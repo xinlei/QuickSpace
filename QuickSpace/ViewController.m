@@ -15,13 +15,14 @@
 
 @implementation ViewController
 
-NSArray * listings;
+NSArray *listings;
+NSArray *images;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view, typically from a nib.
-    listings = [NSArray arrayWithObjects:@"Gene's Room", @"Tony's Room", "Jordan's Room", nil];
-    
+    listings = [NSArray arrayWithObjects:@"Genes room", @"Tonys room", @"Jordans room", nil];
+    images = [NSArray arrayWithObjects:@"room1.jpg", @"room2.jpg", @"room3.jpg", nil];
     
     
     // Just a quick test to make sure that parse is working
@@ -49,7 +50,10 @@ NSArray * listings;
     if (cell == nil) {
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:simpleTableIdentifier];
     }
-    UILabel * title = (UILabel *)[cell viewWithTag:1];
+    UIImageView *image = (UIImageView *)[cell viewWithTag:1];
+    image.image = [UIImage imageNamed:[images objectAtIndex:indexPath.row]];
+    
+    UILabel *title = (UILabel *)[cell viewWithTag:2];
     title.text = [listings objectAtIndex:indexPath.row];
 //    cell.textLabel.text = [listings objectAtIndex:indexPath.row];
     return cell;

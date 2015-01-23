@@ -27,6 +27,9 @@
 		170EFA421A71CE24004EA68B /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 170EFA411A71CE24004EA68B /* SystemConfiguration.framework */; };
 		170EFA441A71CE36004EA68B /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 170EFA431A71CE36004EA68B /* libz.dylib */; };
 		170EFA461A71CE42004EA68B /* libsqlite3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 170EFA451A71CE42004EA68B /* libsqlite3.dylib */; };
+		211E0AA81A7275C0003E4D99 /* room1.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 211E0AA51A7275C0003E4D99 /* room1.jpg */; };
+		211E0AA91A7275C0003E4D99 /* room2.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 211E0AA61A7275C0003E4D99 /* room2.jpg */; };
+		211E0AAA1A7275C0003E4D99 /* room3.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 211E0AA71A7275C0003E4D99 /* room3.jpg */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -66,6 +69,9 @@
 		170EFA411A71CE24004EA68B /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		170EFA431A71CE36004EA68B /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = usr/lib/libz.dylib; sourceTree = SDKROOT; };
 		170EFA451A71CE42004EA68B /* libsqlite3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsqlite3.dylib; path = usr/lib/libsqlite3.dylib; sourceTree = SDKROOT; };
+		211E0AA51A7275C0003E4D99 /* room1.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = room1.jpg; sourceTree = "<group>"; };
+		211E0AA61A7275C0003E4D99 /* room2.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = room2.jpg; sourceTree = "<group>"; };
+		211E0AA71A7275C0003E4D99 /* room3.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = room3.jpg; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -139,6 +145,9 @@
 				170EFA0F1A71C799004EA68B /* ViewController.m */,
 				170EFA111A71C799004EA68B /* Main.storyboard */,
 				170EFA141A71C799004EA68B /* Images.xcassets */,
+				211E0AA51A7275C0003E4D99 /* room1.jpg */,
+				211E0AA61A7275C0003E4D99 /* room2.jpg */,
+				211E0AA71A7275C0003E4D99 /* room3.jpg */,
 				170EFA161A71C799004EA68B /* LaunchScreen.xib */,
 				170EFA071A71C799004EA68B /* Supporting Files */,
 			);
@@ -251,8 +260,11 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				211E0AAA1A7275C0003E4D99 /* room3.jpg in Resources */,
 				170EFA131A71C799004EA68B /* Main.storyboard in Resources */,
 				170EFA181A71C799004EA68B /* LaunchScreen.xib in Resources */,
+				211E0AA91A7275C0003E4D99 /* room2.jpg in Resources */,
+				211E0AA81A7275C0003E4D99 /* room1.jpg in Resources */,
 				170EFA151A71C799004EA68B /* Images.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
