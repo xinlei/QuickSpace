@@ -8,6 +8,7 @@
 
 #import "ViewController.h"
 #import <Parse/Parse.h>
+#import "ListingDetailViewController.h"
 
 @interface ViewController ()
 
@@ -59,4 +60,19 @@ NSArray *images;
     return cell;
 }
 
+- (void) tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    UITableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
+    cell.accessoryType = UITableViewCellAccessoryCheckmark;
+}
+
+- (void) prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+{
+    if ([segue.identifier isEqualToString:@"ShowListingDetail"]){
+        NSIndexPath *indexPath = [self.tableView indexPathForSelectedRow];
+        ListingDetailViewController *destViewController = segue.destinationViewController;
+        destViewController.titleName = [listings objectAtIndex:indexPath.row];
+        destViewController.imageName = [images objectAtIndex:indexPath.row];
+    }
+}
 @end
