@@ -408,7 +408,6 @@
 				INFOPLIST_FILE = QuickSpace/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -423,7 +422,6 @@
 				INFOPLIST_FILE = QuickSpace/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};
@@ -480,7 +478,6 @@
 				170EFA291A71C79A004EA68B /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
 		};
 		170EFA2A1A71C79A004EA68B /* Build configuration list for PBXNativeTarget "QuickSpaceTests" */ = {
 			isa = XCConfigurationList;
@@ -489,7 +486,6 @@
 				170EFA2C1A71C79A004EA68B /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
