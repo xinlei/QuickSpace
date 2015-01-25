@@ -7,12 +7,14 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "Listing.h"
 
 @interface ListingDetailViewController : UIViewController
 
-@property (nonatomic, strong) NSString *imageName;
-@property (nonatomic, strong) NSString *titleName;
+@property (nonatomic, strong) Listing *listing;
 @property (nonatomic, strong) IBOutlet UILabel *titleLabel;
 @property (nonatomic, strong) IBOutlet UIImageView *image;
+@property (weak, nonatomic) IBOutlet UILabel *type;
+@property (weak, nonatomic) IBOutlet UILabel *location;
 
 @end

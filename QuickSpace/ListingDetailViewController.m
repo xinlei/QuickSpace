@@ -14,16 +14,19 @@
 
 @implementation ListingDetailViewController
 
-@synthesize titleName;
 @synthesize titleLabel;
-@synthesize imageName;
 @synthesize image;
+@synthesize listing;
+@synthesize type;
+@synthesize location;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    titleLabel.text = titleName;
-    image.image = [UIImage imageNamed:imageName];
+    titleLabel.text = listing.title;
+    image.image = [UIImage imageNamed:listing.imageName];
+    type.text = listing.type;
+    location.text = listing.location;
 }
 
 - (void)didReceiveMemoryWarning {

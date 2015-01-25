@@ -9,6 +9,7 @@
 #import "ViewController.h"
 #import <Parse/Parse.h>
 #import "ListingDetailViewController.h"
+#import "Listing.h"
 
 @interface ViewController ()
 
@@ -17,14 +18,30 @@
 @implementation ViewController
 
 NSArray *listings;
-NSArray *images;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view, typically from a nib.
-    listings = [NSArray arrayWithObjects:@"Genes room", @"Tonys room", @"Jordans room", nil];
-    images = [NSArray arrayWithObjects:@"room1.jpg", @"room2.jpg", @"room3.jpg", nil];
+
+    Listing *listing1 = [[Listing alloc] init];
+    listing1.title = @"Genes room";
+    listing1.type = @"Resting Space";
+    listing1.location = @"Palo Alto";
+    listing1.imageName = @"room1.jpg";
     
+    Listing *listing2 = [[Listing alloc] init];
+    listing2.title = @"Tonys room";
+    listing2.type = @"Sex Space";
+    listing2.location = @"Palo Alto";
+    listing2.imageName = @"room2.jpg";
+    
+    Listing *listing3 = [[Listing alloc] init];
+    listing3.title = @"Jordans room";
+    listing3.type = @"Resting Space";
+    listing3.type = @"Mountain View";
+    listing3.imageName = @"room3.jpg";
+
+    listings = [NSMutableArray arrayWithObjects:listing1, listing2, listing3, nil];
     
     // Just a quick test to make sure that parse is working
     PFObject *testObject = [PFObject objectWithClassName:@"TestObject"];
@@ -51,12 +68,20 @@ NSArray *images;
     if (cell == nil) {
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:simpleTableIdentifier];
     }
+    
+    Listing *thisListing = [listings objectAtIndex:indexPath.row];
     UIImageView *image = (UIImageView *)[cell viewWithTag:1];
-    image.image = [UIImage imageNamed:[images objectAtIndex:indexPath.row]];
+    image.image = [UIImage imageNamed:thisListing.imageName];
     
     UILabel *title = (UILabel *)[cell viewWithTag:2];
-    title.text = [listings objectAtIndex:indexPath.row];
-//    cell.textLabel.text = [listings objectAtIndex:indexPath.row];
+    title.text = thisListing.title;
+    
+    UILabel *type = (UILabel *)[cell viewWithTag:3];
+    type.text = thisListing.type;
+    
+    UILabel *location = (UILabel *)[cell viewWithTag:4];
+    location.text = thisListing.location;
+    
     return cell;
 }
 
@@ -71,8 +96,7 @@ NSArray *images;
     if ([segue.identifier isEqualToString:@"ShowListingDetail"]){
         NSIndexPath *indexPath = [self.tableView indexPathForSelectedRow];
         ListingDetailViewController *destViewController = segue.destinationViewController;
-        destViewController.titleName = [listings objectAtIndex:indexPath.row];
-        destViewController.imageName = [images objectAtIndex:indexPath.row];
+        destViewController.listing = [listings objectAtIndex:indexPath.row];
     }
 }
 @end

@@ -31,6 +31,7 @@
 		211E0AA91A7275C0003E4D99 /* room2.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 211E0AA61A7275C0003E4D99 /* room2.jpg */; };
 		211E0AAA1A7275C0003E4D99 /* room3.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 211E0AA71A7275C0003E4D99 /* room3.jpg */; };
 		211E0AAD1A72E4E7003E4D99 /* ListingDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 211E0AAC1A72E4E7003E4D99 /* ListingDetailViewController.m */; };
+		211E0AB01A75B19B003E4D99 /* Listing.m in Sources */ = {isa = PBXBuildFile; fileRef = 211E0AAF1A75B19B003E4D99 /* Listing.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -75,6 +76,8 @@
 		211E0AA71A7275C0003E4D99 /* room3.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = room3.jpg; sourceTree = "<group>"; };
 		211E0AAB1A72E4E7003E4D99 /* ListingDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ListingDetailViewController.h; sourceTree = "<group>"; };
 		211E0AAC1A72E4E7003E4D99 /* ListingDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ListingDetailViewController.m; sourceTree = "<group>"; };
+		211E0AAE1A75B19B003E4D99 /* Listing.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Listing.h; sourceTree = "<group>"; };
+		211E0AAF1A75B19B003E4D99 /* Listing.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Listing.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -147,6 +150,8 @@
 				170EFA0E1A71C799004EA68B /* ViewController.h */,
 				170EFA0F1A71C799004EA68B /* ViewController.m */,
 				170EFA111A71C799004EA68B /* Main.storyboard */,
+				211E0AAE1A75B19B003E4D99 /* Listing.h */,
+				211E0AAF1A75B19B003E4D99 /* Listing.m */,
 				211E0AAB1A72E4E7003E4D99 /* ListingDetailViewController.h */,
 				211E0AAC1A72E4E7003E4D99 /* ListingDetailViewController.m */,
 				170EFA141A71C799004EA68B /* Images.xcassets */,
@@ -289,6 +294,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				211E0AAD1A72E4E7003E4D99 /* ListingDetailViewController.m in Sources */,
+				211E0AB01A75B19B003E4D99 /* Listing.m in Sources */,
 				170EFA101A71C799004EA68B /* ViewController.m in Sources */,
 				170EFA0D1A71C799004EA68B /* AppDelegate.m in Sources */,
 				170EFA0A1A71C799004EA68B /* main.m in Sources */,
