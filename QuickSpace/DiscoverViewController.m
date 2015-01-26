@@ -26,7 +26,9 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    // Do any additional setup after loading the view.
+    
+    NSArray *popularPlaces = [NSArray arrayWithObjects:@"Stanford", @"San Francisco", nil];
+    
 }
 
 - (void)didReceiveMemoryWarning
