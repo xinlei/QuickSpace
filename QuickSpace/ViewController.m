@@ -17,36 +17,60 @@
 
 @implementation ViewController
 
-NSArray *listings;
+NSMutableArray *listings;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view, typically from a nib.
 
-    Listing *listing1 = [[Listing alloc] init];
-    listing1.title = @"Genes room";
-    listing1.type = @"Resting Space";
-    listing1.location = @"Palo Alto";
-    listing1.imageName = @"room1.jpg";
-    
-    Listing *listing2 = [[Listing alloc] init];
-    listing2.title = @"Tonys room";
-    listing2.type = @"Sex Space";
-    listing2.location = @"Palo Alto";
-    listing2.imageName = @"room2.jpg";
-    
-    Listing *listing3 = [[Listing alloc] init];
-    listing3.title = @"Jordans room";
-    listing3.type = @"Resting Space";
-    listing3.type = @"Mountain View";
-    listing3.imageName = @"room3.jpg";
 
-    listings = [NSMutableArray arrayWithObjects:listing1, listing2, listing3, nil];
+
+//    
+//        Listing *listing1 = [[Listing alloc] init];
+//        listing1.title = @"Genes room";
+//        listing1.type = @"Resting Space";
+//        listing1.location = @"Palo Alto";
+//        listing1.imageName = @"room1.jpg";
+//    
+//        Listing *listing2 = [[Listing alloc] init];
+//        listing2.title = @"Tonys room";
+//        listing2.type = @"Sex Space";
+//        listing2.location = @"Palo Alto";
+//        listing2.imageName = @"room2.jpg";
+//    
+//        Listing *listing3 = [[Listing alloc] init];
+//        listing3.title = @"Jordans room";
+//        listing3.type = @"Resting Space";
+//        listing3.type = @"Mountain View";
+//        listing3.imageName = @"room3.jpg";
+//    
+//        listings = [NSMutableArray arrayWithObjects:listing1, listing2, listing3, nil];
     
-    // Just a quick test to make sure that parse is working
-    PFObject *testObject = [PFObject objectWithClassName:@"TestObject"];
-    testObject[@"foo"] = @"bar";
-    [testObject saveInBackground];
+    listings = [[NSMutableArray alloc] init];
+    
+    PFQuery *query = [PFQuery queryWithClassName:@"Listing"];
+    [query whereKey:@"title" notEqualTo:@"Dan Stemkoski"];
+    NSArray* AllListings = [query findObjects];
+    
+            // The find succeeded.
+            NSLog(@"Successfully retrieved %d listings.", AllListings.count);
+            // Do something with the found objects
+            for (PFObject *object in AllListings) {
+                Listing *lister = [[Listing alloc] init];
+                lister.title = object[@"title"];
+                lister.type = object[@"type"];
+                lister.location = object[@"location"];
+                lister.imageName = object[@"imageName"];
+                [listings addObject:lister];
+            }
+//                        Listing* hey = [listings objectAtIndex:1];
+//                        NSLog(@"%@", hey.title);
+//                        Listing* hey1 = [listings objectAtIndex:0];
+//                        NSLog(@"%@", hey1.title);
+//                        Listing* hey2 = [listings objectAtIndex:2];
+//                        NSLog(@"%@", hey2.title);
+
+
 }
 
 - (void)didReceiveMemoryWarning {
