@@ -47,12 +47,13 @@ NSArray *popularPlacesImg;
 
 - (UITableViewCell *)tableView:(UITableView *) tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    static NSString *tableIdentifier = @"popularPlaces";
     
-    UITableViewCell *viewCell = [tableView dequeueReusableCellWithIdentifier: tableIdentifier];
+    static NSString *simpleTableIdentifier = @"popularPlaces";
+    
+    UITableViewCell *viewCell = [tableView dequeueReusableCellWithIdentifier: simpleTableIdentifier];
     
     if(viewCell == nil) {
-        viewCell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:tableIdentifier];
+        viewCell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier: simpleTableIdentifier];
     }
     
     NSString *imgName = [popularPlacesImg objectAtIndex:indexPath.row];
@@ -61,6 +62,7 @@ NSArray *popularPlacesImg;
     
     return viewCell;
 }
+
 /*
 #pragma mark - Navigation
 
