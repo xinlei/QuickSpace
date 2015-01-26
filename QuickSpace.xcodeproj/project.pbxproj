@@ -32,6 +32,9 @@
 		211E0AAA1A7275C0003E4D99 /* room3.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 211E0AA71A7275C0003E4D99 /* room3.jpg */; };
 		211E0AAD1A72E4E7003E4D99 /* ListingDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 211E0AAC1A72E4E7003E4D99 /* ListingDetailViewController.m */; };
 		211E0AB01A75B19B003E4D99 /* Listing.m in Sources */ = {isa = PBXBuildFile; fileRef = 211E0AAF1A75B19B003E4D99 /* Listing.m */; };
+		F0A4D8311A75BD18002D8B2F /* host_space.jpg in Resources */ = {isa = PBXBuildFile; fileRef = F0A4D8301A75BD18002D8B2F /* host_space.jpg */; };
+		F0A4D8331A75BD21002D8B2F /* find_space.jpg in Resources */ = {isa = PBXBuildFile; fileRef = F0A4D8321A75BD21002D8B2F /* find_space.jpg */; };
+		F0A4D8361A75C39A002D8B2F /* DiscoverViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F0A4D8351A75C39A002D8B2F /* DiscoverViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -78,6 +81,10 @@
 		211E0AAC1A72E4E7003E4D99 /* ListingDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ListingDetailViewController.m; sourceTree = "<group>"; };
 		211E0AAE1A75B19B003E4D99 /* Listing.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Listing.h; sourceTree = "<group>"; };
 		211E0AAF1A75B19B003E4D99 /* Listing.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Listing.m; sourceTree = "<group>"; };
+		F0A4D8301A75BD18002D8B2F /* host_space.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = host_space.jpg; path = ../../Desktop/host_space.jpg; sourceTree = "<group>"; };
+		F0A4D8321A75BD21002D8B2F /* find_space.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = find_space.jpg; path = ../../Desktop/find_space.jpg; sourceTree = "<group>"; };
+		F0A4D8341A75C39A002D8B2F /* DiscoverViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DiscoverViewController.h; sourceTree = "<group>"; };
+		F0A4D8351A75C39A002D8B2F /* DiscoverViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DiscoverViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -145,11 +152,14 @@
 		170EFA061A71C799004EA68B /* QuickSpace */ = {
 			isa = PBXGroup;
 			children = (
+				F0A4D82E1A75BBC7002D8B2F /* assets */,
 				170EFA0B1A71C799004EA68B /* AppDelegate.h */,
 				170EFA0C1A71C799004EA68B /* AppDelegate.m */,
 				170EFA0E1A71C799004EA68B /* ViewController.h */,
 				170EFA0F1A71C799004EA68B /* ViewController.m */,
 				170EFA111A71C799004EA68B /* Main.storyboard */,
+				F0A4D8341A75C39A002D8B2F /* DiscoverViewController.h */,
+				F0A4D8351A75C39A002D8B2F /* DiscoverViewController.m */,
 				211E0AAE1A75B19B003E4D99 /* Listing.h */,
 				211E0AAF1A75B19B003E4D99 /* Listing.m */,
 				211E0AAB1A72E4E7003E4D99 /* ListingDetailViewController.h */,
@@ -188,6 +198,23 @@
 				170EFA221A71C79A004EA68B /* Info.plist */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		F0A4D82E1A75BBC7002D8B2F /* assets */ = {
+			isa = PBXGroup;
+			children = (
+				F0A4D82F1A75BBDC002D8B2F /* img */,
+			);
+			name = assets;
+			sourceTree = "<group>";
+		};
+		F0A4D82F1A75BBDC002D8B2F /* img */ = {
+			isa = PBXGroup;
+			children = (
+				F0A4D8321A75BD21002D8B2F /* find_space.jpg */,
+				F0A4D8301A75BD18002D8B2F /* host_space.jpg */,
+			);
+			name = img;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -271,8 +298,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				211E0AAA1A7275C0003E4D99 /* room3.jpg in Resources */,
+				F0A4D8331A75BD21002D8B2F /* find_space.jpg in Resources */,
 				170EFA131A71C799004EA68B /* Main.storyboard in Resources */,
 				170EFA181A71C799004EA68B /* LaunchScreen.xib in Resources */,
+				F0A4D8311A75BD18002D8B2F /* host_space.jpg in Resources */,
 				211E0AA91A7275C0003E4D99 /* room2.jpg in Resources */,
 				211E0AA81A7275C0003E4D99 /* room1.jpg in Resources */,
 				170EFA151A71C799004EA68B /* Images.xcassets in Resources */,
@@ -294,6 +323,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				211E0AAD1A72E4E7003E4D99 /* ListingDetailViewController.m in Sources */,
+				F0A4D8361A75C39A002D8B2F /* DiscoverViewController.m in Sources */,
 				211E0AB01A75B19B003E4D99 /* Listing.m in Sources */,
 				170EFA101A71C799004EA68B /* ViewController.m in Sources */,
 				170EFA0D1A71C799004EA68B /* AppDelegate.m in Sources */,
