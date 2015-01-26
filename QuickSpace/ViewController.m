@@ -23,28 +23,6 @@ NSMutableArray *listings;
     [super viewDidLoad];
     // Do any additional setup after loading the view, typically from a nib.
 
-
-
-//    
-//        Listing *listing1 = [[Listing alloc] init];
-//        listing1.title = @"Genes room";
-//        listing1.type = @"Resting Space";
-//        listing1.location = @"Palo Alto";
-//        listing1.imageName = @"room1.jpg";
-//    
-//        Listing *listing2 = [[Listing alloc] init];
-//        listing2.title = @"Tonys room";
-//        listing2.type = @"Sex Space";
-//        listing2.location = @"Palo Alto";
-//        listing2.imageName = @"room2.jpg";
-//    
-//        Listing *listing3 = [[Listing alloc] init];
-//        listing3.title = @"Jordans room";
-//        listing3.type = @"Resting Space";
-//        listing3.type = @"Mountain View";
-//        listing3.imageName = @"room3.jpg";
-//    
-//        listings = [NSMutableArray arrayWithObjects:listing1, listing2, listing3, nil];
     
     // Right now the queries are running on the main thread. Need to eventually change this.
     
@@ -65,13 +43,6 @@ NSMutableArray *listings;
                 lister.imageName = object[@"imageName"];
                 [listings addObject:lister];
             }
-//                        Listing* hey = [listings objectAtIndex:1];
-//                        NSLog(@"%@", hey.title);
-//                        Listing* hey1 = [listings objectAtIndex:0];
-//                        NSLog(@"%@", hey1.title);
-//                        Listing* hey2 = [listings objectAtIndex:2];
-//                        NSLog(@"%@", hey2.title);
-
 
 }
 
