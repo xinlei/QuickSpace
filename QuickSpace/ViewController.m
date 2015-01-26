@@ -46,6 +46,8 @@ NSMutableArray *listings;
 //    
 //        listings = [NSMutableArray arrayWithObjects:listing1, listing2, listing3, nil];
     
+    // Right now the queries are running on the main thread. Need to eventually change this.
+    
     listings = [[NSMutableArray alloc] init];
     
     PFQuery *query = [PFQuery queryWithClassName:@"Listing"];
