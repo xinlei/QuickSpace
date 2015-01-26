@@ -1,0 +1,63 @@
+Listing
+NSString *title;
+NSString *imageName;
+NSString *type;
+NSString *location;
+
+
+User 
+Properties
+username
+password
+
+Dependencies
+has many listings
+has many bookings
+
+Instance methods
+get all listings (Your spaces)
+get all bookings (Previous rentals)
+get current booking
+add new booking
+add new listing
+
+Class methods
+
+Listing
+Properties
+name
+location
+additional location info
+amenities
+price per hour
+photos
+availability (yes/no)  
+
+Dependencies
+Has many bookings
+Belongs to user
+
+Instance methods
+check availability
+change availability
+
+Class methods
+search by office type
+search by location
+
+Booking
+Properties
+# of hours
+guest_id
+host_id
+listing_id
+confirmed (yes/no)
+
+Dependencies
+Belongs to listing
+Belongs to user
+
+Instance methods
+cancel booking
+
+Class methods
