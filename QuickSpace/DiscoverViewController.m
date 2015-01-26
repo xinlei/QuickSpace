@@ -14,6 +14,9 @@
 
 @implementation DiscoverViewController
 
+NSArray *popularPlaces;
+NSArray *popularPlacesImg;
+
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
@@ -27,8 +30,8 @@
 {
     [super viewDidLoad];
     
-    NSArray *popularPlaces = [NSArray arrayWithObjects:@"Stanford", @"San Francisco", nil];
-    
+    popularPlaces = [NSArray arrayWithObjects:@"Stanford", @"San Francisco", nil];
+    popularPlacesImg = [NSArray arrayWithObjects:@"san_fran.jpg", @"stanford.jpg", nil];
 }
 
 - (void)didReceiveMemoryWarning
@@ -37,6 +40,27 @@
     // Dispose of any resources that can be recreated.
 }
 
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
+{
+    return [popularPlaces count];
+}
+
+- (UITableViewCell *)tableView:(UITableView *) tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    static NSString *tableIdentifier = @"popularPlaces";
+    
+    UITableViewCell *viewCell = [tableView dequeueReusableCellWithIdentifier: tableIdentifier];
+    
+    if(viewCell == nil) {
+        viewCell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:tableIdentifier];
+    }
+    
+    NSString *imgName = [popularPlacesImg objectAtIndex:indexPath.row];
+    UIImageView *img = (UIImageView *)[viewCell viewWithTag:1];
+    img.image = [UIImage imageNamed:imgName];
+    
+    return viewCell;
+}
 /*
 #pragma mark - Navigation
 
