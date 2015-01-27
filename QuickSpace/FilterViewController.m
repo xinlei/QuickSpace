@@ -55,7 +55,7 @@
 // On tap send filters to model and update the listings
 // Currently no effect on the listings
 - (IBAction)sendFilterValues:(UIButton *)sender {
-    
+     
 }
 
 /*
