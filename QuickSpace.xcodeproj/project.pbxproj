@@ -32,11 +32,16 @@
 		211E0AAA1A7275C0003E4D99 /* room3.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 211E0AA71A7275C0003E4D99 /* room3.jpg */; };
 		211E0AAD1A72E4E7003E4D99 /* ListingDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 211E0AAC1A72E4E7003E4D99 /* ListingDetailViewController.m */; };
 		211E0AB01A75B19B003E4D99 /* Listing.m in Sources */ = {isa = PBXBuildFile; fileRef = 211E0AAF1A75B19B003E4D99 /* Listing.m */; };
+		F0241E381A783E9C009FF170 /* los_angeles.jpg in Resources */ = {isa = PBXBuildFile; fileRef = F0241E331A783E9C009FF170 /* los_angeles.jpg */; };
+		F0241E391A783E9C009FF170 /* san_francisco.jpg in Resources */ = {isa = PBXBuildFile; fileRef = F0241E341A783E9C009FF170 /* san_francisco.jpg */; };
+		F0241E3A1A783E9C009FF170 /* stanford.jpg in Resources */ = {isa = PBXBuildFile; fileRef = F0241E351A783E9C009FF170 /* stanford.jpg */; };
+		F0241E421A783ED4009FF170 /* host_space.jpg in Resources */ = {isa = PBXBuildFile; fileRef = F0241E3D1A783ED4009FF170 /* host_space.jpg */; };
+		F0241E431A783ED4009FF170 /* find_space.jpg in Resources */ = {isa = PBXBuildFile; fileRef = F0241E3E1A783ED4009FF170 /* find_space.jpg */; };
+		F0241E441A783ED4009FF170 /* stanford.jpg in Resources */ = {isa = PBXBuildFile; fileRef = F0241E3F1A783ED4009FF170 /* stanford.jpg */; };
+		F0241E451A783ED4009FF170 /* los_angeles.jpg in Resources */ = {isa = PBXBuildFile; fileRef = F0241E401A783ED4009FF170 /* los_angeles.jpg */; };
+		F0241E461A783ED4009FF170 /* san_francisco.jpg in Resources */ = {isa = PBXBuildFile; fileRef = F0241E411A783ED4009FF170 /* san_francisco.jpg */; };
+		F0241E481A783F60009FF170 /* san_francisco.png in Resources */ = {isa = PBXBuildFile; fileRef = F0241E471A783F60009FF170 /* san_francisco.png */; };
 		F0A4D8361A75C39A002D8B2F /* DiscoverViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F0A4D8351A75C39A002D8B2F /* DiscoverViewController.m */; };
-		F0A4D83B1A75C9F6002D8B2F /* find_space.jpg in Resources */ = {isa = PBXBuildFile; fileRef = F0A4D8371A75C9F6002D8B2F /* find_space.jpg */; };
-		F0A4D83C1A75C9F6002D8B2F /* host_space.jpg in Resources */ = {isa = PBXBuildFile; fileRef = F0A4D8381A75C9F6002D8B2F /* host_space.jpg */; };
-		F0A4D8411A75CA52002D8B2F /* san_fran.jpg in Resources */ = {isa = PBXBuildFile; fileRef = F0A4D83F1A75CA52002D8B2F /* san_fran.jpg */; };
-		F0A4D8421A75CA52002D8B2F /* stanford.jpg in Resources */ = {isa = PBXBuildFile; fileRef = F0A4D8401A75CA52002D8B2F /* stanford.jpg */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -83,12 +88,17 @@
 		211E0AAC1A72E4E7003E4D99 /* ListingDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ListingDetailViewController.m; sourceTree = "<group>"; };
 		211E0AAE1A75B19B003E4D99 /* Listing.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Listing.h; sourceTree = "<group>"; };
 		211E0AAF1A75B19B003E4D99 /* Listing.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Listing.m; sourceTree = "<group>"; };
+		F0241E331A783E9C009FF170 /* los_angeles.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = los_angeles.jpg; path = assets/los_angeles.jpg; sourceTree = "<group>"; };
+		F0241E341A783E9C009FF170 /* san_francisco.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = san_francisco.jpg; path = assets/san_francisco.jpg; sourceTree = "<group>"; };
+		F0241E351A783E9C009FF170 /* stanford.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = stanford.jpg; path = assets/stanford.jpg; sourceTree = "<group>"; };
+		F0241E3D1A783ED4009FF170 /* host_space.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = host_space.jpg; sourceTree = "<group>"; };
+		F0241E3E1A783ED4009FF170 /* find_space.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = find_space.jpg; sourceTree = "<group>"; };
+		F0241E3F1A783ED4009FF170 /* stanford.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = stanford.jpg; sourceTree = "<group>"; };
+		F0241E401A783ED4009FF170 /* los_angeles.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = los_angeles.jpg; sourceTree = "<group>"; };
+		F0241E411A783ED4009FF170 /* san_francisco.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = san_francisco.jpg; sourceTree = "<group>"; };
+		F0241E471A783F60009FF170 /* san_francisco.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = san_francisco.png; sourceTree = "<group>"; };
 		F0A4D8341A75C39A002D8B2F /* DiscoverViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DiscoverViewController.h; sourceTree = "<group>"; };
 		F0A4D8351A75C39A002D8B2F /* DiscoverViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DiscoverViewController.m; sourceTree = "<group>"; };
-		F0A4D8371A75C9F6002D8B2F /* find_space.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = find_space.jpg; path = assets/find_space.jpg; sourceTree = "<group>"; };
-		F0A4D8381A75C9F6002D8B2F /* host_space.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = host_space.jpg; path = assets/host_space.jpg; sourceTree = "<group>"; };
-		F0A4D83F1A75CA52002D8B2F /* san_fran.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = san_fran.jpg; path = assets/san_fran.jpg; sourceTree = "<group>"; };
-		F0A4D8401A75CA52002D8B2F /* stanford.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = stanford.jpg; path = assets/stanford.jpg; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -156,6 +166,11 @@
 		170EFA061A71C799004EA68B /* QuickSpace */ = {
 			isa = PBXGroup;
 			children = (
+				F0241E3B1A783ED4009FF170 /* assets */,
+				F0241E321A783E9C009FF170 /* img */,
+				F0241E331A783E9C009FF170 /* los_angeles.jpg */,
+				F0241E341A783E9C009FF170 /* san_francisco.jpg */,
+				F0241E351A783E9C009FF170 /* stanford.jpg */,
 				F0A4D82E1A75BBC7002D8B2F /* assets */,
 				170EFA0B1A71C799004EA68B /* AppDelegate.h */,
 				170EFA0C1A71C799004EA68B /* AppDelegate.m */,
@@ -204,23 +219,40 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
+		F0241E321A783E9C009FF170 /* img */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = img;
+			path = assets/img;
+			sourceTree = "<group>";
+		};
+		F0241E3B1A783ED4009FF170 /* assets */ = {
+			isa = PBXGroup;
+			children = (
+				F0241E471A783F60009FF170 /* san_francisco.png */,
+				F0241E3C1A783ED4009FF170 /* img */,
+				F0241E3D1A783ED4009FF170 /* host_space.jpg */,
+				F0241E3E1A783ED4009FF170 /* find_space.jpg */,
+				F0241E3F1A783ED4009FF170 /* stanford.jpg */,
+				F0241E401A783ED4009FF170 /* los_angeles.jpg */,
+				F0241E411A783ED4009FF170 /* san_francisco.jpg */,
+			);
+			path = assets;
+			sourceTree = "<group>";
+		};
+		F0241E3C1A783ED4009FF170 /* img */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = img;
+			sourceTree = "<group>";
+		};
 		F0A4D82E1A75BBC7002D8B2F /* assets */ = {
 			isa = PBXGroup;
 			children = (
-				F0A4D82F1A75BBDC002D8B2F /* img */,
 			);
 			name = assets;
-			sourceTree = "<group>";
-		};
-		F0A4D82F1A75BBDC002D8B2F /* img */ = {
-			isa = PBXGroup;
-			children = (
-				F0A4D83F1A75CA52002D8B2F /* san_fran.jpg */,
-				F0A4D8401A75CA52002D8B2F /* stanford.jpg */,
-				F0A4D8371A75C9F6002D8B2F /* find_space.jpg */,
-				F0A4D8381A75C9F6002D8B2F /* host_space.jpg */,
-			);
-			name = img;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -303,16 +335,21 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				F0A4D8421A75CA52002D8B2F /* stanford.jpg in Resources */,
-				F0A4D83B1A75C9F6002D8B2F /* find_space.jpg in Resources */,
+				F0241E441A783ED4009FF170 /* stanford.jpg in Resources */,
+				F0241E421A783ED4009FF170 /* host_space.jpg in Resources */,
+				F0241E381A783E9C009FF170 /* los_angeles.jpg in Resources */,
+				F0241E3A1A783E9C009FF170 /* stanford.jpg in Resources */,
+				F0241E481A783F60009FF170 /* san_francisco.png in Resources */,
 				211E0AAA1A7275C0003E4D99 /* room3.jpg in Resources */,
 				170EFA131A71C799004EA68B /* Main.storyboard in Resources */,
-				F0A4D8411A75CA52002D8B2F /* san_fran.jpg in Resources */,
+				F0241E431A783ED4009FF170 /* find_space.jpg in Resources */,
 				170EFA181A71C799004EA68B /* LaunchScreen.xib in Resources */,
 				211E0AA91A7275C0003E4D99 /* room2.jpg in Resources */,
 				211E0AA81A7275C0003E4D99 /* room1.jpg in Resources */,
-				F0A4D83C1A75C9F6002D8B2F /* host_space.jpg in Resources */,
+				F0241E451A783ED4009FF170 /* los_angeles.jpg in Resources */,
 				170EFA151A71C799004EA68B /* Images.xcassets in Resources */,
+				F0241E391A783E9C009FF170 /* san_francisco.jpg in Resources */,
+				F0241E461A783ED4009FF170 /* san_francisco.jpg in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -464,6 +501,7 @@
 					"$(PROJECT_DIR)",
 				);
 				INFOPLIST_FILE = QuickSpace/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TARGETED_DEVICE_FAMILY = 1;
@@ -479,6 +517,7 @@
 					"$(PROJECT_DIR)",
 				);
 				INFOPLIST_FILE = QuickSpace/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TARGETED_DEVICE_FAMILY = 1;
@@ -498,6 +537,7 @@
 					"$(inherited)",
 				);
 				INFOPLIST_FILE = QuickSpaceTests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/QuickSpace.app/QuickSpace";
@@ -513,6 +553,7 @@
 					"$(inherited)",
 				);
 				INFOPLIST_FILE = QuickSpaceTests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/QuickSpace.app/QuickSpace";

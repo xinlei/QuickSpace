@@ -30,8 +30,8 @@ NSArray *popularPlacesImg;
 {
     [super viewDidLoad];
     
-    popularPlaces = [NSArray arrayWithObjects:@"Stanford", @"San Francisco", nil];
-    popularPlacesImg = [NSArray arrayWithObjects:@"san_fran.jpg", @"stanford.jpg", nil];
+    popularPlaces = [NSArray arrayWithObjects:@"Stanford", @"San Francisco", @"Los Angeles", nil];
+    popularPlacesImg = [NSArray arrayWithObjects:@"stanford.png", @"san_francisco.png", @"los_angeles.png", nil];
 }
 
 - (void)didReceiveMemoryWarning
@@ -57,8 +57,12 @@ NSArray *popularPlacesImg;
     }
     
     NSString *imgName = [popularPlacesImg objectAtIndex:indexPath.row];
+    
     UIImageView *img = (UIImageView *)[viewCell viewWithTag:1];
     img.image = [UIImage imageNamed:imgName];
+    
+    UILabel *title = (UILabel *)[viewCell viewWithTag:2];
+    title.text = [popularPlaces objectAtIndex:indexPath.row];
     
     return viewCell;
 }
