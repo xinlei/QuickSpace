@@ -41,6 +41,7 @@
 		F0241E451A783ED4009FF170 /* los_angeles.jpg in Resources */ = {isa = PBXBuildFile; fileRef = F0241E401A783ED4009FF170 /* los_angeles.jpg */; };
 		F0241E461A783ED4009FF170 /* san_francisco.jpg in Resources */ = {isa = PBXBuildFile; fileRef = F0241E411A783ED4009FF170 /* san_francisco.jpg */; };
 		F0241E481A783F60009FF170 /* san_francisco.png in Resources */ = {isa = PBXBuildFile; fileRef = F0241E471A783F60009FF170 /* san_francisco.png */; };
+		F0241E541A784DD7009FF170 /* FilterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F0241E531A784DD7009FF170 /* FilterViewController.m */; };
 		F0A4D8361A75C39A002D8B2F /* DiscoverViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F0A4D8351A75C39A002D8B2F /* DiscoverViewController.m */; };
 /* End PBXBuildFile section */
 
@@ -97,6 +98,8 @@
 		F0241E401A783ED4009FF170 /* los_angeles.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = los_angeles.jpg; sourceTree = "<group>"; };
 		F0241E411A783ED4009FF170 /* san_francisco.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = san_francisco.jpg; sourceTree = "<group>"; };
 		F0241E471A783F60009FF170 /* san_francisco.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = san_francisco.png; sourceTree = "<group>"; };
+		F0241E521A784DD7009FF170 /* FilterViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FilterViewController.h; sourceTree = "<group>"; };
+		F0241E531A784DD7009FF170 /* FilterViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FilterViewController.m; sourceTree = "<group>"; };
 		F0A4D8341A75C39A002D8B2F /* DiscoverViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DiscoverViewController.h; sourceTree = "<group>"; };
 		F0A4D8351A75C39A002D8B2F /* DiscoverViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DiscoverViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -167,11 +170,11 @@
 			isa = PBXGroup;
 			children = (
 				F0241E3B1A783ED4009FF170 /* assets */,
-				F0241E321A783E9C009FF170 /* img */,
+				F0241E521A784DD7009FF170 /* FilterViewController.h */,
+				F0241E531A784DD7009FF170 /* FilterViewController.m */,
 				F0241E331A783E9C009FF170 /* los_angeles.jpg */,
 				F0241E341A783E9C009FF170 /* san_francisco.jpg */,
 				F0241E351A783E9C009FF170 /* stanford.jpg */,
-				F0A4D82E1A75BBC7002D8B2F /* assets */,
 				170EFA0B1A71C799004EA68B /* AppDelegate.h */,
 				170EFA0C1A71C799004EA68B /* AppDelegate.m */,
 				170EFA0E1A71C799004EA68B /* ViewController.h */,
@@ -219,19 +222,10 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
-		F0241E321A783E9C009FF170 /* img */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			name = img;
-			path = assets/img;
-			sourceTree = "<group>";
-		};
 		F0241E3B1A783ED4009FF170 /* assets */ = {
 			isa = PBXGroup;
 			children = (
 				F0241E471A783F60009FF170 /* san_francisco.png */,
-				F0241E3C1A783ED4009FF170 /* img */,
 				F0241E3D1A783ED4009FF170 /* host_space.jpg */,
 				F0241E3E1A783ED4009FF170 /* find_space.jpg */,
 				F0241E3F1A783ED4009FF170 /* stanford.jpg */,
@@ -239,20 +233,6 @@
 				F0241E411A783ED4009FF170 /* san_francisco.jpg */,
 			);
 			path = assets;
-			sourceTree = "<group>";
-		};
-		F0241E3C1A783ED4009FF170 /* img */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = img;
-			sourceTree = "<group>";
-		};
-		F0A4D82E1A75BBC7002D8B2F /* assets */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			name = assets;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -371,6 +351,7 @@
 				F0A4D8361A75C39A002D8B2F /* DiscoverViewController.m in Sources */,
 				211E0AB01A75B19B003E4D99 /* Listing.m in Sources */,
 				170EFA101A71C799004EA68B /* ViewController.m in Sources */,
+				F0241E541A784DD7009FF170 /* FilterViewController.m in Sources */,
 				170EFA0D1A71C799004EA68B /* AppDelegate.m in Sources */,
 				170EFA0A1A71C799004EA68B /* main.m in Sources */,
 			);
