@@ -16,6 +16,5 @@
 @property (nonatomic, strong) IBOutlet UIImageView *image;
 @property (weak, nonatomic) IBOutlet UILabel *type;
 @property (weak, nonatomic) IBOutlet UILabel *location;
-@property (weak, nonatomic) IBOutlet UIButton *book;
 
 @end

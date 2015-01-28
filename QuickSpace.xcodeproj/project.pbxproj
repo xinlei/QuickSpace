@@ -170,6 +170,7 @@
 		170EFA061A71C799004EA68B /* QuickSpace */ = {
 			isa = PBXGroup;
 			children = (
+				F0144CE91A789C8700113F95 /* models */,
 				F0144CE61A78917A00113F95 /* AdvancedFilterViewController.h */,
 				F0144CE71A78917A00113F95 /* AdvancedFilterViewController.m */,
 				F0241E3B1A783ED4009FF170 /* assets */,
@@ -224,6 +225,13 @@
 				170EFA221A71C79A004EA68B /* Info.plist */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		F0144CE91A789C8700113F95 /* models */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = models;
 			sourceTree = "<group>";
 		};
 		F0241E3B1A783ED4009FF170 /* assets */ = {
