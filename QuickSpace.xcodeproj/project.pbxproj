@@ -27,6 +27,8 @@
 		170EFA421A71CE24004EA68B /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 170EFA411A71CE24004EA68B /* SystemConfiguration.framework */; };
 		170EFA441A71CE36004EA68B /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 170EFA431A71CE36004EA68B /* libz.dylib */; };
 		170EFA461A71CE42004EA68B /* libsqlite3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 170EFA451A71CE42004EA68B /* libsqlite3.dylib */; };
+		172695231A7872C300DA446E /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 172695221A7872C300DA446E /* LoginViewController.m */; };
+		172695261A7872D300DA446E /* SignUpViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 172695251A7872D300DA446E /* SignUpViewController.m */; };
 		211E0AA81A7275C0003E4D99 /* room1.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 211E0AA51A7275C0003E4D99 /* room1.jpg */; };
 		211E0AA91A7275C0003E4D99 /* room2.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 211E0AA61A7275C0003E4D99 /* room2.jpg */; };
 		211E0AAA1A7275C0003E4D99 /* room3.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 211E0AA71A7275C0003E4D99 /* room3.jpg */; };
@@ -82,6 +84,10 @@
 		170EFA411A71CE24004EA68B /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		170EFA431A71CE36004EA68B /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = usr/lib/libz.dylib; sourceTree = SDKROOT; };
 		170EFA451A71CE42004EA68B /* libsqlite3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsqlite3.dylib; path = usr/lib/libsqlite3.dylib; sourceTree = SDKROOT; };
+		172695211A7872C300DA446E /* LoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginViewController.h; sourceTree = "<group>"; };
+		172695221A7872C300DA446E /* LoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginViewController.m; sourceTree = "<group>"; };
+		172695241A7872D300DA446E /* SignUpViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SignUpViewController.h; sourceTree = "<group>"; };
+		172695251A7872D300DA446E /* SignUpViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SignUpViewController.m; sourceTree = "<group>"; };
 		211E0AA51A7275C0003E4D99 /* room1.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = room1.jpg; sourceTree = "<group>"; };
 		211E0AA61A7275C0003E4D99 /* room2.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = room2.jpg; sourceTree = "<group>"; };
 		211E0AA71A7275C0003E4D99 /* room3.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = room3.jpg; sourceTree = "<group>"; };
@@ -180,6 +186,10 @@
 				170EFA0E1A71C799004EA68B /* ViewController.h */,
 				170EFA0F1A71C799004EA68B /* ViewController.m */,
 				170EFA111A71C799004EA68B /* Main.storyboard */,
+				172695241A7872D300DA446E /* SignUpViewController.h */,
+				172695251A7872D300DA446E /* SignUpViewController.m */,
+				172695211A7872C300DA446E /* LoginViewController.h */,
+				172695221A7872C300DA446E /* LoginViewController.m */,
 				F0A4D8341A75C39A002D8B2F /* DiscoverViewController.h */,
 				F0A4D8351A75C39A002D8B2F /* DiscoverViewController.m */,
 				211E0AAE1A75B19B003E4D99 /* Listing.h */,
@@ -347,6 +357,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				172695231A7872C300DA446E /* LoginViewController.m in Sources */,
 				211E0AAD1A72E4E7003E4D99 /* ListingDetailViewController.m in Sources */,
 				F0A4D8361A75C39A002D8B2F /* DiscoverViewController.m in Sources */,
 				211E0AB01A75B19B003E4D99 /* Listing.m in Sources */,
@@ -354,6 +365,7 @@
 				F0241E541A784DD7009FF170 /* FilterViewController.m in Sources */,
 				170EFA0D1A71C799004EA68B /* AppDelegate.m in Sources */,
 				170EFA0A1A71C799004EA68B /* main.m in Sources */,
+				172695261A7872D300DA446E /* SignUpViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
