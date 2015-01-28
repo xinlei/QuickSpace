@@ -34,6 +34,11 @@
     // Dispose of any resources that can be recreated.
 }
 
+- (IBAction)BookButtonTouchUpInside:(UIButton *)sender {
+    self.book.backgroundColor = [UIColor greenColor];
+    [self.book setTitle:@"Confirm?" forState:(UIControlStateNormal)];
+}
+
 /*
 #pragma mark - Navigation
 

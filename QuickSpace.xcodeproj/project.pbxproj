@@ -29,19 +29,16 @@
 		170EFA461A71CE42004EA68B /* libsqlite3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 170EFA451A71CE42004EA68B /* libsqlite3.dylib */; };
 		172695231A7872C300DA446E /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 172695221A7872C300DA446E /* LoginViewController.m */; };
 		172695261A7872D300DA446E /* SignUpViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 172695251A7872D300DA446E /* SignUpViewController.m */; };
-		1726952A1A78877900DA446E /* los_angeles.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 172695271A78877900DA446E /* los_angeles.jpg */; };
-		1726952B1A78877900DA446E /* san_francisco.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 172695281A78877900DA446E /* san_francisco.jpg */; };
-		1726952C1A78877900DA446E /* stanford.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 172695291A78877900DA446E /* stanford.jpg */; };
 		211E0AA81A7275C0003E4D99 /* room1.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 211E0AA51A7275C0003E4D99 /* room1.jpg */; };
 		211E0AA91A7275C0003E4D99 /* room2.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 211E0AA61A7275C0003E4D99 /* room2.jpg */; };
 		211E0AAA1A7275C0003E4D99 /* room3.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 211E0AA71A7275C0003E4D99 /* room3.jpg */; };
 		211E0AAD1A72E4E7003E4D99 /* ListingDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 211E0AAC1A72E4E7003E4D99 /* ListingDetailViewController.m */; };
 		211E0AB01A75B19B003E4D99 /* Listing.m in Sources */ = {isa = PBXBuildFile; fileRef = 211E0AAF1A75B19B003E4D99 /* Listing.m */; };
+		F0144CE41A78912C00113F95 /* los_angeles.png in Resources */ = {isa = PBXBuildFile; fileRef = F0144CE21A78912C00113F95 /* los_angeles.png */; };
+		F0144CE51A78912C00113F95 /* stanford.png in Resources */ = {isa = PBXBuildFile; fileRef = F0144CE31A78912C00113F95 /* stanford.png */; };
+		F0144CE81A78917A00113F95 /* AdvancedFilterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F0144CE71A78917A00113F95 /* AdvancedFilterViewController.m */; };
 		F0241E421A783ED4009FF170 /* host_space.jpg in Resources */ = {isa = PBXBuildFile; fileRef = F0241E3D1A783ED4009FF170 /* host_space.jpg */; };
 		F0241E431A783ED4009FF170 /* find_space.jpg in Resources */ = {isa = PBXBuildFile; fileRef = F0241E3E1A783ED4009FF170 /* find_space.jpg */; };
-		F0241E441A783ED4009FF170 /* stanford.jpg in Resources */ = {isa = PBXBuildFile; fileRef = F0241E3F1A783ED4009FF170 /* stanford.jpg */; };
-		F0241E451A783ED4009FF170 /* los_angeles.jpg in Resources */ = {isa = PBXBuildFile; fileRef = F0241E401A783ED4009FF170 /* los_angeles.jpg */; };
-		F0241E461A783ED4009FF170 /* san_francisco.jpg in Resources */ = {isa = PBXBuildFile; fileRef = F0241E411A783ED4009FF170 /* san_francisco.jpg */; };
 		F0241E481A783F60009FF170 /* san_francisco.png in Resources */ = {isa = PBXBuildFile; fileRef = F0241E471A783F60009FF170 /* san_francisco.png */; };
 		F0241E541A784DD7009FF170 /* FilterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F0241E531A784DD7009FF170 /* FilterViewController.m */; };
 		F0A4D8361A75C39A002D8B2F /* DiscoverViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F0A4D8351A75C39A002D8B2F /* DiscoverViewController.m */; };
@@ -88,9 +85,6 @@
 		172695221A7872C300DA446E /* LoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginViewController.m; sourceTree = "<group>"; };
 		172695241A7872D300DA446E /* SignUpViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SignUpViewController.h; sourceTree = "<group>"; };
 		172695251A7872D300DA446E /* SignUpViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SignUpViewController.m; sourceTree = "<group>"; };
-		172695271A78877900DA446E /* los_angeles.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = los_angeles.jpg; sourceTree = "<group>"; };
-		172695281A78877900DA446E /* san_francisco.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = san_francisco.jpg; sourceTree = "<group>"; };
-		172695291A78877900DA446E /* stanford.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = stanford.jpg; sourceTree = "<group>"; };
 		211E0AA51A7275C0003E4D99 /* room1.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = room1.jpg; sourceTree = "<group>"; };
 		211E0AA61A7275C0003E4D99 /* room2.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = room2.jpg; sourceTree = "<group>"; };
 		211E0AA71A7275C0003E4D99 /* room3.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = room3.jpg; sourceTree = "<group>"; };
@@ -98,11 +92,12 @@
 		211E0AAC1A72E4E7003E4D99 /* ListingDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ListingDetailViewController.m; sourceTree = "<group>"; };
 		211E0AAE1A75B19B003E4D99 /* Listing.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Listing.h; sourceTree = "<group>"; };
 		211E0AAF1A75B19B003E4D99 /* Listing.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Listing.m; sourceTree = "<group>"; };
+		F0144CE21A78912C00113F95 /* los_angeles.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = los_angeles.png; sourceTree = "<group>"; };
+		F0144CE31A78912C00113F95 /* stanford.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = stanford.png; sourceTree = "<group>"; };
+		F0144CE61A78917A00113F95 /* AdvancedFilterViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AdvancedFilterViewController.h; sourceTree = "<group>"; };
+		F0144CE71A78917A00113F95 /* AdvancedFilterViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AdvancedFilterViewController.m; sourceTree = "<group>"; };
 		F0241E3D1A783ED4009FF170 /* host_space.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = host_space.jpg; sourceTree = "<group>"; };
 		F0241E3E1A783ED4009FF170 /* find_space.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = find_space.jpg; sourceTree = "<group>"; };
-		F0241E3F1A783ED4009FF170 /* stanford.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = stanford.jpg; sourceTree = "<group>"; };
-		F0241E401A783ED4009FF170 /* los_angeles.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = los_angeles.jpg; sourceTree = "<group>"; };
-		F0241E411A783ED4009FF170 /* san_francisco.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = san_francisco.jpg; sourceTree = "<group>"; };
 		F0241E471A783F60009FF170 /* san_francisco.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = san_francisco.png; sourceTree = "<group>"; };
 		F0241E521A784DD7009FF170 /* FilterViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FilterViewController.h; sourceTree = "<group>"; };
 		F0241E531A784DD7009FF170 /* FilterViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FilterViewController.m; sourceTree = "<group>"; };
@@ -175,6 +170,8 @@
 		170EFA061A71C799004EA68B /* QuickSpace */ = {
 			isa = PBXGroup;
 			children = (
+				F0144CE61A78917A00113F95 /* AdvancedFilterViewController.h */,
+				F0144CE71A78917A00113F95 /* AdvancedFilterViewController.m */,
 				F0241E3B1A783ED4009FF170 /* assets */,
 				F0241E521A784DD7009FF170 /* FilterViewController.h */,
 				F0241E531A784DD7009FF170 /* FilterViewController.m */,
@@ -232,15 +229,11 @@
 		F0241E3B1A783ED4009FF170 /* assets */ = {
 			isa = PBXGroup;
 			children = (
-				172695271A78877900DA446E /* los_angeles.jpg */,
-				172695281A78877900DA446E /* san_francisco.jpg */,
-				172695291A78877900DA446E /* stanford.jpg */,
+				F0144CE21A78912C00113F95 /* los_angeles.png */,
+				F0144CE31A78912C00113F95 /* stanford.png */,
 				F0241E471A783F60009FF170 /* san_francisco.png */,
 				F0241E3D1A783ED4009FF170 /* host_space.jpg */,
 				F0241E3E1A783ED4009FF170 /* find_space.jpg */,
-				F0241E3F1A783ED4009FF170 /* stanford.jpg */,
-				F0241E401A783ED4009FF170 /* los_angeles.jpg */,
-				F0241E411A783ED4009FF170 /* san_francisco.jpg */,
 			);
 			path = assets;
 			sourceTree = "<group>";
@@ -325,21 +318,17 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				1726952C1A78877900DA446E /* stanford.jpg in Resources */,
-				F0241E441A783ED4009FF170 /* stanford.jpg in Resources */,
 				F0241E421A783ED4009FF170 /* host_space.jpg in Resources */,
 				F0241E481A783F60009FF170 /* san_francisco.png in Resources */,
+				F0144CE51A78912C00113F95 /* stanford.png in Resources */,
 				211E0AAA1A7275C0003E4D99 /* room3.jpg in Resources */,
 				170EFA131A71C799004EA68B /* Main.storyboard in Resources */,
+				F0144CE41A78912C00113F95 /* los_angeles.png in Resources */,
 				F0241E431A783ED4009FF170 /* find_space.jpg in Resources */,
 				170EFA181A71C799004EA68B /* LaunchScreen.xib in Resources */,
 				211E0AA91A7275C0003E4D99 /* room2.jpg in Resources */,
 				211E0AA81A7275C0003E4D99 /* room1.jpg in Resources */,
-				F0241E451A783ED4009FF170 /* los_angeles.jpg in Resources */,
-				1726952A1A78877900DA446E /* los_angeles.jpg in Resources */,
 				170EFA151A71C799004EA68B /* Images.xcassets in Resources */,
-				F0241E461A783ED4009FF170 /* san_francisco.jpg in Resources */,
-				1726952B1A78877900DA446E /* san_francisco.jpg in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -359,6 +348,7 @@
 			files = (
 				172695231A7872C300DA446E /* LoginViewController.m in Sources */,
 				211E0AAD1A72E4E7003E4D99 /* ListingDetailViewController.m in Sources */,
+				F0144CE81A78917A00113F95 /* AdvancedFilterViewController.m in Sources */,
 				F0A4D8361A75C39A002D8B2F /* DiscoverViewController.m in Sources */,
 				211E0AB01A75B19B003E4D99 /* Listing.m in Sources */,
 				170EFA101A71C799004EA68B /* ViewController.m in Sources */,
@@ -494,7 +484,7 @@
 					"$(PROJECT_DIR)",
 				);
 				INFOPLIST_FILE = QuickSpace/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TARGETED_DEVICE_FAMILY = 1;
@@ -510,7 +500,7 @@
 					"$(PROJECT_DIR)",
 				);
 				INFOPLIST_FILE = QuickSpace/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TARGETED_DEVICE_FAMILY = 1;
