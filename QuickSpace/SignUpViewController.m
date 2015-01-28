@@ -7,6 +7,7 @@
 //
 
 #import "SignUpViewController.h"
+#import <Parse/Parse.h>
 
 @interface SignUpViewController ()
 @property (weak, nonatomic) IBOutlet UITextField *emailTextField;
@@ -41,28 +42,26 @@ bool shouldSegue = YES;
     }
     
     else if(![password1 isEqualToString:password2]){
+        shouldSegue = NO;
         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Sign Up Error" message:@"Your Passwords don't match!" delegate:nil cancelButtonTitle:@"Try Again" otherButtonTitles: nil];
         [alert show];
-        shouldSegue = NO;
     }
     //    else if(email is not valid){
     //
     //    }
     else {
-        //    PFUser *user = [PFUser user];
-        //    user.username = email;
-        //    user.password = password1;
-        //
-        //
-        //    [user signUpInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
-        //        if (!error) {
-        //            // Move to the next page. Decide if this should be the profile page to complete that part or let them go straight to browsing
-        //        } else {
-        //            NSString *errorString = [error userInfo][@"error"];
-        //            // Show the errorString somewhere and let the user try again.
-        //        }
-        //    }];
-        shouldSegue = YES;
+        PFUser *user = [PFUser user];
+        user.username = email;
+        user.password = password1;
+        
+        //Need to make sure that particular email address doesn't already exist in our user database.
+        // if it does, give the person the option to reset the password (?)
+        shouldSegue = [user signUp];
+        if(shouldSegue == NO){
+            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error" message:@"Email address is already taken" delegate:nil cancelButtonTitle:@"Try Again" otherButtonTitles: @"Forgot Password?", nil];
+            [alert show];
+        }
+
     }
     
     NSLog(@"Email: %@, Password: %@, Password2: %@", email, password1, password2);
