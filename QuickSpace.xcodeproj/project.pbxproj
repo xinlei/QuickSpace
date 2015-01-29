@@ -42,6 +42,7 @@
 		F0241E481A783F60009FF170 /* san_francisco.png in Resources */ = {isa = PBXBuildFile; fileRef = F0241E471A783F60009FF170 /* san_francisco.png */; };
 		F0241E541A784DD7009FF170 /* FilterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F0241E531A784DD7009FF170 /* FilterViewController.m */; };
 		F0A4D8361A75C39A002D8B2F /* DiscoverViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F0A4D8351A75C39A002D8B2F /* DiscoverViewController.m */; };
+		F0D625151A7AD92C0063CE0B /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = F0D625141A7AD92C0063CE0B /* Default-568h@2x.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -103,6 +104,7 @@
 		F0241E531A784DD7009FF170 /* FilterViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FilterViewController.m; sourceTree = "<group>"; };
 		F0A4D8341A75C39A002D8B2F /* DiscoverViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DiscoverViewController.h; sourceTree = "<group>"; };
 		F0A4D8351A75C39A002D8B2F /* DiscoverViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DiscoverViewController.m; sourceTree = "<group>"; };
+		F0D625141A7AD92C0063CE0B /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -139,6 +141,7 @@
 		170EF9FB1A71C798004EA68B = {
 			isa = PBXGroup;
 			children = (
+				F0D625141A7AD92C0063CE0B /* Default-568h@2x.png */,
 				170EFA451A71CE42004EA68B /* libsqlite3.dylib */,
 				170EFA431A71CE36004EA68B /* libz.dylib */,
 				170EFA411A71CE24004EA68B /* SystemConfiguration.framework */,
@@ -331,6 +334,7 @@
 				F0144CE51A78912C00113F95 /* stanford.png in Resources */,
 				211E0AAA1A7275C0003E4D99 /* room3.jpg in Resources */,
 				170EFA131A71C799004EA68B /* Main.storyboard in Resources */,
+				F0D625151A7AD92C0063CE0B /* Default-568h@2x.png in Resources */,
 				F0144CE41A78912C00113F95 /* los_angeles.png in Resources */,
 				F0241E431A783ED4009FF170 /* find_space.jpg in Resources */,
 				170EFA181A71C799004EA68B /* LaunchScreen.xib in Resources */,
