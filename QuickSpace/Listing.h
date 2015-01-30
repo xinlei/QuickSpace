@@ -14,5 +14,7 @@
 @property (nonatomic, strong) NSString *imageName;
 @property (nonatomic, strong) NSString *location;
 @property (nonatomic, strong) NSString *type;
+@property (nonatomic, strong) NSString *description;
+@property (nonatomic) int price;
 
 @end

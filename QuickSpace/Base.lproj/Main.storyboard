@@ -158,10 +158,10 @@
             </objects>
             <point key="canvasLocation" x="-1214" y="-420"/>
         </scene>
-        <!--View Controller - List Your Space-->
+        <!--Host View Controller - List Your Space-->
         <scene sceneID="Jt3-YV-7Gi">
             <objects>
-                <viewController id="8lq-DA-qP8" sceneMemberID="viewController">
+                <viewController id="8lq-DA-qP8" customClass="HostViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="xHI-HJ-RcG"/>
                         <viewControllerLayoutGuide type="bottom" id="Ynd-63-1Ma"/>
@@ -175,18 +175,27 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
+                                <connections>
+                                    <outlet property="delegate" destination="8lq-DA-qP8" id="9Gd-gG-61v"/>
+                                </connections>
                             </textField>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Other info (e.g. door code)" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="5hs-Je-m7C">
                                 <rect key="frame" x="45" y="138" width="230" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
+                                <connections>
+                                    <outlet property="delegate" destination="8lq-DA-qP8" id="f0j-Ys-Zc9"/>
+                                </connections>
                             </textField>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Enter address or choose location" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="ir9-3a-HSQ">
                                 <rect key="frame" x="45" y="176" width="230" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
+                                <connections>
+                                    <outlet property="delegate" destination="8lq-DA-qP8" id="I3R-3l-hkY"/>
+                                </connections>
                             </textField>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7W3-tp-N8e">
                                 <rect key="frame" x="0.0" y="478" width="320" height="40"/>
@@ -196,22 +205,27 @@
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
-                                    <segue destination="P7J-Wm-X9x" kind="push" id="rgd-wE-OPI"/>
+                                    <segue destination="P7J-Wm-X9x" kind="push" identifier="ShowNewListingDetails" id="rgd-wE-OPI"/>
                                 </connections>
                             </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
                     <navigationItem key="navigationItem" title="List Your Space" id="rdY-1h-M2t"/>
+                    <connections>
+                        <outlet property="descriptionTextField" destination="5hs-Je-m7C" id="2tS-GP-u9S"/>
+                        <outlet property="locationTextField" destination="ir9-3a-HSQ" id="Uk8-mu-LQB"/>
+                        <outlet property="titleTextField" destination="zMI-D8-366" id="yyy-ER-IMk"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="HTi-kP-oWW" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-714" y="1119"/>
         </scene>
-        <!--View Controller - Add Details-->
+        <!--Add Detail View Controller - Add Details-->
         <scene sceneID="rDw-ck-Dcd">
             <objects>
-                <viewController id="P7J-Wm-X9x" sceneMemberID="viewController">
+                <viewController id="P7J-Wm-X9x" customClass="AddDetailViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="TZg-Fd-fcH"/>
                         <viewControllerLayoutGuide type="bottom" id="O7t-co-RAS"/>
@@ -285,9 +299,6 @@
                             <slider opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="2" minValue="0.0" maxValue="500" translatesAutoresizingMaskIntoConstraints="NO" id="wlq-J5-AOl">
                                 <rect key="frame" x="90" y="405" width="178" height="31"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <connections>
-                                    <action selector="sliderValueChanged:" destination="f1v-Ve-GyG" eventType="valueChanged" id="tSI-Y3-yUp"/>
-                                </connections>
                             </slider>
                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Set Price Limit" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LNY-lp-bht">
                                 <rect key="frame" x="127" y="376" width="112" height="21"/>
@@ -306,10 +317,20 @@
                                     <segue destination="cD8-OF-FRe" kind="push" id="qC8-tL-195"/>
                                 </connections>
                             </button>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zNX-ZN-aGH">
+                                <rect key="frame" x="139" y="55" width="43" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
                     <navigationItem key="navigationItem" title="Add Details" id="lVT-tS-Ax1"/>
+                    <connections>
+                        <outlet property="titleLabel" destination="zNX-ZN-aGH" id="lAT-qS-yGt"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="EHR-Ce-MYl" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -740,7 +761,7 @@
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="blue" accessoryType="disclosureIndicator" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="ListingCell" rowHeight="226" id="sNs-dE-DZN">
-                                        <rect key="frame" x="0.0" y="22" width="320" height="226"/>
+                                        <rect key="frame" x="0.0" y="86" width="320" height="226"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="sNs-dE-DZN" id="FDx-Jv-AGq">
                                             <rect key="frame" x="0.0" y="0.0" width="287" height="225"/>
@@ -934,6 +955,7 @@
         <!--Navigation Controller-->
         <scene sceneID="BMc-w0-wzk">
             <objects>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="IdI-9t-XQQ" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <navigationController id="egu-2u-gjJ" sceneMemberID="viewController">
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="Xtr-Vw-mg4">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
@@ -943,7 +965,6 @@
                         <segue destination="kli-Nc-SX0" kind="relationship" relationship="rootViewController" id="qQk-5j-mcI"/>
                     </connections>
                 </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="IdI-9t-XQQ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-3378" y="-392"/>
         </scene>
@@ -1085,9 +1106,9 @@
         <simulatedScreenMetrics key="destination" type="retina4"/>
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
-        <segue reference="sbc-fe-3wW"/>
-        <segue reference="OHa-B8-TXq"/>
-        <segue reference="JLq-d7-1U3"/>
+        <segue reference="75H-L1-cIG"/>
         <segue reference="JF6-f5-YZK"/>
+        <segue reference="JLq-d7-1U3"/>
+        <segue reference="PSf-8c-2F7"/>
     </inferredMetricsTieBreakers>
 </document>
