@@ -7,6 +7,7 @@
 //
 
 #import "ConfirmationViewController.h"
+#import <Parse/Parse.h>
 
 @interface ConfirmationViewController ()
 
@@ -59,6 +60,19 @@
 {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+{
+    PFUser *currentUser = [PFUser currentUser];
+    PFObject *listingObject = [PFObject objectWithClassName:@"Listing"];
+    listingObject[@"title"] = titleLabel.text;
+    listingObject[@"price"] = priceLabel.text;
+    listingObject[@"location"] = locationLabel.text;
+    listingObject[@"amenities"] = amenitiesLabel.text;
+    listingObject[@"description"] = descriptionLabel.text;
+    listingObject[@"lister"] = currentUser.username;
+    [listingObject save];
 }
 
 /*
