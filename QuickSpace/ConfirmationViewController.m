@@ -73,6 +73,11 @@
     listingObject[@"description"] = descriptionLabel.text;
     listingObject[@"lister"] = currentUser.username;
     [listingObject save];
+ 
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    NSString *object_id = listingObject.objectId;
+    [defaults setObject:object_id forKey:@"object_id"];
+    
 }
 
 /*

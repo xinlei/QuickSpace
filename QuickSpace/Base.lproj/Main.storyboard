@@ -404,10 +404,10 @@
             </objects>
             <point key="canvasLocation" x="-714" y="1877"/>
         </scene>
-        <!--View Controller-->
+        <!--Cancel View Controller-->
         <scene sceneID="CfO-Nw-KLz">
             <objects>
-                <viewController id="eYX-ss-bK0" sceneMemberID="viewController">
+                <viewController id="eYX-ss-bK0" customClass="CancelViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="f4S-h7-sdS"/>
                         <viewControllerLayoutGuide type="bottom" id="Khy-fi-Ve6"/>
@@ -445,13 +445,16 @@
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
-                                    <segue destination="8lq-DA-qP8" kind="push" id="OHa-B8-TXq"/>
+                                    <segue destination="8lq-DA-qP8" kind="push" identifier="cancelListingSegue" id="OHa-B8-TXq"/>
                                 </connections>
                             </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
                     <navigationItem key="navigationItem" id="4a9-7e-fNx"/>
+                    <connections>
+                        <outlet property="cancelButton" destination="pxH-SE-iOf" id="94o-QK-67F"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="2dD-lc-V7K" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
