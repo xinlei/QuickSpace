@@ -296,9 +296,12 @@
                                 <rect key="frame" x="39" y="300" width="51" height="31"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </switch>
-                            <slider opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="2" minValue="0.0" maxValue="500" translatesAutoresizingMaskIntoConstraints="NO" id="wlq-J5-AOl">
+                            <slider opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="10" minValue="0.0" maxValue="500" translatesAutoresizingMaskIntoConstraints="NO" id="wlq-J5-AOl">
                                 <rect key="frame" x="90" y="405" width="178" height="31"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <connections>
+                                    <action selector="sliderValueChanged:" destination="P7J-Wm-X9x" eventType="valueChanged" id="zmp-De-I2D"/>
+                                </connections>
                             </slider>
                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Set Price Limit" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LNY-lp-bht">
                                 <rect key="frame" x="127" y="376" width="112" height="21"/>
@@ -317,29 +320,28 @@
                                     <segue destination="cD8-OF-FRe" kind="push" id="qC8-tL-195"/>
                                 </connections>
                             </button>
-                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zNX-ZN-aGH">
-                                <rect key="frame" x="139" y="55" width="43" height="21"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
                     <navigationItem key="navigationItem" title="Add Details" id="lVT-tS-Ax1"/>
                     <connections>
-                        <outlet property="titleLabel" destination="zNX-ZN-aGH" id="lAT-qS-yGt"/>
+                        <outlet property="monitorSwitch" destination="6cS-Kd-Hkv" id="6BI-9L-Ji3"/>
+                        <outlet property="priceLabel" destination="LNY-lp-bht" id="xec-pU-PID"/>
+                        <outlet property="priceSlider" destination="wlq-J5-AOl" id="p3N-lV-27p"/>
+                        <outlet property="refrigeratorSwitch" destination="oyH-Lz-pC5" id="gue-ab-jzb"/>
+                        <outlet property="servicesSwitch" destination="d0U-zx-DSm" id="v38-XS-EVN"/>
+                        <outlet property="studyDeskSwitch" destination="Pyv-P0-S3k" id="wzP-ef-QTE"/>
+                        <outlet property="wifiSwitch" destination="Dgl-hJ-5t4" id="cOy-TT-h3D"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="EHR-Ce-MYl" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-277" y="1119"/>
         </scene>
-        <!--View Controller - Listing Details-->
+        <!--Confirmation View Controller - Listing Details-->
         <scene sceneID="Hj8-DT-1YS">
             <objects>
-                <viewController id="xtc-tK-7qU" sceneMemberID="viewController">
+                <viewController id="xtc-tK-7qU" customClass="ConfirmationViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="ByT-Mf-4mq"/>
                         <viewControllerLayoutGuide type="bottom" id="30s-GK-YBh"/>
@@ -351,7 +353,7 @@
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="sF9-X8-dpB">
                                 <rect key="frame" x="0.0" y="478" width="320" height="40"/>
                                 <color key="backgroundColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                <state key="normal" title="Next">
+                                <state key="normal" title="Confirm Listing">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
@@ -381,13 +383,19 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Amenities" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ODu-p5-DYf">
-                                <rect key="frame" x="16" y="321" width="165" height="21"/>
+                                <rect key="frame" x="16" y="321" width="284" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Other Information" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="165" translatesAutoresizingMaskIntoConstraints="NO" id="d9q-rd-fCm">
+                                <rect key="frame" x="16" y="350" width="165" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="NtW-S2-RoJ">
-                                <rect key="frame" x="16" y="350" width="288" height="99"/>
+                                <rect key="frame" x="16" y="371" width="288" height="99"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <string key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</string>
                                 <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
@@ -398,6 +406,14 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
                     <navigationItem key="navigationItem" title="Listing Details" id="cDA-N9-Z8A"/>
+                    <connections>
+                        <outlet property="amenitiesLabel" destination="ODu-p5-DYf" id="am1-i3-ikS"/>
+                        <outlet property="descriptionLabel" destination="NtW-S2-RoJ" id="xRs-Yg-rRE"/>
+                        <outlet property="listingImg" destination="yy9-1D-nTF" id="j1e-mM-vFq"/>
+                        <outlet property="locationLabel" destination="o77-qa-Eb8" id="1en-qg-Aat"/>
+                        <outlet property="priceLabel" destination="IU6-Kf-Yse" id="2Ir-gb-B4x"/>
+                        <outlet property="titleLabel" destination="ybf-sj-tx5" id="efr-qD-uQG"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="0KW-Sl-Reu" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -461,7 +477,6 @@
         <!--View Controller - Add Photos-->
         <scene sceneID="hJV-gm-dtT">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="FQ9-iV-QCb" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <viewController id="cD8-OF-FRe" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="Ylr-7b-nwR"/>
@@ -487,6 +502,7 @@
                     </view>
                     <navigationItem key="navigationItem" title="Add Photos" id="Zex-c2-5OH"/>
                 </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="FQ9-iV-QCb" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="164" y="1119"/>
         </scene>
@@ -955,7 +971,6 @@
         <!--Navigation Controller-->
         <scene sceneID="BMc-w0-wzk">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="IdI-9t-XQQ" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <navigationController id="egu-2u-gjJ" sceneMemberID="viewController">
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="Xtr-Vw-mg4">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
@@ -965,6 +980,7 @@
                         <segue destination="kli-Nc-SX0" kind="relationship" relationship="rootViewController" id="qQk-5j-mcI"/>
                     </connections>
                 </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="IdI-9t-XQQ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-3378" y="-392"/>
         </scene>

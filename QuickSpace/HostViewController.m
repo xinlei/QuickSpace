@@ -30,7 +30,15 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    // Do any additional setup after loading the view.
+    
+    // Load previous user inputs
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    NSDictionary *newListingBasicInfo = [defaults objectForKey:@"newListingBasicInfo"];
+    if (newListingBasicInfo != nil){
+        titleTextField.text = newListingBasicInfo[@"title"];
+        descriptionTextField.text = newListingBasicInfo[@"description"];
+        locationTextField.text = newListingBasicInfo[@"location"];
+    }
 }
 
 - (void)didReceiveMemoryWarning
@@ -78,11 +86,19 @@
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
-    NSArray *keys = [NSArray arrayWithObjects:@"title", @"description", @"location", nil];
+ 
+    NSArray *keys = [NSArray arrayWithObjects:
+                     @"title",
+                     @"description",
+                     @"location",
+                     nil];
+   
     NSArray *objects = [NSArray arrayWithObjects:titleTextField.text, descriptionTextField.text, locationTextField.text, nil];
-    NSDictionary *newListing = [NSDictionary dictionaryWithObjects:objects forKeys:keys];
+    NSMutableDictionary *newListingBasicInfo = [NSMutableDictionary dictionaryWithObjects:objects forKeys:keys];
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-    [defaults setObject:newListing forKey:@"newListing"];
+    
+    [defaults setObject:newListingBasicInfo forKey:@"newListingBasicInfo"];
+    [defaults setInteger:-1 forKey:@"price"];
 }
 
 

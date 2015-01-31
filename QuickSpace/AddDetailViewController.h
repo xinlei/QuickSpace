@@ -10,6 +10,12 @@
 #import "Listing.h"
 
 @interface AddDetailViewController : UIViewController
-@property (weak, nonatomic) IBOutlet UILabel *titleLabel;
+@property (weak, nonatomic) IBOutlet UISwitch *wifiSwitch;
+@property (weak, nonatomic) IBOutlet UISwitch *refrigeratorSwitch;
+@property (weak, nonatomic) IBOutlet UISwitch *studyDeskSwitch;
+@property (weak, nonatomic) IBOutlet UISwitch *monitorSwitch;
+@property (weak, nonatomic) IBOutlet UISwitch *servicesSwitch;
+@property (weak, nonatomic) IBOutlet UISlider *priceSlider;
+@property (weak, nonatomic) IBOutlet UILabel *priceLabel;
 
 @end
