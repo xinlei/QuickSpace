@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-@interface FilterViewController : UIViewController
+@interface FilterViewController : UIViewController<UIPickerViewDataSource, UIPickerViewDelegate>
+@property (weak, nonatomic) IBOutlet UIPickerView *typePicker;
 
 @end

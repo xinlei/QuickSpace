@@ -8,12 +8,17 @@
 
 #import "FilterViewController.h"
 
-@interface FilterViewController ()
+@interface FilterViewController (){
+    NSArray *_typePickerData;
+}
+
+
 
 @property (weak, nonatomic) IBOutlet UILabel *hourLabel;
 @property (weak, nonatomic) IBOutlet UIStepper *hourStepper;
 @property (weak, nonatomic) IBOutlet UITextField *typeInputField;
 @property (weak, nonatomic) IBOutlet UIDatePicker *datePicker;
+
 
 @end
 
@@ -32,12 +37,27 @@
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    _typePickerData = @[@"Office Space", @"Resting Space", @"Party Space", @"Closet Space"];
+    self.typePicker.dataSource = self;
+    self.typePicker.delegate = self;
 }
 
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+-(int) numberOfComponentsInPickerView:(UIPickerView *)pickerView{
+    return 1;
+}
+
+-(int) pickerView:(UIPickerView *)pickerView numberOfRowsInComponent:(NSInteger)component{
+    return _typePickerData.count;
+}
+
+-(NSString*)pickerView:(UIPickerView *)pickerView titleForRow:(NSInteger)row forComponent:(NSInteger)component{
+    return _typePickerData[row];
 }
 
 // Update the num of hours using the stepper's value

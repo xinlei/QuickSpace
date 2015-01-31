@@ -516,47 +516,42 @@
                                     <segue destination="f1v-Ve-GyG" kind="push" id="Nl5-ml-cNL"/>
                                 </connections>
                             </button>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="e.g. parking space, office" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="pR2-iH-qMU">
-                                <rect key="frame" x="66" y="112" width="188" height="30"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits"/>
-                                <connections>
-                                    <outlet property="delegate" destination="63p-hx-VCu" id="eZz-yw-8KC"/>
-                                </connections>
-                            </textField>
                             <datePicker contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="dateAndTime" minuteInterval="1" translatesAutoresizingMaskIntoConstraints="NO" id="wBi-Pw-hrR">
-                                <rect key="frame" x="0.0" y="266" width="320" height="162"/>
+                                <rect key="frame" x="0.0" y="303" width="320" height="162"/>
                                 <date key="date" timeIntervalSinceReferenceDate="444090754.19627202">
                                     <!--2015-01-27 22:32:34 +0000-->
                                 </date>
                             </datePicker>
                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Space Type" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="RsK-o3-yxW">
-                                <rect key="frame" x="115" y="83" width="90" height="21"/>
+                                <rect key="frame" x="115" y="45" width="90" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Number of Hours" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jhp-BV-2v4">
-                                <rect key="frame" x="94" y="160" width="133" height="21"/>
+                                <rect key="frame" x="94" y="197" width="133" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Rental Start Time" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hJK-g1-IkK">
-                                <rect key="frame" x="94" y="237" width="133" height="21"/>
+                                <rect key="frame" x="94" y="274" width="133" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <stepper opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" maximumValue="100" translatesAutoresizingMaskIntoConstraints="NO" id="5nO-mO-dz6">
-                                <rect key="frame" x="94" y="189" width="94" height="29"/>
+                                <rect key="frame" x="94" y="226" width="94" height="29"/>
                                 <connections>
                                     <action selector="updateHourLabel:" destination="63p-hx-VCu" eventType="valueChanged" id="OaP-3A-owo"/>
                                 </connections>
                             </stepper>
                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" tag="1" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="0" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gav-sR-OH2">
-                                <rect key="frame" x="192" y="193" width="35" height="21"/>
+                                <rect key="frame" x="192" y="230" width="35" height="21"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <pickerView contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="TR5-gQ-Kh8">
+                                <rect key="frame" x="0.0" y="50" width="320" height="162"/>
+                            </pickerView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
@@ -565,7 +560,7 @@
                         <outlet property="datePicker" destination="wBi-Pw-hrR" id="zUa-xF-Hde"/>
                         <outlet property="hourLabel" destination="gav-sR-OH2" id="iaQ-8q-3QC"/>
                         <outlet property="hourStepper" destination="5nO-mO-dz6" id="uEC-3h-mne"/>
-                        <outlet property="typeInputField" destination="pR2-iH-qMU" id="smb-fq-W2U"/>
+                        <outlet property="typePicker" destination="TR5-gQ-Kh8" id="k4z-Mj-30D"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="F9i-SZ-W3x" userLabel="First Responder" sceneMemberID="firstResponder"/>
