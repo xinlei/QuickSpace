@@ -43,6 +43,7 @@
 		F0241E481A783F60009FF170 /* san_francisco.png in Resources */ = {isa = PBXBuildFile; fileRef = F0241E471A783F60009FF170 /* san_francisco.png */; };
 		F0241E541A784DD7009FF170 /* FilterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F0241E531A784DD7009FF170 /* FilterViewController.m */; };
 		F085B8EA1A7D79D200AA5003 /* ConfirmationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F085B8E91A7D79D200AA5003 /* ConfirmationViewController.m */; };
+		F085B8F31A7DA7BD00AA5003 /* ProfileViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F085B8F21A7DA7BD00AA5003 /* ProfileViewController.m */; };
 		F0A4D8361A75C39A002D8B2F /* DiscoverViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F0A4D8351A75C39A002D8B2F /* DiscoverViewController.m */; };
 		F0D625151A7AD92C0063CE0B /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = F0D625141A7AD92C0063CE0B /* Default-568h@2x.png */; };
 		F0D625191A7AE54D0063CE0B /* HostViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F0D625181A7AE54D0063CE0B /* HostViewController.m */; };
@@ -110,6 +111,8 @@
 		F0241E531A784DD7009FF170 /* FilterViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FilterViewController.m; sourceTree = "<group>"; };
 		F085B8E81A7D79D200AA5003 /* ConfirmationViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ConfirmationViewController.h; sourceTree = "<group>"; };
 		F085B8E91A7D79D200AA5003 /* ConfirmationViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ConfirmationViewController.m; sourceTree = "<group>"; };
+		F085B8F11A7DA7BD00AA5003 /* ProfileViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProfileViewController.h; sourceTree = "<group>"; };
+		F085B8F21A7DA7BD00AA5003 /* ProfileViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProfileViewController.m; sourceTree = "<group>"; };
 		F0A4D8341A75C39A002D8B2F /* DiscoverViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DiscoverViewController.h; sourceTree = "<group>"; };
 		F0A4D8351A75C39A002D8B2F /* DiscoverViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DiscoverViewController.m; sourceTree = "<group>"; };
 		F0D625141A7AD92C0063CE0B /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
@@ -197,6 +200,8 @@
 				170EFA0E1A71C799004EA68B /* ViewController.h */,
 				170EFA0F1A71C799004EA68B /* ViewController.m */,
 				170EFA111A71C799004EA68B /* Main.storyboard */,
+				F085B8F11A7DA7BD00AA5003 /* ProfileViewController.h */,
+				F085B8F21A7DA7BD00AA5003 /* ProfileViewController.m */,
 				172695241A7872D300DA446E /* SignUpViewController.h */,
 				172695251A7872D300DA446E /* SignUpViewController.m */,
 				172695211A7872C300DA446E /* LoginViewController.h */,
@@ -390,6 +395,7 @@
 				172695231A7872C300DA446E /* LoginViewController.m in Sources */,
 				211E0AAD1A72E4E7003E4D99 /* ListingDetailViewController.m in Sources */,
 				F0144CE81A78917A00113F95 /* AdvancedFilterViewController.m in Sources */,
+				F085B8F31A7DA7BD00AA5003 /* ProfileViewController.m in Sources */,
 				178097B71A7D946900BDBB1A /* CancelViewController.m in Sources */,
 				F0D6251C1A7AF98E0063CE0B /* AddDetailViewController.m in Sources */,
 				F0A4D8361A75C39A002D8B2F /* DiscoverViewController.m in Sources */,
