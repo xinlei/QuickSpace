@@ -69,6 +69,8 @@
     listingObject[@"title"] = titleLabel.text;
     listingObject[@"price"] = priceLabel.text;
     listingObject[@"location"] = locationLabel.text;
+    
+    // Need to change into an array of amenities later
     listingObject[@"amenities"] = amenitiesLabel.text;
     listingObject[@"description"] = descriptionLabel.text;
     listingObject[@"lister"] = currentUser.username;

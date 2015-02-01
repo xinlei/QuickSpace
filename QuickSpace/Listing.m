@@ -7,9 +7,21 @@
 //
 
 #import "Listing.h"
+#import <Parse/Parse.h>
 
 @implementation Listing
 
-
-
++ (NSMutableArray *)objectToListingsWith:(NSArray *)PFObjects {
+    NSMutableArray *listings = [[NSMutableArray alloc] init];
+    
+    for (PFObject *object in PFObjects) {
+        Listing *lister = [[Listing alloc] init];
+        lister.title = object[@"title"];
+        lister.type = object[@"type"];
+        lister.location = object[@"location"];
+        lister.imageName = object[@"imageName"];
+        [listings addObject:lister];
+    }
+    return listings;
+}
 @end

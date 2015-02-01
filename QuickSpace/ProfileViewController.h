@@ -8,6 +8,10 @@
 
 #import <UIKit/UIKit.h>
 
-@interface ProfileViewController : UIViewController
+@interface ProfileViewController : UIViewController <UITableViewDataSource, UITableViewDelegate>
+
+@property (weak, nonatomic) IBOutlet UISegmentedControl *listingSegments;
+
+@property (strong, nonatomic) IBOutlet UITableView *listingTable;
 
 @end

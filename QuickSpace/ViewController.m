@@ -32,9 +32,14 @@ NSMutableArray *listings;
     [query whereKey:@"title" notEqualTo:@"Dan Stemkoski"];
     NSArray* AllListings = [query findObjects];
     
-            // The find succeeded.
-            NSLog(@"Successfully retrieved %d listings.", AllListings.count);
-            // Do something with the found objects
+    // The find succeeded.
+    NSLog(@"Successfully retrieved %d listings.", AllListings.count);
+    // Do something with the found objects
+    
+    // Convert into listing objects using class method
+    listings = [Listing objectToListingsWith:AllListings];
+    
+            /*
             for (PFObject *object in AllListings) {
                 Listing *lister = [[Listing alloc] init];
                 lister.title = object[@"title"];
@@ -43,6 +48,7 @@ NSMutableArray *listings;
                 lister.imageName = object[@"imageName"];
                 [listings addObject:lister];
             }
+            */
 
 }
 

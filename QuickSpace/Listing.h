@@ -17,4 +17,6 @@
 @property (nonatomic, strong) NSString *description;
 @property (nonatomic) int price;
 
++ (NSMutableArray *)objectToListingsWith:(NSArray *)PFObjects;
+
 @end
