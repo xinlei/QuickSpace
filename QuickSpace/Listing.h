@@ -17,7 +17,9 @@
 @property (nonatomic, strong) NSString *description;
 @property (nonatomic, strong) NSData *imageData;
 @property (nonatomic, strong) NSNumber *price;
+@property (nonatomic) NSString *object_id;
 
 + (NSMutableArray *)objectToListingsWith:(NSArray *)PFObjects;
-
+- (BOOL) isEqual: other;
+//- (unsigned) hash;
 @end

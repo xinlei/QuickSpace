@@ -17,7 +17,7 @@
 
 @implementation ViewController
 
-NSMutableArray *listings;
+NSArray *listings;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -26,23 +26,20 @@ NSMutableArray *listings;
     
     // Right now the queries are running on the main thread. Need to eventually change this.
     
-    listings = [[NSMutableArray alloc] init];
+    listings = [[NSArray alloc] init];
     
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     NSDictionary *amenities = [defaults objectForKey:@"additionalFilters"];
+    NSNumber *price = [defaults objectForKey:@"maxPrice"];
     
-//    PFQuery *priceQuery = [PFQuery queryWithClassName:@"ListingObject"];
-//    [priceQuery whereKey:@"price" lessThanOrEqualTo: [defaults objectForKey:@"maxPrice"]];
+    NSLog(@"Price: %@", price);
     
     PFQuery *fakeQuery = [PFQuery queryWithClassName:@"ListingObject"];
-    [fakeQuery whereKey:@"title" notEqualTo:@"blah"];
+    [fakeQuery whereKeyExists:@"title"];
     
-    NSArray *fakeObjects = [fakeQuery findObjects];
-//    NSMutableArray *fakeLists = [[NSMutableArray alloc] init];
-    listings = [Listing objectToListingsWith:fakeObjects];
+    NSArray *allObjects = [fakeQuery findObjects];
     
-    
-    NSMutableSet *myIntersect = [NSMutableSet setWithArray: listings];
+    NSMutableSet *myIntersect = [NSMutableSet setWithArray: [Listing objectToListingsWith:allObjects]];
     NSLog(@"Initial count: %lu", (unsigned long)myIntersect.count);
     
     
@@ -54,6 +51,13 @@ NSMutableArray *listings;
     
     
     NSMutableArray *queryArray = [[NSMutableArray alloc] init];
+    
+    if(price){
+        PFQuery *priceQuery = [PFQuery queryWithClassName:@"ListingObject"];
+        [priceQuery whereKey:@"price" lessThanOrEqualTo: price];
+        [myIntersect intersectSet:[NSSet setWithArray:[Listing objectToListingsWith:[priceQuery findObjects]]]];
+        NSLog(@"Post Price count: %lu", (unsigned long)myIntersect.count);
+    }
     if(wifi){
         [queryArray addObject:@"wifi"];
     }
@@ -76,16 +80,15 @@ NSMutableArray *listings;
         PFQuery *myquery = [PFQuery queryWithClassName:@"ListingObject"];
         [myquery whereKey:@"amenities" containsAllObjectsInArray:queryArray];
         
-        NSArray *queryResults = [myquery findObjects];
-        listings = [Listing objectToListingsWith:queryResults];
+        [myIntersect intersectSet:[NSSet setWithArray:[Listing objectToListingsWith:[myquery findObjects]]]];
+        NSLog(@"Post switch count: %lu", (unsigned long)myIntersect.count);
 
     }
     
+    listings = [myIntersect allObjects];
+    
     [defaults removeObjectForKey:@"additionalFilters"];
     [defaults removeObjectForKey:@"maxPrice"];
-    
-    // Convert into listing objects using class method
-//    listings = [Listing objectToListingsWith:AllListings];
 
 
 }
