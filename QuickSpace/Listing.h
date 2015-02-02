@@ -15,7 +15,8 @@
 @property (nonatomic, strong) NSString *location;
 @property (nonatomic, strong) NSString *type;
 @property (nonatomic, strong) NSString *description;
-@property (nonatomic) int price;
+@property (nonatomic, strong) NSData *imageData;
+@property (nonatomic, strong) NSNumber *price;
 
 + (NSMutableArray *)objectToListingsWith:(NSArray *)PFObjects;
 

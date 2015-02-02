@@ -11,5 +11,10 @@
 @interface AdvancedFilterViewController : UIViewController
 @property (weak, nonatomic) IBOutlet UILabel *priceLabel;
 @property (weak, nonatomic) IBOutlet UISlider *priceSlider;
+@property (weak, nonatomic) IBOutlet UISwitch *wifiSwitch;
+@property (weak, nonatomic) IBOutlet UISwitch *refrigeratorSwitch;
+@property (weak, nonatomic) IBOutlet UISwitch *studySwitch;
+@property (weak, nonatomic) IBOutlet UISwitch *computerSwitch;
+@property (weak, nonatomic) IBOutlet UISwitch *janitorSwitch;
 
 @end

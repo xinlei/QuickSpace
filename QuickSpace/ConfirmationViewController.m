@@ -64,19 +64,33 @@
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
-    PFUser *currentUser = [PFUser currentUser];
-    PFObject *listingObject = [PFObject objectWithClassName:@"Listing"];
-    listingObject[@"title"] = titleLabel.text;
-    listingObject[@"price"] = priceLabel.text;
-    listingObject[@"location"] = locationLabel.text;
     
-    // Need to change into an array of amenities later
-    listingObject[@"amenities"] = amenitiesLabel.text;
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    NSDictionary *listingAmenities = [defaults objectForKey:@"newListingAmenities"];
+    NSSet *keys = [listingAmenities keysOfEntriesPassingTest:^(id key, id obj, BOOL *stop){
+        NSLog(@"Key: %@", key);
+        return [obj boolValue];
+    }];
+    NSArray *amenities = [keys allObjects];
+    
+    NSNumber *num = [NSNumber numberWithInteger:[defaults integerForKey:@"newListingPrice"]];
+    
+    UIImage *myImage = [UIImage imageNamed:@"room3.jpg"];
+    NSData *image = UIImagePNGRepresentation(myImage);
+    PFFile *imageFile = [PFFile fileWithName:@"listingImage.png" data:image];
+    
+    PFUser *currentUser = [PFUser currentUser];
+    PFObject *listingObject = [PFObject objectWithClassName:@"ListingObject"];
+    listingObject[@"title"] = titleLabel.text;
+    listingObject[@"price"] = num;
+    listingObject[@"location"] = locationLabel.text;
+    listingObject[@"amenities"] = amenities;
     listingObject[@"description"] = descriptionLabel.text;
     listingObject[@"lister"] = currentUser.username;
+    listingObject[@"image"] = imageFile;
+    listingObject[@"type"] = @"";
     [listingObject save];
- 
-    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    
     NSString *object_id = listingObject.objectId;
     [defaults setObject:object_id forKey:@"object_id"];
     

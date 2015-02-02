@@ -10,16 +10,22 @@
 #import <Parse/Parse.h>
 
 @implementation Listing
+@synthesize description;
 
 + (NSMutableArray *)objectToListingsWith:(NSArray *)PFObjects {
     NSMutableArray *listings = [[NSMutableArray alloc] init];
     
+
     for (PFObject *object in PFObjects) {
+        PFFile *imageFile = object[@"image"];
+        NSData *myData = [imageFile getData];
+        
         Listing *lister = [[Listing alloc] init];
         lister.title = object[@"title"];
         lister.type = object[@"type"];
         lister.location = object[@"location"];
-        lister.imageName = object[@"imageName"];
+        lister.description = object[@"description"];
+        lister.imageData = myData;
         [listings addObject:lister];
     }
     return listings;

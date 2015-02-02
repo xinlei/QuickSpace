@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6254" systemVersion="14B25" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="egu-2u-gjJ">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6254" systemVersion="13F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="egu-2u-gjJ">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6247"/>
@@ -888,8 +888,13 @@
                     </view>
                     <navigationItem key="navigationItem" title="Add Filters" id="5fu-Fg-F0Y"/>
                     <connections>
+                        <outlet property="computerSwitch" destination="wZy-a4-Lu7" id="dd8-uV-TjU"/>
+                        <outlet property="janitorSwitch" destination="3TY-11-hwF" id="IE3-yX-jp5"/>
                         <outlet property="priceLabel" destination="sJA-gR-In3" id="n1o-2M-LAc"/>
                         <outlet property="priceSlider" destination="FEa-ML-9si" id="AMq-Cv-CoR"/>
+                        <outlet property="refrigeratorSwitch" destination="5F7-um-k5h" id="BME-cr-SiL"/>
+                        <outlet property="studySwitch" destination="X7w-63-qd7" id="5UL-Ef-V0f"/>
+                        <outlet property="wifiSwitch" destination="Qba-3n-hcL" id="6tk-mf-Qjd"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="65S-BO-dxa" userLabel="First Responder" sceneMemberID="firstResponder"/>

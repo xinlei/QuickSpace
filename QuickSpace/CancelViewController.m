@@ -31,12 +31,14 @@
     if ([segue.identifier isEqualToString:@"cancelListingSegue"]){
         PFQuery *query = [PFQuery queryWithClassName:@"Listing"];
         PFObject *currentListing = [query getObjectWithId: [defaults objectForKey:@"object_id"]];
+        NSLog(@"Title: %@ Description: %@", currentListing[@"title"], currentListing[@"description"]);
         [currentListing delete];
     }
     [defaults removeObjectForKey:@"object_id"];
     [defaults removeObjectForKey:@"newListingAmenities"];
     [defaults removeObjectForKey:@"newListingBasicInfo"];
     [defaults removeObjectForKey:@"newListingPrice"];
+
 
 }
 

@@ -43,7 +43,24 @@
     self.priceLabel.text = [NSString stringWithFormat:@"$%d", (int)sender.value];
 }
 
-
+-(void) prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender{
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    
+    NSArray *keys = [NSArray arrayWithObjects:
+                     @"wifi",
+                     @"refrigerator",
+                     @"studyDesk",
+                     @"moniter",
+                     @"services",
+                     nil];
+    
+    NSArray *objects = [NSArray arrayWithObjects:[NSNumber numberWithBool:self.wifiSwitch.on], [NSNumber numberWithBool:self.refrigeratorSwitch.on], [NSNumber numberWithBool:self.studySwitch.on], [NSNumber numberWithBool:self.computerSwitch.on], [NSNumber numberWithBool:self.janitorSwitch.on], nil];
+    NSMutableDictionary *additionalFilters = [NSMutableDictionary dictionaryWithObjects:objects forKeys:keys];
+    
+    
+    [defaults setObject:additionalFilters forKey:@"additionalFilters"];
+    [defaults setInteger:(int)self.priceSlider.value forKey:@"maxPrice"];
+}
 
 /*
 #pragma mark - Navigation

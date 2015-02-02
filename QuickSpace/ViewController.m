@@ -28,27 +28,65 @@ NSMutableArray *listings;
     
     listings = [[NSMutableArray alloc] init];
     
-    PFQuery *query = [PFQuery queryWithClassName:@"Listing"];
-    [query whereKey:@"title" notEqualTo:@"Dan Stemkoski"];
-    NSArray* AllListings = [query findObjects];
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    NSDictionary *amenities = [defaults objectForKey:@"additionalFilters"];
     
-    // The find succeeded.
-    NSLog(@"Successfully retrieved %d listings.", AllListings.count);
-    // Do something with the found objects
+//    PFQuery *priceQuery = [PFQuery queryWithClassName:@"ListingObject"];
+//    [priceQuery whereKey:@"price" lessThanOrEqualTo: [defaults objectForKey:@"maxPrice"]];
+    
+    PFQuery *fakeQuery = [PFQuery queryWithClassName:@"ListingObject"];
+    [fakeQuery whereKey:@"title" notEqualTo:@"blah"];
+    
+    NSArray *fakeObjects = [fakeQuery findObjects];
+//    NSMutableArray *fakeLists = [[NSMutableArray alloc] init];
+    listings = [Listing objectToListingsWith:fakeObjects];
+    
+    
+    NSMutableSet *myIntersect = [NSMutableSet setWithArray: listings];
+    NSLog(@"Initial count: %lu", (unsigned long)myIntersect.count);
+    
+    
+    bool wifi = [[amenities objectForKey:@"wifi"] boolValue];
+    bool refrigerator = [[amenities objectForKey:@"refrigerator"] boolValue];
+    bool study = [[amenities objectForKey:@"studyDesk"] boolValue];
+    bool monitor = [[amenities objectForKey:@"monitor"] boolValue];
+    bool services = [[amenities objectForKey:@"services"] boolValue];
+    
+    
+    NSMutableArray *queryArray = [[NSMutableArray alloc] init];
+    if(wifi){
+        [queryArray addObject:@"wifi"];
+    }
+    if(refrigerator){
+        [queryArray addObject:@"refrigerator"];
+    }
+    if(study){
+        [queryArray addObject:@"studyDesk"];
+    }
+    if(monitor){
+        [queryArray addObject:@"monitor"];
+    }
+    if(services){
+        [queryArray addObject:@"services"];
+    }
+    
+
+    
+    if([queryArray count] != 0){
+        PFQuery *myquery = [PFQuery queryWithClassName:@"ListingObject"];
+        [myquery whereKey:@"amenities" containsAllObjectsInArray:queryArray];
+        
+        NSArray *queryResults = [myquery findObjects];
+        listings = [Listing objectToListingsWith:queryResults];
+
+    }
+    
+    [defaults removeObjectForKey:@"additionalFilters"];
+    [defaults removeObjectForKey:@"maxPrice"];
     
     // Convert into listing objects using class method
-    listings = [Listing objectToListingsWith:AllListings];
-    
-            /*
-            for (PFObject *object in AllListings) {
-                Listing *lister = [[Listing alloc] init];
-                lister.title = object[@"title"];
-                lister.type = object[@"type"];
-                lister.location = object[@"location"];
-                lister.imageName = object[@"imageName"];
-                [listings addObject:lister];
-            }
-            */
+//    listings = [Listing objectToListingsWith:AllListings];
+
 
 }
 
@@ -74,7 +112,7 @@ NSMutableArray *listings;
     
     Listing *thisListing = [listings objectAtIndex:indexPath.row];
     UIImageView *image = (UIImageView *)[cell viewWithTag:1];
-    image.image = [UIImage imageNamed:thisListing.imageName];
+    image.image = [UIImage imageWithData: thisListing.imageData];
     
     UILabel *title = (UILabel *)[cell viewWithTag:2];
     title.text = thisListing.title;

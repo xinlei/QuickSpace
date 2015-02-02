@@ -24,7 +24,7 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     titleLabel.text = listing.title;
-    image.image = [UIImage imageNamed:listing.imageName];
+    image.image = [UIImage imageWithData: listing.imageData];
     type.text = listing.type;
     location.text = listing.location;
 }
