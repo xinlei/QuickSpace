@@ -9,20 +9,18 @@
 #import "FilterViewController.h"
 
 @interface FilterViewController (){
-    NSArray *_typePickerData;
+    NSMutableArray *spaceType;
 }
-
-
-
-@property (weak, nonatomic) IBOutlet UILabel *hourLabel;
-@property (weak, nonatomic) IBOutlet UIStepper *hourStepper;
-@property (weak, nonatomic) IBOutlet UITextField *typeInputField;
-@property (weak, nonatomic) IBOutlet UIDatePicker *datePicker;
-
 
 @end
 
 @implementation FilterViewController
+
+@synthesize spaceType;
+@synthesize restButton;
+@synthesize closetButton;
+@synthesize officeButton;
+@synthesize quietButton;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -37,9 +35,13 @@
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    _typePickerData = @[@"Office Space", @"Resting Space", @"Party Space", @"Closet Space"];
-    self.typePicker.dataSource = self;
-    self.typePicker.delegate = self;
+    NSNumber *space = [NSNumber numberWithBool:NO];
+    NSNumber *closet = [NSNumber numberWithBool:NO];
+    NSNumber *office = [NSNumber numberWithBool:NO];
+    NSNumber *quiet = [NSNumber numberWithBool:NO];
+    
+    spaceType = [NSMutableArray arrayWithObjects:space, closet, office, quiet, nil];
+    
 }
 
 - (void)didReceiveMemoryWarning
@@ -48,23 +50,6 @@
     // Dispose of any resources that can be recreated.
 }
 
--(int) numberOfComponentsInPickerView:(UIPickerView *)pickerView{
-    return 1;
-}
-
--(int) pickerView:(UIPickerView *)pickerView numberOfRowsInComponent:(NSInteger)component{
-    return _typePickerData.count;
-}
-
--(NSString*)pickerView:(UIPickerView *)pickerView titleForRow:(NSInteger)row forComponent:(NSInteger)component{
-    return _typePickerData[row];
-}
-
-// Update the num of hours using the stepper's value
-- (IBAction)updateHourLabel:(UIStepper *)sender {
-    double value = [sender value];
-    [self.hourLabel setText:[NSString stringWithFormat:@"%d", (int)value]];
-}
 
 // Remove the keyboard after typing
 - (BOOL)textFieldShouldReturn:(UITextField *)textField {
@@ -75,7 +60,14 @@
 // On tap send filters to model and update the listings
 // Currently no effect on the listings
 - (IBAction)sendFilterValues:(UIButton *)sender {
-    
+    if (restButton.selected)
+        [spaceType replaceObjectAtIndex:0 withObject:[NSNumber numberWithBool:YES]];
+    if (closetButton.selected)
+        [spaceType replaceObjectAtIndex:1 withObject:[NSNumber numberWithBool:YES]];
+    if (officeButton.selected)
+        [spaceType replaceObjectAtIndex:2 withObject:[NSNumber numberWithBool:YES]];
+    if (quietButton.selected)
+        [spaceType replaceObjectAtIndex:3 withObject:[NSNumber numberWithBool:YES]];
 }
 
 /*
@@ -89,4 +81,31 @@
 }
 */
 
+//spacetype buttons
+- (IBAction)restSelected:(id)sender {
+    UIButton *button = (UIButton *)sender;
+    button.selected = !button.selected;
+}
+
+- (IBAction)closetSelected:(id)sender {
+    UIButton *button = (UIButton *)sender;
+    button.selected = !button.selected;
+}
+
+- (IBAction)officeSelected:(id)sender {
+    UIButton *button = (UIButton *)sender;
+    button.selected = !button.selected;
+}
+
+- (IBAction)quietSelected:(id)sender {
+    UIButton *button = (UIButton *)sender;
+    button.selected = !button.selected;
+}
+
+//date selection
+- (IBAction)selectStart:(id)sender {
+}
+
+- (IBAction)selectEnd:(id)sender {
+}
 @end
