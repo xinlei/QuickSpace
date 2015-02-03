@@ -10,12 +10,13 @@
 #import <Parse/Parse.h>
 
 @interface LoginViewController ()
-@property (weak, nonatomic) IBOutlet UITextField *emailTextField;
-@property (weak, nonatomic) IBOutlet UITextField *passwordTextField;
 
 @end
 
 @implementation LoginViewController
+
+@synthesize emailTextField;
+@synthesize passwordTextField;
 
 bool canSegue = NO;
 
@@ -39,12 +40,15 @@ bool canSegue = NO;
     }
 }
 
--(BOOL) textFieldShouldReturn:(UITextField *)emailTextField
+-(BOOL) textFieldShouldReturn:(UITextField *)textField
 {
-    [emailTextField resignFirstResponder];
-    return YES;
+    if(textField == emailTextField) {
+        [passwordTextField becomeFirstResponder];
+    } else if (textField == passwordTextField) {
+        [textField resignFirstResponder];
+    }
+    return NO;
 }
-
 
 -(BOOL)shouldPerformSegueWithIdentifier:(NSString *)identifier sender:(id)sender{
     if (![identifier isEqualToString:@"loginSegue"]){

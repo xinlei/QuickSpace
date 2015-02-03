@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6254" systemVersion="13F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="egu-2u-gjJ">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="5056" systemVersion="13F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="egu-2u-gjJ">
     <dependencies>
-        <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6247"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3733"/>
     </dependencies>
     <scenes>
         <!--Navigation Controller-->
@@ -22,7 +21,7 @@
             </objects>
             <point key="canvasLocation" x="-1652" y="-420"/>
         </scene>
-        <!--Profile-->
+        <!--Navigation Controller - Profile-->
         <scene sceneID="8il-ur-Z6t">
             <objects>
                 <navigationController definesPresentationContext="YES" id="ukr-Fa-r1Y" sceneMemberID="viewController">
@@ -103,7 +102,7 @@
             </objects>
             <point key="canvasLocation" x="-714" y="-1172"/>
         </scene>
-        <!--Discover-->
+        <!--Discover View Controller - Discover-->
         <scene sceneID="uqQ-dh-nVq">
             <objects>
                 <viewController id="MUO-4i-pix" customClass="DiscoverViewController" sceneMemberID="viewController">
@@ -120,7 +119,7 @@
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="popularPlaces" rowHeight="120" id="crY-f6-LRM">
-                                        <rect key="frame" x="0.0" y="22" width="320" height="120"/>
+                                        <rect key="frame" x="0.0" y="86" width="320" height="120"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="crY-f6-LRM" id="6Uy-ka-NFJ">
                                             <rect key="frame" x="0.0" y="0.0" width="287" height="119"/>
@@ -227,7 +226,7 @@
             </objects>
             <point key="canvasLocation" x="-1214" y="-420"/>
         </scene>
-        <!--List Your Space-->
+        <!--Host View Controller - List Your Space-->
         <scene sceneID="Jt3-YV-7Gi">
             <objects>
                 <viewController id="8lq-DA-qP8" customClass="HostViewController" sceneMemberID="viewController">
@@ -288,7 +287,7 @@
             </objects>
             <point key="canvasLocation" x="-714" y="1119"/>
         </scene>
-        <!--Add Details-->
+        <!--Add Detail View Controller - Add Details-->
         <scene sceneID="rDw-ck-Dcd">
             <objects>
                 <viewController id="P7J-Wm-X9x" customClass="AddDetailViewController" sceneMemberID="viewController">
@@ -391,7 +390,7 @@
             </objects>
             <point key="canvasLocation" x="-277" y="1119"/>
         </scene>
-        <!--Listing Details-->
+        <!--Confirmation View Controller - Listing Details-->
         <scene sceneID="Hj8-DT-1YS">
             <objects>
                 <viewController id="xtc-tK-7qU" customClass="ConfirmationViewController" sceneMemberID="viewController">
@@ -528,7 +527,7 @@
             </objects>
             <point key="canvasLocation" x="-277" y="1877"/>
         </scene>
-        <!--Add Photos-->
+        <!--View Controller - Add Photos-->
         <scene sceneID="hJV-gm-dtT">
             <objects>
                 <viewController id="cD8-OF-FRe" sceneMemberID="viewController">
@@ -560,7 +559,7 @@
             </objects>
             <point key="canvasLocation" x="164" y="1119"/>
         </scene>
-        <!--Filter-->
+        <!--Filter View Controller - Filter-->
         <scene sceneID="i5g-Sz-m5q">
             <objects>
                 <viewController id="63p-hx-VCu" customClass="FilterViewController" sceneMemberID="viewController">
@@ -741,7 +740,7 @@
             </objects>
             <point key="canvasLocation" x="-277" y="-420"/>
         </scene>
-        <!--Add Filters-->
+        <!--Advanced Filter View Controller - Add Filters-->
         <scene sceneID="ftm-Cg-fiC">
             <objects>
                 <viewController id="f1v-Ve-GyG" customClass="AdvancedFilterViewController" sceneMemberID="viewController">
@@ -901,7 +900,7 @@
             </objects>
             <point key="canvasLocation" x="164" y="-420"/>
         </scene>
-        <!--Explore-->
+        <!--View Controller - Explore-->
         <scene sceneID="o7T-o1-LkV">
             <objects>
                 <viewController id="ofG-30-AEt" customClass="ViewController" sceneMemberID="viewController">
@@ -987,7 +986,7 @@
             </objects>
             <point key="canvasLocation" x="-714" y="285"/>
         </scene>
-        <!--Explore-->
+        <!--Listing Detail View Controller - Explore-->
         <scene sceneID="UOT-KM-rHn">
             <objects>
                 <viewController id="Duy-ei-nca" customClass="ListingDetailViewController" sceneMemberID="viewController">
@@ -1155,11 +1154,17 @@
                                 <rect key="frame" x="28" y="138" width="239" height="30"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
+                                <connections>
+                                    <outlet property="delegate" destination="kli-Nc-SX0" id="78v-Ql-kO8"/>
+                                </connections>
                             </textField>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Password" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="PAR-bL-Aki">
                                 <rect key="frame" x="28" y="208" width="239" height="30"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" secureTextEntry="YES"/>
+                                <connections>
+                                    <outlet property="delegate" destination="kli-Nc-SX0" id="hgB-Qe-n4L"/>
+                                </connections>
                             </textField>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3QU-vr-dS3">
                                 <rect key="frame" x="118" y="381" width="59" height="30"/>
@@ -1175,8 +1180,8 @@
                     </view>
                     <navigationItem key="navigationItem" id="2JR-Yt-2pN"/>
                     <connections>
-                        <outlet property="emailTextField" destination="WIW-eZ-igz" id="YIt-Vk-Hwk"/>
-                        <outlet property="passwordTextField" destination="PAR-bL-Aki" id="E22-rr-iaU"/>
+                        <outlet property="emailTextField" destination="WIW-eZ-igz" id="u3b-iA-Vih"/>
+                        <outlet property="passwordTextField" destination="PAR-bL-Aki" id="WUh-f1-qJw"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="B0e-yF-QiH" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -1209,25 +1214,34 @@
                                 <rect key="frame" x="43" y="158" width="235" height="30"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
+                                <connections>
+                                    <outlet property="delegate" destination="mZX-Y3-7uT" id="GpQ-KA-J6p"/>
+                                </connections>
                             </textField>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Password" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="vmE-Us-a0c">
                                 <rect key="frame" x="43" y="221" width="235" height="30"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" secureTextEntry="YES"/>
+                                <connections>
+                                    <outlet property="delegate" destination="mZX-Y3-7uT" id="ziD-Z5-fpi"/>
+                                </connections>
                             </textField>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Confirm Password" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="vk8-id-gP0">
                                 <rect key="frame" x="43" y="282" width="235" height="30"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" secureTextEntry="YES"/>
+                                <connections>
+                                    <outlet property="delegate" destination="mZX-Y3-7uT" id="FOW-Ix-KyC"/>
+                                </connections>
                             </textField>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
                     <navigationItem key="navigationItem" id="bHW-KL-Tms"/>
                     <connections>
-                        <outlet property="confirmPasswordTextField" destination="vk8-id-gP0" id="5nQ-EZ-2ei"/>
-                        <outlet property="emailTextField" destination="EXq-r7-baK" id="19o-eq-CYg"/>
-                        <outlet property="passwordTextField" destination="vmE-Us-a0c" id="REx-kD-0qF"/>
+                        <outlet property="confirmPasswordTextField" destination="vk8-id-gP0" id="RXy-zg-gEs"/>
+                        <outlet property="emailTextField" destination="EXq-r7-baK" id="eaj-Tq-mb4"/>
+                        <outlet property="passwordTextField" destination="vmE-Us-a0c" id="HB5-67-QKI"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="LCU-JF-pWN" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -1266,9 +1280,9 @@
         <simulatedScreenMetrics key="destination" type="retina4"/>
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
-        <segue reference="JF6-f5-YZK"/>
-        <segue reference="75H-L1-cIG"/>
         <segue reference="PSf-8c-2F7"/>
+        <segue reference="75H-L1-cIG"/>
+        <segue reference="ihc-zZ-jmu"/>
         <segue reference="JLq-d7-1U3"/>
         <segue reference="9Jd-uR-fqQ"/>
     </inferredMetricsTieBreakers>
