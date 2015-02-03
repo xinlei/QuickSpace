@@ -8,6 +8,7 @@
 
 #import "CancelViewController.h"
 #import <Parse/Parse.h>
+#import "Listing.h"
 
 @interface CancelViewController ()
 @end
@@ -29,10 +30,8 @@
 {
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     if ([segue.identifier isEqualToString:@"cancelListingSegue"]){
-        PFQuery *query = [PFQuery queryWithClassName:@"Listing"];
-        PFObject *currentListing = [query getObjectWithId: [defaults objectForKey:@"object_id"]];
-        NSLog(@"Title: %@ Description: %@", currentListing[@"title"], currentListing[@"description"]);
-        [currentListing delete];
+        
+        [Listing cancelListingForHost:[defaults objectForKey:@"object_id"]];
     }
     [defaults removeObjectForKey:@"object_id"];
     [defaults removeObjectForKey:@"newListingAmenities"];

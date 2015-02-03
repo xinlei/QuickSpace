@@ -1293,10 +1293,10 @@
         <simulatedScreenMetrics key="destination" type="retina4"/>
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
-        <segue reference="ihc-zZ-jmu"/>
-        <segue reference="PSf-8c-2F7"/>
-        <segue reference="KOp-dB-tul"/>
-        <segue reference="9Jd-uR-fqQ"/>
+        <segue reference="yQH-N5-bKF"/>
         <segue reference="oHm-PT-uY9"/>
+        <segue reference="KOp-dB-tul"/>
+        <segue reference="ihc-zZ-jmu"/>
+        <segue reference="OHa-B8-TXq"/>
     </inferredMetricsTieBreakers>
 </document>

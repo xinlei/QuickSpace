@@ -41,6 +41,12 @@
     return listings;
 }
 
++ (void) cancelListingForHost:(NSString *) object_id {
+    PFQuery *query = [PFQuery queryWithClassName:@"Listing"];
+    PFObject *currentListing = [query getObjectWithId: object_id];
+    [currentListing delete];
+}
+
 - (BOOL) isEqual:(id)other{
 //    if (self == other)
 //        return YES;

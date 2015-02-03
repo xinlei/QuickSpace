@@ -8,10 +8,10 @@
 
 #import <UIKit/UIKit.h>
 
-@interface ProfileViewController : UIViewController <UITableViewDataSource, UITableViewDelegate>
+@interface ProfileViewController : UIViewController <UITableViewDataSource, UITableViewDelegate, UIActionSheetDelegate>
 
 @property (weak, nonatomic) IBOutlet UISegmentedControl *listingSegments;
-
 @property (strong, nonatomic) IBOutlet UITableView *listingTable;
+@property (strong, nonatomic) IBOutlet UIActionSheet *popup;
 
 @end

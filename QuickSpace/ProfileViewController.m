@@ -9,6 +9,7 @@
 #import "ProfileViewController.h"
 #import <Parse/Parse.h>
 #import "Listing.h"
+#import <UIKit/UIKit.h>
 
 @interface ProfileViewController ()
 
@@ -17,7 +18,7 @@
 @implementation ProfileViewController
 
 @synthesize listingSegments;
-
+@synthesize popup;
 NSMutableArray *listings;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
@@ -47,6 +48,38 @@ NSMutableArray *listings;
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    
+    // Show popup menu
+    if (listingSegments.selectedSegmentIndex == 1){
+        popup = [[UIActionSheet alloc]
+                 initWithTitle:@"Listing Options"
+                 delegate:self
+                 cancelButtonTitle:@"Cancel"
+                 destructiveButtonTitle:@"Remove Listing"
+                 otherButtonTitles:nil];
+        popup.actionSheetStyle = UIActionSheetStyleBlackOpaque;
+        [popup showInView:self.view];
+        popup.tag = indexPath.row;
+    }
+}
+
+- (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex {
+    
+    // Remove listing
+    if (buttonIndex == 0) {
+        int row = actionSheet.tag;
+        Listing *currListing = [listings objectAtIndex:row];
+        PFQuery *query = [PFQuery queryWithClassName:@"Listing"];
+            
+        [query getObjectInBackgroundWithId:currListing.object_id block:^(PFObject *parseListing, NSError *error) {
+            [parseListing deleteEventually];
+        }];
+        [self.listingTable reloadData];
+    }
+}
+
 - (IBAction)listingSegmentValueChanged:(UISegmentedControl *)sender {
     PFUser *currentUser = [PFUser currentUser];
     if (listingSegments.selectedSegmentIndex == 0){
