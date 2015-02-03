@@ -68,10 +68,12 @@
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     NSDictionary *listingAmenities = [defaults objectForKey:@"newListingAmenities"];
     NSSet *keys = [listingAmenities keysOfEntriesPassingTest:^(id key, id obj, BOOL *stop){
-        NSLog(@"Key: %@", key);
+        if([obj boolValue] == YES)
+            NSLog(@"Key: %@", key);
         return [obj boolValue];
     }];
     NSArray *amenities = [keys allObjects];
+
     
     NSNumber *num = [NSNumber numberWithInteger:[defaults integerForKey:@"newListingPrice"]];
     

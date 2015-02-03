@@ -37,10 +37,20 @@ NSArray *listings;
     PFQuery *fakeQuery = [PFQuery queryWithClassName:@"ListingObject"];
     [fakeQuery whereKeyExists:@"title"];
     
-    NSArray *allObjects = [fakeQuery findObjects];
+//    NSArray *allObjects = [fakeQuery findObjects];
+    NSArray *allListings = [Listing objectToListingsWith:[fakeQuery findObjects]];
     
-    NSMutableSet *myIntersect = [NSMutableSet setWithArray: [Listing objectToListingsWith:allObjects]];
-    NSLog(@"Initial count: %lu", (unsigned long)myIntersect.count);
+    NSMutableArray *idArray = [[NSMutableArray alloc]init];
+    for (int i = 0; i < allListings.count; i++) {
+        Listing *list = [allListings objectAtIndex:i];
+        [idArray addObject:list.object_id];
+    }
+    
+    NSMutableDictionary *dict = [[NSMutableDictionary alloc]initWithObjects:allListings forKeys:idArray];
+    
+    
+//    NSMutableSet *myIntersect = [NSMutableSet setWithArray: [Listing objectToListingsWith:allObjects]];
+    NSLog(@"Initial count: %lu ID count: %lu", (unsigned long)listings.count, (unsigned long)idArray.count);
     
     
     bool wifi = [[amenities objectForKey:@"wifi"] boolValue];
@@ -52,11 +62,40 @@ NSArray *listings;
     
     NSMutableArray *queryArray = [[NSMutableArray alloc] init];
     
-    if(price){
+    if(price > 0){
         PFQuery *priceQuery = [PFQuery queryWithClassName:@"ListingObject"];
         [priceQuery whereKey:@"price" lessThanOrEqualTo: price];
-        [myIntersect intersectSet:[NSSet setWithArray:[Listing objectToListingsWith:[priceQuery findObjects]]]];
-        NSLog(@"Post Price count: %lu", (unsigned long)myIntersect.count);
+//        [myIntersect intersectSet:[NSSet setWithArray:[Listing objectToListingsWith:[priceQuery findObjects]]]];
+//        NSLog(@"Post Price count: %lu", (unsigned long)myIntersect.count);
+        
+        NSArray *priceArray = [priceQuery findObjects];
+        NSMutableArray *priceIDArray = [[NSMutableArray alloc] init];
+        for(int i = 0; i < priceArray.count; i++){
+            PFObject *object = [priceArray objectAtIndex:i];
+            [priceIDArray addObject:object.objectId];
+        }
+        
+        NSLog(@"Num price ids: %lu", (unsigned long)priceIDArray.count);
+//        for(int i = 0; i < idArray.count; i++){
+//            NSString *object_id = [idArray objectAtIndex:i];
+//            
+//            if(![priceIDArray containsObject: object_id]){
+//                NSLog(@"Price Query doesn't contain object with id: %@", object_id);
+//                [idArray removeObjectAtIndex:i];
+//                [listings removeObjectAtIndex:i];
+//            }
+//        }
+        NSMutableArray *temp = [[NSMutableArray alloc]init];
+        for(int i = 0; i < priceIDArray.count; i++){
+            NSString *object_id = [priceIDArray objectAtIndex:i];
+            
+            if([idArray containsObject: object_id]){
+                [temp addObject:object_id];
+            }
+        }
+        idArray = temp;
+        
+        NSLog(@"Post Price count: %lu ID count: %lu", (unsigned long)listings.count, (unsigned long)idArray.count);
     }
     if(wifi){
         [queryArray addObject:@"wifi"];
@@ -68,6 +107,7 @@ NSArray *listings;
         [queryArray addObject:@"studyDesk"];
     }
     if(monitor){
+        NSLog(@"IN THE MONITOR!!!!");
         [queryArray addObject:@"monitor"];
     }
     if(services){
@@ -80,12 +120,43 @@ NSArray *listings;
         PFQuery *myquery = [PFQuery queryWithClassName:@"ListingObject"];
         [myquery whereKey:@"amenities" containsAllObjectsInArray:queryArray];
         
-        [myIntersect intersectSet:[NSSet setWithArray:[Listing objectToListingsWith:[myquery findObjects]]]];
-        NSLog(@"Post switch count: %lu", (unsigned long)myIntersect.count);
+        NSArray *newArray = [myquery findObjects];
+        
+        NSMutableArray *newIDArray = [[NSMutableArray alloc] init];
+        for(int i = 0; i < newArray.count; i++){
+            PFObject *object = [newArray objectAtIndex:i];
+            [newIDArray addObject:object.objectId];
+        }
+        
+             NSLog(@"Num new ids: %lu", (unsigned long)newIDArray.count);
+        
+//        for(int i = 0; i < idArray.count; i++){
+//            NSString *object_id = [idArray objectAtIndex:i];
+//            if(![newIDArray containsObject: object_id]){
+//                NSLog(@"Switch Query doesn't contain object with id: %@", object_id);
+//                [idArray removeObjectAtIndex:i];
+//                [listings removeObjectAtIndex:i];
+//            }
+//        }
+        
+        NSMutableArray *temp = [[NSMutableArray alloc]init];
+        for(int i = 0; i < newIDArray.count; i++){
+            NSString *object_id = [newIDArray objectAtIndex:i];
+            
+            if([idArray containsObject: object_id]){
+                [temp addObject:object_id];
+            }
+        }
+        idArray = temp;
+        
+        
+        NSLog(@"Post switch count: %lu ID count: %lu", (unsigned long)listings.count, (unsigned long)idArray.count);
+//        [myIntersect intersectSet:[NSSet setWithArray:[Listing objectToListingsWith:[myquery findObjects]]]];
+//        NSLog(@"Post switch count: %lu", (unsigned long)myIntersect.count);
 
     }
-    
-    listings = [myIntersect allObjects];
+
+    listings = [dict objectsForKeys:idArray notFoundMarker:[NSNull null]];
     
     [defaults removeObjectForKey:@"additionalFilters"];
     [defaults removeObjectForKey:@"maxPrice"];

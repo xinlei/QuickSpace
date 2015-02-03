@@ -34,10 +34,10 @@
 }
 
 - (BOOL) isEqual:(id)other{
-    if (self == other)
-        return YES;
-    if(!other || ![other isKindOfClass: [self class]])
-        return NO;
+//    if (self == other)
+//        return YES;
+//    if(!other || ![other isKindOfClass: [self class]])
+//        return NO;
     return [[self object_id] isEqualToString:[other object_id]];
 }
 

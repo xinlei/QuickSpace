@@ -869,7 +869,7 @@
                                     <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="3TY-11-hwF">
                                         <rect key="frame" x="39" y="300" width="51" height="31"/>
                                     </switch>
-                                    <slider opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="2" minValue="0.0" maxValue="500" translatesAutoresizingMaskIntoConstraints="NO" id="FEa-ML-9si">
+                                    <slider opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="500" minValue="0.0" maxValue="500" translatesAutoresizingMaskIntoConstraints="NO" id="FEa-ML-9si">
                                         <rect key="frame" x="94" y="405" width="178" height="31"/>
                                         <connections>
                                             <action selector="sliderValueChanged:" destination="f1v-Ve-GyG" eventType="valueChanged" id="CuQ-GL-GUe"/>

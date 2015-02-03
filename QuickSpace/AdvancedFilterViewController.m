@@ -50,7 +50,7 @@
                      @"wifi",
                      @"refrigerator",
                      @"studyDesk",
-                     @"moniter",
+                     @"monitor",
                      @"services",
                      nil];
     

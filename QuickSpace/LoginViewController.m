@@ -39,6 +39,13 @@ bool canSegue = NO;
     }
 }
 
+-(BOOL) textFieldShouldReturn:(UITextField *)emailTextField
+{
+    [emailTextField resignFirstResponder];
+    return YES;
+}
+
+
 -(BOOL)shouldPerformSegueWithIdentifier:(NSString *)identifier sender:(id)sender{
     if (![identifier isEqualToString:@"loginSegue"]){
         return YES;
