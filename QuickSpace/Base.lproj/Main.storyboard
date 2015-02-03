@@ -1049,7 +1049,7 @@
                                 </state>
                                 <connections>
                                     <action selector="bookButton:" destination="Duy-ei-nca" eventType="touchUpInside" id="Jnj-10-W4n"/>
-                                    <segue destination="VcC-Ma-qT0" kind="push" id="hQm-md-erW"/>
+                                    <segue destination="VcC-Ma-qT0" kind="push" identifier="ShowBookingConfirmation" id="hQm-md-erW"/>
                                 </connections>
                             </button>
                         </subviews>

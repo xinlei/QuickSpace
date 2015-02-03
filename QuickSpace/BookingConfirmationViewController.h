@@ -7,8 +7,11 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "Listing.h"
 
 @interface BookingConfirmationViewController : UIViewController
+
+@property (nonatomic, strong) Listing *listing;
 @property (weak, nonatomic) IBOutlet UIButton *cancelButton;
 
 @end

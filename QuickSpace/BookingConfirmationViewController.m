@@ -7,6 +7,7 @@
 //
 
 #import "BookingConfirmationViewController.h"
+#import <Parse/Parse.h>
 
 @interface BookingConfirmationViewController ()
 
@@ -15,6 +16,7 @@
 @implementation BookingConfirmationViewController
 
 @synthesize cancelButton;
+@synthesize listing;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -37,7 +39,14 @@
     // Dispose of any resources that can be recreated.
 }
 - (IBAction)cancelBooking:(UIButton *)sender {
+    PFQuery *query = [PFQuery queryWithClassName:@"ListingObject"];
     
+    // Retrieve the object by id
+    [query getObjectInBackgroundWithId:listing.object_id block:^(PFObject *parseListing, NSError *error) {
+        parseListing[@"guest_id"] = @"";
+        [parseListing saveInBackground];
+    }];
+
 }
 
 /*

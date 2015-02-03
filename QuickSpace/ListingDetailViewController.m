@@ -7,6 +7,7 @@
 //
 
 #import "ListingDetailViewController.h"
+#import "BookingConfirmationViewController.h"
 #import <Parse/Parse.h>
 
 @interface ListingDetailViewController ()
@@ -41,7 +42,7 @@
     PFQuery *query = [PFQuery queryWithClassName:@"ListingObject"];
     
     // Retrieve the object by id
-    [query getObjectInBackgroundWithId:listing.object_id block:^(PFObject *listing, NSError *error) {
+    [query getObjectInBackgroundWithId:listing.object_id block:^(PFObject *parseListing, NSError *error) {
         PFUser *currentUser = [PFUser currentUser];
         
         // Update start and end time
@@ -50,21 +51,20 @@
         // Hard-coded 30 seconds. Need to be changed later once date picker is implmented
         NSDate *endTime = [startTime dateByAddingTimeInterval:180];
         
-        listing[@"startTime"] = startTime;
-        listing[@"endTime"] = endTime;
-        listing[@"guest_id"] = currentUser.username;
-        [listing saveInBackground];
+        parseListing[@"startTime"] = startTime;
+        parseListing[@"endTime"] = endTime;
+        parseListing[@"guest_id"] = currentUser.username;
+        [parseListing saveInBackground];
     }];
 }
 
-/*
-#pragma mark - Navigation
 
-// In a storyboard-based application, you will often want to do a little preparation before navigation
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
+    if ([segue.identifier isEqualToString:@"ShowBookingConfirmation"]){
+        BookingConfirmationViewController *destViewController = segue.destinationViewController;
+        destViewController.listing = listing;
+    }
 }
-*/
+
 
 @end
