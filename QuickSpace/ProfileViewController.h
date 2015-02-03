@@ -13,5 +13,6 @@
 @property (weak, nonatomic) IBOutlet UISegmentedControl *listingSegments;
 @property (strong, nonatomic) IBOutlet UITableView *listingTable;
 @property (strong, nonatomic) IBOutlet UIActionSheet *popup;
+@property (weak, nonatomic) IBOutlet UIButton *logoutButton;
 
 @end

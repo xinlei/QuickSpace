@@ -54,7 +54,6 @@
                                 <segments>
                                     <segment title="Rentals"/>
                                     <segment title="Listings"/>
-                                    <segment title="Searches"/>
                                 </segments>
                                 <connections>
                                     <action selector="listingSegmentValueChanged:" destination="0De-Iy-zan" eventType="valueChanged" id="xGv-Vd-7hd"/>
@@ -99,10 +98,27 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
-                    <navigationItem key="navigationItem" id="yZu-Zc-F1j"/>
+                    <navigationItem key="navigationItem" id="yZu-Zc-F1j">
+                        <barButtonItem key="rightBarButtonItem" style="plain" id="hkX-B6-bAu">
+                            <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="9wW-aD-u20">
+                                <rect key="frame" x="233" y="5" width="71" height="33"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                <state key="normal" title="Logout">
+                                    <color key="titleColor" cocoaTouchSystemColor="darkTextColor"/>
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="logoutButtonTouched:" destination="0De-Iy-zan" eventType="touchUpInside" id="jwy-5B-ADb"/>
+                                    <segue destination="kli-Nc-SX0" kind="push" id="uLc-1e-HkW"/>
+                                </connections>
+                            </button>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
                         <outlet property="listingSegments" destination="YWd-Rd-4kD" id="Pn8-iF-GGF"/>
                         <outlet property="listingTable" destination="7oN-Wc-k5G" id="azp-MU-wbB"/>
+                        <outlet property="logoutButton" destination="9wW-aD-u20" id="ad0-AJ-apo"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="yRc-qn-SD9" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -1296,6 +1312,7 @@
         <segue reference="yQH-N5-bKF"/>
         <segue reference="oHm-PT-uY9"/>
         <segue reference="KOp-dB-tul"/>
+        <segue reference="uLc-1e-HkW"/>
         <segue reference="ihc-zZ-jmu"/>
         <segue reference="OHa-B8-TXq"/>
     </inferredMetricsTieBreakers>

@@ -19,6 +19,7 @@
 
 @synthesize listingSegments;
 @synthesize popup;
+@synthesize logoutButton;
 NSMutableArray *listings;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
@@ -49,6 +50,11 @@ NSMutableArray *listings;
     // Dispose of any resources that can be recreated.
 }
 
+// Log out the current user
+- (IBAction)logoutButtonTouched:(UIButton *)sender {
+    [PFUser logOut];
+}
+
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     
     // Show popup menu
@@ -71,7 +77,7 @@ NSMutableArray *listings;
     if (buttonIndex == 0) {
         int row = actionSheet.tag;
         Listing *currListing = [listings objectAtIndex:row];
-        PFQuery *query = [PFQuery queryWithClassName:@"Listing"];
+        PFQuery *query = [PFQuery queryWithClassName:@"ListingObject"];
             
         [query getObjectInBackgroundWithId:currListing.object_id block:^(PFObject *parseListing, NSError *error) {
             [parseListing deleteEventually];
@@ -93,18 +99,12 @@ NSMutableArray *listings;
         NSArray* AllListings = [query findObjects];
         listings = [Listing objectToListingsWith:AllListings];
         
-    } else if (listingSegments.selectedSegmentIndex == 1){
-        
+    } else {
         // Get listings posted by this user
-        PFQuery *query = [PFQuery queryWithClassName:@"Listing"];
+        PFQuery *query = [PFQuery queryWithClassName:@"ListingObject"];
         [query whereKey:@"lister" equalTo:currentUser.username];
         NSArray* AllListings = [query findObjects];
         listings = [Listing objectToListingsWith:AllListings];
-    
-    } else {
-        
-        // Testing, need to be replaced by recently viewed searches
-        [listings removeAllObjects];
     }
     [self.listingTable reloadData];
 }
