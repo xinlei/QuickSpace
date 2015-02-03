@@ -12,6 +12,9 @@
 @implementation Listing
 @synthesize description;
 @synthesize object_id;
+@synthesize startTime;
+@synthesize endTime;
+@synthesize guest_id;
 
 + (NSMutableArray *)objectToListingsWith:(NSArray *)PFObjects {
     NSMutableArray *listings = [[NSMutableArray alloc] init];
@@ -29,6 +32,11 @@
         lister.imageData = myData;
         lister.object_id = object.objectId;
         [listings addObject:lister];
+        
+        // Booking information. These fields are nil if no value has been set
+        lister.startTime = object[@"startTime"];
+        lister.endTime = object[@"endTime"];
+        lister.guest_id = object[@"guest_id"];
     }
     return listings;
 }

@@ -80,6 +80,13 @@
                                                     <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
+                                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" tag="2" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pyS-0O-0b3">
+                                                    <rect key="frame" x="191" y="11" width="109" height="21"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
                                             </subviews>
                                         </tableViewCellContentView>
                                     </tableViewCell>
@@ -119,7 +126,7 @@
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="popularPlaces" rowHeight="120" id="crY-f6-LRM">
-                                        <rect key="frame" x="0.0" y="86" width="320" height="120"/>
+                                        <rect key="frame" x="0.0" y="22" width="320" height="120"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="crY-f6-LRM" id="6Uy-ka-NFJ">
                                             <rect key="frame" x="0.0" y="0.0" width="287" height="119"/>
@@ -1041,6 +1048,7 @@
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
+                                    <action selector="bookButton:" destination="Duy-ei-nca" eventType="touchUpInside" id="Jnj-10-W4n"/>
                                     <segue destination="VcC-Ma-qT0" kind="push" id="hQm-md-erW"/>
                                 </connections>
                             </button>
@@ -1049,6 +1057,7 @@
                     </view>
                     <navigationItem key="navigationItem" title="Explore" id="m0f-qi-z2v"/>
                     <connections>
+                        <outlet property="bookButton" destination="J8d-oW-Rnf" id="4su-iy-kUw"/>
                         <outlet property="image" destination="3cU-0f-T4g" id="VOv-tC-DaG"/>
                         <outlet property="location" destination="hCX-a5-8tr" id="xWh-Aq-e0G"/>
                         <outlet property="titleLabel" destination="7F8-gA-9a8" id="74P-R9-MiP"/>
@@ -1059,10 +1068,10 @@
             </objects>
             <point key="canvasLocation" x="-277" y="285"/>
         </scene>
-        <!--View Controller-->
+        <!--Booking Confirmation View Controller-->
         <scene sceneID="Uqc-ZD-udU">
             <objects>
-                <viewController id="VcC-Ma-qT0" sceneMemberID="viewController">
+                <viewController id="VcC-Ma-qT0" customClass="BookingConfirmationViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="yxb-um-DKv"/>
                         <viewControllerLayoutGuide type="bottom" id="v7f-Fc-g8U"/>
@@ -1100,6 +1109,7 @@
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
+                                    <action selector="cancelBooking:" destination="VcC-Ma-qT0" eventType="touchUpInside" id="vR2-X8-uzB"/>
                                     <segue destination="MUO-4i-pix" kind="push" id="oHm-PT-uY9"/>
                                 </connections>
                             </button>
@@ -1107,6 +1117,9 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
                     <navigationItem key="navigationItem" id="2Yq-PI-a57"/>
+                    <connections>
+                        <outlet property="cancelButton" destination="J0h-SS-eL7" id="l4P-Es-T3T"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="rnB-vO-xDo" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -1280,10 +1293,10 @@
         <simulatedScreenMetrics key="destination" type="retina4"/>
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
-        <segue reference="PSf-8c-2F7"/>
-        <segue reference="75H-L1-cIG"/>
         <segue reference="ihc-zZ-jmu"/>
-        <segue reference="JLq-d7-1U3"/>
+        <segue reference="PSf-8c-2F7"/>
+        <segue reference="KOp-dB-tul"/>
         <segue reference="9Jd-uR-fqQ"/>
+        <segue reference="oHm-PT-uY9"/>
     </inferredMetricsTieBreakers>
 </document>

@@ -45,6 +45,7 @@
 		F0241E431A783ED4009FF170 /* find_space.jpg in Resources */ = {isa = PBXBuildFile; fileRef = F0241E3E1A783ED4009FF170 /* find_space.jpg */; };
 		F0241E481A783F60009FF170 /* san_francisco.png in Resources */ = {isa = PBXBuildFile; fileRef = F0241E471A783F60009FF170 /* san_francisco.png */; };
 		F0241E541A784DD7009FF170 /* FilterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F0241E531A784DD7009FF170 /* FilterViewController.m */; };
+		F084BA891A816FCA00C63D41 /* BookingConfirmationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F084BA881A816FCA00C63D41 /* BookingConfirmationViewController.m */; };
 		F085B8EA1A7D79D200AA5003 /* ConfirmationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F085B8E91A7D79D200AA5003 /* ConfirmationViewController.m */; };
 		F085B8F31A7DA7BD00AA5003 /* ProfileViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F085B8F21A7DA7BD00AA5003 /* ProfileViewController.m */; };
 		F0A4D8361A75C39A002D8B2F /* DiscoverViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F0A4D8351A75C39A002D8B2F /* DiscoverViewController.m */; };
@@ -118,6 +119,8 @@
 		F0241E471A783F60009FF170 /* san_francisco.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = san_francisco.png; sourceTree = "<group>"; };
 		F0241E521A784DD7009FF170 /* FilterViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FilterViewController.h; sourceTree = "<group>"; };
 		F0241E531A784DD7009FF170 /* FilterViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FilterViewController.m; sourceTree = "<group>"; };
+		F084BA871A816FCA00C63D41 /* BookingConfirmationViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BookingConfirmationViewController.h; sourceTree = "<group>"; };
+		F084BA881A816FCA00C63D41 /* BookingConfirmationViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BookingConfirmationViewController.m; sourceTree = "<group>"; };
 		F085B8E81A7D79D200AA5003 /* ConfirmationViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ConfirmationViewController.h; sourceTree = "<group>"; };
 		F085B8E91A7D79D200AA5003 /* ConfirmationViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ConfirmationViewController.m; sourceTree = "<group>"; };
 		F085B8F11A7DA7BD00AA5003 /* ProfileViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProfileViewController.h; sourceTree = "<group>"; };
@@ -197,6 +200,7 @@
 		170EFA061A71C799004EA68B /* QuickSpace */ = {
 			isa = PBXGroup;
 			children = (
+				F084BA831A816F3800C63D41 /* views_guest */,
 				F0D625161A7AE4570063CE0B /* views_host */,
 				F0144CE91A789C8700113F95 /* models */,
 				F0144CE61A78917A00113F95 /* AdvancedFilterViewController.h */,
@@ -280,6 +284,15 @@
 				F0241E3E1A783ED4009FF170 /* find_space.jpg */,
 			);
 			path = assets;
+			sourceTree = "<group>";
+		};
+		F084BA831A816F3800C63D41 /* views_guest */ = {
+			isa = PBXGroup;
+			children = (
+				F084BA871A816FCA00C63D41 /* BookingConfirmationViewController.h */,
+				F084BA881A816FCA00C63D41 /* BookingConfirmationViewController.m */,
+			);
+			name = views_guest;
 			sourceTree = "<group>";
 		};
 		F0D625161A7AE4570063CE0B /* views_host */ = {
@@ -424,6 +437,7 @@
 				170EFA0A1A71C799004EA68B /* main.m in Sources */,
 				216434D51A7F2898003730E6 /* DatePickerViewController.m in Sources */,
 				172695261A7872D300DA446E /* SignUpViewController.m in Sources */,
+				F084BA891A816FCA00C63D41 /* BookingConfirmationViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

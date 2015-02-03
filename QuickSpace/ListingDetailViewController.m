@@ -7,6 +7,7 @@
 //
 
 #import "ListingDetailViewController.h"
+#import <Parse/Parse.h>
 
 @interface ListingDetailViewController ()
 
@@ -19,6 +20,7 @@
 @synthesize listing;
 @synthesize type;
 @synthesize location;
+@synthesize bookButton;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -32,6 +34,27 @@
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+// Set guest_id, startTime, and endTime and save to server
+- (IBAction)bookButton:(UIButton *)sender {
+    PFQuery *query = [PFQuery queryWithClassName:@"ListingObject"];
+    
+    // Retrieve the object by id
+    [query getObjectInBackgroundWithId:listing.object_id block:^(PFObject *listing, NSError *error) {
+        PFUser *currentUser = [PFUser currentUser];
+        
+        // Update start and end time
+        NSDate *startTime = [NSDate date];
+        
+        // Hard-coded 30 seconds. Need to be changed later once date picker is implmented
+        NSDate *endTime = [startTime dateByAddingTimeInterval:180];
+        
+        listing[@"startTime"] = startTime;
+        listing[@"endTime"] = endTime;
+        listing[@"guest_id"] = currentUser.username;
+        [listing saveInBackground];
+    }];
 }
 
 /*

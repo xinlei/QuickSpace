@@ -48,20 +48,26 @@ NSMutableArray *listings;
     // Dispose of any resources that can be recreated.
 }
 - (IBAction)listingSegmentValueChanged:(UISegmentedControl *)sender {
+    PFUser *currentUser = [PFUser currentUser];
     if (listingSegments.selectedSegmentIndex == 0){
         
-        // Testing, need to be replaced by rentals
-        [listings removeAllObjects];
+        NSDate *now = [NSDate date];
+        
+        // Get rentals booked by this user
+        PFQuery *query = [PFQuery queryWithClassName:@"ListingObject"];
+        [query whereKey:@"guest_id" equalTo:currentUser.username];
+        [query whereKey:@"endTime" greaterThan:now];
+        NSArray* AllListings = [query findObjects];
+        listings = [Listing objectToListingsWith:AllListings];
+        
     } else if (listingSegments.selectedSegmentIndex == 1){
         
         // Get listings posted by this user
-        PFUser *currentUser = [PFUser currentUser];
         PFQuery *query = [PFQuery queryWithClassName:@"Listing"];
         [query whereKey:@"lister" equalTo:currentUser.username];
-        
         NSArray* AllListings = [query findObjects];
-        
         listings = [Listing objectToListingsWith:AllListings];
+    
     } else {
         
         // Testing, need to be replaced by recently viewed searches
@@ -80,15 +86,31 @@ NSMutableArray *listings;
     static NSString *simpleTableIdentifier = @"userListingCell";
     
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:simpleTableIdentifier];
-    
     if (cell == nil) {
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:simpleTableIdentifier];
     }
-    
     Listing *thisListing = [listings objectAtIndex:indexPath.row];
-    
     UILabel *title = (UILabel *)[cell viewWithTag:1];
     title.text = thisListing.title;
+    
+    // Show the amount of time remaining on each booking
+    if (listingSegments.selectedSegmentIndex == 0){
+        NSString *timeDiff = [[NSString alloc] init];
+        NSTimeInterval interval = [thisListing.endTime timeIntervalSinceNow];
+        int minutes = interval/60;
+        if (minutes == 1) {
+            timeDiff = [NSString stringWithFormat:@"%d minute left", minutes];
+        } else {
+            timeDiff = [NSString stringWithFormat:@"%d minutes left", minutes];
+        }
+        UILabel *timeRemaining = (UILabel *)[cell viewWithTag:2];
+        timeRemaining.text = timeDiff;
+
+    } else {
+        UILabel *timeRemaining = (UILabel *)[cell viewWithTag:2];
+        timeRemaining.text = @"";
+    }
+    
     return cell;
 }
 /*

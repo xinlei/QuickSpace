@@ -19,6 +19,11 @@
 @property (nonatomic, strong) NSNumber *price;
 @property (nonatomic) NSString *object_id;
 
+// Booking information
+@property (nonatomic, strong) NSDate *startTime;
+@property (nonatomic, strong) NSDate *endTime;
+@property (nonatomic, strong) NSString *guest_id;
+
 + (NSMutableArray *)objectToListingsWith:(NSArray *)PFObjects;
 - (BOOL) isEqual: other;
 //- (unsigned) hash;
