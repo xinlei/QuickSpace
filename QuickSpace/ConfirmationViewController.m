@@ -61,7 +61,7 @@
     }];
     NSArray *amenities = [keys allObjects];
     NSNumber *num = [NSNumber numberWithInteger:[defaults integerForKey:@"newListingPrice"]];
-    UIImage *myImage = [UIImage imageNamed:@"room3.jpg"];
+    UIImage *myImage = listingImg.image;
     NSData *image = UIImagePNGRepresentation(myImage);
     PFFile *imageFile = [PFFile fileWithName:@"listingImage.png" data:image];
     PFUser *currentUser = [PFUser currentUser];

@@ -80,7 +80,7 @@ NSMutableArray *listings;
         PFQuery *query = [PFQuery queryWithClassName:@"ListingObject"];
             
         [query getObjectInBackgroundWithId:currListing.object_id block:^(PFObject *parseListing, NSError *error) {
-            [parseListing deleteEventually];
+            [parseListing delete];
         }];
         [self.listingTable reloadData];
     }
