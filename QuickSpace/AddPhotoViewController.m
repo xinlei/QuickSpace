@@ -30,15 +30,15 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    self.imageView.image = [UIImage imageNamed:@"no-image"];
     if (![UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera]) {
         
-        UIAlertView *myAlertView = [[UIAlertView alloc] initWithTitle:@"Error"
-                                                              message:@"Device has no camera"
-                                                             delegate:nil
-                                                    cancelButtonTitle:@"OK"
-                                                    otherButtonTitles: nil];
-        
-        [myAlertView show];
+        UIAlertView *noCameraAlert = [[UIAlertView alloc] initWithTitle:@"Error"
+            message:@"Device has no camera"
+            delegate:nil
+            cancelButtonTitle:@"OK"
+            otherButtonTitles: nil];
+        [noCameraAlert show];
     }
 }
 
@@ -48,22 +48,25 @@
     // Dispose of any resources that can be recreated.
 }
 - (IBAction)takePhoto:(UIButton *)sender {
+    if ([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera]) {
+        UIImagePickerController *picker = [[UIImagePickerController alloc] init];
+        picker.delegate = self;
+        picker.allowsEditing = YES;
+        picker.sourceType = UIImagePickerControllerSourceTypeCamera;
     
-    UIImagePickerController *picker = [[UIImagePickerController alloc] init];
-    picker.delegate = self;
-    picker.allowsEditing = YES;
-    picker.sourceType = UIImagePickerControllerSourceTypeCamera;
-    
-    [self presentViewController:picker animated:YES completion:NULL];
+        [self presentViewController:picker animated:YES completion:NULL];
+    }
 }
 
 - (IBAction)selectButton:(UIButton *)sender {
-    UIImagePickerController *picker = [[UIImagePickerController alloc] init];
-    picker.delegate = self;
-    picker.allowsEditing = YES;
-    picker.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
+    if ([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera]) {
+        UIImagePickerController *picker = [[UIImagePickerController alloc] init];
+        picker.delegate = self;
+        picker.allowsEditing = YES;
+        picker.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
     
-    [self presentViewController:picker animated:YES completion:NULL];
+        [self presentViewController:picker animated:YES completion:NULL];
+    }
 }
 
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info {
@@ -85,7 +88,7 @@
 {
     if ([segue.identifier isEqualToString:@"ShowAddBookingConfirmation"]){
         ConfirmationViewController *destViewController = segue.destinationViewController;
-        destViewController.listingImg.image = self.imageView.image;
+        destViewController.theImage = self.imageView.image;
     }
 }
 

@@ -49,6 +49,7 @@
 		F085B8EA1A7D79D200AA5003 /* ConfirmationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F085B8E91A7D79D200AA5003 /* ConfirmationViewController.m */; };
 		F085B8F31A7DA7BD00AA5003 /* ProfileViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F085B8F21A7DA7BD00AA5003 /* ProfileViewController.m */; };
 		F08C486D1A8197510025EA2D /* AddPhotoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F08C486C1A8197510025EA2D /* AddPhotoViewController.m */; };
+		F090E6051A843C8C00BBE953 /* no-image.png in Resources */ = {isa = PBXBuildFile; fileRef = F090E6041A843C8C00BBE953 /* no-image.png */; };
 		F0A4D8361A75C39A002D8B2F /* DiscoverViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F0A4D8351A75C39A002D8B2F /* DiscoverViewController.m */; };
 		F0D625151A7AD92C0063CE0B /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = F0D625141A7AD92C0063CE0B /* Default-568h@2x.png */; };
 		F0D625191A7AE54D0063CE0B /* HostViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F0D625181A7AE54D0063CE0B /* HostViewController.m */; };
@@ -128,6 +129,7 @@
 		F085B8F21A7DA7BD00AA5003 /* ProfileViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProfileViewController.m; sourceTree = "<group>"; };
 		F08C486B1A8197510025EA2D /* AddPhotoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddPhotoViewController.h; sourceTree = "<group>"; };
 		F08C486C1A8197510025EA2D /* AddPhotoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddPhotoViewController.m; sourceTree = "<group>"; };
+		F090E6041A843C8C00BBE953 /* no-image.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "no-image.png"; sourceTree = "<group>"; };
 		F0A4D8341A75C39A002D8B2F /* DiscoverViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DiscoverViewController.h; sourceTree = "<group>"; };
 		F0A4D8351A75C39A002D8B2F /* DiscoverViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DiscoverViewController.m; sourceTree = "<group>"; };
 		F0D625141A7AD92C0063CE0B /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
@@ -280,6 +282,7 @@
 		F0241E3B1A783ED4009FF170 /* assets */ = {
 			isa = PBXGroup;
 			children = (
+				F090E6041A843C8C00BBE953 /* no-image.png */,
 				F0144CE21A78912C00113F95 /* los_angeles.png */,
 				F0144CE31A78912C00113F95 /* stanford.png */,
 				F0241E471A783F60009FF170 /* san_francisco.png */,
@@ -395,6 +398,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F090E6051A843C8C00BBE953 /* no-image.png in Resources */,
 				F0241E421A783ED4009FF170 /* host_space.jpg in Resources */,
 				F0241E481A783F60009FF170 /* san_francisco.png in Resources */,
 				F0144CE51A78912C00113F95 /* stanford.png in Resources */,

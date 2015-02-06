@@ -10,6 +10,8 @@
 @interface ConfirmationViewController ()
 @end
 @implementation ConfirmationViewController
+
+@synthesize theImage;
 @synthesize listingImg;
 @synthesize titleLabel;
 @synthesize priceLabel;
@@ -27,6 +29,8 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    listingImg.image = theImage;
+    
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     NSDictionary *newListingBasicInfo = [defaults objectForKey:@"newListingBasicInfo"];
     NSDictionary *amenities = [defaults objectForKey:@"newListingAmenities"];
