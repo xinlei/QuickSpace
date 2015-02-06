@@ -280,13 +280,84 @@
                                     <segue destination="P7J-Wm-X9x" kind="push" identifier="ShowNewListingDetails" id="rgd-wE-OPI"/>
                                 </connections>
                             </button>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Space Type" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="If1-7A-8CI">
+                                <rect key="frame" x="126" y="227" width="70" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <view contentMode="scaleToFill" id="Xom-mY-GAe">
+                                <rect key="frame" x="40" y="256" width="240" height="60"/>
+                                <subviews>
+                                    <view contentMode="scaleToFill" id="xbo-37-Jq0">
+                                        <rect key="frame" x="120" y="14" width="1" height="32"/>
+                                        <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                    </view>
+                                    <view contentMode="scaleToFill" id="ZkO-ea-J0G">
+                                        <rect key="frame" x="180" y="14" width="1" height="32"/>
+                                        <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                    </view>
+                                    <view contentMode="scaleToFill" id="oOB-p2-9a3">
+                                        <rect key="frame" x="60" y="14" width="1" height="32"/>
+                                        <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                    </view>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="Na6-Ff-5EY">
+                                        <rect key="frame" x="0.0" y="0.0" width="60" height="60"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                                        <state key="normal" title="Rest">
+                                            <color key="titleColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="restSelected:" destination="8lq-DA-qP8" eventType="touchUpInside" id="5XG-Bm-qcH"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="ukR-dj-dMf">
+                                        <rect key="frame" x="60" y="0.0" width="60" height="60"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                                        <state key="normal" title="Closet">
+                                            <color key="titleColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="closetSelected:" destination="8lq-DA-qP8" eventType="touchUpInside" id="5rX-hy-bDc"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="d5l-zY-5qv">
+                                        <rect key="frame" x="120" y="0.0" width="60" height="60"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                                        <state key="normal" title="Office">
+                                            <color key="titleColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="officeSelected:" destination="8lq-DA-qP8" eventType="touchUpInside" id="eWm-4w-coX"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="gcY-hu-Ynq">
+                                        <rect key="frame" x="180" y="0.0" width="60" height="60"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                                        <state key="normal" title="Quiet">
+                                            <color key="titleColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="quietSelected:" destination="8lq-DA-qP8" eventType="touchUpInside" id="ZUW-9I-MKV"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            </view>
                         </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <color key="backgroundColor" red="0.93725496530532837" green="0.93725496530532837" blue="0.95686280727386475" alpha="1" colorSpace="deviceRGB"/>
                     </view>
                     <navigationItem key="navigationItem" title="List Your Space" id="rdY-1h-M2t"/>
                     <connections>
+                        <outlet property="closetButton" destination="ukR-dj-dMf" id="cki-Uz-vs1"/>
                         <outlet property="descriptionTextField" destination="5hs-Je-m7C" id="2tS-GP-u9S"/>
                         <outlet property="locationTextField" destination="ir9-3a-HSQ" id="Uk8-mu-LQB"/>
+                        <outlet property="officeButton" destination="d5l-zY-5qv" id="ddE-7z-CmP"/>
+                        <outlet property="quietButton" destination="gcY-hu-Ynq" id="hUA-5w-CpR"/>
+                        <outlet property="restButton" destination="Na6-Ff-5EY" id="ySX-b1-duK"/>
                         <outlet property="titleTextField" destination="zMI-D8-366" id="yyy-ER-IMk"/>
                     </connections>
                 </viewController>
@@ -589,8 +660,8 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
-                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="SpaceType" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="jhp-BV-2v4">
-                                <rect key="frame" x="126" y="97" width="69" height="21"/>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Space Type" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="jhp-BV-2v4">
+                                <rect key="frame" x="126" y="97" width="70" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="13"/>
                                 <nil key="highlightedColor"/>
                             </label>
@@ -1280,11 +1351,11 @@
         <simulatedScreenMetrics key="destination" type="retina4"/>
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
+        <segue reference="OHa-B8-TXq"/>
+        <segue reference="sbc-fe-3wW"/>
+        <segue reference="ihc-zZ-jmu"/>
+        <segue reference="uLc-1e-HkW"/>
         <segue reference="yQH-N5-bKF"/>
         <segue reference="oHm-PT-uY9"/>
-        <segue reference="KOp-dB-tul"/>
-        <segue reference="uLc-1e-HkW"/>
-        <segue reference="ihc-zZ-jmu"/>
-        <segue reference="OHa-B8-TXq"/>
     </inferredMetricsTieBreakers>
 </document>

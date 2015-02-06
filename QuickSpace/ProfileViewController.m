@@ -125,23 +125,31 @@ NSMutableArray *listings;
     Listing *thisListing = [listings objectAtIndex:indexPath.row];
     UILabel *title = (UILabel *)[cell viewWithTag:1];
     title.text = thisListing.title;
+    NSString *timeDiff = [[NSString alloc] init];
+    NSTimeInterval interval = [thisListing.endTime timeIntervalSinceNow];
+    UILabel *timeRemaining = (UILabel *)[cell viewWithTag:2];
+    int minutes = interval/60;
     
     // Show the amount of time remaining on each booking
     if (listingSegments.selectedSegmentIndex == 0){
-        NSString *timeDiff = [[NSString alloc] init];
-        NSTimeInterval interval = [thisListing.endTime timeIntervalSinceNow];
-        int minutes = interval/60;
         if (minutes == 1) {
             timeDiff = [NSString stringWithFormat:@"%d minute left", minutes];
         } else {
             timeDiff = [NSString stringWithFormat:@"%d minutes left", minutes];
         }
-        UILabel *timeRemaining = (UILabel *)[cell viewWithTag:2];
         timeRemaining.text = timeDiff;
 
     } else {
-        UILabel *timeRemaining = (UILabel *)[cell viewWithTag:2];
-        timeRemaining.text = @"";
+        if (minutes > 0){
+            if (minutes == 1) {
+                timeDiff = [NSString stringWithFormat:@"%d minute left", minutes];
+            } else {
+                timeDiff = [NSString stringWithFormat:@"%d minutes left", minutes];
+            }
+            timeRemaining.text = timeDiff;
+        } else {
+            timeRemaining.text = @"";
+        }
     }
     
     return cell;
