@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="5056" systemVersion="13F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" initialViewController="egu-2u-gjJ">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6254" systemVersion="13F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" initialViewController="egu-2u-gjJ">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3733"/>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6247"/>
     </dependencies>
     <scenes>
         <!--Navigation Controller-->
@@ -21,7 +22,7 @@
             </objects>
             <point key="canvasLocation" x="-1652" y="-420"/>
         </scene>
-        <!--Navigation Controller - Profile-->
+        <!--Profile-->
         <scene sceneID="8il-ur-Z6t">
             <objects>
                 <navigationController definesPresentationContext="YES" id="ukr-Fa-r1Y" sceneMemberID="viewController">
@@ -121,7 +122,7 @@
             </objects>
             <point key="canvasLocation" x="-714" y="-1172"/>
         </scene>
-        <!--Discover View Controller - Discover-->
+        <!--Discover-->
         <scene sceneID="uqQ-dh-nVq">
             <objects>
                 <viewController id="MUO-4i-pix" customClass="DiscoverViewController" sceneMemberID="viewController">
@@ -237,7 +238,56 @@
             </objects>
             <point key="canvasLocation" x="-1214" y="-420"/>
         </scene>
-        <!--Host View Controller - List Your Space-->
+        <!--Set Location View Controller-->
+        <scene sceneID="6gs-FJ-Cqt">
+            <objects>
+                <viewController id="Qnx-8k-Ku7" customClass="SetLocationViewController" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="HUz-wW-8Oz">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" id="tVG-mQ-5sk">
+                                <rect key="frame" x="22" y="151" width="277" height="266"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                            </mapView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="MgF-Fm-5CM">
+                                <rect key="frame" x="0.0" y="479" width="320" height="40"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <state key="normal" title="Next">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <segue destination="P7J-Wm-X9x" kind="push" id="ha4-gl-UIi"/>
+                                </connections>
+                            </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Set Location" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="T8P-t2-eMn">
+                                <rect key="frame" x="107" y="46" width="97" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Enter Address or choose location" minimumFontSize="17" id="yDU-1T-Yrz">
+                                <rect key="frame" x="39" y="103" width="243" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="TNz-PJ-85h"/>
+                    <connections>
+                        <outlet property="myMapView" destination="tVG-mQ-5sk" id="ntp-ME-3ye"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="kFh-aT-GLs" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-678" y="1119"/>
+        </scene>
+        <!--List Your Space-->
         <scene sceneID="Jt3-YV-7Gi">
             <objects>
                 <viewController id="8lq-DA-qP8" customClass="HostViewController" sceneMemberID="viewController">
@@ -277,7 +327,7 @@
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
-                                    <segue destination="P7J-Wm-X9x" kind="push" identifier="ShowNewListingDetails" id="rgd-wE-OPI"/>
+                                    <segue destination="Qnx-8k-Ku7" kind="push" identifier="ShowNewListingDetails" id="9uV-0c-3jK"/>
                                 </connections>
                             </button>
                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Space Type" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="If1-7A-8CI">
@@ -363,9 +413,9 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="HTi-kP-oWW" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-714" y="1119"/>
+            <point key="canvasLocation" x="-1126" y="1119"/>
         </scene>
-        <!--Add Detail View Controller - Add Details-->
+        <!--Add Details-->
         <scene sceneID="rDw-ck-Dcd">
             <objects>
                 <viewController id="P7J-Wm-X9x" customClass="AddDetailViewController" sceneMemberID="viewController">
@@ -464,7 +514,7 @@
             </objects>
             <point key="canvasLocation" x="-277" y="1119"/>
         </scene>
-        <!--Confirmation View Controller - Listing Details-->
+        <!--Listing Details-->
         <scene sceneID="Hj8-DT-1YS">
             <objects>
                 <viewController id="xtc-tK-7qU" customClass="ConfirmationViewController" sceneMemberID="viewController">
@@ -593,7 +643,7 @@
             </objects>
             <point key="canvasLocation" x="-277" y="1877"/>
         </scene>
-        <!--Add Photo View Controller - Add Photos-->
+        <!--Add Photos-->
         <scene sceneID="hJV-gm-dtT">
             <objects>
                 <viewController id="cD8-OF-FRe" customClass="AddPhotoViewController" sceneMemberID="viewController">
@@ -652,7 +702,7 @@
             </objects>
             <point key="canvasLocation" x="164" y="1119"/>
         </scene>
-        <!--Filter View Controller - Filter-->
+        <!--Filter-->
         <scene sceneID="i5g-Sz-m5q">
             <objects>
                 <viewController id="63p-hx-VCu" customClass="FilterViewController" sceneMemberID="viewController">
@@ -829,7 +879,7 @@
             </objects>
             <point key="canvasLocation" x="-277" y="-420"/>
         </scene>
-        <!--Advanced Filter View Controller - Add Filters-->
+        <!--Add Filters-->
         <scene sceneID="ftm-Cg-fiC">
             <objects>
                 <viewController id="f1v-Ve-GyG" customClass="AdvancedFilterViewController" sceneMemberID="viewController">
@@ -985,7 +1035,7 @@
             </objects>
             <point key="canvasLocation" x="164" y="-420"/>
         </scene>
-        <!--View Controller - Explore-->
+        <!--Explore-->
         <scene sceneID="o7T-o1-LkV">
             <objects>
                 <viewController id="ofG-30-AEt" customClass="ViewController" sceneMemberID="viewController">
@@ -1067,7 +1117,7 @@
             </objects>
             <point key="canvasLocation" x="-714" y="285"/>
         </scene>
-        <!--Listing Detail View Controller - Explore-->
+        <!--Explore-->
         <scene sceneID="UOT-KM-rHn">
             <objects>
                 <viewController id="Duy-ei-nca" customClass="ListingDetailViewController" sceneMemberID="viewController">
@@ -1351,11 +1401,11 @@
         <simulatedScreenMetrics key="destination" type="retina4"/>
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
-        <segue reference="OHa-B8-TXq"/>
-        <segue reference="sbc-fe-3wW"/>
-        <segue reference="ihc-zZ-jmu"/>
         <segue reference="uLc-1e-HkW"/>
+        <segue reference="ihc-zZ-jmu"/>
         <segue reference="yQH-N5-bKF"/>
         <segue reference="oHm-PT-uY9"/>
+        <segue reference="sbc-fe-3wW"/>
+        <segue reference="OHa-B8-TXq"/>
     </inferredMetricsTieBreakers>
 </document>

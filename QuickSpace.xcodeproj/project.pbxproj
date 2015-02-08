@@ -29,7 +29,9 @@
 		170EFA461A71CE42004EA68B /* libsqlite3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 170EFA451A71CE42004EA68B /* libsqlite3.dylib */; };
 		172695231A7872C300DA446E /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 172695221A7872C300DA446E /* LoginViewController.m */; };
 		172695261A7872D300DA446E /* SignUpViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 172695251A7872D300DA446E /* SignUpViewController.m */; };
+		17443CF51A881E0100A0694F /* SetLocationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 17443CF41A881E0100A0694F /* SetLocationViewController.m */; };
 		178097B71A7D946900BDBB1A /* CancelViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 178097B61A7D946900BDBB1A /* CancelViewController.m */; };
+		17E63AB91A86EBCF00F763C1 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 17E63AB81A86EBCF00F763C1 /* MapKit.framework */; };
 		211E0AA81A7275C0003E4D99 /* room1.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 211E0AA51A7275C0003E4D99 /* room1.jpg */; };
 		211E0AA91A7275C0003E4D99 /* room2.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 211E0AA61A7275C0003E4D99 /* room2.jpg */; };
 		211E0AAA1A7275C0003E4D99 /* room3.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 211E0AA71A7275C0003E4D99 /* room3.jpg */; };
@@ -97,8 +99,11 @@
 		172695221A7872C300DA446E /* LoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginViewController.m; sourceTree = "<group>"; };
 		172695241A7872D300DA446E /* SignUpViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SignUpViewController.h; sourceTree = "<group>"; };
 		172695251A7872D300DA446E /* SignUpViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SignUpViewController.m; sourceTree = "<group>"; };
+		17443CF31A881E0100A0694F /* SetLocationViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SetLocationViewController.h; sourceTree = "<group>"; };
+		17443CF41A881E0100A0694F /* SetLocationViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SetLocationViewController.m; sourceTree = "<group>"; };
 		178097B51A7D946900BDBB1A /* CancelViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CancelViewController.h; sourceTree = "<group>"; };
 		178097B61A7D946900BDBB1A /* CancelViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CancelViewController.m; sourceTree = "<group>"; };
+		17E63AB81A86EBCF00F763C1 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 		211E0AA51A7275C0003E4D99 /* room1.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = room1.jpg; sourceTree = "<group>"; };
 		211E0AA61A7275C0003E4D99 /* room2.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = room2.jpg; sourceTree = "<group>"; };
 		211E0AA71A7275C0003E4D99 /* room3.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = room3.jpg; sourceTree = "<group>"; };
@@ -148,6 +153,7 @@
 				170EFA441A71CE36004EA68B /* libz.dylib in Frameworks */,
 				170EFA421A71CE24004EA68B /* SystemConfiguration.framework in Frameworks */,
 				170EFA401A71CE1A004EA68B /* StoreKit.framework in Frameworks */,
+				17E63AB91A86EBCF00F763C1 /* MapKit.framework in Frameworks */,
 				170EFA3E1A71CE14004EA68B /* Security.framework in Frameworks */,
 				170EFA3C1A71CE0B004EA68B /* QuartzCore.framework in Frameworks */,
 				170EFA3A1A71CE02004EA68B /* MobileCoreServices.framework in Frameworks */,
@@ -173,6 +179,7 @@
 		170EF9FB1A71C798004EA68B = {
 			isa = PBXGroup;
 			children = (
+				17E63AB81A86EBCF00F763C1 /* MapKit.framework */,
 				F0D625141A7AD92C0063CE0B /* Default-568h@2x.png */,
 				170EFA451A71CE42004EA68B /* libsqlite3.dylib */,
 				170EFA431A71CE36004EA68B /* libz.dylib */,
@@ -304,6 +311,8 @@
 		F0D625161A7AE4570063CE0B /* views_host */ = {
 			isa = PBXGroup;
 			children = (
+				17443CF31A881E0100A0694F /* SetLocationViewController.h */,
+				17443CF41A881E0100A0694F /* SetLocationViewController.m */,
 				178097B51A7D946900BDBB1A /* CancelViewController.h */,
 				178097B61A7D946900BDBB1A /* CancelViewController.m */,
 				F0D625171A7AE54D0063CE0B /* HostViewController.h */,
@@ -367,6 +376,11 @@
 				TargetAttributes = {
 					170EFA031A71C798004EA68B = {
 						CreatedOnToolsVersion = 6.1.1;
+						SystemCapabilities = {
+							com.apple.Maps.iOS = {
+								enabled = 1;
+							};
+						};
 					};
 					170EFA1C1A71C79A004EA68B = {
 						CreatedOnToolsVersion = 6.1.1;
@@ -430,6 +444,7 @@
 			files = (
 				F085B8EA1A7D79D200AA5003 /* ConfirmationViewController.m in Sources */,
 				F08C486D1A8197510025EA2D /* AddPhotoViewController.m in Sources */,
+				17443CF51A881E0100A0694F /* SetLocationViewController.m in Sources */,
 				172695231A7872C300DA446E /* LoginViewController.m in Sources */,
 				211E0AAD1A72E4E7003E4D99 /* ListingDetailViewController.m in Sources */,
 				216434D21A7F1D12003730E6 /* UIViewController+MJPopupViewController.m in Sources */,

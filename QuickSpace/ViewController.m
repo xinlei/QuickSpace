@@ -24,34 +24,16 @@ NSArray *listings;
     // Do any additional setup after loading the view, typically from a nib.
 
     
-    // Right now the queries are running on the main thread. Need to eventually change this.
-    
     listings = [[NSArray alloc] init];
     
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     NSDictionary *amenities = [defaults objectForKey:@"additionalFilters"];
     NSNumber *price = [defaults objectForKey:@"maxPrice"];
     
-    NSLog(@"Price: %@", price);
-    
     PFQuery *fakeQuery = [PFQuery queryWithClassName:@"ListingObject"];
     [fakeQuery whereKeyExists:@"title"];
-    
-//    NSArray *allObjects = [fakeQuery findObjects];
-    NSArray *allListings = [Listing objectToListingsWith:[fakeQuery findObjects]];
-    
-    NSMutableArray *idArray = [[NSMutableArray alloc]init];
-    for (int i = 0; i < allListings.count; i++) {
-        Listing *list = [allListings objectAtIndex:i];
-        [idArray addObject:list.object_id];
-    }
-    
-    NSMutableDictionary *dict = [[NSMutableDictionary alloc]initWithObjects:allListings forKeys:idArray];
-    
-    
-//    NSMutableSet *myIntersect = [NSMutableSet setWithArray: [Listing objectToListingsWith:allObjects]];
-    NSLog(@"Initial count: %lu ID count: %lu", (unsigned long)listings.count, (unsigned long)idArray.count);
-    
+
+    listings = [Listing objectToListingsWith:[fakeQuery findObjects]];
     
     bool wifi = [[amenities objectForKey:@"wifi"] boolValue];
     bool refrigerator = [[amenities objectForKey:@"refrigerator"] boolValue];
@@ -61,42 +43,7 @@ NSArray *listings;
     
     
     NSMutableArray *queryArray = [[NSMutableArray alloc] init];
-    
-    if(price > 0){
-        PFQuery *priceQuery = [PFQuery queryWithClassName:@"ListingObject"];
-        [priceQuery whereKey:@"price" lessThanOrEqualTo: price];
-//        [myIntersect intersectSet:[NSSet setWithArray:[Listing objectToListingsWith:[priceQuery findObjects]]]];
-//        NSLog(@"Post Price count: %lu", (unsigned long)myIntersect.count);
-        
-        NSArray *priceArray = [priceQuery findObjects];
-        NSMutableArray *priceIDArray = [[NSMutableArray alloc] init];
-        for(int i = 0; i < priceArray.count; i++){
-            PFObject *object = [priceArray objectAtIndex:i];
-            [priceIDArray addObject:object.objectId];
-        }
-        
-        NSLog(@"Num price ids: %lu", (unsigned long)priceIDArray.count);
-//        for(int i = 0; i < idArray.count; i++){
-//            NSString *object_id = [idArray objectAtIndex:i];
-//            
-//            if(![priceIDArray containsObject: object_id]){
-//                NSLog(@"Price Query doesn't contain object with id: %@", object_id);
-//                [idArray removeObjectAtIndex:i];
-//                [listings removeObjectAtIndex:i];
-//            }
-//        }
-        NSMutableArray *temp = [[NSMutableArray alloc]init];
-        for(int i = 0; i < priceIDArray.count; i++){
-            NSString *object_id = [priceIDArray objectAtIndex:i];
-            
-            if([idArray containsObject: object_id]){
-                [temp addObject:object_id];
-            }
-        }
-        idArray = temp;
-        
-        NSLog(@"Post Price count: %lu ID count: %lu", (unsigned long)listings.count, (unsigned long)idArray.count);
-    }
+
     if(wifi){
         [queryArray addObject:@"wifi"];
     }
@@ -107,56 +54,22 @@ NSArray *listings;
         [queryArray addObject:@"studyDesk"];
     }
     if(monitor){
-        NSLog(@"IN THE MONITOR!!!!");
         [queryArray addObject:@"monitor"];
     }
     if(services){
         [queryArray addObject:@"services"];
     }
     
-
+    PFQuery *query = [PFQuery queryWithClassName:@"ListingObject"];
+    if([queryArray count] != 0)
+        [query whereKey:@"amenities" containsAllObjectsInArray:queryArray];
+    if(price > 0)
+        [query whereKey:@"price" lessThanOrEqualTo: price];
     
-    if([queryArray count] != 0){
-        PFQuery *myquery = [PFQuery queryWithClassName:@"ListingObject"];
-        [myquery whereKey:@"amenities" containsAllObjectsInArray:queryArray];
-        
-        NSArray *newArray = [myquery findObjects];
-        
-        NSMutableArray *newIDArray = [[NSMutableArray alloc] init];
-        for(int i = 0; i < newArray.count; i++){
-            PFObject *object = [newArray objectAtIndex:i];
-            [newIDArray addObject:object.objectId];
-        }
-        
-             NSLog(@"Num new ids: %lu", (unsigned long)newIDArray.count);
-        
-//        for(int i = 0; i < idArray.count; i++){
-//            NSString *object_id = [idArray objectAtIndex:i];
-//            if(![newIDArray containsObject: object_id]){
-//                NSLog(@"Switch Query doesn't contain object with id: %@", object_id);
-//                [idArray removeObjectAtIndex:i];
-//                [listings removeObjectAtIndex:i];
-//            }
-//        }
-        
-        NSMutableArray *temp = [[NSMutableArray alloc]init];
-        for(int i = 0; i < newIDArray.count; i++){
-            NSString *object_id = [newIDArray objectAtIndex:i];
-            
-            if([idArray containsObject: object_id]){
-                [temp addObject:object_id];
-            }
-        }
-        idArray = temp;
-        
-        
-        NSLog(@"Post switch count: %lu ID count: %lu", (unsigned long)listings.count, (unsigned long)idArray.count);
-//        [myIntersect intersectSet:[NSSet setWithArray:[Listing objectToListingsWith:[myquery findObjects]]]];
-//        NSLog(@"Post switch count: %lu", (unsigned long)myIntersect.count);
-
+    if([queryArray count] != 0 || price > 0){
+        NSArray* AllListings = [query findObjects];
+        listings = [Listing objectToListingsWith:AllListings];
     }
-
-    listings = [dict objectsForKeys:idArray notFoundMarker:[NSNull null]];
     
     [defaults removeObjectForKey:@"additionalFilters"];
     [defaults removeObjectForKey:@"maxPrice"];
