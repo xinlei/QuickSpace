@@ -37,8 +37,6 @@
 		211E0AAA1A7275C0003E4D99 /* room3.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 211E0AA71A7275C0003E4D99 /* room3.jpg */; };
 		211E0AAD1A72E4E7003E4D99 /* ListingDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 211E0AAC1A72E4E7003E4D99 /* ListingDetailViewController.m */; };
 		211E0AB01A75B19B003E4D99 /* Listing.m in Sources */ = {isa = PBXBuildFile; fileRef = 211E0AAF1A75B19B003E4D99 /* Listing.m */; };
-		216434D11A7F1D12003730E6 /* MJPopupBackgroundView.m in Sources */ = {isa = PBXBuildFile; fileRef = 216434CE1A7F1D12003730E6 /* MJPopupBackgroundView.m */; };
-		216434D21A7F1D12003730E6 /* UIViewController+MJPopupViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 216434D01A7F1D12003730E6 /* UIViewController+MJPopupViewController.m */; };
 		216434D51A7F2898003730E6 /* DatePickerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 216434D41A7F2898003730E6 /* DatePickerViewController.m */; };
 		F0144CE41A78912C00113F95 /* los_angeles.png in Resources */ = {isa = PBXBuildFile; fileRef = F0144CE21A78912C00113F95 /* los_angeles.png */; };
 		F0144CE51A78912C00113F95 /* stanford.png in Resources */ = {isa = PBXBuildFile; fileRef = F0144CE31A78912C00113F95 /* stanford.png */; };
@@ -111,10 +109,6 @@
 		211E0AAC1A72E4E7003E4D99 /* ListingDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ListingDetailViewController.m; sourceTree = "<group>"; };
 		211E0AAE1A75B19B003E4D99 /* Listing.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Listing.h; sourceTree = "<group>"; };
 		211E0AAF1A75B19B003E4D99 /* Listing.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Listing.m; sourceTree = "<group>"; };
-		216434CD1A7F1D12003730E6 /* MJPopupBackgroundView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MJPopupBackgroundView.h; sourceTree = "<group>"; };
-		216434CE1A7F1D12003730E6 /* MJPopupBackgroundView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MJPopupBackgroundView.m; sourceTree = "<group>"; };
-		216434CF1A7F1D12003730E6 /* UIViewController+MJPopupViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIViewController+MJPopupViewController.h"; sourceTree = "<group>"; };
-		216434D01A7F1D12003730E6 /* UIViewController+MJPopupViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIViewController+MJPopupViewController.m"; sourceTree = "<group>"; };
 		216434D31A7F2898003730E6 /* DatePickerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DatePickerViewController.h; sourceTree = "<group>"; };
 		216434D41A7F2898003730E6 /* DatePickerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DatePickerViewController.m; sourceTree = "<group>"; };
 		F0144CE21A78912C00113F95 /* los_angeles.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = los_angeles.png; sourceTree = "<group>"; };
@@ -239,10 +233,6 @@
 				211E0AAF1A75B19B003E4D99 /* Listing.m */,
 				211E0AAB1A72E4E7003E4D99 /* ListingDetailViewController.h */,
 				211E0AAC1A72E4E7003E4D99 /* ListingDetailViewController.m */,
-				216434CD1A7F1D12003730E6 /* MJPopupBackgroundView.h */,
-				216434CE1A7F1D12003730E6 /* MJPopupBackgroundView.m */,
-				216434CF1A7F1D12003730E6 /* UIViewController+MJPopupViewController.h */,
-				216434D01A7F1D12003730E6 /* UIViewController+MJPopupViewController.m */,
 				170EFA141A71C799004EA68B /* Images.xcassets */,
 				211E0AA51A7275C0003E4D99 /* room1.jpg */,
 				211E0AA61A7275C0003E4D99 /* room2.jpg */,
@@ -447,13 +437,11 @@
 				17443CF51A881E0100A0694F /* SetLocationViewController.m in Sources */,
 				172695231A7872C300DA446E /* LoginViewController.m in Sources */,
 				211E0AAD1A72E4E7003E4D99 /* ListingDetailViewController.m in Sources */,
-				216434D21A7F1D12003730E6 /* UIViewController+MJPopupViewController.m in Sources */,
 				F0144CE81A78917A00113F95 /* AdvancedFilterViewController.m in Sources */,
 				F085B8F31A7DA7BD00AA5003 /* ProfileViewController.m in Sources */,
 				178097B71A7D946900BDBB1A /* CancelViewController.m in Sources */,
 				F0D6251C1A7AF98E0063CE0B /* AddDetailViewController.m in Sources */,
 				F0A4D8361A75C39A002D8B2F /* DiscoverViewController.m in Sources */,
-				216434D11A7F1D12003730E6 /* MJPopupBackgroundView.m in Sources */,
 				211E0AB01A75B19B003E4D99 /* Listing.m in Sources */,
 				170EFA101A71C799004EA68B /* ViewController.m in Sources */,
 				F0241E541A784DD7009FF170 /* FilterViewController.m in Sources */,

@@ -38,14 +38,16 @@
     titleLabel.text = newListingBasicInfo[@"title"];
     priceLabel.text = [NSString stringWithFormat:@"$%d/hour", price];
     locationLabel.text = newListingBasicInfo[@"location"];
-    NSMutableString *amenitiesString = [[NSMutableString alloc] initWithString:@"Amenities: "];
+    NSMutableString *amenitiesString = [[NSMutableString alloc] init];
     for (id key in amenities) {
         if([[amenities objectForKey:key] boolValue]){
+            [amenitiesString appendString: @"- "];
             NSLog(@"true");
             [amenitiesString appendString:key];
             [amenitiesString appendString:@" "];
         }
     }
+    [amenitiesString appendString:@"-"];
     amenitiesLabel.text = amenitiesString;
     descriptionLabel.text = newListingBasicInfo[@"description"];
 }
