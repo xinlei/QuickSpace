@@ -21,15 +21,18 @@
     
 
     for (PFObject *object in PFObjects) {
+        Listing *lister = [[Listing alloc] init];
+        [object fetchIfNeeded];
+        
         PFFile *imageFile = object[@"image"];
         NSData *myData = [imageFile getData];
+        lister.imageData = myData;
         
-        Listing *lister = [[Listing alloc] init];
         lister.title = object[@"title"];
         lister.type = object[@"type"];
         lister.location = object[@"location"];
         lister.description = object[@"description"];
-        lister.imageData = myData;
+        
         lister.object_id = object.objectId;
         [listings addObject:lister];
         

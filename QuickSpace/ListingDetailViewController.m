@@ -39,6 +39,7 @@
 
 // Set guest_id, startTime, and endTime and save to server
 - (IBAction)bookButton:(UIButton *)sender {
+    PFObject *booking = [PFObject objectWithClassName:@"Booking"];
     PFQuery *query = [PFQuery queryWithClassName:@"ListingObject"];
     
     // Retrieve the object by id
@@ -51,10 +52,13 @@
         // Hard-coded 30 seconds. Need to be changed later once date picker is implmented
         NSDate *endTime = [startTime dateByAddingTimeInterval:180];
         
-        parseListing[@"startTime"] = startTime;
-        parseListing[@"endTime"] = endTime;
-        parseListing[@"guest_id"] = currentUser.username;
+        booking[@"startTime"] = startTime;
+        booking[@"endTime"] = endTime;
+        booking[@"guest"] = currentUser;
+        booking[@"rating"] = @0;
+        booking[@"listing"] = parseListing;
         [parseListing saveInBackground];
+        [booking saveInBackground]; 
     }];
 }
 
