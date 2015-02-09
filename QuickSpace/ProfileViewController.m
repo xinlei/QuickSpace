@@ -37,15 +37,6 @@ NSArray *bookings;
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    PFUser *currentUser = [PFUser currentUser];
-    PFQuery *query = [PFQuery queryWithClassName:@"Listing"];
-    [query whereKey:@"lister" equalTo:currentUser.username];
-    
-    NSArray* AllListings = [query findObjects];
-    
-    listings = [Listing objectToListingsWith:AllListings];
-    NSLog(@"Listing count%d", [listings count]);
-    
     [self refreshTableData];
 }
 
@@ -90,7 +81,7 @@ NSArray *bookings;
 
 - (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex {
     Listing *currListing = [listings objectAtIndex:actionSheet.tag];
-    PFObject *booking = [bookings objectAtIndex:actionSheet.tag];
+    
     // Remove listing
     if (listingSegments.selectedSegmentIndex == 1){
         if (buttonIndex == 0) {
@@ -104,6 +95,7 @@ NSArray *bookings;
     
     // Set listing rating
     if (listingSegments.selectedSegmentIndex == 0){
+        PFObject *booking = [bookings objectAtIndex:actionSheet.tag];
         switch (buttonIndex) {
             case 0:
                 booking[@"rating"] = @3;
@@ -140,9 +132,8 @@ NSArray *bookings;
 
 - (void) refreshTableData {
     PFUser *currentUser = [PFUser currentUser];
+    NSDate *now = [NSDate date];
     if (listingSegments.selectedSegmentIndex == 0){
-        
-        NSDate *now = [NSDate date];
         
         PFQuery *notExpired = [PFQuery queryWithClassName:@"Booking"];
         [notExpired whereKey:@"guest" equalTo:currentUser];
@@ -161,6 +152,10 @@ NSArray *bookings;
         listings = [Listing objectToListingsWith:allRentals];
         
     } else {
+        PFQuery *notExpired = [PFQuery queryWithClassName:@"Booking"];
+        [notExpired whereKey:@"owner" equalTo:currentUser];
+        bookings = [notExpired findObjects];
+        
         // Get listings posted by this user
         PFQuery *query = [PFQuery queryWithClassName:@"ListingObject"];
         [query whereKey:@"lister" equalTo:currentUser.username];
@@ -188,17 +183,16 @@ NSArray *bookings;
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:simpleTableIdentifier];
     }
     Listing *thisListing = [listings objectAtIndex:indexPath.row];
-    PFObject *thisBooking = [bookings objectAtIndex:indexPath.row];
-    
+    UILabel *timeRemaining = (UILabel *)[cell viewWithTag:2];
     UILabel *title = (UILabel *)[cell viewWithTag:1];
     title.text = thisListing.title;
-    NSString *timeDiff = [[NSString alloc] init];
-    NSTimeInterval interval = [thisBooking[@"endTime"] timeIntervalSinceNow];
-    UILabel *timeRemaining = (UILabel *)[cell viewWithTag:2];
-    int minutes = interval/60;
     
-    // Show the amount of time remaining on each booking
     if (listingSegments.selectedSegmentIndex == 0){
+        PFObject *thisBooking = [bookings objectAtIndex:indexPath.row];
+        NSString *timeDiff = [[NSString alloc] init];
+        NSTimeInterval interval = [thisBooking[@"endTime"] timeIntervalSinceNow];
+        int minutes = interval/60;
+        
         if (minutes < 0){
             timeRemaining.text = @"";
         } else {
@@ -209,20 +203,9 @@ NSArray *bookings;
             }
             timeRemaining.text = timeDiff;
         }
-
     } else {
-        if (minutes > 0){
-            if (minutes == 1) {
-                timeDiff = [NSString stringWithFormat:@"%d minute left", minutes];
-            } else {
-                timeDiff = [NSString stringWithFormat:@"%d minutes left", minutes];
-            }
-            timeRemaining.text = timeDiff;
-        } else {
-            timeRemaining.text = @"";
-        }
+        timeRemaining.text = @"";
     }
-    
     return cell;
 }
 /*

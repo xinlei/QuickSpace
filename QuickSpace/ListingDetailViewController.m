@@ -67,6 +67,7 @@
         booking[@"startTime"] = startTime;
         booking[@"endTime"] = endTime;
         booking[@"guest"] = currentUser;
+        booking[@"owner"] = parseListing[@"lister"];
         booking[@"rating"] = @0;
         booking[@"listing"] = parseListing;
         [parseListing saveInBackground];
