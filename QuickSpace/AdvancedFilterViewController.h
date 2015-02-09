@@ -17,4 +17,8 @@
 @property (weak, nonatomic) IBOutlet UISwitch *computerSwitch;
 @property (weak, nonatomic) IBOutlet UISwitch *janitorSwitch;
 
+@property (strong, nonatomic) NSMutableArray *spaceType;
+@property (weak, nonatomic) NSDate *startDate;
+@property (weak, nonatomic) NSDate *endDate;
+
 @end

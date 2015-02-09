@@ -7,7 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "UIViewController+MJPopupViewController.h"
+#import "AdvancedFilterViewController.h"
 
 @interface FilterViewController : UIViewController 
 
@@ -23,16 +23,13 @@
 - (IBAction)officeSelected:(id)sender;
 - (IBAction)quietSelected:(id)sender;
 
-//start/end labels
-@property (weak, nonatomic) IBOutlet UILabel *startDate;
-@property (weak, nonatomic) IBOutlet UILabel *startTime;
-@property (weak, nonatomic) IBOutlet UILabel *endDate;
-@property (weak, nonatomic) IBOutlet UILabel *endTime;
-
-//start/end buttons
-@property (weak, nonatomic) IBOutlet UIButton *startButton;
-@property (weak, nonatomic) IBOutlet UIButton *endButton;
+//start/end;
 - (IBAction)selectStart:(id)sender;
 - (IBAction)selectEnd:(id)sender;
+
+@property (weak, nonatomic) IBOutlet UIDatePicker *startPicker;
+@property (weak, nonatomic) IBOutlet UIDatePicker *endPicker;
+@property (weak, nonatomic) IBOutlet UIView *asdf;
+
 
 @end

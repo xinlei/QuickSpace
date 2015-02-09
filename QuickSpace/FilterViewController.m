@@ -21,6 +21,8 @@
 @synthesize closetButton;
 @synthesize officeButton;
 @synthesize quietButton;
+@synthesize startPicker;
+@synthesize endPicker;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -41,6 +43,28 @@
     NSNumber *quiet = [NSNumber numberWithBool:NO];
     
     spaceType = [NSMutableArray arrayWithObjects:space, closet, office, quiet, nil];
+    
+    CGRect frame = startPicker.frame;
+    frame.size.height = 83;
+    frame.size.height = 239;
+    [startPicker setFrame:frame];
+    [endPicker setFrame:frame];
+    
+    
+    CGFloat viewX = self.asdf.frame.size.width;
+    CGFloat viewY = self.asdf.frame.size.height;
+    NSLog(@"%f %f", viewX, viewY);
+    
+    //    UIDatePicker *datePicker = [[UIDatePicker alloc] init];
+    //    datePicker.frame = CGRectMake(0, 0, viewX, viewY/2);
+    //    datePicker.transform = CGAffineTransformMakeScale(.7, 0.7);
+    //    [self.asdf addSubview:datePicker];
+    
+    startPicker.frame = CGRectMake(0, 0, viewX, viewY/2);
+    startPicker.transform = CGAffineTransformMakeScale(.7, .7);
+    
+    endPicker.frame = CGRectMake(0, viewY/2, viewX, viewY/2);
+    endPicker.transform = CGAffineTransformMakeScale(.7, .7);
     
 }
 
@@ -68,6 +92,27 @@
         [spaceType replaceObjectAtIndex:2 withObject:[NSNumber numberWithBool:YES]];
     if (quietButton.selected)
         [spaceType replaceObjectAtIndex:3 withObject:[NSNumber numberWithBool:YES]];
+}
+
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+    if ([segue.identifier isEqualToString:@"RefineDetails"]) {
+        AdvancedFilterViewController *destViewController = segue.destinationViewController;
+        
+        if (restButton.selected){
+            [spaceType replaceObjectAtIndex:0 withObject:[NSNumber numberWithBool:YES]];
+            NSLog(@"rest");
+        }
+        if (closetButton.selected)
+            [spaceType replaceObjectAtIndex:1 withObject:[NSNumber numberWithBool:YES]];
+        if (officeButton.selected)
+            [spaceType replaceObjectAtIndex:2 withObject:[NSNumber numberWithBool:YES]];
+        if (quietButton.selected)
+            [spaceType replaceObjectAtIndex:3 withObject:[NSNumber numberWithBool:YES]];
+        NSLog(@"%@", startPicker.date.description);
+        destViewController.spaceType = spaceType;
+        destViewController.startDate = startPicker.date;
+        destViewController.endDate = endPicker.date;
+    }
 }
 
 /*
