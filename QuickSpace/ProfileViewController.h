@@ -15,4 +15,6 @@
 @property (strong, nonatomic) IBOutlet UIActionSheet *popup;
 @property (weak, nonatomic) IBOutlet UIButton *logoutButton;
 
+-(void) refreshTableData;
+
 @end

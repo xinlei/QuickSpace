@@ -81,6 +81,9 @@
     listingObject[@"lister"] = currentUser.username;
     listingObject[@"image"] = imageFile;
     listingObject[@"type"] = listingTypes;
+    listingObject[@"totalRating"] = @0;
+    listingObject[@"totalRaters"] = @0;
+    listingObject[@"ratingValue"] = @0;
     
     [listingObject saveEventually];
     NSString *object_id = listingObject.objectId;

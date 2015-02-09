@@ -1171,6 +1171,13 @@
                                     <segue destination="VcC-Ma-qT0" kind="push" identifier="ShowBookingConfirmation" id="hQm-md-erW"/>
                                 </connections>
                             </button>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Rating" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="5zl-sV-xj1">
+                                <rect key="frame" x="187" y="234" width="117" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
@@ -1179,6 +1186,7 @@
                         <outlet property="bookButton" destination="J8d-oW-Rnf" id="4su-iy-kUw"/>
                         <outlet property="image" destination="3cU-0f-T4g" id="VOv-tC-DaG"/>
                         <outlet property="location" destination="hCX-a5-8tr" id="xWh-Aq-e0G"/>
+                        <outlet property="ratingLabel" destination="5zl-sV-xj1" id="ofh-Xv-8n7"/>
                         <outlet property="titleLabel" destination="7F8-gA-9a8" id="74P-R9-MiP"/>
                         <outlet property="type" destination="JjO-g2-OLb" id="D8Z-AF-rlM"/>
                     </connections>
@@ -1400,11 +1408,11 @@
         <simulatedScreenMetrics key="destination" type="retina4"/>
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
-        <segue reference="uLc-1e-HkW"/>
+        <segue reference="OHa-B8-TXq"/>
         <segue reference="ihc-zZ-jmu"/>
+        <segue reference="uLc-1e-HkW"/>
         <segue reference="yQH-N5-bKF"/>
         <segue reference="oHm-PT-uY9"/>
-        <segue reference="sbc-fe-3wW"/>
-        <segue reference="OHa-B8-TXq"/>
+        <segue reference="KOp-dB-tul"/>
     </inferredMetricsTieBreakers>
 </document>

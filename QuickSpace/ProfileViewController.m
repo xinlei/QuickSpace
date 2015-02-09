@@ -13,6 +13,8 @@
 
 @interface ProfileViewController ()
 
+-(void) refreshTableData;
+
 @end
 
 @implementation ProfileViewController
@@ -43,6 +45,8 @@ NSArray *bookings;
     
     listings = [Listing objectToListingsWith:AllListings];
     NSLog(@"Listing count%d", [listings count]);
+    
+    [self refreshTableData];
 }
 
 - (void)didReceiveMemoryWarning
@@ -113,16 +117,33 @@ NSArray *bookings;
                 booking[@"rating"] = @0;
         }
         [booking saveInBackground];
+        PFQuery *query = [PFQuery queryWithClassName:@"ListingObject"];
+        [query getObjectInBackgroundWithId:currListing.object_id block:^(PFObject *parseListing, NSError *error) {
+            
+            int currTotalRating = [parseListing[@"totalRating"] intValue];
+            int currTotalRaters = [parseListing[@"totalRaters"] intValue];
+            int currRating = [booking[@"rating"] intValue];
+            
+            int newTotalRating = currTotalRating + currRating;
+            int newTotalRaters = currTotalRaters + 1;
+            int newRating = newTotalRating / newTotalRaters;
+            
+            parseListing[@"totalRating"] = [NSNumber numberWithInt:(newTotalRating)];
+            parseListing[@"totalRaters"] = [NSNumber numberWithInt:(newTotalRaters)];
+            parseListing[@"ratingValue"] = [NSNumber numberWithInt:(newRating)];
+            
+            [parseListing saveInBackground];
+        }];
     }
     
 }
 
-- (IBAction)listingSegmentValueChanged:(UISegmentedControl *)sender {
+- (void) refreshTableData {
     PFUser *currentUser = [PFUser currentUser];
     if (listingSegments.selectedSegmentIndex == 0){
         
         NSDate *now = [NSDate date];
-
+        
         PFQuery *notExpired = [PFQuery queryWithClassName:@"Booking"];
         [notExpired whereKey:@"guest" equalTo:currentUser];
         [notExpired whereKey:@"endTime" greaterThan:now];
@@ -133,13 +154,12 @@ NSArray *bookings;
         PFQuery *query = [PFQuery orQueryWithSubqueries:@[noRatings,notExpired]];
         bookings = [query findObjects];
         
-        NSMutableArray* allListings = [[NSMutableArray alloc] init];
+        NSMutableArray* allRentals = [[NSMutableArray alloc] init];
         for (PFObject *object in bookings) {
-            [allListings addObject:object[@"listing"]];
+            [allRentals addObject:object[@"listing"]];
         }
-        listings = [Listing objectToListingsWith:allListings];
+        listings = [Listing objectToListingsWith:allRentals];
         
-    
     } else {
         // Get listings posted by this user
         PFQuery *query = [PFQuery queryWithClassName:@"ListingObject"];
@@ -148,6 +168,10 @@ NSArray *bookings;
         listings = [Listing objectToListingsWith:AllListings];
     }
     [self.listingTable reloadData];
+}
+
+- (IBAction)listingSegmentValueChanged:(UISegmentedControl *)sender {
+    [self refreshTableData];
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section

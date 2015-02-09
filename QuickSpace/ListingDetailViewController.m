@@ -22,6 +22,7 @@
 @synthesize type;
 @synthesize location;
 @synthesize bookButton;
+@synthesize ratingLabel;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -30,6 +31,17 @@
     image.image = [UIImage imageWithData: listing.imageData];
     type.text = listing.type;
     location.text = listing.location;
+    
+    PFQuery *query = [PFQuery queryWithClassName:@"ListingObject"];
+    // Retrieve the object by id
+    [query getObjectInBackgroundWithId:listing.object_id block:^(PFObject *parseListing, NSError *error) {
+        int rating = [parseListing[@"ratingValue"] intValue];
+        if (rating == 0) {
+            ratingLabel.text = @"No Ratings Yet";
+        } else {
+            ratingLabel.text = [NSString stringWithFormat:@"Rating: %d/3", rating];
+        }
+    }];
 }
 
 - (void)didReceiveMemoryWarning {

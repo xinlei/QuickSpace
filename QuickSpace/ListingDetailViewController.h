@@ -17,5 +17,6 @@
 @property (weak, nonatomic) IBOutlet UILabel *type;
 @property (weak, nonatomic) IBOutlet UILabel *location;
 @property (weak, nonatomic) IBOutlet UIButton *bookButton;
+@property (weak, nonatomic) IBOutlet UILabel *ratingLabel;
 
 @end
