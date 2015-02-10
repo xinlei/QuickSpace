@@ -9,7 +9,4 @@
 #import <UIKit/UIKit.h>
 
 @interface SetLocationViewController : UIViewController
-- (IBAction)search:(id)sender;
-@property (strong, nonatomic) IBOutlet UITextField *addressTextField;
-
 @end

@@ -29,31 +29,32 @@ NSArray *listings;
     [super viewDidLoad];
     
     [self.locationManager startUpdatingLocation];
-    
-//    CLLocation *location = self.locationManager.location;
-//    if (location) {
-//        self.currentLocation = location;
-//    }
+
+    CLLocation *location = self.locationManager.location;
+    if (location) {
+        self.currentLocation = location;
+    }
+
     [self populateListings];
 }
 
 //Taken from the AnyWall Parse tutorial
-//- (CLLocationManager *)locationManager {
-//    if (_locationManager == nil) {
-//        _locationManager = [[CLLocationManager alloc] init];
-//        _locationManager.delegate = self;
-//        _locationManager.desiredAccuracy = kCLLocationAccuracyBest;
-//        _locationManager.distanceFilter = kCLLocationAccuracyNearestTenMeters;
-//    }
-//    return _locationManager;
-//}
+- (CLLocationManager *)locationManager {
+    if (_locationManager == nil) {
+        _locationManager = [[CLLocationManager alloc] init];
+        _locationManager.delegate = self;
+        _locationManager.desiredAccuracy = kCLLocationAccuracyBest;
+        _locationManager.distanceFilter = kCLLocationAccuracyNearestTenMeters;
+    }
+    return _locationManager;
+}
 
 //Taken from the AnyWall Parse tutorial
-//- (void)locationManager:(CLLocationManager *)manager
-//    didUpdateToLocation:(CLLocation *)newLocation
-//           fromLocation:(CLLocation *)oldLocation {
-//    self.currentLocation = newLocation;
-//}
+- (void)locationManager:(CLLocationManager *)manager
+    didUpdateToLocation:(CLLocation *)newLocation
+           fromLocation:(CLLocation *)oldLocation {
+    self.currentLocation = newLocation;
+}
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
@@ -67,13 +68,13 @@ NSArray *listings;
     NSDictionary *amenities = [defaults objectForKey:@"additionalFilters"];
     NSNumber *price = [defaults objectForKey:@"maxPrice"];
     
-    
-    NSLog(@"hey");
+
 //    PFGeoPoint *currLocationGeoPoint = [PFGeoPoint geoPointWithLocation:_currentLocation];
 //    [self.locationManager stopUpdatingLocation];
     
-    PFQuery *fakeQuery = [PFQuery queryWithClassName:@"ListingObject"];
-//    [fakeQuery whereKey:@"geoLocation" nearGeoPoint:currLocationGeoPoint];
+    PFQuery *fakeQuery = [PFQuery queryWithClassName:@"Listing"];
+//    [fakeQuery whereKey:@"location" nearGeoPoint:currLocationGeoPoint];
+
     
     listings = [Listing objectToListingsWith:[fakeQuery findObjects]];
     
@@ -102,7 +103,7 @@ NSArray *listings;
         [queryArray addObject:@"services"];
     }
     
-    PFQuery *query = [PFQuery queryWithClassName:@"ListingObject"];
+    PFQuery *query = [PFQuery queryWithClassName:@"Listing"];
     if([queryArray count] != 0)
         [query whereKey:@"amenities" containsAllObjectsInArray:queryArray];
     if(price > 0)
@@ -140,11 +141,11 @@ NSArray *listings;
     UILabel *title = (UILabel *)[cell viewWithTag:2];
     title.text = thisListing.title;
     
-    UILabel *type = (UILabel *)[cell viewWithTag:3];
-    type.text = thisListing.type;
-    
-    UILabel *location = (UILabel *)[cell viewWithTag:4];
-    location.text = thisListing.location;
+//    UILabel *type = (UILabel *)[cell viewWithTag:3];
+//    type.text = thisListing.type;
+//    
+//    UILabel *location = (UILabel *)[cell viewWithTag:4];
+//    location.text = thisListing.location;
     
     return cell;
 }
