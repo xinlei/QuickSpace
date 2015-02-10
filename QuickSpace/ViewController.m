@@ -70,7 +70,7 @@ NSArray *listings;
     
 
 //    PFGeoPoint *currLocationGeoPoint = [PFGeoPoint geoPointWithLocation:_currentLocation];
-//    [self.locationManager stopUpdatingLocation];
+    [self.locationManager stopUpdatingLocation];
     
     PFQuery *fakeQuery = [PFQuery queryWithClassName:@"Listing"];
 //    [fakeQuery whereKey:@"location" nearGeoPoint:currLocationGeoPoint];
@@ -143,7 +143,7 @@ NSArray *listings;
     
 //    UILabel *type = (UILabel *)[cell viewWithTag:3];
 //    type.text = thisListing.type;
-//    
+
 //    UILabel *location = (UILabel *)[cell viewWithTag:4];
 //    location.text = thisListing.location;
     

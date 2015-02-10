@@ -29,7 +29,7 @@
         lister.imageData = myData;
         
         lister.title = object[@"title"];
-        lister.type = object[@"type"];
+        lister.types = object[@"type"];
         lister.location = object[@"location"];
         lister.description = object[@"description"];
         
