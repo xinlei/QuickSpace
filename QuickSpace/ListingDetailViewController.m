@@ -45,17 +45,7 @@
         }
         
         //update the amenities in the listing view
-        NSMutableString *amenitiesString = [[NSMutableString alloc] init];
-        NSArray *amenities = parseListing[@"amenities"];
-        for (NSString *amenity in amenities){
-            [amenitiesString appendString:@"- "];
-            NSLog(@"%@", amenity);
-            [amenitiesString appendString:amenity];
-            [amenitiesString appendString:@" "];
-            
-        }
-        [amenitiesString appendString:@"-"];
-        amenitiesLabel.text = amenitiesString;
+        amenitiesLabel.text = [Listing amenitiesToString:parseListing[@"amenities"]];
         
         //update the description
         NSString *descripString = parseListing[@"description"];
@@ -85,7 +75,7 @@
 // Set guest_id, startTime, and endTime and save to server
 - (IBAction)bookButton:(UIButton *)sender {
     PFObject *booking = [PFObject objectWithClassName:@"Booking"];
-    PFQuery *query = [PFQuery queryWithClassName:@"ListingObject"];
+    PFQuery *query = [PFQuery queryWithClassName:@"Listing"];
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
 
     // Retrieve the object by id

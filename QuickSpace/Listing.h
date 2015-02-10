@@ -26,6 +26,7 @@
 @property (nonatomic, strong) NSString *guest_id;
 
 + (NSMutableArray *)objectToListingsWith:(NSArray *)PFObjects;
++ (NSString *) amenitiesToString:(NSArray *) amenities;
 + (void) cancelListingForHost:(NSString *) object_id;
 - (BOOL) isEqual: other;
 //- (unsigned) hash;
