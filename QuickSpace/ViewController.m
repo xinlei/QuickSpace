@@ -65,9 +65,9 @@ NSArray *listings;
     NSNumber *price = [defaults objectForKey:@"maxPrice"];
     
 //    PFGeoPoint *currLocationGeoPoint = [PFGeoPoint geoPointWithLocation:_currentLocation];
-//    [self.locationManager stopUpdatingLocation];
+    [self.locationManager stopUpdatingLocation];
     
-    PFQuery *fakeQuery = [PFQuery queryWithClassName:@"ListingObject"];
+    PFQuery *fakeQuery = [PFQuery queryWithClassName:@"Listing"];
 //    [fakeQuery whereKey:@"location" nearGeoPoint:currLocationGeoPoint];
     
     listings = [Listing objectToListingsWith:[fakeQuery findObjects]];
@@ -97,7 +97,7 @@ NSArray *listings;
         [queryArray addObject:@"services"];
     }
     
-    PFQuery *query = [PFQuery queryWithClassName:@"ListingObject"];
+    PFQuery *query = [PFQuery queryWithClassName:@"Listing"];
     if([queryArray count] != 0)
         [query whereKey:@"amenities" containsAllObjectsInArray:queryArray];
     if(price > 0)
@@ -135,11 +135,11 @@ NSArray *listings;
     UILabel *title = (UILabel *)[cell viewWithTag:2];
     title.text = thisListing.title;
     
-    UILabel *type = (UILabel *)[cell viewWithTag:3];
-    type.text = thisListing.type;
+//    UILabel *type = (UILabel *)[cell viewWithTag:3];
+//    type.text = thisListing.type;
     
-    UILabel *location = (UILabel *)[cell viewWithTag:4];
-    location.text = thisListing.location;
+//    UILabel *location = (UILabel *)[cell viewWithTag:4];
+//    location.text = thisListing.location;
     
     return cell;
 }
