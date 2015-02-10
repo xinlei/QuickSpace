@@ -67,16 +67,15 @@
 - (IBAction)bookButton:(UIButton *)sender {
     PFObject *booking = [PFObject objectWithClassName:@"Booking"];
     PFQuery *query = [PFQuery queryWithClassName:@"ListingObject"];
-    
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+
     // Retrieve the object by id
     [query getObjectInBackgroundWithId:listing.object_id block:^(PFObject *parseListing, NSError *error) {
         PFUser *currentUser = [PFUser currentUser];
         
         // Update start and end time
-        NSDate *startTime = [NSDate date];
-        
-        // Hard-coded 30 seconds. Need to be changed later once date picker is implmented
-        NSDate *endTime = [startTime dateByAddingTimeInterval:180];
+        NSDate *startTime = [defaults objectForKey:@"startDate"];
+        NSDate *endTime = [defaults objectForKey:@"endDate"];
         
         booking[@"startTime"] = startTime;
         booking[@"endTime"] = endTime;

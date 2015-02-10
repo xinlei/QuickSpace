@@ -66,6 +66,10 @@
     endPicker.frame = CGRectMake(0, viewY/2, viewX, viewY/2);
     endPicker.transform = CGAffineTransformMakeScale(.7, .7);
     
+    endPicker.minimumDate = startPicker.date; 
+}
+- (IBAction)limitEndTime:(UIDatePicker *)sender {
+    endPicker.minimumDate = startPicker.date;
 }
 
 - (void)didReceiveMemoryWarning
@@ -113,6 +117,10 @@
         destViewController.startDate = startPicker.date;
         destViewController.endDate = endPicker.date;
     }
+    
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    [defaults setObject:startPicker.date forKey:@"startDate"];
+    [defaults setObject:endPicker.date forKey:@"endDate"];
 }
 
 /*
