@@ -15,10 +15,13 @@
 
 @property (nonatomic, strong) CLLocationManager *locationManager;
 @property (nonatomic, strong) CLLocation *currentLocation;
+
 -(void) populateListings;
+
 @end
 
 @implementation ViewController
+
 
 NSArray *listings;
 
@@ -26,11 +29,12 @@ NSArray *listings;
     [super viewDidLoad];
     
     [self.locationManager startUpdatingLocation];
-    
+
     CLLocation *location = self.locationManager.location;
     if (location) {
         self.currentLocation = location;
     }
+
     [self populateListings];
 }
 
@@ -67,11 +71,13 @@ NSArray *listings;
     NSNumber *longitude = [defaults objectForKey:@"longitude"];
     PFGeoPoint *discoverLocation = [PFGeoPoint geoPointWithLatitude:[latitude doubleValue] longitude:[longitude doubleValue]];
     
+
 //    PFGeoPoint *currLocationGeoPoint = [PFGeoPoint geoPointWithLocation:_currentLocation];
     [self.locationManager stopUpdatingLocation];
     
     PFQuery *fakeQuery = [PFQuery queryWithClassName:@"Listing"];
     [fakeQuery whereKey:@"location" nearGeoPoint:discoverLocation];
+
     
     listings = [Listing objectToListingsWith:[fakeQuery findObjects]];
     
@@ -140,7 +146,7 @@ NSArray *listings;
     
 //    UILabel *type = (UILabel *)[cell viewWithTag:3];
 //    type.text = thisListing.type;
-    
+
 //    UILabel *location = (UILabel *)[cell viewWithTag:4];
 //    location.text = thisListing.location;
     

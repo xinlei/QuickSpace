@@ -18,7 +18,6 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     NSDictionary *newListingBasicInfo = [defaults objectForKey:@"newListingBasicInfo"];
     NSString *address = [newListingBasicInfo objectForKey:@"location"];
