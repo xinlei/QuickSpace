@@ -43,7 +43,6 @@
     for (id key in amenities) {
         if([[amenities objectForKey:key] boolValue]){
             [amenitiesString appendString: @"- "];
-            NSLog(@"true");
             if ([key isEqualToString:@"wifi"]) [amenitiesString appendString:@"WiFi Internet"];
             if ([key isEqualToString:@"refrigerator"]) [amenitiesString appendString:@"Refrigerator"];
             if ([key isEqualToString:@"studyDesk"]) [amenitiesString appendString:@"Study Desk"];
@@ -68,8 +67,6 @@
     NSArray *listingTypes = [defaults objectForKey:@"newListingSpaceType"];
     
     NSSet *keys = [listingAmenities keysOfEntriesPassingTest:^(id key, id obj, BOOL *stop){
-        if([obj boolValue] == YES)
-            NSLog(@"Key: %@", key);
         return [obj boolValue];
     }];
     NSArray *amenities = [keys allObjects];
@@ -79,10 +76,18 @@
     PFFile *imageFile = [PFFile fileWithName:@"listingImage.png" data:image];
     PFUser *currentUser = [PFUser currentUser];
     
-    PFObject *listingObject = [PFObject objectWithClassName:@"ListingObject"];
+    NSNumber *latitude = [defaults objectForKey:@"Latitude"];
+    NSNumber *longitude = [defaults objectForKey:@"Longitude"];
+    
+    NSLog(@"New Latitude: %f, New Longitude: %f", [latitude doubleValue], [longitude doubleValue]);
+    PFGeoPoint *currentPoint =
+    [PFGeoPoint geoPointWithLatitude:[latitude doubleValue]
+                           longitude:[longitude doubleValue]];
+    
+    PFObject *listingObject = [PFObject objectWithClassName:@"Listing"];
     listingObject[@"title"] = titleLabel.text;
     listingObject[@"price"] = num;
-    listingObject[@"location"] = locationLabel.text;
+    listingObject[@"location"] = currentPoint;
     listingObject[@"amenities"] = amenities;
     listingObject[@"description"] = descriptionLabel.text;
     listingObject[@"lister"] = currentUser.username;
@@ -92,7 +97,7 @@
     listingObject[@"totalRaters"] = @0;
     listingObject[@"ratingValue"] = @0;
     
-    [listingObject saveEventually];
+    [listingObject save];
     NSString *object_id = listingObject.objectId;
     [defaults setObject:object_id forKey:@"object_id"];
 }

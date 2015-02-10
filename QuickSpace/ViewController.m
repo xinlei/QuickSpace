@@ -15,7 +15,7 @@
 
 @property (nonatomic, strong) CLLocationManager *locationManager;
 @property (nonatomic, strong) CLLocation *currentLocation;
-
+-(void) populateListings;
 @end
 
 @implementation ViewController
@@ -31,7 +31,7 @@ NSArray *listings;
     if (location) {
         self.currentLocation = location;
     }
-    
+    [self populateListings];
 }
 
 //Taken from the AnyWall Parse tutorial
@@ -64,12 +64,11 @@ NSArray *listings;
     NSDictionary *amenities = [defaults objectForKey:@"additionalFilters"];
     NSNumber *price = [defaults objectForKey:@"maxPrice"];
     
-    PFGeoPoint *currLocationGeoPoint = [PFGeoPoint geoPointWithLocation:_currentLocation];
-    [self.locationManager stopUpdatingLocation];
+//    PFGeoPoint *currLocationGeoPoint = [PFGeoPoint geoPointWithLocation:_currentLocation];
+//    [self.locationManager stopUpdatingLocation];
     
-    PFQuery *fakeQuery = [PFQuery queryWithClassName:@"Listing"];
-    [fakeQuery whereKeyExists:@"title"];
-    [fakeQuery whereKey:@"geoLocation" nearGeoPoint:currLocationGeoPoint];
+    PFQuery *fakeQuery = [PFQuery queryWithClassName:@"ListingObject"];
+//    [fakeQuery whereKey:@"location" nearGeoPoint:currLocationGeoPoint];
     
     listings = [Listing objectToListingsWith:[fakeQuery findObjects]];
     
