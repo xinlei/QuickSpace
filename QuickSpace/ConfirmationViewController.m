@@ -18,6 +18,7 @@
 @synthesize locationLabel;
 @synthesize amenitiesLabel;
 @synthesize descriptionLabel;
+
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
@@ -43,7 +44,11 @@
         if([[amenities objectForKey:key] boolValue]){
             [amenitiesString appendString: @"- "];
             NSLog(@"true");
-            [amenitiesString appendString:key];
+            if ([key isEqualToString:@"wifi"]) [amenitiesString appendString:@"WiFi Internet"];
+            if ([key isEqualToString:@"refrigerator"]) [amenitiesString appendString:@"Refrigerator"];
+            if ([key isEqualToString:@"studyDesk"]) [amenitiesString appendString:@"Study Desk"];
+            if ([key isEqualToString:@"monitor"]) [amenitiesString appendString:@"Monitor"];
+            if ([key isEqualToString:@"services"]) [amenitiesString appendString:@"Janitoral Services"];
             [amenitiesString appendString:@" "];
         }
     }
@@ -74,32 +79,23 @@
     PFFile *imageFile = [PFFile fileWithName:@"listingImage.png" data:image];
     PFUser *currentUser = [PFUser currentUser];
     
-    NSNumber *latitude = [defaults objectForKey:@"Latitude"];
-    NSNumber *longitude = [defaults objectForKey:@"Longitude"];
-    
-    NSLog(@"New Latitude: %f, New Longitude: %f", [latitude doubleValue], [longitude doubleValue]);
-    PFGeoPoint *currentPoint =
-    [PFGeoPoint geoPointWithLatitude:[latitude doubleValue]
-                           longitude:[longitude doubleValue]];
-    
-    PFObject *listingObject = [PFObject objectWithClassName:@"Listing"];
+    PFObject *listingObject = [PFObject objectWithClassName:@"ListingObject"];
     listingObject[@"title"] = titleLabel.text;
     listingObject[@"price"] = num;
+    listingObject[@"location"] = locationLabel.text;
     listingObject[@"amenities"] = amenities;
     listingObject[@"description"] = descriptionLabel.text;
     listingObject[@"lister"] = currentUser.username;
     listingObject[@"image"] = imageFile;
     listingObject[@"type"] = listingTypes;
-    listingObject[@"location"] = currentPoint;
     listingObject[@"totalRating"] = @0;
     listingObject[@"totalRaters"] = @0;
     listingObject[@"ratingValue"] = @0;
     
-    [listingObject save];
+    [listingObject saveEventually];
     NSString *object_id = listingObject.objectId;
     [defaults setObject:object_id forKey:@"object_id"];
 }
-
 /*
  #pragma mark - Navigation
  // In a storyboard-based application, you will often want to do a little preparation before navigation

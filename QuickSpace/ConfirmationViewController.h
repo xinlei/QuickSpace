@@ -13,6 +13,6 @@
 @property (weak, nonatomic) IBOutlet UILabel *priceLabel;
 @property (weak, nonatomic) IBOutlet UILabel *locationLabel;
 @property (weak, nonatomic) IBOutlet UILabel *amenitiesLabel;
-@property (weak, nonatomic) IBOutlet UITextView *descriptionLabel;
+@property (weak, nonatomic) IBOutlet UILabel *descriptionLabel;
 @property (nonatomic, retain) UIImage *theImage;
 @end

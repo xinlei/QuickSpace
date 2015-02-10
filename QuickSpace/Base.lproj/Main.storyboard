@@ -274,22 +274,11 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="Ixy-IK-Gfe">
-                                <rect key="frame" x="110" y="435" width="91" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="Find Address">
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <connections>
-                                    <action selector="search:" destination="Qnx-8k-Ku7" eventType="touchUpInside" id="8FV-2g-ExC"/>
-                                </connections>
-                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
                     <navigationItem key="navigationItem" id="TNz-PJ-85h"/>
                     <connections>
-                        <outlet property="addressTextField" destination="yDU-1T-Yrz" id="NwQ-Bu-Xz1"/>
                         <outlet property="myMapView" destination="tVG-mQ-5sk" id="ntp-ME-3ye"/>
                     </connections>
                 </viewController>
@@ -570,16 +559,22 @@
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" id="NtW-S2-RoJ">
-                                <rect key="frame" x="16" y="401" width="288" height="69"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <string key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</string>
-                                <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="GQT-Tf-DLE">
+                                <rect key="frame" x="16" y="338" width="275" height="39"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="13"/>
-                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
-                            </textView>
+                                <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="XXd-QM-Y08">
+                                <rect key="frame" x="16" y="414" width="274" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                                <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Other Information" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="d9q-rd-fCm">
-                                <rect key="frame" x="16" y="372" width="165" height="21"/>
+                                <rect key="frame" x="16" y="385" width="165" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
@@ -589,8 +584,8 @@
                     </view>
                     <navigationItem key="navigationItem" title="Listing Details" id="cDA-N9-Z8A"/>
                     <connections>
-                        <outlet property="amenitiesLabel" destination="ODu-p5-DYf" id="am1-i3-ikS"/>
-                        <outlet property="descriptionLabel" destination="NtW-S2-RoJ" id="xRs-Yg-rRE"/>
+                        <outlet property="amenitiesLabel" destination="GQT-Tf-DLE" id="RGp-IC-Fwj"/>
+                        <outlet property="descriptionLabel" destination="XXd-QM-Y08" id="zwI-9C-ahi"/>
                         <outlet property="listingImg" destination="yy9-1D-nTF" id="j1e-mM-vFq"/>
                         <outlet property="locationLabel" destination="o77-qa-Eb8" id="1en-qg-Aat"/>
                         <outlet property="priceLabel" destination="IU6-Kf-Yse" id="2Ir-gb-B4x"/>
@@ -1143,6 +1138,14 @@
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" id="1sp-KM-gGC">
+                                <rect key="frame" x="16" y="349" width="288" height="99"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <string key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</string>
+                                <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                            </textView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="J8d-oW-Rnf">
                                 <rect key="frame" x="0.0" y="478" width="320" height="40"/>
                                 <color key="backgroundColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
@@ -1162,35 +1165,12 @@
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="WgU-Kl-qgm">
-                                <rect key="frame" x="30" y="349" width="274" height="21"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="13"/>
-                                <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Description" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="5lg-d4-xwj">
-                                <rect key="frame" x="16" y="378" width="170" height="21"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="4Di-qP-zfX">
-                                <rect key="frame" x="30" y="407" width="274" height="21"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="13"/>
-                                <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
-                                <nil key="highlightedColor"/>
-                            </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
                     <navigationItem key="navigationItem" title="Explore" id="m0f-qi-z2v"/>
                     <connections>
-                        <outlet property="amenitiesLabel" destination="WgU-Kl-qgm" id="qV6-Uo-ZHq"/>
                         <outlet property="bookButton" destination="J8d-oW-Rnf" id="4su-iy-kUw"/>
-                        <outlet property="descriptionsLabel" destination="4Di-qP-zfX" id="Z0c-pa-0eT"/>
                         <outlet property="image" destination="3cU-0f-T4g" id="VOv-tC-DaG"/>
                         <outlet property="location" destination="hCX-a5-8tr" id="xWh-Aq-e0G"/>
                         <outlet property="ratingLabel" destination="5zl-sV-xj1" id="ofh-Xv-8n7"/>
@@ -1415,11 +1395,11 @@
         <simulatedScreenMetrics key="destination" type="retina4"/>
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
-        <segue reference="9Jd-uR-fqQ"/>
-        <segue reference="KOp-dB-tul"/>
-        <segue reference="oHm-PT-uY9"/>
-        <segue reference="ihc-zZ-jmu"/>
-        <segue reference="qQk-5j-mcI"/>
         <segue reference="OHa-B8-TXq"/>
+        <segue reference="9Jd-uR-fqQ"/>
+        <segue reference="oHm-PT-uY9"/>
+        <segue reference="KOp-dB-tul"/>
+        <segue reference="ihc-zZ-jmu"/>
+        <segue reference="uLc-1e-HkW"/>
     </inferredMetricsTieBreakers>
 </document>
