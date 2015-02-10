@@ -11,6 +11,10 @@
 @interface ViewController : UIViewController <UITableViewDataSource, UITableViewDelegate>
 
 @property (nonatomic, strong) IBOutlet UITableView * tableView;
+@property (strong, nonatomic) NSMutableArray *spaceType;
+@property (weak, nonatomic) NSDate *startDate;
+@property (weak, nonatomic) NSDate *endDate;
+
 -(void) populateListings;
 @end
 

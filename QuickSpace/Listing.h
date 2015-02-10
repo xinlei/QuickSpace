@@ -18,6 +18,7 @@
 @property (nonatomic, strong) NSData *imageData;
 @property (nonatomic, strong) NSNumber *price;
 @property (nonatomic) NSString *object_id;
+@property (nonatomic) NSString *address;
 
 // Booking information
 @property (nonatomic, strong) NSDate *startTime;

@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "ViewController.h"
 
 @interface AdvancedFilterViewController : UIViewController
 @property (weak, nonatomic) IBOutlet UILabel *priceLabel;

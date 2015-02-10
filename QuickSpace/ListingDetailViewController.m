@@ -64,26 +64,12 @@
         //update the space type
         NSMutableString *typeDesc = [[NSMutableString alloc] init];
         NSArray *spaceType = parseListing[@"type"];
-        if ([[spaceType objectAtIndex:0] boolValue] == YES){
+        for (NSString *listingType in spaceType){
             [typeDesc appendString:@"- "];
-            [typeDesc appendString:@"Rest"];
+            [typeDesc appendString:listingType];
             [typeDesc appendString:@" "];
         }
-        if ([[spaceType objectAtIndex:1] boolValue] == YES){
-            [typeDesc appendString:@"- "];
-            [typeDesc appendString:@"Closet"];
-            [typeDesc appendString:@" "];
-        }
-        if ([[spaceType objectAtIndex:2] boolValue] == YES){
-            [typeDesc appendString:@"- "];
-            [typeDesc appendString:@"Office"];
-            [typeDesc appendString:@" "];
-        }
-        if ([[spaceType objectAtIndex:3] boolValue] == YES){
-            [typeDesc appendString:@"- "];
-            [typeDesc appendString:@"Quiet"];
-            [typeDesc appendString:@" "];
-        }
+
         [typeDesc appendString:@"-"];
         type.text = typeDesc;
         

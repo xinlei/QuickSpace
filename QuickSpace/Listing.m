@@ -18,7 +18,6 @@
 
 + (NSMutableArray *)objectToListingsWith:(NSArray *)PFObjects {
     NSMutableArray *listings = [[NSMutableArray alloc] init];
-    
 
     for (PFObject *object in PFObjects) {
         Listing *lister = [[Listing alloc] init];
@@ -32,7 +31,7 @@
         lister.types = object[@"type"];
         lister.location = object[@"location"];
         lister.description = object[@"description"];
-        
+        lister.address = object[@"address"];
         lister.object_id = object.objectId;
         [listings addObject:lister];
         

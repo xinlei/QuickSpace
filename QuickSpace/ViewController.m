@@ -28,33 +28,33 @@ NSArray *listings;
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    [self.locationManager startUpdatingLocation];
-
-    CLLocation *location = self.locationManager.location;
-    if (location) {
-        self.currentLocation = location;
-    }
+//    [self.locationManager startUpdatingLocation];
+//
+//    CLLocation *location = self.locationManager.location;
+//    if (location) {
+//        self.currentLocation = location;
+//    }
 
     [self populateListings];
 }
 
 //Taken from the AnyWall Parse tutorial
-- (CLLocationManager *)locationManager {
-    if (_locationManager == nil) {
-        _locationManager = [[CLLocationManager alloc] init];
-        _locationManager.delegate = self;
-        _locationManager.desiredAccuracy = kCLLocationAccuracyBest;
-        _locationManager.distanceFilter = kCLLocationAccuracyNearestTenMeters;
-    }
-    return _locationManager;
-}
+//- (CLLocationManager *)locationManager {
+//    if (_locationManager == nil) {
+//        _locationManager = [[CLLocationManager alloc] init];
+//        _locationManager.delegate = self;
+//        _locationManager.desiredAccuracy = kCLLocationAccuracyBest;
+//        _locationManager.distanceFilter = kCLLocationAccuracyNearestTenMeters;
+//    }
+//    return _locationManager;
+//}
 
 //Taken from the AnyWall Parse tutorial
-- (void)locationManager:(CLLocationManager *)manager
-    didUpdateToLocation:(CLLocation *)newLocation
-           fromLocation:(CLLocation *)oldLocation {
-    self.currentLocation = newLocation;
-}
+//- (void)locationManager:(CLLocationManager *)manager
+//    didUpdateToLocation:(CLLocation *)newLocation
+//           fromLocation:(CLLocation *)oldLocation {
+//    self.currentLocation = newLocation;
+//}
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
@@ -73,7 +73,7 @@ NSArray *listings;
     
 
 //    PFGeoPoint *currLocationGeoPoint = [PFGeoPoint geoPointWithLocation:_currentLocation];
-    [self.locationManager stopUpdatingLocation];
+//    [self.locationManager stopUpdatingLocation];
     
     PFQuery *fakeQuery = [PFQuery queryWithClassName:@"Listing"];
     [fakeQuery whereKey:@"location" nearGeoPoint:discoverLocation];
@@ -88,38 +88,62 @@ NSArray *listings;
     bool services = [[amenities objectForKey:@"services"] boolValue];
     
     
-    NSMutableArray *queryArray = [[NSMutableArray alloc] init];
+    NSMutableArray *amenitiesQueryArray = [[NSMutableArray alloc] init];
     
     if(wifi){
-        [queryArray addObject:@"wifi"];
+        [amenitiesQueryArray addObject:@"wifi"];
     }
     if(refrigerator){
-        [queryArray addObject:@"refrigerator"];
+        [amenitiesQueryArray addObject:@"refrigerator"];
     }
     if(study){
-        [queryArray addObject:@"studyDesk"];
+        [amenitiesQueryArray addObject:@"studyDesk"];
     }
     if(monitor){
-        [queryArray addObject:@"monitor"];
+        [amenitiesQueryArray addObject:@"monitor"];
     }
     if(services){
-        [queryArray addObject:@"services"];
+        [amenitiesQueryArray addObject:@"services"];
     }
     
+    NSMutableArray *typeQueryArray = [[NSMutableArray alloc] init];
+    if ([[self.spaceType objectAtIndex:0] boolValue] == YES){
+        [typeQueryArray addObject:@"Rest"];
+    }
+    if ([[self.spaceType objectAtIndex:1] boolValue] == YES){
+        [typeQueryArray addObject:@"Closet"];
+    }
+    if ([[self.spaceType objectAtIndex:2] boolValue] == YES){
+        [typeQueryArray addObject:@"Office"];
+    }
+    if ([[self.spaceType objectAtIndex:3] boolValue] == YES){
+        [typeQueryArray addObject:@"Quiet"];;
+    }
+    
+
+    
     PFQuery *query = [PFQuery queryWithClassName:@"Listing"];
-    if([queryArray count] != 0)
-        [query whereKey:@"amenities" containsAllObjectsInArray:queryArray];
+    if([amenitiesQueryArray count] > 0)
+        [query whereKey:@"amenities" containsAllObjectsInArray:amenitiesQueryArray];
     if(price > 0)
         [query whereKey:@"price" lessThanOrEqualTo: price];
+    if([typeQueryArray count] > 0)
+        [query whereKey:@"type" containsAllObjectsInArray:typeQueryArray];
     
-    if([queryArray count] != 0 || price > 0){
+    if([amenitiesQueryArray count] > 0 || price > 0 || [typeQueryArray count] > 0){
         NSArray* AllListings = [query findObjects];
         listings = [Listing objectToListingsWith:AllListings];
+        
+        
+
     }
     
     [defaults removeObjectForKey:@"additionalFilters"];
     [defaults removeObjectForKey:@"maxPrice"];
     
+    
+
+
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section

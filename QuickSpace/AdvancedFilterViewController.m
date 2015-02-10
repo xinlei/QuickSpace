@@ -44,6 +44,16 @@
 }
 
 -(void) prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender{
+    
+    if ([segue.identifier isEqualToString:@"DisplayResults"]) {
+        AdvancedFilterViewController *destViewController = segue.destinationViewController;
+ 
+        destViewController.spaceType = self.spaceType;
+        destViewController.startDate = self.startDate;
+        destViewController.endDate = self.endDate;
+    }
+    
+    
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     
     NSArray *keys = [NSArray arrayWithObjects:

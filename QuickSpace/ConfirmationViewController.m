@@ -64,7 +64,22 @@
 {
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     NSDictionary *listingAmenities = [defaults objectForKey:@"newListingAmenities"];
-    NSArray *listingTypes = [defaults objectForKey:@"newListingSpaceType"];
+    NSArray *spaceType = [defaults objectForKey:@"newListingSpaceType"];
+    NSDictionary *newListingBasicInfo = [defaults objectForKey:@"newListingBasicInfo"];
+    NSString *address = [newListingBasicInfo objectForKey:@"location"];
+    NSMutableArray *listingTypes = [[NSMutableArray alloc]init];
+    if ([[spaceType objectAtIndex:0] boolValue] == YES){
+        [listingTypes addObject:@"Rest"];
+    }
+    if ([[spaceType objectAtIndex:1] boolValue] == YES){
+        [listingTypes addObject:@"Closet"];
+    }
+    if ([[spaceType objectAtIndex:2] boolValue] == YES){
+        [listingTypes addObject:@"Office"];
+    }
+    if ([[spaceType objectAtIndex:3] boolValue] == YES){
+        [listingTypes addObject:@"Quiet"];;
+    }
     
     NSSet *keys = [listingAmenities keysOfEntriesPassingTest:^(id key, id obj, BOOL *stop){
         return [obj boolValue];
@@ -96,6 +111,7 @@
     listingObject[@"totalRating"] = @0;
     listingObject[@"totalRaters"] = @0;
     listingObject[@"ratingValue"] = @0;
+    listingObject[@"address"] = address;
     
     [listingObject save];
     NSString *object_id = listingObject.objectId;
