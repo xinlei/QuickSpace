@@ -39,9 +39,9 @@
     // Dispose of any resources that can be recreated.
 }
 - (IBAction)cancelBooking:(UIButton *)sender {
-    PFQuery *query = [PFQuery queryWithClassName:@"ListingObject"];
+    PFQuery *query = [PFQuery queryWithClassName:@"Listing"];
     
-    // Retrieve the object by id
+    // TODO: NEED TO UPDATE TO REMOVE BOOKINGS !! DOESN'T WORK
     [query getObjectInBackgroundWithId:listing.object_id block:^(PFObject *parseListing, NSError *error) {
         parseListing[@"guest_id"] = @"";
         [parseListing saveInBackground];

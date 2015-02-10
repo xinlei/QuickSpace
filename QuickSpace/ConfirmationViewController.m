@@ -7,6 +7,7 @@
 //
 #import "ConfirmationViewController.h"
 #import <Parse/Parse.h>
+#import "Listing.h"
 @interface ConfirmationViewController ()
 @end
 @implementation ConfirmationViewController
@@ -32,27 +33,17 @@
     [super viewDidLoad];
     listingImg.image = theImage;
     
+    // Get values from UserDefaults
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     NSDictionary *newListingBasicInfo = [defaults objectForKey:@"newListingBasicInfo"];
     NSDictionary *amenities = [defaults objectForKey:@"newListingAmenities"];
     NSInteger price = [defaults integerForKey:@"newListingPrice"];
+    
+    // Display values to view
     titleLabel.text = newListingBasicInfo[@"title"];
     priceLabel.text = [NSString stringWithFormat:@"$%d/hour", price];
     locationLabel.text = newListingBasicInfo[@"location"];
-    NSMutableString *amenitiesString = [[NSMutableString alloc] init];
-    for (id key in amenities) {
-        if([[amenities objectForKey:key] boolValue]){
-            [amenitiesString appendString: @"- "];
-            if ([key isEqualToString:@"wifi"]) [amenitiesString appendString:@"WiFi Internet"];
-            if ([key isEqualToString:@"refrigerator"]) [amenitiesString appendString:@"Refrigerator"];
-            if ([key isEqualToString:@"studyDesk"]) [amenitiesString appendString:@"Study Desk"];
-            if ([key isEqualToString:@"monitor"]) [amenitiesString appendString:@"Monitor"];
-            if ([key isEqualToString:@"services"]) [amenitiesString appendString:@"Janitoral Services"];
-            [amenitiesString appendString:@" "];
-        }
-    }
-    [amenitiesString appendString:@"-"];
-    amenitiesLabel.text = amenitiesString;
+    amenitiesLabel.text = [Listing amenitiesToString:[amenities allKeys]];
     descriptionLabel.text = newListingBasicInfo[@"description"];
 }
 - (void)didReceiveMemoryWarning

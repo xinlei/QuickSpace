@@ -85,7 +85,7 @@ NSArray *bookings;
     // Remove listing
     if (listingSegments.selectedSegmentIndex == 1){
         if (buttonIndex == 0) {
-            PFQuery *query = [PFQuery queryWithClassName:@"ListingObject"];
+            PFQuery *query = [PFQuery queryWithClassName:@"Listing"];
             [query getObjectInBackgroundWithId:currListing.object_id block:^(PFObject *parseListing, NSError *error) {
                 [parseListing delete];
             }];
@@ -109,7 +109,7 @@ NSArray *bookings;
                 booking[@"rating"] = @0;
         }
         [booking saveInBackground];
-        PFQuery *query = [PFQuery queryWithClassName:@"ListingObject"];
+        PFQuery *query = [PFQuery queryWithClassName:@"Listing"];
         [query getObjectInBackgroundWithId:currListing.object_id block:^(PFObject *parseListing, NSError *error) {
             
             int currTotalRating = [parseListing[@"totalRating"] intValue];
@@ -157,7 +157,7 @@ NSArray *bookings;
         bookings = [notExpired findObjects];
         
         // Get listings posted by this user
-        PFQuery *query = [PFQuery queryWithClassName:@"ListingObject"];
+        PFQuery *query = [PFQuery queryWithClassName:@"Listing"];
         [query whereKey:@"lister" equalTo:currentUser.username];
         NSArray* AllListings = [query findObjects];
         listings = [Listing objectToListingsWith:AllListings];

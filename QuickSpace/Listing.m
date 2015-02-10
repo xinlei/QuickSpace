@@ -44,6 +44,19 @@
     return listings;
 }
 
++ (NSString *)amenitiesToString:(NSArray *)amenities {
+    NSMutableString *amenitiesString = [[NSMutableString alloc] init];
+    for (NSString *key in amenities) {
+        if ([key isEqualToString:@"wifi"]) [amenitiesString appendString:@"- WiFi Internet "];
+        if ([key isEqualToString:@"refrigerator"]) [amenitiesString appendString:@"- Refrigerator "];
+        if ([key isEqualToString:@"studyDesk"]) [amenitiesString appendString:@"- Study Desk "];
+        if ([key isEqualToString:@"monitor"]) [amenitiesString appendString:@"- Monitor "];
+        if ([key isEqualToString:@"services"]) [amenitiesString appendString:@"- Janitoral Services "];
+    }
+    [amenitiesString appendString:@"-"];
+    return amenitiesString;
+}
+
 + (void) cancelListingForHost:(NSString *) object_id {
     PFQuery *query = [PFQuery queryWithClassName:@"Listing"];
     PFObject *currentListing = [query getObjectWithId: object_id];
