@@ -16,9 +16,12 @@
 @property (nonatomic, strong) CLLocationManager *locationManager;
 @property (nonatomic, strong) CLLocation *currentLocation;
 
+-(void) populateListings;
+
 @end
 
 @implementation ViewController
+
 
 NSArray *listings;
 
@@ -27,30 +30,30 @@ NSArray *listings;
     
     [self.locationManager startUpdatingLocation];
     
-    CLLocation *location = self.locationManager.location;
-    if (location) {
-        self.currentLocation = location;
-    }
-    
+//    CLLocation *location = self.locationManager.location;
+//    if (location) {
+//        self.currentLocation = location;
+//    }
+    [self populateListings];
 }
 
 //Taken from the AnyWall Parse tutorial
-- (CLLocationManager *)locationManager {
-    if (_locationManager == nil) {
-        _locationManager = [[CLLocationManager alloc] init];
-        _locationManager.delegate = self;
-        _locationManager.desiredAccuracy = kCLLocationAccuracyBest;
-        _locationManager.distanceFilter = kCLLocationAccuracyNearestTenMeters;
-    }
-    return _locationManager;
-}
+//- (CLLocationManager *)locationManager {
+//    if (_locationManager == nil) {
+//        _locationManager = [[CLLocationManager alloc] init];
+//        _locationManager.delegate = self;
+//        _locationManager.desiredAccuracy = kCLLocationAccuracyBest;
+//        _locationManager.distanceFilter = kCLLocationAccuracyNearestTenMeters;
+//    }
+//    return _locationManager;
+//}
 
 //Taken from the AnyWall Parse tutorial
-- (void)locationManager:(CLLocationManager *)manager
-    didUpdateToLocation:(CLLocation *)newLocation
-           fromLocation:(CLLocation *)oldLocation {
-    self.currentLocation = newLocation;
-}
+//- (void)locationManager:(CLLocationManager *)manager
+//    didUpdateToLocation:(CLLocation *)newLocation
+//           fromLocation:(CLLocation *)oldLocation {
+//    self.currentLocation = newLocation;
+//}
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
@@ -64,12 +67,13 @@ NSArray *listings;
     NSDictionary *amenities = [defaults objectForKey:@"additionalFilters"];
     NSNumber *price = [defaults objectForKey:@"maxPrice"];
     
-    PFGeoPoint *currLocationGeoPoint = [PFGeoPoint geoPointWithLocation:_currentLocation];
-    [self.locationManager stopUpdatingLocation];
     
-    PFQuery *fakeQuery = [PFQuery queryWithClassName:@"Listing"];
-    [fakeQuery whereKeyExists:@"title"];
-    [fakeQuery whereKey:@"geoLocation" nearGeoPoint:currLocationGeoPoint];
+    NSLog(@"hey");
+//    PFGeoPoint *currLocationGeoPoint = [PFGeoPoint geoPointWithLocation:_currentLocation];
+//    [self.locationManager stopUpdatingLocation];
+    
+    PFQuery *fakeQuery = [PFQuery queryWithClassName:@"ListingObject"];
+//    [fakeQuery whereKey:@"geoLocation" nearGeoPoint:currLocationGeoPoint];
     
     listings = [Listing objectToListingsWith:[fakeQuery findObjects]];
     
