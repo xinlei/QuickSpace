@@ -24,6 +24,7 @@
 @synthesize bookButton;
 @synthesize ratingLabel;
 @synthesize amenitiesLabel;
+@synthesize descriptionsLabel;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -33,7 +34,7 @@
 //    type.text = listing.type;
 //    location.text = listing.location;
     
-    PFQuery *query = [PFQuery queryWithClassName:@"ListingObject"];
+    PFQuery *query = [PFQuery queryWithClassName:@"Listing"];
     // Retrieve the object by id
     [query getObjectInBackgroundWithId:listing.object_id block:^(PFObject *parseListing, NSError *error) {
         int rating = [parseListing[@"ratingValue"] intValue];
@@ -43,17 +44,49 @@
             ratingLabel.text = [NSString stringWithFormat:@"Rating: %d/3", rating];
         }
         
-        //updating the amenities in the listing view
+        //update the amenities in the listing view
         NSMutableString *amenitiesString = [[NSMutableString alloc] init];
         NSArray *amenities = parseListing[@"amenities"];
         for (NSString *amenity in amenities){
             [amenitiesString appendString:@"- "];
+            NSLog(@"%@", amenity);
             [amenitiesString appendString:amenity];
             [amenitiesString appendString:@" "];
             
         }
         [amenitiesString appendString:@"-"];
         amenitiesLabel.text = amenitiesString;
+        
+        //update the description
+        NSString *descripString = parseListing[@"description"];
+        descriptionsLabel.text = descripString;
+        
+        //update the space type
+        NSMutableString *typeDesc = [[NSMutableString alloc] init];
+        NSArray *spaceType = parseListing[@"type"];
+        if ([[spaceType objectAtIndex:0] boolValue] == YES){
+            [typeDesc appendString:@"- "];
+            [typeDesc appendString:@"Rest"];
+            [typeDesc appendString:@" "];
+        }
+        if ([[spaceType objectAtIndex:1] boolValue] == YES){
+            [typeDesc appendString:@"- "];
+            [typeDesc appendString:@"Closet"];
+            [typeDesc appendString:@" "];
+        }
+        if ([[spaceType objectAtIndex:2] boolValue] == YES){
+            [typeDesc appendString:@"- "];
+            [typeDesc appendString:@"Office"];
+            [typeDesc appendString:@" "];
+        }
+        if ([[spaceType objectAtIndex:3] boolValue] == YES){
+            [typeDesc appendString:@"- "];
+            [typeDesc appendString:@"Quiet"];
+            [typeDesc appendString:@" "];
+        }
+        [typeDesc appendString:@"-"];
+        type.text = typeDesc;
+        
     }];
     
 }
