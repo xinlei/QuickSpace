@@ -23,6 +23,7 @@
 @synthesize location;
 @synthesize bookButton;
 @synthesize ratingLabel;
+@synthesize amenitiesLabel;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -41,7 +42,20 @@
         } else {
             ratingLabel.text = [NSString stringWithFormat:@"Rating: %d/3", rating];
         }
+        
+        //updating the amenities in the listing view
+        NSMutableString *amenitiesString = [[NSMutableString alloc] init];
+        NSArray *amenities = parseListing[@"amenities"];
+        for (NSString *amenity in amenities){
+            [amenitiesString appendString:@"- "];
+            [amenitiesString appendString:amenity];
+            [amenitiesString appendString:@" "];
+            
+        }
+        [amenitiesString appendString:@"-"];
+        amenitiesLabel.text = amenitiesString;
     }];
+    
 }
 
 - (void)didReceiveMemoryWarning {

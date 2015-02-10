@@ -87,7 +87,7 @@
     listingObject[@"totalRaters"] = @0;
     listingObject[@"ratingValue"] = @0;
     
-    [listingObject saveEventually];
+    [listingObject save];
     NSString *object_id = listingObject.objectId;
     [defaults setObject:object_id forKey:@"object_id"];
 }

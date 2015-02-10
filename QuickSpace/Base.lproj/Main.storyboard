@@ -568,15 +568,8 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="13"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                             </textView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="GQT-Tf-DLE">
-                                <rect key="frame" x="21" y="345" width="274" height="21"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="13"/>
-                                <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
-                                <nil key="highlightedColor"/>
-                            </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Other Information" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="d9q-rd-fCm">
-                                <rect key="frame" x="16" y="374" width="165" height="21"/>
+                                <rect key="frame" x="16" y="372" width="165" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
@@ -586,7 +579,7 @@
                     </view>
                     <navigationItem key="navigationItem" title="Listing Details" id="cDA-N9-Z8A"/>
                     <connections>
-                        <outlet property="amenitiesLabel" destination="GQT-Tf-DLE" id="RGp-IC-Fwj"/>
+                        <outlet property="amenitiesLabel" destination="ODu-p5-DYf" id="am1-i3-ikS"/>
                         <outlet property="descriptionLabel" destination="NtW-S2-RoJ" id="xRs-Yg-rRE"/>
                         <outlet property="listingImg" destination="yy9-1D-nTF" id="j1e-mM-vFq"/>
                         <outlet property="locationLabel" destination="o77-qa-Eb8" id="1en-qg-Aat"/>
