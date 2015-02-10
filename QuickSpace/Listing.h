@@ -7,13 +7,13 @@
 //
 
 #import <Foundation/Foundation.h>
+#import <Parse/Parse.h>
 
 @interface Listing : NSObject
 
 @property (nonatomic, strong) NSString *title;
-@property (nonatomic, strong) NSString *imageName;
-@property (nonatomic, strong) NSString *location;
-@property (nonatomic, strong) NSString *type;
+@property (nonatomic, strong) PFGeoPoint *location;
+@property (nonatomic, strong) NSArray *types;
 @property (nonatomic, strong) NSString *description;
 @property (nonatomic, strong) NSData *imageData;
 @property (nonatomic, strong) NSNumber *price;
