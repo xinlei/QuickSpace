@@ -74,23 +74,32 @@
     PFFile *imageFile = [PFFile fileWithName:@"listingImage.png" data:image];
     PFUser *currentUser = [PFUser currentUser];
     
-    PFObject *listingObject = [PFObject objectWithClassName:@"ListingObject"];
+    NSNumber *latitude = [defaults objectForKey:@"Latitude"];
+    NSNumber *longitude = [defaults objectForKey:@"Longitude"];
+    
+    NSLog(@"New Latitude: %f, New Longitude: %f", [latitude doubleValue], [longitude doubleValue]);
+    PFGeoPoint *currentPoint =
+    [PFGeoPoint geoPointWithLatitude:[latitude doubleValue]
+                           longitude:[longitude doubleValue]];
+    
+    PFObject *listingObject = [PFObject objectWithClassName:@"Listing"];
     listingObject[@"title"] = titleLabel.text;
     listingObject[@"price"] = num;
-    listingObject[@"location"] = locationLabel.text;
     listingObject[@"amenities"] = amenities;
     listingObject[@"description"] = descriptionLabel.text;
     listingObject[@"lister"] = currentUser.username;
     listingObject[@"image"] = imageFile;
     listingObject[@"type"] = listingTypes;
+    listingObject[@"location"] = currentPoint;
     listingObject[@"totalRating"] = @0;
     listingObject[@"totalRaters"] = @0;
     listingObject[@"ratingValue"] = @0;
     
-    [listingObject saveEventually];
+    [listingObject save];
     NSString *object_id = listingObject.objectId;
     [defaults setObject:object_id forKey:@"object_id"];
 }
+
 /*
  #pragma mark - Navigation
  // In a storyboard-based application, you will often want to do a little preparation before navigation

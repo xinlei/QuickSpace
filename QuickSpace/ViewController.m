@@ -13,6 +13,9 @@
 
 @interface ViewController ()
 
+@property (nonatomic, strong) CLLocationManager *locationManager;
+@property (nonatomic, strong) CLLocation *currentLocation;
+
 @end
 
 @implementation ViewController
@@ -21,18 +24,53 @@ NSArray *listings;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view, typically from a nib.
-
     
+    [self.locationManager startUpdatingLocation];
+    
+    CLLocation *location = self.locationManager.location;
+    if (location) {
+        self.currentLocation = location;
+    }
+    
+}
+
+//Taken from the AnyWall Parse tutorial
+- (CLLocationManager *)locationManager {
+    if (_locationManager == nil) {
+        _locationManager = [[CLLocationManager alloc] init];
+        _locationManager.delegate = self;
+        _locationManager.desiredAccuracy = kCLLocationAccuracyBest;
+        _locationManager.distanceFilter = kCLLocationAccuracyNearestTenMeters;
+    }
+    return _locationManager;
+}
+
+//Taken from the AnyWall Parse tutorial
+- (void)locationManager:(CLLocationManager *)manager
+    didUpdateToLocation:(CLLocation *)newLocation
+           fromLocation:(CLLocation *)oldLocation {
+    self.currentLocation = newLocation;
+}
+
+- (void)didReceiveMemoryWarning {
+    [super didReceiveMemoryWarning];
+    // Dispose of any resources that can be recreated.
+}
+
+-(void) populateListings{
     listings = [[NSArray alloc] init];
     
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     NSDictionary *amenities = [defaults objectForKey:@"additionalFilters"];
     NSNumber *price = [defaults objectForKey:@"maxPrice"];
     
-    PFQuery *fakeQuery = [PFQuery queryWithClassName:@"ListingObject"];
+    PFGeoPoint *currLocationGeoPoint = [PFGeoPoint geoPointWithLocation:_currentLocation];
+    [self.locationManager stopUpdatingLocation];
+    
+    PFQuery *fakeQuery = [PFQuery queryWithClassName:@"Listing"];
     [fakeQuery whereKeyExists:@"title"];
-
+    [fakeQuery whereKey:@"geoLocation" nearGeoPoint:currLocationGeoPoint];
+    
     listings = [Listing objectToListingsWith:[fakeQuery findObjects]];
     
     bool wifi = [[amenities objectForKey:@"wifi"] boolValue];
@@ -43,7 +81,7 @@ NSArray *listings;
     
     
     NSMutableArray *queryArray = [[NSMutableArray alloc] init];
-
+    
     if(wifi){
         [queryArray addObject:@"wifi"];
     }
@@ -73,13 +111,7 @@ NSArray *listings;
     
     [defaults removeObjectForKey:@"additionalFilters"];
     [defaults removeObjectForKey:@"maxPrice"];
-
-
-}
-
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
+    
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
