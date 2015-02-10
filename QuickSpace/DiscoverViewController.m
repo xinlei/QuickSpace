@@ -64,6 +64,24 @@ NSArray *popularPlacesImg;
     UILabel *title = (UILabel *)[viewCell viewWithTag:2];
     title.text = [popularPlaces objectAtIndex:indexPath.row];
     
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    NSNumber *latitude;
+    NSNumber *longitude;
+    if([title.text isEqualToString:@"Stanford"]){
+        latitude = [NSNumber numberWithDouble:37.4300];
+        longitude = [NSNumber numberWithDouble:-122.1700];
+    }
+    else if([title.text isEqualToString:@"San Francisco"]){
+        latitude = [NSNumber numberWithDouble:37.7833];
+        longitude = [NSNumber numberWithDouble:-122.4167];
+    }
+    else if([title.text isEqualToString:@"Los Angeles"]){
+        latitude = [NSNumber numberWithDouble:34.0500];
+        longitude = [NSNumber numberWithDouble:-118.2500];
+    }
+    [defaults setObject:latitude forKey:@"latitude"];
+    [defaults setObject:longitude forKey:@"longitude"];
+    
     return viewCell;
 }
 

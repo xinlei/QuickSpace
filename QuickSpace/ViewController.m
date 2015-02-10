@@ -63,12 +63,15 @@ NSArray *listings;
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     NSDictionary *amenities = [defaults objectForKey:@"additionalFilters"];
     NSNumber *price = [defaults objectForKey:@"maxPrice"];
+    NSNumber *latitude = [defaults objectForKey:@"latitude"];
+    NSNumber *longitude = [defaults objectForKey:@"longitude"];
+    PFGeoPoint *discoverLocation = [PFGeoPoint geoPointWithLatitude:[latitude doubleValue] longitude:[longitude doubleValue]];
     
 //    PFGeoPoint *currLocationGeoPoint = [PFGeoPoint geoPointWithLocation:_currentLocation];
     [self.locationManager stopUpdatingLocation];
     
     PFQuery *fakeQuery = [PFQuery queryWithClassName:@"Listing"];
-//    [fakeQuery whereKey:@"location" nearGeoPoint:currLocationGeoPoint];
+    [fakeQuery whereKey:@"location" nearGeoPoint:discoverLocation];
     
     listings = [Listing objectToListingsWith:[fakeQuery findObjects]];
     

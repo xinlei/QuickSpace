@@ -37,6 +37,8 @@
     [defaults removeObjectForKey:@"newListingAmenities"];
     [defaults removeObjectForKey:@"newListingBasicInfo"];
     [defaults removeObjectForKey:@"newListingPrice"];
+    [defaults removeObjectForKey:@"Latitude"];
+    [defaults removeObjectForKey:@"Longitude"];
 
 
 }
