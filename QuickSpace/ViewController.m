@@ -76,7 +76,7 @@ NSArray *listings;
 //    [self.locationManager stopUpdatingLocation];
     
     PFQuery *fakeQuery = [PFQuery queryWithClassName:@"Listing"];
-    [fakeQuery whereKey:@"location" nearGeoPoint:discoverLocation withinKilometers:50];
+    [fakeQuery whereKey:@"location" nearGeoPoint:discoverLocation];
 
     
     listings = [Listing objectToListingsWith:[fakeQuery findObjects]];
