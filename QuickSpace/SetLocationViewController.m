@@ -38,4 +38,29 @@
 }
 */
 
+- (IBAction)search:(id)sender {
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    
+    CLGeocoder *location = [[CLGeocoder alloc] init];
+    [location geocodeAddressString:self.addressTextField.text completionHandler:^(NSArray* placemarks, NSError* error){
+        if (placemarks && placemarks.count > 0) {
+            CLPlacemark *topResult = [placemarks objectAtIndex:0];
+            MKPlacemark *placemark = [[MKPlacemark alloc] initWithPlacemark:topResult];
+            
+            MKCoordinateRegion region = MKCoordinateRegionMakeWithDistance(placemark.coordinate, 5000, 5000);
+            
+            
+            NSNumber *latitude = [NSNumber numberWithDouble:placemark.coordinate.latitude];
+            NSNumber *longitude = [NSNumber numberWithDouble:placemark.coordinate.longitude];
+            
+            [defaults setObject:latitude forKey:@"Latitude"];
+            [defaults setObject:longitude forKey:@"Longitude"];
+            NSLog(@"Latitude: %@ Longitude: %@", latitude, longitude);
+            
+            [self.myMapView setRegion:region animated:YES];
+            [self.myMapView addAnnotation:placemark];
+        }
+    }];
+
+}
 @end
