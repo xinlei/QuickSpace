@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="5056" systemVersion="13F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" initialViewController="egu-2u-gjJ">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6254" systemVersion="13F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" initialViewController="egu-2u-gjJ">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3733"/>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6247"/>
     </dependencies>
     <scenes>
         <!--Navigation Controller-->
@@ -21,7 +22,7 @@
             </objects>
             <point key="canvasLocation" x="-1652" y="-420"/>
         </scene>
-        <!--Navigation Controller - Profile-->
+        <!--Profile-->
         <scene sceneID="8il-ur-Z6t">
             <objects>
                 <navigationController definesPresentationContext="YES" id="ukr-Fa-r1Y" sceneMemberID="viewController">
@@ -121,7 +122,7 @@
             </objects>
             <point key="canvasLocation" x="-714" y="-1172"/>
         </scene>
-        <!--Discover View Controller - Discover-->
+        <!--Discover-->
         <scene sceneID="uqQ-dh-nVq">
             <objects>
                 <viewController id="MUO-4i-pix" customClass="DiscoverViewController" sceneMemberID="viewController">
@@ -273,7 +274,7 @@
             </objects>
             <point key="canvasLocation" x="-678" y="1119"/>
         </scene>
-        <!--Host View Controller - List Your Space-->
+        <!--List Your Space-->
         <scene sceneID="Jt3-YV-7Gi">
             <objects>
                 <viewController id="8lq-DA-qP8" customClass="HostViewController" sceneMemberID="viewController">
@@ -401,7 +402,7 @@
             </objects>
             <point key="canvasLocation" x="-1126" y="1119"/>
         </scene>
-        <!--Add Detail View Controller - Add Details-->
+        <!--Add Details-->
         <scene sceneID="rDw-ck-Dcd">
             <objects>
                 <viewController id="P7J-Wm-X9x" customClass="AddDetailViewController" sceneMemberID="viewController">
@@ -500,7 +501,7 @@
             </objects>
             <point key="canvasLocation" x="-277" y="1119"/>
         </scene>
-        <!--Confirmation View Controller - Listing Details-->
+        <!--Listing Details-->
         <scene sceneID="Hj8-DT-1YS">
             <objects>
                 <viewController id="xtc-tK-7qU" customClass="ConfirmationViewController" sceneMemberID="viewController">
@@ -635,7 +636,7 @@
             </objects>
             <point key="canvasLocation" x="-277" y="1877"/>
         </scene>
-        <!--Add Photo View Controller - Add Photos-->
+        <!--Add Photos-->
         <scene sceneID="hJV-gm-dtT">
             <objects>
                 <viewController id="cD8-OF-FRe" customClass="AddPhotoViewController" sceneMemberID="viewController">
@@ -694,7 +695,7 @@
             </objects>
             <point key="canvasLocation" x="164" y="1119"/>
         </scene>
-        <!--Filter View Controller - Filter-->
+        <!--Filter-->
         <scene sceneID="i5g-Sz-m5q">
             <objects>
                 <viewController id="63p-hx-VCu" customClass="FilterViewController" sceneMemberID="viewController">
@@ -852,7 +853,7 @@
             </objects>
             <point key="canvasLocation" x="-277" y="-420"/>
         </scene>
-        <!--Advanced Filter View Controller - Add Filters-->
+        <!--Add Filters-->
         <scene sceneID="ftm-Cg-fiC">
             <objects>
                 <viewController id="f1v-Ve-GyG" customClass="AdvancedFilterViewController" sceneMemberID="viewController">
@@ -984,7 +985,7 @@
                                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
                                         <connections>
-                                            <segue destination="ofG-30-AEt" kind="push" id="9Jd-uR-fqQ"/>
+                                            <segue destination="ofG-30-AEt" kind="push" identifier="DisplayResults" id="9Jd-uR-fqQ"/>
                                         </connections>
                                     </button>
                                 </subviews>
@@ -1008,7 +1009,7 @@
             </objects>
             <point key="canvasLocation" x="164" y="-420"/>
         </scene>
-        <!--View Controller - Explore-->
+        <!--Explore-->
         <scene sceneID="o7T-o1-LkV">
             <objects>
                 <viewController id="ofG-30-AEt" customClass="ViewController" sceneMemberID="viewController">
@@ -1090,7 +1091,7 @@
             </objects>
             <point key="canvasLocation" x="-714" y="285"/>
         </scene>
-        <!--Listing Detail View Controller - Explore-->
+        <!--Explore-->
         <scene sceneID="UOT-KM-rHn">
             <objects>
                 <viewController id="Duy-ei-nca" customClass="ListingDetailViewController" sceneMemberID="viewController">
@@ -1398,10 +1399,10 @@
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
         <segue reference="OHa-B8-TXq"/>
-        <segue reference="uLc-1e-HkW"/>
-        <segue reference="ihc-zZ-jmu"/>
-        <segue reference="yQH-N5-bKF"/>
+        <segue reference="9Jd-uR-fqQ"/>
         <segue reference="oHm-PT-uY9"/>
         <segue reference="KOp-dB-tul"/>
+        <segue reference="ihc-zZ-jmu"/>
+        <segue reference="uLc-1e-HkW"/>
     </inferredMetricsTieBreakers>
 </document>
