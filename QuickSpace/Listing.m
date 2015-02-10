@@ -23,7 +23,8 @@
         Listing *lister = [[Listing alloc] init];
         [object fetchIfNeeded];
         
-        PFFile *imageFile = object[@"image"];
+        
+        PFFile *imageFile = [object[@"images"] firstObject];
         NSData *myData = [imageFile getData];
         lister.imageData = myData;
         

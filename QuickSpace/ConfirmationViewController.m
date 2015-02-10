@@ -80,6 +80,8 @@
     UIImage *myImage = listingImg.image;
     NSData *image = UIImagePNGRepresentation(myImage);
     PFFile *imageFile = [PFFile fileWithName:@"listingImage.png" data:image];
+    
+    NSArray *allImages = [[NSArray alloc] initWithObjects:imageFile, nil];
     PFUser *currentUser = [PFUser currentUser];
     
     NSNumber *latitude = [defaults objectForKey:@"Latitude"];
@@ -97,7 +99,7 @@
     listingObject[@"amenities"] = amenities;
     listingObject[@"description"] = descriptionLabel.text;
     listingObject[@"lister"] = currentUser.username;
-    listingObject[@"image"] = imageFile;
+    listingObject[@"images"] = allImages;
     listingObject[@"type"] = listingTypes;
     listingObject[@"totalRating"] = @0;
     listingObject[@"totalRaters"] = @0;
