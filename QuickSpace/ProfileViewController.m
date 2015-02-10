@@ -22,14 +22,14 @@
 @synthesize listingSegments;
 @synthesize popup;
 @synthesize logoutButton;
-NSMutableArray *listings;
+NSMutableArray *userListings;
 NSArray *bookings;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
-        // Custom initialization
+        [self refreshTableData];
     }
     return self;
 }
@@ -37,7 +37,6 @@ NSArray *bookings;
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    [self refreshTableData];
 }
 
 - (void)didReceiveMemoryWarning
@@ -80,7 +79,7 @@ NSArray *bookings;
 }
 
 - (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex {
-    Listing *currListing = [listings objectAtIndex:actionSheet.tag];
+    Listing *currListing = [userListings objectAtIndex:actionSheet.tag];
     
     // Remove listing
     if (listingSegments.selectedSegmentIndex == 1){
@@ -149,7 +148,7 @@ NSArray *bookings;
         for (PFObject *object in bookings) {
             [allRentals addObject:object[@"listing"]];
         }
-        listings = [Listing objectToListingsWith:allRentals];
+        userListings = [Listing objectToListingsWith:allRentals];
         
     } else {
         PFQuery *notExpired = [PFQuery queryWithClassName:@"Booking"];
@@ -160,7 +159,7 @@ NSArray *bookings;
         PFQuery *query = [PFQuery queryWithClassName:@"Listing"];
         [query whereKey:@"lister" equalTo:currentUser.username];
         NSArray* AllListings = [query findObjects];
-        listings = [Listing objectToListingsWith:AllListings];
+        userListings = [Listing objectToListingsWith:AllListings];
     }
     [self.listingTable reloadData];
 }
@@ -171,7 +170,7 @@ NSArray *bookings;
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return [listings count];
+    return [userListings count];
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -182,7 +181,7 @@ NSArray *bookings;
     if (cell == nil) {
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:simpleTableIdentifier];
     }
-    Listing *thisListing = [listings objectAtIndex:indexPath.row];
+    Listing *thisListing = [userListings objectAtIndex:indexPath.row];
     UILabel *timeRemaining = (UILabel *)[cell viewWithTag:2];
     UILabel *title = (UILabel *)[cell viewWithTag:1];
     title.text = thisListing.title;

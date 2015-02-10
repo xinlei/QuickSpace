@@ -77,7 +77,7 @@
     PFObject *booking = [PFObject objectWithClassName:@"Booking"];
     PFQuery *query = [PFQuery queryWithClassName:@"Listing"];
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-
+    
     // Retrieve the object by id
     [query getObjectInBackgroundWithId:listing.object_id block:^(PFObject *parseListing, NSError *error) {
         PFUser *currentUser = [PFUser currentUser];

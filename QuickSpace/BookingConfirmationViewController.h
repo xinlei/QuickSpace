@@ -12,6 +12,7 @@
 @interface BookingConfirmationViewController : UIViewController
 
 @property (nonatomic, strong) Listing *listing;
+@property (nonatomic, strong) NSString *booking_id; 
 @property (weak, nonatomic) IBOutlet UIButton *cancelButton;
 
 @end
