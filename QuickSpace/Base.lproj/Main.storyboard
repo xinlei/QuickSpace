@@ -168,6 +168,7 @@
                     <navigationItem key="navigationItem" title="Discover" id="dlw-L8-b8W"/>
                     <connections>
                         <outlet property="searchDisplayController" destination="PvR-Eh-w70" id="8nn-ku-1Pa"/>
+                        <outlet property="tableView" destination="P4T-Ew-YT9" id="aFA-Mn-no4"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="adF-lF-Gcq" userLabel="First Responder" sceneMemberID="firstResponder"/>
