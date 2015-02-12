@@ -139,6 +139,7 @@ NSArray *bookings;
         [notExpired whereKey:@"endTime" greaterThan:now];
         
         PFQuery *noRatings = [PFQuery queryWithClassName:@"Booking"];
+        [noRatings whereKey:@"guest" equalTo:currentUser];
         [noRatings whereKey:@"rating" lessThanOrEqualTo:@0];
         
         PFQuery *query = [PFQuery orQueryWithSubqueries:@[noRatings,notExpired]];
