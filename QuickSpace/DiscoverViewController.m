@@ -64,36 +64,41 @@ NSArray *popularPlacesImg;
     UILabel *title = (UILabel *)[viewCell viewWithTag:2];
     title.text = [popularPlaces objectAtIndex:indexPath.row];
     
+
+    return viewCell;
+}
+
+- (void) tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+
+}
+
+
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+{
+    NSIndexPath *indexPath = [self.tableView indexPathForSelectedRow];
+    NSString *city = [popularPlaces objectAtIndex:indexPath.row];
+    NSLog(@"City: %@ Row: %lu", city, (long)indexPath.row);
+    
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     NSNumber *latitude;
     NSNumber *longitude;
-    if([title.text isEqualToString:@"Stanford"]){
+    if([city isEqualToString:@"Stanford"]){
         latitude = [NSNumber numberWithDouble:37.4300];
         longitude = [NSNumber numberWithDouble:-122.1700];
     }
-    else if([title.text isEqualToString:@"San Francisco"]){
+    else if([city isEqualToString:@"San Francisco"]){
         latitude = [NSNumber numberWithDouble:37.7833];
         longitude = [NSNumber numberWithDouble:-122.4167];
     }
-    else if([title.text isEqualToString:@"Los Angeles"]){
+    else if([city isEqualToString:@"Los Angeles"]){
         latitude = [NSNumber numberWithDouble:34.0500];
         longitude = [NSNumber numberWithDouble:-118.2500];
     }
     [defaults setObject:latitude forKey:@"latitude"];
     [defaults setObject:longitude forKey:@"longitude"];
-    
-    return viewCell;
+    [defaults synchronize];
 }
 
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
-{
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
 
 @end

@@ -70,16 +70,14 @@ NSArray *listings;
     NSNumber *latitude = [defaults objectForKey:@"latitude"];
     NSNumber *longitude = [defaults objectForKey:@"longitude"];
     PFGeoPoint *discoverLocation = [PFGeoPoint geoPointWithLatitude:[latitude doubleValue] longitude:[longitude doubleValue]];
-    
+    NSLog(@"Latitude: %f. Longitude: %f", [latitude doubleValue], [longitude doubleValue]);
 
 //    PFGeoPoint *currLocationGeoPoint = [PFGeoPoint geoPointWithLocation:_currentLocation];
 //    [self.locationManager stopUpdatingLocation];
     
-    PFQuery *fakeQuery = [PFQuery queryWithClassName:@"Listing"];
-    [fakeQuery whereKey:@"location" nearGeoPoint:discoverLocation];
+     PFQuery *query = [PFQuery queryWithClassName:@"Listing"];
+    [query whereKey:@"location" nearGeoPoint:discoverLocation withinMiles:20];
 
-    
-    listings = [Listing objectToListingsWith:[fakeQuery findObjects]];
     
     bool wifi = [[amenities objectForKey:@"wifi"] boolValue];
     bool refrigerator = [[amenities objectForKey:@"refrigerator"] boolValue];
@@ -120,9 +118,7 @@ NSArray *listings;
         [typeQueryArray addObject:@"Quiet"];;
     }
     
-
-    
-    PFQuery *query = [PFQuery queryWithClassName:@"Listing"];
+   
     if([amenitiesQueryArray count] > 0)
         [query whereKey:@"amenities" containsAllObjectsInArray:amenitiesQueryArray];
     if(price > 0)
@@ -130,18 +126,11 @@ NSArray *listings;
     if([typeQueryArray count] > 0)
         [query whereKey:@"type" containsAllObjectsInArray:typeQueryArray];
     
-    if([amenitiesQueryArray count] > 0 || price > 0 || [typeQueryArray count] > 0){
-        NSArray* AllListings = [query findObjects];
-        listings = [Listing objectToListingsWith:AllListings];
-        
-        
-
-    }
+    NSArray* AllListings = [query findObjects];
+    listings = [Listing objectToListingsWith:AllListings];
     
     [defaults removeObjectForKey:@"additionalFilters"];
     [defaults removeObjectForKey:@"maxPrice"];
-    
-    
 
 
 }
@@ -168,11 +157,21 @@ NSArray *listings;
     UILabel *title = (UILabel *)[cell viewWithTag:2];
     title.text = thisListing.title;
     
-//    UILabel *type = (UILabel *)[cell viewWithTag:3];
-//    type.text = thisListing.type;
+    
+    NSMutableString *typeDesc = [[NSMutableString alloc] init];
+    NSArray *spaceType = thisListing.types;
+    for (NSString *listingType in spaceType){
+//        [typeDesc appendString:@"- "];
+        [typeDesc appendString:listingType];
+        [typeDesc appendString:@" "];
+    }
+//    [typeDesc appendString:@"-"];
+    
+    UILabel *type = (UILabel *)[cell viewWithTag:3];
+    type.text = typeDesc;
 
-//    UILabel *location = (UILabel *)[cell viewWithTag:4];
-//    location.text = thisListing.location;
+    UILabel *location = (UILabel *)[cell viewWithTag:4];
+    location.text = thisListing.address;
     
     return cell;
 }
@@ -189,6 +188,7 @@ NSArray *listings;
         NSIndexPath *indexPath = [self.tableView indexPathForSelectedRow];
         ListingDetailViewController *destViewController = segue.destinationViewController;
         destViewController.listing = [listings objectAtIndex:indexPath.row];
+        NSLog(@"View Controller Row: %lu", (long)indexPath.row);
     }
 }
 @end
