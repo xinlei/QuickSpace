@@ -41,7 +41,7 @@
     
     // Display values to view
     titleLabel.text = newListingBasicInfo[@"title"];
-    priceLabel.text = [NSString stringWithFormat:@"$%d/hour", price];
+    priceLabel.text = [NSString stringWithFormat:@"$%ld/hour", (long)price];
     locationLabel.text = newListingBasicInfo[@"location"];
     amenitiesLabel.text = [Listing amenitiesToString:[amenities allKeys]];
     descriptionLabel.text = newListingBasicInfo[@"description"];

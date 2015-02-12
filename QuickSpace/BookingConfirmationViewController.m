@@ -9,14 +9,16 @@
 #import "BookingConfirmationViewController.h"
 #import <Parse/Parse.h>
 
-@interface BookingConfirmationViewController ()
-
+@interface BookingConfirmationViewController () {
+    NSString *booking_id;
+}
 @end
 
 @implementation BookingConfirmationViewController
 
 @synthesize cancelButton;
 @synthesize listing;
+@synthesize booking_id;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -39,14 +41,10 @@
     // Dispose of any resources that can be recreated.
 }
 - (IBAction)cancelBooking:(UIButton *)sender {
-    PFQuery *query = [PFQuery queryWithClassName:@"Listing"];
-    
-    // TODO: NEED TO UPDATE TO REMOVE BOOKINGS !! DOESN'T WORK
-    [query getObjectInBackgroundWithId:listing.object_id block:^(PFObject *parseListing, NSError *error) {
-        parseListing[@"guest_id"] = @"";
-        [parseListing saveInBackground];
+    PFQuery *query = [PFQuery queryWithClassName:@"Booking"];
+    [query getObjectInBackgroundWithId:booking_id block:^(PFObject *parseBooking, NSError *error) {
+        [parseBooking delete];
     }];
-
 }
 
 /*
