@@ -75,10 +75,21 @@ NSArray *listings;
 //    PFGeoPoint *currLocationGeoPoint = [PFGeoPoint geoPointWithLocation:_currentLocation];
 //    [self.locationManager stopUpdatingLocation];
     
-     PFQuery *query = [PFQuery queryWithClassName:@"Listing"];
-    [query whereKey:@"location" nearGeoPoint:discoverLocation withinMiles:20];
-
+    // WIP to be updated
+    /*
+    NSDate *now = [NSDate date];
+    __block NSMutableArray *excludedListings = [[NSMutableArray alloc] init];
+    PFQuery *innerQuery = [PFQuery queryWithClassName:@"Booking"];
+    [innerQuery whereKey:@"endTime" greaterThan:now];
+    [innerQuery findObjectsInBackgroundWithBlock:^(NSArray *existingBookings, NSError *error) {
+        for (PFObject *booking in existingBookings) {
+            [excludedListings addObject:booking[@"listing"]];
+        }
+    }];
+    */
     
+    PFQuery *query = [PFQuery queryWithClassName:@"Listing"];
+    [query whereKey:@"location" nearGeoPoint:discoverLocation withinMiles:20];
     bool wifi = [[amenities objectForKey:@"wifi"] boolValue];
     bool refrigerator = [[amenities objectForKey:@"refrigerator"] boolValue];
     bool study = [[amenities objectForKey:@"studyDesk"] boolValue];
