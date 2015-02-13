@@ -7,6 +7,7 @@
 //
 
 #import "HostViewController.h"
+#import <Bolts/BFTask.h>
 
 @interface HostViewController ()
 
@@ -42,7 +43,7 @@
     NSNumber *quiet = [NSNumber numberWithBool:NO];
     
     spaceType = [NSMutableArray arrayWithObjects:space, closet, office, quiet, nil];
-
+     
     // Load previous user inputs
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     NSDictionary *newListingBasicInfo = [defaults objectForKey:@"newListingBasicInfo"];

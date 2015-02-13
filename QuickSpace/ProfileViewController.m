@@ -47,6 +47,13 @@ NSArray *bookings;
 
 // Log out the current user
 - (IBAction)logoutButtonTouched:(UIButton *)sender {
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    [defaults removeObjectForKey:@"object_id"];
+    [defaults removeObjectForKey:@"newListingAmenities"];
+    [defaults removeObjectForKey:@"newListingBasicInfo"];
+    [defaults removeObjectForKey:@"newListingPrice"];
+    [defaults removeObjectForKey:@"Latitude"];
+    [defaults removeObjectForKey:@"Longitude"];
     [PFUser logOut];
 }
 
