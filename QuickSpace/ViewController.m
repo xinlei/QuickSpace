@@ -8,6 +8,8 @@
 
 #import "ViewController.h"
 #import <Parse/Parse.h>
+#import <QuartzCore/QuartzCore.h>
+#import "SVProgressHUD.h"
 #import "ListingDetailViewController.h"
 #import "Listing.h"
 
@@ -90,7 +92,6 @@ NSArray *listings;
     PFQuery *query = [PFQuery queryWithClassName:@"Listing"];
     [query whereKey:@"objectId" notContainedIn:excludedListings];
     
-    // End
     [query whereKey:@"location" nearGeoPoint:discoverLocation withinMiles:20];
     bool wifi = [[amenities objectForKey:@"wifi"] boolValue];
     bool refrigerator = [[amenities objectForKey:@"refrigerator"] boolValue];
@@ -130,8 +131,6 @@ NSArray *listings;
     if ([[self.spaceType objectAtIndex:3] boolValue] == YES){
         [typeQueryArray addObject:@"Quiet"];;
     }
-    
-   
     if([amenitiesQueryArray count] > 0)
         [query whereKey:@"amenities" containsAllObjectsInArray:amenitiesQueryArray];
     if(price > 0)
@@ -144,8 +143,6 @@ NSArray *listings;
     
     [defaults removeObjectForKey:@"additionalFilters"];
     [defaults removeObjectForKey:@"maxPrice"];
-
-
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
