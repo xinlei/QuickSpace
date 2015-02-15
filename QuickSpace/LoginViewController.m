@@ -7,6 +7,7 @@
 //
 
 #import "LoginViewController.h"
+#import "SVProgressHUD.h"
 #import <Parse/Parse.h>
 
 @interface LoginViewController ()
@@ -30,7 +31,14 @@ bool canSegue = NO;
     // Dispose of any resources that can be recreated.
 }
 - (IBAction)onSubmit:(UIButton *)sender {
-    PFUser *user = [PFUser logInWithUsername: self.emailTextField.text password: self.passwordTextField.text];
+    __block PFUser *user = [[PFUser alloc] init];
+    [SVProgressHUD show];
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+        user = [PFUser logInWithUsername: self.emailTextField.text password: self.passwordTextField.text];
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [SVProgressHUD dismiss];
+        });
+    });
     if(user){
         canSegue = YES;
     } else{

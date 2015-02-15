@@ -8,6 +8,7 @@
 
 #import "ProfileViewController.h"
 #import <Parse/Parse.h>
+#import "SVProgressHUD.h"
 #import "Listing.h"
 #import <UIKit/UIKit.h>
 
@@ -29,7 +30,7 @@ NSArray *bookings;
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
-        [self refreshTableData];
+         // Custom initialization
     }
     return self;
 }
@@ -37,6 +38,7 @@ NSArray *bookings;
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    [self refreshTableData];
 }
 
 - (void)didReceiveMemoryWarning
@@ -137,39 +139,46 @@ NSArray *bookings;
 }
 
 - (void) refreshTableData {
-    PFUser *currentUser = [PFUser currentUser];
-    NSDate *now = [NSDate date];
-    if (listingSegments.selectedSegmentIndex == 0){
-        
-        PFQuery *notExpired = [PFQuery queryWithClassName:@"Booking"];
-        [notExpired whereKey:@"guest" equalTo:currentUser];
-        [notExpired whereKey:@"endTime" greaterThan:now];
-        
-        PFQuery *noRatings = [PFQuery queryWithClassName:@"Booking"];
-        [noRatings whereKey:@"guest" equalTo:currentUser];
-        [noRatings whereKey:@"rating" lessThanOrEqualTo:@0];
-        
-        PFQuery *query = [PFQuery orQueryWithSubqueries:@[noRatings,notExpired]];
-        bookings = [query findObjects];
-        
-        NSMutableArray* allRentals = [[NSMutableArray alloc] init];
-        for (PFObject *object in bookings) {
-            [allRentals addObject:object[@"listing"]];
+    [SVProgressHUD show];
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+        PFUser *currentUser = [PFUser currentUser];
+        NSDate *now = [NSDate date];
+        if (listingSegments.selectedSegmentIndex == 0){
+            
+            PFQuery *notExpired = [PFQuery queryWithClassName:@"Booking"];
+            [notExpired whereKey:@"guest" equalTo:currentUser];
+            [notExpired whereKey:@"endTime" greaterThan:now];
+            
+            PFQuery *noRatings = [PFQuery queryWithClassName:@"Booking"];
+            [noRatings whereKey:@"guest" equalTo:currentUser];
+            [noRatings whereKey:@"rating" lessThanOrEqualTo:@0];
+            
+            PFQuery *query = [PFQuery orQueryWithSubqueries:@[noRatings,notExpired]];
+            bookings = [query findObjects];
+            
+            NSMutableArray* allRentals = [[NSMutableArray alloc] init];
+            for (PFObject *object in bookings) {
+                [allRentals addObject:object[@"listing"]];
+            }
+            userListings = [Listing objectToListingsWith:allRentals];
+            
+        } else {
+            PFQuery *notExpired = [PFQuery queryWithClassName:@"Booking"];
+            [notExpired whereKey:@"owner" equalTo:currentUser];
+            bookings = [notExpired findObjects];
+            
+            // Get listings posted by this user
+            PFQuery *query = [PFQuery queryWithClassName:@"Listing"];
+            [query whereKey:@"lister" equalTo:currentUser.username];
+            NSArray* AllListings = [query findObjects];
+            userListings = [Listing objectToListingsWith:AllListings];
         }
-        userListings = [Listing objectToListingsWith:allRentals];
-        
-    } else {
-        PFQuery *notExpired = [PFQuery queryWithClassName:@"Booking"];
-        [notExpired whereKey:@"owner" equalTo:currentUser];
-        bookings = [notExpired findObjects];
-        
-        // Get listings posted by this user
-        PFQuery *query = [PFQuery queryWithClassName:@"Listing"];
-        [query whereKey:@"lister" equalTo:currentUser.username];
-        NSArray* AllListings = [query findObjects];
-        userListings = [Listing objectToListingsWith:AllListings];
-    }
-    [self.listingTable reloadData];
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [self.listingTable reloadData];
+            [SVProgressHUD dismiss];
+        });
+    });
+    
 }
 
 - (IBAction)listingSegmentValueChanged:(UISegmentedControl *)sender {
