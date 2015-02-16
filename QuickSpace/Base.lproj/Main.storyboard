@@ -132,6 +132,14 @@
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="120" sectionHeaderHeight="22" sectionFooterHeight="22" id="P4T-Ew-YT9">
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <searchBar key="tableHeaderView" contentMode="redraw" id="Ofk-z3-8Nl">
+                                    <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                                    <textInputTraits key="textInputTraits"/>
+                                    <connections>
+                                        <outlet property="delegate" destination="MUO-4i-pix" id="pvD-I4-zp1"/>
+                                    </connections>
+                                </searchBar>
                                 <prototypes>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="popularPlaces" rowHeight="120" id="crY-f6-LRM">
                                         <rect key="frame" x="0.0" y="22" width="320" height="120"/>
@@ -166,17 +174,18 @@
                     </view>
                     <navigationItem key="navigationItem" title="Discover" id="dlw-L8-b8W"/>
                     <connections>
-                        <outlet property="searchDisplayController" destination="PvR-Eh-w70" id="8nn-ku-1Pa"/>
+                        <outlet property="searchDisplayController" destination="UAs-sm-bPd" id="eoa-Er-j0W"/>
                         <outlet property="tableView" destination="P4T-Ew-YT9" id="aFA-Mn-no4"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="adF-lF-Gcq" userLabel="First Responder" sceneMemberID="firstResponder"/>
-                <searchDisplayController id="PvR-Eh-w70">
+                <searchDisplayController id="UAs-sm-bPd">
                     <connections>
-                        <outlet property="delegate" destination="MUO-4i-pix" id="gM5-fe-gbD"/>
-                        <outlet property="searchContentsController" destination="MUO-4i-pix" id="X9u-MP-pIs"/>
-                        <outlet property="searchResultsDataSource" destination="MUO-4i-pix" id="s17-hA-aN0"/>
-                        <outlet property="searchResultsDelegate" destination="MUO-4i-pix" id="Hnc-3P-RTz"/>
+                        <outlet property="delegate" destination="MUO-4i-pix" id="WXx-gP-GYO"/>
+                        <outlet property="searchBar" destination="Ofk-z3-8Nl" id="TwB-cK-Exv"/>
+                        <outlet property="searchContentsController" destination="MUO-4i-pix" id="kh6-xC-bqp"/>
+                        <outlet property="searchResultsDataSource" destination="MUO-4i-pix" id="vMu-rZ-YYz"/>
+                        <outlet property="searchResultsDelegate" destination="MUO-4i-pix" id="S1K-ld-DKC"/>
                     </connections>
                 </searchDisplayController>
             </objects>
@@ -1399,7 +1408,7 @@
         <segue reference="ihc-zZ-jmu"/>
         <segue reference="uLc-1e-HkW"/>
         <segue reference="oHm-PT-uY9"/>
-        <segue reference="9Jd-uR-fqQ"/>
+        <segue reference="yQH-N5-bKF"/>
         <segue reference="KOp-dB-tul"/>
     </inferredMetricsTieBreakers>
 </document>

@@ -12,10 +12,11 @@
 
 @end
 
-@implementation DiscoverViewController
-
-NSArray *popularPlaces;
-NSArray *popularPlacesImg;
+@implementation DiscoverViewController {
+    NSArray *popularPlaces;
+    NSArray *popularPlacesImg;
+    NSArray *resultPlaces;
+}
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -40,9 +41,24 @@ NSArray *popularPlacesImg;
     // Dispose of any resources that can be recreated.
 }
 
+- (void)filterContentForSearchText:(NSString*)searchText scope:(NSString*)scope
+{
+    resultPlaces = nil;
+}
+
+-(BOOL)searchDisplayController:(UISearchDisplayController *)controller shouldReloadTableForSearchString:(NSString *)searchString
+{
+    [self filterContentForSearchText:searchString scope:[[self.searchDisplayController.searchBar scopeButtonTitles] objectAtIndex:[self.searchDisplayController.searchBar selectedScopeButtonIndex]]];
+    return YES;
+}
+
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return [popularPlaces count];
+    if (tableView == self.searchDisplayController.searchResultsTableView){
+        return [resultPlaces count]; 
+    } else {
+        return [popularPlaces count];
+    }
 }
 
 - (UITableViewCell *)tableView:(UITableView *) tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -52,19 +68,19 @@ NSArray *popularPlacesImg;
     
     UITableViewCell *viewCell = [tableView dequeueReusableCellWithIdentifier: simpleTableIdentifier];
     
-    if(viewCell == nil) {
+    if (viewCell == nil) {
         viewCell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier: simpleTableIdentifier];
     }
     
-    NSString *imgName = [popularPlacesImg objectAtIndex:indexPath.row];
-    
     UIImageView *img = (UIImageView *)[viewCell viewWithTag:1];
-    img.image = [UIImage imageNamed:imgName];
-    
     UILabel *title = (UILabel *)[viewCell viewWithTag:2];
-    title.text = [popularPlaces objectAtIndex:indexPath.row];
-    
-
+    if (tableView == self.searchDisplayController.searchResultsTableView){
+        // fill table information
+    } else {
+        NSString *imgName = [popularPlacesImg objectAtIndex:indexPath.row];
+        img.image = [UIImage imageNamed:imgName];
+        title.text = [popularPlaces objectAtIndex:indexPath.row];
+    }
     return viewCell;
 }
 
