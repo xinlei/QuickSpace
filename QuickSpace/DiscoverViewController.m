@@ -94,7 +94,6 @@
 {
     NSIndexPath *indexPath = [self.tableView indexPathForSelectedRow];
     NSString *city = [popularPlaces objectAtIndex:indexPath.row];
-    NSLog(@"City: %@ Row: %lu", city, (long)indexPath.row);
     
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     NSNumber *latitude;

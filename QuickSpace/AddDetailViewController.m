@@ -47,6 +47,8 @@
         studyDeskSwitch.on = [amenities[@"studyDesk"] boolValue];
         monitorSwitch.on = [amenities[@"monitor"] boolValue];
         servicesSwitch.on = [amenities[@"services"] boolValue];
+        if(wifiSwitch.on)
+            NSLog(@"Wifi on(?)");
     }
     //Set previous price; otherwise default to 10
     if (price != -1){

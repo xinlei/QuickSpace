@@ -73,7 +73,6 @@ NSArray *listings;
         NSNumber *latitude = [defaults objectForKey:@"latitude"];
         NSNumber *longitude = [defaults objectForKey:@"longitude"];
         PFGeoPoint *discoverLocation = [PFGeoPoint geoPointWithLatitude:[latitude doubleValue] longitude:[longitude doubleValue]];
-        NSLog(@"Latitude: %f. Longitude: %f", [latitude doubleValue], [longitude doubleValue]);
         
         //    PFGeoPoint *currLocationGeoPoint = [PFGeoPoint geoPointWithLocation:_currentLocation];
         //    [self.locationManager stopUpdatingLocation];
@@ -202,8 +201,6 @@ NSArray *listings;
     if ([segue.identifier isEqualToString:@"ShowListingDetail"]){
         NSIndexPath *indexPath = [self.tableView indexPathForSelectedRow];
         ListingDetailViewController *destViewController = segue.destinationViewController;
-        destViewController.listing = [listings objectAtIndex:indexPath.row];
-        NSLog(@"View Controller Row: %lu", (long)indexPath.row);
-    }
+        destViewController.listing = [listings objectAtIndex:indexPath.row];    }
 }
 @end

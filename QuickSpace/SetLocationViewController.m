@@ -36,7 +36,6 @@
             
             [defaults setObject:latitude forKey:@"Latitude"];
             [defaults setObject:longitude forKey:@"Longitude"];
-            NSLog(@"Latitude: %@ Longitude: %@", latitude, longitude);
             
             [self.myMapView setRegion:region animated:YES];
             [self.myMapView addAnnotation:placemark];
