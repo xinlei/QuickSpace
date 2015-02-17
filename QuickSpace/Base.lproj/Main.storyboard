@@ -160,7 +160,7 @@
                                             </subviews>
                                         </tableViewCellContentView>
                                         <connections>
-                                            <segue destination="ofG-30-AEt" kind="push" id="yQH-N5-bKF"/>
+                                            <segue destination="ofG-30-AEt" kind="push" identifier="ShowListings" id="yQH-N5-bKF"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>
