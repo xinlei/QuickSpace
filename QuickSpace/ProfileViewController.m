@@ -11,6 +11,7 @@
 #import "SVProgressHUD.h"
 #import "Listing.h"
 #import <UIKit/UIKit.h>
+#import "editListingViewController.h"
 
 @interface ProfileViewController ()
 
@@ -68,7 +69,7 @@ NSArray *bookings;
                  delegate:self
                  cancelButtonTitle:@"Cancel"
                  destructiveButtonTitle:@"Remove Listing"
-                 otherButtonTitles:nil];
+                 otherButtonTitles:@"Edit Listing", nil];
         popup.actionSheetStyle = UIActionSheetStyleBlackOpaque;
         [popup showInView:self.view];
         popup.tag = indexPath.row;
@@ -89,15 +90,19 @@ NSArray *bookings;
 
 - (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex {
     Listing *currListing = [userListings objectAtIndex:actionSheet.tag];
-    
+    NSLog(@"Button Index: %ld", (long)buttonIndex);
     // Remove listing
     if (listingSegments.selectedSegmentIndex == 1){
-        if (buttonIndex == 0) {
+        if (buttonIndex == actionSheet.destructiveButtonIndex) {
             PFQuery *query = [PFQuery queryWithClassName:@"Listing"];
             [query getObjectInBackgroundWithId:currListing.object_id block:^(PFObject *parseListing, NSError *error) {
                 [parseListing delete];
             }];
             [self.listingTable reloadData];
+        }
+        // Edit Listing
+        else if (buttonIndex == actionSheet.firstOtherButtonIndex){
+            [self performSegueWithIdentifier:@"editSegue" sender:self];
         }
     }
     
@@ -224,15 +229,14 @@ NSArray *bookings;
     }
     return cell;
 }
-/*
-#pragma mark - Navigation
 
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
-{
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender{
+    NSIndexPath *indexPath = [self.listingTable indexPathForSelectedRow];
+    if([[segue identifier] isEqualToString:@"editSegue"]){
+        Listing *selectedListing = [userListings objectAtIndex:indexPath.row];
+        editListingViewController *destViewController = segue.destinationViewController;
+        destViewController.listing = selectedListing;
+    }
 }
-*/
 
 @end

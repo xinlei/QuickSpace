@@ -170,7 +170,6 @@
     [defaults setObject:latitude forKey:@"latitude"];
     [defaults setObject:longitude forKey:@"longitude"];
     [defaults synchronize];
-    NSLog(@"Latitude: %@ Longitude: %@", latitude, longitude);
 }
 
 

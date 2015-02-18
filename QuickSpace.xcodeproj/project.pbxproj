@@ -32,6 +32,7 @@
 		17443CF51A881E0100A0694F /* SetLocationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 17443CF41A881E0100A0694F /* SetLocationViewController.m */; };
 		178097B71A7D946900BDBB1A /* CancelViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 178097B61A7D946900BDBB1A /* CancelViewController.m */; };
 		17E63AB91A86EBCF00F763C1 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 17E63AB81A86EBCF00F763C1 /* MapKit.framework */; };
+		17EEBBE51A9468240055447F /* editListingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 17EEBBE41A9468240055447F /* editListingViewController.m */; };
 		211E0AA81A7275C0003E4D99 /* room1.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 211E0AA51A7275C0003E4D99 /* room1.jpg */; };
 		211E0AA91A7275C0003E4D99 /* room2.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 211E0AA61A7275C0003E4D99 /* room2.jpg */; };
 		211E0AAA1A7275C0003E4D99 /* room3.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 211E0AA71A7275C0003E4D99 /* room3.jpg */; };
@@ -105,6 +106,8 @@
 		178097B51A7D946900BDBB1A /* CancelViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CancelViewController.h; sourceTree = "<group>"; };
 		178097B61A7D946900BDBB1A /* CancelViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CancelViewController.m; sourceTree = "<group>"; };
 		17E63AB81A86EBCF00F763C1 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
+		17EEBBE31A9468240055447F /* editListingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = editListingViewController.h; sourceTree = "<group>"; };
+		17EEBBE41A9468240055447F /* editListingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = editListingViewController.m; sourceTree = "<group>"; };
 		211E0AA51A7275C0003E4D99 /* room1.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = room1.jpg; sourceTree = "<group>"; };
 		211E0AA61A7275C0003E4D99 /* room2.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = room2.jpg; sourceTree = "<group>"; };
 		211E0AA71A7275C0003E4D99 /* room3.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = room3.jpg; sourceTree = "<group>"; };
@@ -223,6 +226,8 @@
 				F0144CE71A78917A00113F95 /* AdvancedFilterViewController.m */,
 				F0241E3B1A783ED4009FF170 /* assets */,
 				170EFA111A71C799004EA68B /* Main.storyboard */,
+				17EEBBE31A9468240055447F /* editListingViewController.h */,
+				17EEBBE41A9468240055447F /* editListingViewController.m */,
 				F0241E521A784DD7009FF170 /* FilterViewController.h */,
 				F0241E531A784DD7009FF170 /* FilterViewController.m */,
 				170EFA0B1A71C799004EA68B /* AppDelegate.h */,
@@ -464,6 +469,7 @@
 				211E0AAD1A72E4E7003E4D99 /* ListingDetailViewController.m in Sources */,
 				F0144CE81A78917A00113F95 /* AdvancedFilterViewController.m in Sources */,
 				F085B8F31A7DA7BD00AA5003 /* ProfileViewController.m in Sources */,
+				17EEBBE51A9468240055447F /* editListingViewController.m in Sources */,
 				178097B71A7D946900BDBB1A /* CancelViewController.m in Sources */,
 				F0D6251C1A7AF98E0063CE0B /* AddDetailViewController.m in Sources */,
 				F0A4D8361A75C39A002D8B2F /* DiscoverViewController.m in Sources */,
