@@ -9,6 +9,7 @@
 #import "LoginViewController.h"
 #import "SVProgressHUD.h"
 #import <Parse/Parse.h>
+#import "AppDelegate.h"
 
 @interface LoginViewController ()
 @property bool canSegue;
@@ -43,6 +44,8 @@
     if(user){
         self.canSegue = YES;
         NSLog(@"Can Segue");
+        AppDelegate *appDelegateTemp = [[UIApplication sharedApplication]delegate];
+        appDelegateTemp.window.rootViewController = [[UIStoryboard storyboardWithName:@"Main" bundle:[NSBundle mainBundle]] instantiateInitialViewController];
     } else{
         self.canSegue = NO;
         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Incorrect Login" message:@"Try Again" delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles: nil];

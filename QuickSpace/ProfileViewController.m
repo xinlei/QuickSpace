@@ -12,6 +12,7 @@
 #import "Listing.h"
 #import <UIKit/UIKit.h>
 #import "editListingViewController.h"
+#import "AppDelegate.h"
 
 @interface ProfileViewController ()
 
@@ -58,6 +59,11 @@ NSArray *bookings;
     [defaults removeObjectForKey:@"Latitude"];
     [defaults removeObjectForKey:@"Longitude"];
     [PFUser logOut];
+    
+    AppDelegate *appDelegateTemp = [[UIApplication sharedApplication]delegate];
+    UIViewController* rootController = [[UIStoryboard storyboardWithName:@"Main" bundle:[NSBundle mainBundle]] instantiateViewControllerWithIdentifier:@"LoginViewController"];
+    UINavigationController* navigation = [[UINavigationController alloc] initWithRootViewController:rootController];
+    appDelegateTemp.window.rootViewController = navigation;
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {

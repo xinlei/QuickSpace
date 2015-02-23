@@ -32,11 +32,13 @@
     
     // Keep sessions and if already signed in go straight to main page
     PFUser *currentUser = [PFUser currentUser];
-    if (currentUser) {
-        UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
-        UIViewController *vc = [storyboard instantiateViewControllerWithIdentifier:@"TabBar"];
-        UINavigationController* nav = [[UINavigationController alloc] initWithRootViewController:vc];
-        self.window.rootViewController = nav;
+
+    if (currentUser){
+        self.window.rootViewController = [[UIStoryboard storyboardWithName:@"Main" bundle:[NSBundle mainBundle]] instantiateInitialViewController];
+    } else {
+        UIViewController* rootController = [[UIStoryboard storyboardWithName:@"Main" bundle:[NSBundle mainBundle]] instantiateViewControllerWithIdentifier:@"LoginViewController"];
+        UINavigationController* navigation = [[UINavigationController alloc] initWithRootViewController:rootController];
+        self.window.rootViewController = navigation;
     }
     return YES;
 }
