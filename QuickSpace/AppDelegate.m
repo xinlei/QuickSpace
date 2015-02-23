@@ -29,6 +29,8 @@
     
     // [Optional] Track statistics around application opens.
 //    [PFAnalytics trackAppOpenedWithLaunchOptions:launchOptions];
+    
+    // Keep sessions and if already signed in go straight to main page
     PFUser *currentUser = [PFUser currentUser];
     if (currentUser) {
         UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
