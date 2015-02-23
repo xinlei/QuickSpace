@@ -36,6 +36,7 @@
     
     popularPlaces = [NSArray arrayWithObjects:@"Stanford", @"San Francisco", @"Los Angeles", nil];
     popularPlacesImg = [NSArray arrayWithObjects:@"stanford.png", @"san_francisco.png", @"los_angeles.png", nil];
+    didUseSearch = NO;
 }
 
 - (void)didReceiveMemoryWarning
@@ -46,41 +47,10 @@
 
 - (void)filterContentForSearchText:(NSString*)searchText scope:(NSString*)scope
 {
-    /*
-    MKLocalSearchRequest *request = [[MKLocalSearchRequest alloc] init];
-    request.naturalLanguageQuery = searchText;
-    
-    MKLocalSearch *search = [[MKLocalSearch alloc]initWithRequest:request];
-    
-    [search startWithCompletionHandler:^(MKLocalSearchResponse *response, NSError *error) {
-        if (response.mapItems.count == 0)
-            NSLog(@"No Matches");
-        else
-            for (MKMapItem *item in response.mapItems){
-                //NSLog(@"name = %@", item.name);
-            }
-        resultPlaces = response.mapItems;
-    }];
-     */
-    
     CLGeocoder *location = [[CLGeocoder alloc] init];
     [location geocodeAddressString:searchText completionHandler:^(NSArray* placemarks, NSError* error){
         if (placemarks && placemarks.count > 0) {
-            
             resultPlaces = placemarks;
-            
-            /*
-            CLPlacemark *topResult = [placemarks objectAtIndex:0];
-            MKPlacemark *placemark = [[MKPlacemark alloc] initWithPlacemark:topResult];
-            
-            MKCoordinateRegion region = MKCoordinateRegionMakeWithDistance(placemark.coordinate, 5000, 5000);
-            
-            
-            NSNumber *latitude = [NSNumber numberWithDouble:placemark.coordinate.latitude];
-            NSNumber *longitude = [NSNumber numberWithDouble:placemark.coordinate.longitude];
-            
-            NSLog(@"Latitude: %@ Longitude: %@", latitude, longitude);
-        */
         }
     }];
     [self.tableView reloadData];
@@ -90,6 +60,11 @@
 {
     [self filterContentForSearchText:searchString scope:[[self.searchDisplayController.searchBar scopeButtonTitles] objectAtIndex:[self.searchDisplayController.searchBar selectedScopeButtonIndex]]];
     return YES;
+}
+
+- (void)searchDisplayControllerDidEndSearch:(UISearchDisplayController *)controller
+{
+    didUseSearch = NO;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
