@@ -572,12 +572,6 @@
                             <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" id="d0U-zx-DSm">
                                 <rect key="frame" x="39" y="300" width="51" height="31"/>
                             </switch>
-                            <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="10" minValue="0.0" maxValue="500" id="wlq-J5-AOl">
-                                <rect key="frame" x="90" y="405" width="178" height="31"/>
-                                <connections>
-                                    <action selector="sliderValueChanged:" destination="P7J-Wm-X9x" eventType="valueChanged" id="zmp-De-I2D"/>
-                                </connections>
-                            </slider>
                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Set Price Limit" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="LNY-lp-bht">
                                 <rect key="frame" x="127" y="376" width="112" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
@@ -594,6 +588,12 @@
                                     <segue destination="cD8-OF-FRe" kind="push" id="qC8-tL-195"/>
                                 </connections>
                             </button>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" id="qIv-u0-8Bx">
+                                <rect key="frame" x="96" y="404" width="175" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
@@ -601,7 +601,7 @@
                     <connections>
                         <outlet property="monitorSwitch" destination="6cS-Kd-Hkv" id="6BI-9L-Ji3"/>
                         <outlet property="priceLabel" destination="LNY-lp-bht" id="xec-pU-PID"/>
-                        <outlet property="priceSlider" destination="wlq-J5-AOl" id="p3N-lV-27p"/>
+                        <outlet property="priceTextField" destination="qIv-u0-8Bx" id="Oyf-Pq-8rh"/>
                         <outlet property="refrigeratorSwitch" destination="oyH-Lz-pC5" id="gue-ab-jzb"/>
                         <outlet property="servicesSwitch" destination="d0U-zx-DSm" id="v38-XS-EVN"/>
                         <outlet property="studyDeskSwitch" destination="Pyv-P0-S3k" id="wzP-ef-QTE"/>
