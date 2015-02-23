@@ -144,9 +144,19 @@ NSArray *listings;
         dispatch_async(dispatch_get_main_queue(), ^{
             [self.tableView reloadData];
             [SVProgressHUD dismiss];
+            if ([listings count] == 0){
+                UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"No Listings Available" message:@"Be the first to post a listing in this area!" delegate:self cancelButtonTitle:@"Ok" otherButtonTitles: nil];
+                [alert show];
+                
+            }
         });
     });
-    
+}
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+    if (buttonIndex == 0){
+        [self.navigationController popViewControllerAnimated:YES];
+    }
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
