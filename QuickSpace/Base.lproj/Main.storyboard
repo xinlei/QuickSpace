@@ -297,7 +297,7 @@
         <!--View Controller-->
         <scene sceneID="d2D-j0-vMa">
             <objects>
-                <viewController storyboardIdentifier="Main" id="80B-2m-jAM" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="Home" id="80B-2m-jAM" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="r3k-MO-QH9">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -1478,7 +1478,7 @@
         <!--Tab Bar Controller-->
         <scene sceneID="1dl-eg-N2W">
             <objects>
-                <tabBarController automaticallyAdjustsScrollViewInsets="NO" id="J5I-JI-3b3" sceneMemberID="viewController">
+                <tabBarController storyboardIdentifier="TabBar" automaticallyAdjustsScrollViewInsets="NO" id="J5I-JI-3b3" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationItem key="navigationItem" id="RX1-bS-WcW"/>
                     <nil key="simulatedBottomBarMetrics"/>

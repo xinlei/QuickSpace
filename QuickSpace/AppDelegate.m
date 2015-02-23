@@ -31,7 +31,10 @@
 //    [PFAnalytics trackAppOpenedWithLaunchOptions:launchOptions];
     PFUser *currentUser = [PFUser currentUser];
     if (currentUser) {
-        self.window.rootViewController = [[UIStoryboard storyboardWithName:@"Main" bundle:[NSBundle mainBundle]] instantiateInitialViewController];
+        UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+        UIViewController *vc = [storyboard instantiateViewControllerWithIdentifier:@"TabBar"];
+        UINavigationController* nav = [[UINavigationController alloc] initWithRootViewController:vc];
+        self.window.rootViewController = nav;
     }
     return YES;
 }
