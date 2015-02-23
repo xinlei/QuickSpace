@@ -297,7 +297,7 @@
         <!--View Controller-->
         <scene sceneID="d2D-j0-vMa">
             <objects>
-                <viewController id="80B-2m-jAM" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="Main" id="80B-2m-jAM" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="r3k-MO-QH9">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -1361,7 +1361,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="IdI-9t-XQQ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-3378" y="-392"/>
+            <point key="canvasLocation" x="-3328" y="-414"/>
         </scene>
         <!--Login View Controller-->
         <scene sceneID="Vgc-Z9-ztq">
@@ -1600,11 +1600,11 @@
         <simulatedScreenMetrics key="destination" type="retina4"/>
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
-        <segue reference="yQH-N5-bKF"/>
-        <segue reference="oHm-PT-uY9"/>
-        <segue reference="ihc-zZ-jmu"/>
-        <segue reference="uLc-1e-HkW"/>
+        <segue reference="JF6-f5-YZK"/>
+        <segue reference="qQk-5j-mcI"/>
         <segue reference="gen-5L-AfH"/>
-        <segue reference="OHa-B8-TXq"/>
+        <segue reference="PSf-8c-2F7"/>
+        <segue reference="JLq-d7-1U3"/>
+        <segue reference="yQH-N5-bKF"/>
     </inferredMetricsTieBreakers>
 </document>
