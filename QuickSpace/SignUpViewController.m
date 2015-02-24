@@ -66,8 +66,7 @@ bool shouldSegue = YES;
         }
 
     }
-    
-    NSLog(@"Email: %@, Password: %@, Password2: %@", email, password1, password2);
+
 }
 
 -(BOOL)shouldPerformSegueWithIdentifier:(NSString *)identifier sender:(id)sender{

@@ -128,7 +128,6 @@
         longitude = [NSNumber numberWithDouble:placemark.coordinate.longitude];
     } else {
         NSString *city = [popularPlaces objectAtIndex:indexPath.row];
-        NSLog(@"City: %@ Row: %lu", city, (long)indexPath.row);
         if([city isEqualToString:@"Stanford"]){
             latitude = [NSNumber numberWithDouble:37.4300];
             longitude = [NSNumber numberWithDouble:-122.1700];
