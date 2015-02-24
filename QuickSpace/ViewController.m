@@ -8,6 +8,8 @@
 
 #import "ViewController.h"
 #import <Parse/Parse.h>
+#import <QuartzCore/QuartzCore.h>
+#import "SVProgressHUD.h"
 #import "ListingDetailViewController.h"
 #import "Listing.h"
 
@@ -63,76 +65,98 @@ NSArray *listings;
 
 -(void) populateListings{
     listings = [[NSArray alloc] init];
-    
-    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-    NSDictionary *amenities = [defaults objectForKey:@"additionalFilters"];
-    NSNumber *price = [defaults objectForKey:@"maxPrice"];
-    NSNumber *latitude = [defaults objectForKey:@"latitude"];
-    NSNumber *longitude = [defaults objectForKey:@"longitude"];
-    PFGeoPoint *discoverLocation = [PFGeoPoint geoPointWithLatitude:[latitude doubleValue] longitude:[longitude doubleValue]];
-    NSLog(@"Latitude: %f. Longitude: %f", [latitude doubleValue], [longitude doubleValue]);
-
-//    PFGeoPoint *currLocationGeoPoint = [PFGeoPoint geoPointWithLocation:_currentLocation];
-//    [self.locationManager stopUpdatingLocation];
-    
-     PFQuery *query = [PFQuery queryWithClassName:@"Listing"];
-    [query whereKey:@"location" nearGeoPoint:discoverLocation withinMiles:20];
-
-    
-    bool wifi = [[amenities objectForKey:@"wifi"] boolValue];
-    bool refrigerator = [[amenities objectForKey:@"refrigerator"] boolValue];
-    bool study = [[amenities objectForKey:@"studyDesk"] boolValue];
-    bool monitor = [[amenities objectForKey:@"monitor"] boolValue];
-    bool services = [[amenities objectForKey:@"services"] boolValue];
-    
-    
-    NSMutableArray *amenitiesQueryArray = [[NSMutableArray alloc] init];
-    
-    if(wifi){
-        [amenitiesQueryArray addObject:@"wifi"];
+    [SVProgressHUD show];
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+        NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+        NSDictionary *amenities = [defaults objectForKey:@"additionalFilters"];
+        NSNumber *price = [defaults objectForKey:@"maxPrice"];
+        NSNumber *latitude = [defaults objectForKey:@"latitude"];
+        NSNumber *longitude = [defaults objectForKey:@"longitude"];
+        PFGeoPoint *discoverLocation = [PFGeoPoint geoPointWithLatitude:[latitude doubleValue] longitude:[longitude doubleValue]];
+        
+        //    PFGeoPoint *currLocationGeoPoint = [PFGeoPoint geoPointWithLocation:_currentLocation];
+        //    [self.locationManager stopUpdatingLocation];
+        
+        // Exclude booked locations
+        NSDate *now = [NSDate date];
+        __block NSMutableArray *excludedListings = [[NSMutableArray alloc] init];
+        PFQuery *innerQuery = [PFQuery queryWithClassName:@"Booking"];
+        [innerQuery whereKey:@"endTime" greaterThan:now];
+        [innerQuery whereKey:@"startTime" lessThan:now];
+        [innerQuery includeKey:@"listing"];
+        NSArray *existingBookings = [innerQuery findObjects];
+        for (PFObject *booking in existingBookings) {
+            PFObject *listing = [booking objectForKey:@"listing"];
+            [excludedListings addObject:[listing valueForKeyPath:@"objectId"]];
+        }
+        PFQuery *query = [PFQuery queryWithClassName:@"Listing"];
+        [query whereKey:@"objectId" notContainedIn:excludedListings];
+        
+        [query whereKey:@"location" nearGeoPoint:discoverLocation withinMiles:20];
+        bool wifi = [[amenities objectForKey:@"wifi"] boolValue];
+        bool refrigerator = [[amenities objectForKey:@"refrigerator"] boolValue];
+        bool study = [[amenities objectForKey:@"studyDesk"] boolValue];
+        bool monitor = [[amenities objectForKey:@"monitor"] boolValue];
+        bool services = [[amenities objectForKey:@"services"] boolValue];
+        
+        
+        NSMutableArray *amenitiesQueryArray = [[NSMutableArray alloc] init];
+        
+        if(wifi){
+            [amenitiesQueryArray addObject:@"wifi"];
+        }
+        if(refrigerator){
+            [amenitiesQueryArray addObject:@"refrigerator"];
+        }
+        if(study){
+            [amenitiesQueryArray addObject:@"studyDesk"];
+        }
+        if(monitor){
+            [amenitiesQueryArray addObject:@"monitor"];
+        }
+        if(services){
+            [amenitiesQueryArray addObject:@"services"];
+        }
+        
+        NSMutableArray *typeQueryArray = [[NSMutableArray alloc] init];
+        if ([[self.spaceType objectAtIndex:0] boolValue] == YES){
+            [typeQueryArray addObject:@"Rest"];
+        }
+        if ([[self.spaceType objectAtIndex:1] boolValue] == YES){
+            [typeQueryArray addObject:@"Closet"];
+        }
+        if ([[self.spaceType objectAtIndex:2] boolValue] == YES){
+            [typeQueryArray addObject:@"Office"];
+        }
+        if ([[self.spaceType objectAtIndex:3] boolValue] == YES){
+            [typeQueryArray addObject:@"Quiet"];;
+        }
+        if([amenitiesQueryArray count] > 0)
+            [query whereKey:@"amenities" containsAllObjectsInArray:amenitiesQueryArray];
+        if(price > 0)
+            [query whereKey:@"price" lessThanOrEqualTo: price];
+        if([typeQueryArray count] > 0)
+            [query whereKey:@"type" containsAllObjectsInArray:typeQueryArray];
+        
+        [defaults removeObjectForKey:@"additionalFilters"];
+        [defaults removeObjectForKey:@"maxPrice"];
+        listings = [Listing objectToListingsWith:[query findObjects]];
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [self.tableView reloadData];
+            [SVProgressHUD dismiss];
+            if ([listings count] == 0){
+                UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"No Listings Available" message:@"Be the first to post a listing in this area!" delegate:self cancelButtonTitle:@"Ok" otherButtonTitles: nil];
+                [alert show];
+                
+            }
+        });
+    });
+}
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+    if (buttonIndex == 0){
+        [self.navigationController popViewControllerAnimated:YES];
     }
-    if(refrigerator){
-        [amenitiesQueryArray addObject:@"refrigerator"];
-    }
-    if(study){
-        [amenitiesQueryArray addObject:@"studyDesk"];
-    }
-    if(monitor){
-        [amenitiesQueryArray addObject:@"monitor"];
-    }
-    if(services){
-        [amenitiesQueryArray addObject:@"services"];
-    }
-    
-    NSMutableArray *typeQueryArray = [[NSMutableArray alloc] init];
-    if ([[self.spaceType objectAtIndex:0] boolValue] == YES){
-        [typeQueryArray addObject:@"Rest"];
-    }
-    if ([[self.spaceType objectAtIndex:1] boolValue] == YES){
-        [typeQueryArray addObject:@"Closet"];
-    }
-    if ([[self.spaceType objectAtIndex:2] boolValue] == YES){
-        [typeQueryArray addObject:@"Office"];
-    }
-    if ([[self.spaceType objectAtIndex:3] boolValue] == YES){
-        [typeQueryArray addObject:@"Quiet"];;
-    }
-    
-   
-    if([amenitiesQueryArray count] > 0)
-        [query whereKey:@"amenities" containsAllObjectsInArray:amenitiesQueryArray];
-    if(price > 0)
-        [query whereKey:@"price" lessThanOrEqualTo: price];
-    if([typeQueryArray count] > 0)
-        [query whereKey:@"type" containsAllObjectsInArray:typeQueryArray];
-    
-    NSArray* AllListings = [query findObjects];
-    listings = [Listing objectToListingsWith:AllListings];
-    
-    [defaults removeObjectForKey:@"additionalFilters"];
-    [defaults removeObjectForKey:@"maxPrice"];
-
-
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
@@ -187,8 +211,6 @@ NSArray *listings;
     if ([segue.identifier isEqualToString:@"ShowListingDetail"]){
         NSIndexPath *indexPath = [self.tableView indexPathForSelectedRow];
         ListingDetailViewController *destViewController = segue.destinationViewController;
-        destViewController.listing = [listings objectAtIndex:indexPath.row];
-        NSLog(@"View Controller Row: %lu", (long)indexPath.row);
-    }
+        destViewController.listing = [listings objectAtIndex:indexPath.row];    }
 }
 @end

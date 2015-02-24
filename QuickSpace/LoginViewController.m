@@ -7,10 +7,12 @@
 //
 
 #import "LoginViewController.h"
+#import "SVProgressHUD.h"
 #import <Parse/Parse.h>
+#import "AppDelegate.h"
 
 @interface LoginViewController ()
-
+@property bool canSegue;
 @end
 
 @implementation LoginViewController
@@ -18,10 +20,11 @@
 @synthesize emailTextField;
 @synthesize passwordTextField;
 
-bool canSegue = NO;
+
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    self.canSegue = NO;
     // Do any additional setup after loading the view.
 }
 
@@ -30,11 +33,21 @@ bool canSegue = NO;
     // Dispose of any resources that can be recreated.
 }
 - (IBAction)onSubmit:(UIButton *)sender {
-    PFUser *user = [PFUser logInWithUsername: self.emailTextField.text password: self.passwordTextField.text];
+//    __block PFUser *user = [[PFUser alloc] init];
+//    [SVProgressHUD show];
+//    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+        PFUser *user = [PFUser logInWithUsername: self.emailTextField.text password: self.passwordTextField.text];
+//        dispatch_async(dispatch_get_main_queue(), ^{
+//            [SVProgressHUD dismiss];
+//        });
+//    });
     if(user){
-        canSegue = YES;
+        self.canSegue = YES;
+        NSLog(@"Can Segue");
+        AppDelegate *appDelegateTemp = [[UIApplication sharedApplication]delegate];
+        appDelegateTemp.window.rootViewController = [[UIStoryboard storyboardWithName:@"Main" bundle:[NSBundle mainBundle]] instantiateInitialViewController];
     } else{
-        canSegue = NO;
+        self.canSegue = NO;
         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Incorrect Login" message:@"Try Again" delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles: nil];
         [alert show];
     }
@@ -54,7 +67,7 @@ bool canSegue = NO;
     if (![identifier isEqualToString:@"loginSegue"]){
         return YES;
     }
-    return canSegue;
+    return self.canSegue;
 }
     
 /*

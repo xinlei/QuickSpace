@@ -10,7 +10,9 @@
 #import "BookingConfirmationViewController.h"
 #import <Parse/Parse.h>
 
-@interface ListingDetailViewController ()
+@interface ListingDetailViewController () {
+    NSString *booking_id;
+}
 
 @end
 
@@ -25,6 +27,7 @@
 @synthesize ratingLabel;
 @synthesize amenitiesLabel;
 @synthesize descriptionsLabel;
+@synthesize booking_id;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -35,7 +38,6 @@
 //    location.text = listing.location;
     
     PFQuery *query = [PFQuery queryWithClassName:@"Listing"];
-    // Retrieve the object by id
     [query getObjectInBackgroundWithId:listing.object_id block:^(PFObject *parseListing, NSError *error) {
         int rating = [parseListing[@"ratingValue"] intValue];
         if (rating == 0) {
@@ -92,8 +94,10 @@
         booking[@"owner"] = parseListing[@"lister"];
         booking[@"rating"] = @0;
         booking[@"listing"] = parseListing;
-        [parseListing saveInBackground];
-        [booking saveInBackground]; 
+        [parseListing save];
+        [booking saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
+            if (succeeded) booking_id = [booking objectId];
+        }];
     }];
 }
 
@@ -102,6 +106,7 @@
     if ([segue.identifier isEqualToString:@"ShowBookingConfirmation"]){
         BookingConfirmationViewController *destViewController = segue.destinationViewController;
         destViewController.listing = listing;
+        destViewController.booking_id = booking_id;
     }
 }
 

@@ -12,6 +12,7 @@
 @interface ListingDetailViewController : UIViewController
 
 @property (nonatomic, strong) Listing *listing;
+@property (nonatomic, strong) NSString *booking_id;
 @property (nonatomic, strong) IBOutlet UILabel *titleLabel;
 @property (nonatomic, strong) IBOutlet UIImageView *image;
 @property (weak, nonatomic) IBOutlet UILabel *type;

@@ -32,6 +32,7 @@
 		17443CF51A881E0100A0694F /* SetLocationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 17443CF41A881E0100A0694F /* SetLocationViewController.m */; };
 		178097B71A7D946900BDBB1A /* CancelViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 178097B61A7D946900BDBB1A /* CancelViewController.m */; };
 		17E63AB91A86EBCF00F763C1 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 17E63AB81A86EBCF00F763C1 /* MapKit.framework */; };
+		17EEBBE51A9468240055447F /* editListingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 17EEBBE41A9468240055447F /* editListingViewController.m */; };
 		211E0AA81A7275C0003E4D99 /* room1.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 211E0AA51A7275C0003E4D99 /* room1.jpg */; };
 		211E0AA91A7275C0003E4D99 /* room2.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 211E0AA61A7275C0003E4D99 /* room2.jpg */; };
 		211E0AAA1A7275C0003E4D99 /* room3.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 211E0AA71A7275C0003E4D99 /* room3.jpg */; };
@@ -45,6 +46,9 @@
 		F0241E431A783ED4009FF170 /* find_space.jpg in Resources */ = {isa = PBXBuildFile; fileRef = F0241E3E1A783ED4009FF170 /* find_space.jpg */; };
 		F0241E481A783F60009FF170 /* san_francisco.png in Resources */ = {isa = PBXBuildFile; fileRef = F0241E471A783F60009FF170 /* san_francisco.png */; };
 		F0241E541A784DD7009FF170 /* FilterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F0241E531A784DD7009FF170 /* FilterViewController.m */; };
+		F050D56A1A8FF3340066EF00 /* SVIndefiniteAnimatedView.m in Sources */ = {isa = PBXBuildFile; fileRef = F050D5651A8FF3340066EF00 /* SVIndefiniteAnimatedView.m */; };
+		F050D56B1A8FF3340066EF00 /* SVProgressHUD.bundle in Resources */ = {isa = PBXBuildFile; fileRef = F050D5671A8FF3340066EF00 /* SVProgressHUD.bundle */; };
+		F050D56C1A8FF3340066EF00 /* SVProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = F050D5691A8FF3340066EF00 /* SVProgressHUD.m */; };
 		F084BA891A816FCA00C63D41 /* BookingConfirmationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F084BA881A816FCA00C63D41 /* BookingConfirmationViewController.m */; };
 		F085B8EA1A7D79D200AA5003 /* ConfirmationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F085B8E91A7D79D200AA5003 /* ConfirmationViewController.m */; };
 		F085B8F31A7DA7BD00AA5003 /* ProfileViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F085B8F21A7DA7BD00AA5003 /* ProfileViewController.m */; };
@@ -102,6 +106,8 @@
 		178097B51A7D946900BDBB1A /* CancelViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CancelViewController.h; sourceTree = "<group>"; };
 		178097B61A7D946900BDBB1A /* CancelViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CancelViewController.m; sourceTree = "<group>"; };
 		17E63AB81A86EBCF00F763C1 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
+		17EEBBE31A9468240055447F /* editListingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = editListingViewController.h; sourceTree = "<group>"; };
+		17EEBBE41A9468240055447F /* editListingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = editListingViewController.m; sourceTree = "<group>"; };
 		211E0AA51A7275C0003E4D99 /* room1.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = room1.jpg; sourceTree = "<group>"; };
 		211E0AA61A7275C0003E4D99 /* room2.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = room2.jpg; sourceTree = "<group>"; };
 		211E0AA71A7275C0003E4D99 /* room3.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = room3.jpg; sourceTree = "<group>"; };
@@ -120,6 +126,12 @@
 		F0241E471A783F60009FF170 /* san_francisco.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = san_francisco.png; sourceTree = "<group>"; };
 		F0241E521A784DD7009FF170 /* FilterViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FilterViewController.h; sourceTree = "<group>"; };
 		F0241E531A784DD7009FF170 /* FilterViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FilterViewController.m; sourceTree = "<group>"; };
+		F050D5641A8FF3340066EF00 /* SVIndefiniteAnimatedView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SVIndefiniteAnimatedView.h; sourceTree = "<group>"; };
+		F050D5651A8FF3340066EF00 /* SVIndefiniteAnimatedView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SVIndefiniteAnimatedView.m; sourceTree = "<group>"; };
+		F050D5661A8FF3340066EF00 /* SVProgressHUD-Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "SVProgressHUD-Prefix.pch"; sourceTree = "<group>"; };
+		F050D5671A8FF3340066EF00 /* SVProgressHUD.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = SVProgressHUD.bundle; sourceTree = "<group>"; };
+		F050D5681A8FF3340066EF00 /* SVProgressHUD.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SVProgressHUD.h; sourceTree = "<group>"; };
+		F050D5691A8FF3340066EF00 /* SVProgressHUD.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SVProgressHUD.m; sourceTree = "<group>"; };
 		F084BA871A816FCA00C63D41 /* BookingConfirmationViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BookingConfirmationViewController.h; sourceTree = "<group>"; };
 		F084BA881A816FCA00C63D41 /* BookingConfirmationViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BookingConfirmationViewController.m; sourceTree = "<group>"; };
 		F085B8E81A7D79D200AA5003 /* ConfirmationViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ConfirmationViewController.h; sourceTree = "<group>"; };
@@ -173,6 +185,7 @@
 		170EF9FB1A71C798004EA68B = {
 			isa = PBXGroup;
 			children = (
+				F050D5631A8FF3340066EF00 /* SVProgressHUD */,
 				17E63AB81A86EBCF00F763C1 /* MapKit.framework */,
 				F0D625141A7AD92C0063CE0B /* Default-568h@2x.png */,
 				170EFA451A71CE42004EA68B /* libsqlite3.dylib */,
@@ -213,6 +226,8 @@
 				F0144CE71A78917A00113F95 /* AdvancedFilterViewController.m */,
 				F0241E3B1A783ED4009FF170 /* assets */,
 				170EFA111A71C799004EA68B /* Main.storyboard */,
+				17EEBBE31A9468240055447F /* editListingViewController.h */,
+				17EEBBE41A9468240055447F /* editListingViewController.m */,
 				F0241E521A784DD7009FF170 /* FilterViewController.h */,
 				F0241E531A784DD7009FF170 /* FilterViewController.m */,
 				170EFA0B1A71C799004EA68B /* AppDelegate.h */,
@@ -287,6 +302,19 @@
 				F0241E3E1A783ED4009FF170 /* find_space.jpg */,
 			);
 			path = assets;
+			sourceTree = "<group>";
+		};
+		F050D5631A8FF3340066EF00 /* SVProgressHUD */ = {
+			isa = PBXGroup;
+			children = (
+				F050D5641A8FF3340066EF00 /* SVIndefiniteAnimatedView.h */,
+				F050D5651A8FF3340066EF00 /* SVIndefiniteAnimatedView.m */,
+				F050D5661A8FF3340066EF00 /* SVProgressHUD-Prefix.pch */,
+				F050D5671A8FF3340066EF00 /* SVProgressHUD.bundle */,
+				F050D5681A8FF3340066EF00 /* SVProgressHUD.h */,
+				F050D5691A8FF3340066EF00 /* SVProgressHUD.m */,
+			);
+			path = SVProgressHUD;
 			sourceTree = "<group>";
 		};
 		F084BA831A816F3800C63D41 /* views_guest */ = {
@@ -410,6 +438,7 @@
 				211E0AAA1A7275C0003E4D99 /* room3.jpg in Resources */,
 				170EFA131A71C799004EA68B /* Main.storyboard in Resources */,
 				F0D625151A7AD92C0063CE0B /* Default-568h@2x.png in Resources */,
+				F050D56B1A8FF3340066EF00 /* SVProgressHUD.bundle in Resources */,
 				F0144CE41A78912C00113F95 /* los_angeles.png in Resources */,
 				F0241E431A783ED4009FF170 /* find_space.jpg in Resources */,
 				170EFA181A71C799004EA68B /* LaunchScreen.xib in Resources */,
@@ -440,6 +469,7 @@
 				211E0AAD1A72E4E7003E4D99 /* ListingDetailViewController.m in Sources */,
 				F0144CE81A78917A00113F95 /* AdvancedFilterViewController.m in Sources */,
 				F085B8F31A7DA7BD00AA5003 /* ProfileViewController.m in Sources */,
+				17EEBBE51A9468240055447F /* editListingViewController.m in Sources */,
 				178097B71A7D946900BDBB1A /* CancelViewController.m in Sources */,
 				F0D6251C1A7AF98E0063CE0B /* AddDetailViewController.m in Sources */,
 				F0A4D8361A75C39A002D8B2F /* DiscoverViewController.m in Sources */,
@@ -448,7 +478,9 @@
 				F0241E541A784DD7009FF170 /* FilterViewController.m in Sources */,
 				F0D625191A7AE54D0063CE0B /* HostViewController.m in Sources */,
 				170EFA0D1A71C799004EA68B /* AppDelegate.m in Sources */,
+				F050D56A1A8FF3340066EF00 /* SVIndefiniteAnimatedView.m in Sources */,
 				170EFA0A1A71C799004EA68B /* main.m in Sources */,
+				F050D56C1A8FF3340066EF00 /* SVProgressHUD.m in Sources */,
 				216434D51A7F2898003730E6 /* DatePickerViewController.m in Sources */,
 				172695261A7872D300DA446E /* SignUpViewController.m in Sources */,
 				F084BA891A816FCA00C63D41 /* BookingConfirmationViewController.m in Sources */,
@@ -580,7 +612,7 @@
 					"$(PROJECT_DIR)",
 				);
 				INFOPLIST_FILE = QuickSpace/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TARGETED_DEVICE_FAMILY = 1;
@@ -596,7 +628,7 @@
 					"$(PROJECT_DIR)",
 				);
 				INFOPLIST_FILE = QuickSpace/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TARGETED_DEVICE_FAMILY = 1;

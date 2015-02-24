@@ -8,8 +8,11 @@
 
 #import "ProfileViewController.h"
 #import <Parse/Parse.h>
+#import "SVProgressHUD.h"
 #import "Listing.h"
 #import <UIKit/UIKit.h>
+#import "editListingViewController.h"
+#import "AppDelegate.h"
 
 @interface ProfileViewController ()
 
@@ -29,7 +32,7 @@ NSArray *bookings;
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
-        [self refreshTableData];
+         // Custom initialization
     }
     return self;
 }
@@ -37,6 +40,7 @@ NSArray *bookings;
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    [self refreshTableData];
 }
 
 - (void)didReceiveMemoryWarning
@@ -47,7 +51,19 @@ NSArray *bookings;
 
 // Log out the current user
 - (IBAction)logoutButtonTouched:(UIButton *)sender {
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    [defaults removeObjectForKey:@"object_id"];
+    [defaults removeObjectForKey:@"newListingAmenities"];
+    [defaults removeObjectForKey:@"newListingBasicInfo"];
+    [defaults removeObjectForKey:@"newListingPrice"];
+    [defaults removeObjectForKey:@"Latitude"];
+    [defaults removeObjectForKey:@"Longitude"];
     [PFUser logOut];
+    
+    AppDelegate *appDelegateTemp = [[UIApplication sharedApplication]delegate];
+    UIViewController* rootController = [[UIStoryboard storyboardWithName:@"Main" bundle:[NSBundle mainBundle]] instantiateViewControllerWithIdentifier:@"LoginViewController"];
+    UINavigationController* navigation = [[UINavigationController alloc] initWithRootViewController:rootController];
+    appDelegateTemp.window.rootViewController = navigation;
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -59,7 +75,7 @@ NSArray *bookings;
                  delegate:self
                  cancelButtonTitle:@"Cancel"
                  destructiveButtonTitle:@"Remove Listing"
-                 otherButtonTitles:nil];
+                 otherButtonTitles:@"Edit Listing", nil];
         popup.actionSheetStyle = UIActionSheetStyleBlackOpaque;
         [popup showInView:self.view];
         popup.tag = indexPath.row;
@@ -80,15 +96,19 @@ NSArray *bookings;
 
 - (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex {
     Listing *currListing = [userListings objectAtIndex:actionSheet.tag];
-    
+    NSLog(@"Button Index: %ld", (long)buttonIndex);
     // Remove listing
     if (listingSegments.selectedSegmentIndex == 1){
-        if (buttonIndex == 0) {
+        if (buttonIndex == actionSheet.destructiveButtonIndex) {
             PFQuery *query = [PFQuery queryWithClassName:@"Listing"];
             [query getObjectInBackgroundWithId:currListing.object_id block:^(PFObject *parseListing, NSError *error) {
                 [parseListing delete];
             }];
             [self.listingTable reloadData];
+        }
+        // Edit Listing
+        else if (buttonIndex == actionSheet.firstOtherButtonIndex){
+            [self performSegueWithIdentifier:@"editSegue" sender:self];
         }
     }
     
@@ -130,38 +150,46 @@ NSArray *bookings;
 }
 
 - (void) refreshTableData {
-    PFUser *currentUser = [PFUser currentUser];
-    NSDate *now = [NSDate date];
-    if (listingSegments.selectedSegmentIndex == 0){
-        
-        PFQuery *notExpired = [PFQuery queryWithClassName:@"Booking"];
-        [notExpired whereKey:@"guest" equalTo:currentUser];
-        [notExpired whereKey:@"endTime" greaterThan:now];
-        
-        PFQuery *noRatings = [PFQuery queryWithClassName:@"Booking"];
-        [noRatings whereKey:@"rating" lessThanOrEqualTo:@0];
-        
-        PFQuery *query = [PFQuery orQueryWithSubqueries:@[noRatings,notExpired]];
-        bookings = [query findObjects];
-        
-        NSMutableArray* allRentals = [[NSMutableArray alloc] init];
-        for (PFObject *object in bookings) {
-            [allRentals addObject:object[@"listing"]];
+    [SVProgressHUD show];
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+        PFUser *currentUser = [PFUser currentUser];
+        NSDate *now = [NSDate date];
+        if (listingSegments.selectedSegmentIndex == 0){
+            
+            PFQuery *notExpired = [PFQuery queryWithClassName:@"Booking"];
+            [notExpired whereKey:@"guest" equalTo:currentUser];
+            [notExpired whereKey:@"endTime" greaterThan:now];
+            
+            PFQuery *noRatings = [PFQuery queryWithClassName:@"Booking"];
+            [noRatings whereKey:@"guest" equalTo:currentUser];
+            [noRatings whereKey:@"rating" lessThanOrEqualTo:@0];
+            
+            PFQuery *query = [PFQuery orQueryWithSubqueries:@[noRatings,notExpired]];
+            bookings = [query findObjects];
+            
+            NSMutableArray* allRentals = [[NSMutableArray alloc] init];
+            for (PFObject *object in bookings) {
+                [allRentals addObject:object[@"listing"]];
+            }
+            userListings = [Listing objectToListingsWith:allRentals];
+            
+        } else {
+            PFQuery *notExpired = [PFQuery queryWithClassName:@"Booking"];
+            [notExpired whereKey:@"owner" equalTo:currentUser];
+            bookings = [notExpired findObjects];
+            
+            // Get listings posted by this user
+            PFQuery *query = [PFQuery queryWithClassName:@"Listing"];
+            [query whereKey:@"lister" equalTo:currentUser.username];
+            NSArray* AllListings = [query findObjects];
+            userListings = [Listing objectToListingsWith:AllListings];
         }
-        userListings = [Listing objectToListingsWith:allRentals];
-        
-    } else {
-        PFQuery *notExpired = [PFQuery queryWithClassName:@"Booking"];
-        [notExpired whereKey:@"owner" equalTo:currentUser];
-        bookings = [notExpired findObjects];
-        
-        // Get listings posted by this user
-        PFQuery *query = [PFQuery queryWithClassName:@"Listing"];
-        [query whereKey:@"lister" equalTo:currentUser.username];
-        NSArray* AllListings = [query findObjects];
-        userListings = [Listing objectToListingsWith:AllListings];
-    }
-    [self.listingTable reloadData];
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [self.listingTable reloadData];
+            [SVProgressHUD dismiss];
+        });
+    });
+    
 }
 
 - (IBAction)listingSegmentValueChanged:(UISegmentedControl *)sender {
@@ -207,15 +235,14 @@ NSArray *bookings;
     }
     return cell;
 }
-/*
-#pragma mark - Navigation
 
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
-{
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender{
+    NSIndexPath *indexPath = [self.listingTable indexPathForSelectedRow];
+    if([[segue identifier] isEqualToString:@"editSegue"]){
+        Listing *selectedListing = [userListings objectAtIndex:indexPath.row];
+        editListingViewController *destViewController = segue.destinationViewController;
+        destViewController.listing = selectedListing;
+    }
 }
-*/
 
 @end

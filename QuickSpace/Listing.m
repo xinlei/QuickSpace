@@ -34,12 +34,26 @@
         lister.description = object[@"description"];
         lister.address = object[@"address"];
         lister.object_id = object.objectId;
-        [listings addObject:lister];
+
         
         // Booking information. These fields are nil if no value has been set
         lister.startTime = object[@"startTime"];
         lister.endTime = object[@"endTime"];
         lister.guest_id = object[@"guest_id"];
+        
+        
+        NSMutableString *amenitiesString = [[NSMutableString alloc] init];
+        for (NSString *key in object[@"amenities"]) {
+            if ([key isEqualToString:@"wifi"]) [amenitiesString appendString:@"- WiFi Internet "];
+            if ([key isEqualToString:@"refrigerator"]) [amenitiesString appendString:@"- Refrigerator "];
+            if ([key isEqualToString:@"studyDesk"]) [amenitiesString appendString:@"- Study Desk "];
+            if ([key isEqualToString:@"monitor"]) [amenitiesString appendString:@"- Monitor "];
+            if ([key isEqualToString:@"services"]) [amenitiesString appendString:@"- Janitoral Services "];
+        }
+        [amenitiesString appendString:@"-"];
+        lister.amenities = amenitiesString;
+        
+        [listings addObject:lister];
     }
     return listings;
 }

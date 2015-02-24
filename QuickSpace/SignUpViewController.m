@@ -51,8 +51,10 @@ bool shouldSegue = YES;
     //
     //    }
     else {
+        
         PFUser *user = [PFUser user];
         user.username = email;
+        user.email = email;
         user.password = password1;
         
         //Need to make sure that particular email address doesn't already exist in our user database.

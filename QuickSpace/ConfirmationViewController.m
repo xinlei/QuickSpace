@@ -9,6 +9,7 @@
 #import <Parse/Parse.h>
 #import "Listing.h"
 @interface ConfirmationViewController ()
+@property NSArray *amenities;
 @end
 @implementation ConfirmationViewController
 
@@ -36,14 +37,19 @@
     // Get values from UserDefaults
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     NSDictionary *newListingBasicInfo = [defaults objectForKey:@"newListingBasicInfo"];
-    NSDictionary *amenities = [defaults objectForKey:@"newListingAmenities"];
+    NSDictionary *listingAmenities = [defaults objectForKey:@"newListingAmenities"];
     NSInteger price = [defaults integerForKey:@"newListingPrice"];
+    
+    NSSet *keys = [listingAmenities keysOfEntriesPassingTest:^(id key, id obj, BOOL *stop){
+        return [obj boolValue];
+    }];
+    self.amenities = [keys allObjects];
     
     // Display values to view
     titleLabel.text = newListingBasicInfo[@"title"];
-    priceLabel.text = [NSString stringWithFormat:@"$%d/hour", price];
+    priceLabel.text = [NSString stringWithFormat:@"$%ld/hour", (long)price];
     locationLabel.text = newListingBasicInfo[@"location"];
-    amenitiesLabel.text = [Listing amenitiesToString:[amenities allKeys]];
+    amenitiesLabel.text = [Listing amenitiesToString:self.amenities];
     descriptionLabel.text = newListingBasicInfo[@"description"];
 }
 - (void)didReceiveMemoryWarning
@@ -54,7 +60,6 @@
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-    NSDictionary *listingAmenities = [defaults objectForKey:@"newListingAmenities"];
     NSArray *spaceType = [defaults objectForKey:@"newListingSpaceType"];
     NSDictionary *newListingBasicInfo = [defaults objectForKey:@"newListingBasicInfo"];
     NSString *address = [newListingBasicInfo objectForKey:@"location"];
@@ -72,10 +77,7 @@
         [listingTypes addObject:@"Quiet"];;
     }
     
-    NSSet *keys = [listingAmenities keysOfEntriesPassingTest:^(id key, id obj, BOOL *stop){
-        return [obj boolValue];
-    }];
-    NSArray *amenities = [keys allObjects];
+    
     NSNumber *num = [NSNumber numberWithInteger:[defaults integerForKey:@"newListingPrice"]];
     UIImage *myImage = listingImg.image;
     NSData *image = UIImagePNGRepresentation(myImage);
@@ -87,7 +89,6 @@
     NSNumber *latitude = [defaults objectForKey:@"Latitude"];
     NSNumber *longitude = [defaults objectForKey:@"Longitude"];
     
-    NSLog(@"New Latitude: %f, New Longitude: %f", [latitude doubleValue], [longitude doubleValue]);
     PFGeoPoint *currentPoint =
     [PFGeoPoint geoPointWithLatitude:[latitude doubleValue]
                            longitude:[longitude doubleValue]];
@@ -96,7 +97,7 @@
     listingObject[@"title"] = titleLabel.text;
     listingObject[@"price"] = num;
     listingObject[@"location"] = currentPoint;
-    listingObject[@"amenities"] = amenities;
+    listingObject[@"amenities"] = self.amenities;
     listingObject[@"description"] = descriptionLabel.text;
     listingObject[@"lister"] = currentUser.username;
     listingObject[@"images"] = allImages;
@@ -110,13 +111,5 @@
     NSString *object_id = listingObject.objectId;
     [defaults setObject:object_id forKey:@"object_id"];
 }
-/*
- #pragma mark - Navigation
- // In a storyboard-based application, you will often want to do a little preparation before navigation
- - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
- {
- // Get the new view controller using [segue destinationViewController].
- // Pass the selected object to the new view controller.
- }
- */
+
 @end

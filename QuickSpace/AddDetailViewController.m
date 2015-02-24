@@ -20,7 +20,7 @@
 @synthesize monitorSwitch;
 @synthesize servicesSwitch;
 @synthesize priceLabel;
-@synthesize priceSlider;
+@synthesize priceTextField;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -47,15 +47,15 @@
         studyDeskSwitch.on = [amenities[@"studyDesk"] boolValue];
         monitorSwitch.on = [amenities[@"monitor"] boolValue];
         servicesSwitch.on = [amenities[@"services"] boolValue];
+        if(wifiSwitch.on)
+            NSLog(@"Wifi on(?)");
     }
     //Set previous price; otherwise default to 10
     if (price != -1){
-        priceSlider.value = price;
+        priceTextField.text = [@(price) stringValue];
     } else {
-        priceSlider.value = 10;
+        priceTextField.text = [@(10) stringValue];
     }
-    // Set current slider to user input
-    priceLabel.text = [NSString stringWithFormat:@"$%d", (int)priceSlider.value];
 }
 
 - (void)didReceiveMemoryWarning
@@ -63,9 +63,24 @@
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
-- (IBAction)sliderValueChanged:(UISlider *)sender {
-    priceLabel.text = [NSString stringWithFormat:@"$%d", (int)sender.value];
+
+- (BOOL)shouldPerformSegueWithIdentifier:(NSString *)identifier sender:(id)sender{
+    NSCharacterSet* notDigits = [[NSCharacterSet decimalDigitCharacterSet] invertedSet];
+    if ([priceTextField.text rangeOfCharacterFromSet:notDigits].location == NSNotFound){
+        return YES;
+    } else {
+        UIAlertView *notPermitted = [[UIAlertView alloc]
+                                     initWithTitle:@"Error"
+                                     message:@"Price Must a Number"
+                                     delegate:nil
+                                     cancelButtonTitle:@"OK"
+                                     otherButtonTitles:nil];
+        
+        [notPermitted show];
+        return NO;
+    }
 }
+
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
@@ -78,7 +93,7 @@
     
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     [defaults setObject:amenities forKey:@"newListingAmenities"];
-    [defaults setInteger:(int)priceSlider.value forKey:@"newListingPrice"];
+    [defaults setInteger:[priceTextField.text intValue] forKey:@"newListingPrice"];
 }
 
 

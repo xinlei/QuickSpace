@@ -15,7 +15,7 @@
 @property (weak, nonatomic) IBOutlet UISwitch *studyDeskSwitch;
 @property (weak, nonatomic) IBOutlet UISwitch *monitorSwitch;
 @property (weak, nonatomic) IBOutlet UISwitch *servicesSwitch;
-@property (weak, nonatomic) IBOutlet UISlider *priceSlider;
+@property (weak, nonatomic) IBOutlet UITextField *priceTextField;
 @property (weak, nonatomic) IBOutlet UILabel *priceLabel;
 
 @end

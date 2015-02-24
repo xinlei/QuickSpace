@@ -19,6 +19,7 @@
 @property (nonatomic, strong) NSNumber *price;
 @property (nonatomic) NSString *object_id;
 @property (nonatomic) NSString *address;
+@property (nonatomic) NSString *amenities;
 
 // Booking information
 @property (nonatomic, strong) NSDate *startTime;
