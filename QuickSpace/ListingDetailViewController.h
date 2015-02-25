@@ -13,13 +13,25 @@
 
 @property (nonatomic, strong) Listing *listing;
 @property (nonatomic, strong) NSString *booking_id;
-@property (nonatomic, strong) IBOutlet UILabel *titleLabel;
+
 @property (nonatomic, strong) IBOutlet UIImageView *image;
-@property (weak, nonatomic) IBOutlet UILabel *type;
-@property (weak, nonatomic) IBOutlet UILabel *location;
-@property (weak, nonatomic) IBOutlet UIButton *bookButton;
+@property (nonatomic, strong) IBOutlet UILabel *titleLabel;
+@property (weak, nonatomic) IBOutlet UILabel *typeLabel;
 @property (weak, nonatomic) IBOutlet UILabel *ratingLabel;
+
+@property (weak, nonatomic) IBOutlet UILabel *locationLabel;
+@property (weak, nonatomic) IBOutlet UILabel *location;
+
 @property (weak, nonatomic) IBOutlet UILabel *amenitiesLabel;
+@property (weak, nonatomic) IBOutlet UILabel *amenities;
+
+@property (weak, nonatomic) IBOutlet UILabel *descriptions;
 @property (weak, nonatomic) IBOutlet UILabel *descriptionsLabel;
+
+@property (weak, nonatomic) IBOutlet UIScrollView *scrollView;
+@property (weak, nonatomic) IBOutlet UIButton *bookButton;
+
++(void) setItemLocation:(UILabel *)label withPrev:(UILabel *)prev inView:(CGRect)viewFrame apartBy:(CGFloat)dist;
++(void) addSeparatorOnto:(UIView *)view at:(CGFloat)y;
 
 @end

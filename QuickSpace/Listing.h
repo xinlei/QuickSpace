@@ -30,6 +30,7 @@
 
 + (NSMutableArray *)objectToListingsWith:(NSArray *)PFObjects;
 + (NSString *) amenitiesToString:(NSArray *) amenities;
++ (NSString *) typesToString:(NSArray *) spaceType;
 + (void) cancelListingForHost:(NSString *) object_id;
 - (BOOL) isEqual: other;
 //- (unsigned) hash;

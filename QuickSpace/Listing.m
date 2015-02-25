@@ -45,13 +45,27 @@
         
         NSMutableString *amenitiesString = [[NSMutableString alloc] init];
         for (NSString *key in object[@"amenities"]) {
-            if ([key isEqualToString:@"wifi"]) [amenitiesString appendString:@"- WiFi Internet "];
-            if ([key isEqualToString:@"refrigerator"]) [amenitiesString appendString:@"- Refrigerator "];
-            if ([key isEqualToString:@"studyDesk"]) [amenitiesString appendString:@"- Study Desk "];
-            if ([key isEqualToString:@"monitor"]) [amenitiesString appendString:@"- Monitor "];
-            if ([key isEqualToString:@"services"]) [amenitiesString appendString:@"- Janitoral Services "];
+            if ([key isEqualToString:@"wifi"]){
+                if (amenitiesString.length != 0) [amenitiesString appendString:@"\n"];
+                [amenitiesString appendString:@"WiFi Internet"];
+            }
+            if ([key isEqualToString:@"refrigerator"]){
+                if (amenitiesString.length != 0) [amenitiesString appendString:@"\n"];
+                [amenitiesString appendString:@"Refrigerator"];
+            }
+            if ([key isEqualToString:@"studyDesk"]){
+                if (amenitiesString.length != 0) [amenitiesString appendString:@"\n"];
+                [amenitiesString appendString:@"Study Desk"];
+            }
+            if ([key isEqualToString:@"monitor"]){
+                if (amenitiesString.length != 0) [amenitiesString appendString:@"\n"];
+                [amenitiesString appendString:@"Monitor"];
+            }
+            if ([key isEqualToString:@"services"]){
+                if (amenitiesString.length != 0) [amenitiesString appendString:@"\n"];
+                [amenitiesString appendString:@"Janitoral Services"];
+            }
         }
-        [amenitiesString appendString:@"-"];
         lister.amenities = amenitiesString;
         
         
@@ -65,14 +79,39 @@
 + (NSString *)amenitiesToString:(NSArray *)amenities {
     NSMutableString *amenitiesString = [[NSMutableString alloc] init];
     for (NSString *key in amenities) {
-        if ([key isEqualToString:@"wifi"]) [amenitiesString appendString:@"- WiFi Internet "];
-        if ([key isEqualToString:@"refrigerator"]) [amenitiesString appendString:@"- Refrigerator "];
-        if ([key isEqualToString:@"studyDesk"]) [amenitiesString appendString:@"- Study Desk "];
-        if ([key isEqualToString:@"monitor"]) [amenitiesString appendString:@"- Monitor "];
-        if ([key isEqualToString:@"services"]) [amenitiesString appendString:@"- Janitoral Services "];
+        if ([key isEqualToString:@"wifi"]){
+            if (amenitiesString.length != 0) [amenitiesString appendString:@"\n"];
+            [amenitiesString appendString:@"WiFi Internet"];
+        }
+        if ([key isEqualToString:@"refrigerator"]){
+            if (amenitiesString.length != 0) [amenitiesString appendString:@"\n"];
+            [amenitiesString appendString:@"Refrigerator"];
+        }
+        if ([key isEqualToString:@"studyDesk"]){
+            if (amenitiesString.length != 0) [amenitiesString appendString:@"\n"];
+            [amenitiesString appendString:@"Study Desk"];
+        }
+        if ([key isEqualToString:@"monitor"]){
+            if (amenitiesString.length != 0) [amenitiesString appendString:@"\n"];
+            [amenitiesString appendString:@"Monitor"];
+        }
+        if ([key isEqualToString:@"services"]){
+            if (amenitiesString.length != 0) [amenitiesString appendString:@"\n"];
+            [amenitiesString appendString:@"Janitoral Services"];
+        }
     }
     [amenitiesString appendString:@"-"];
     return amenitiesString;
+}
+
++ (NSString *) typesToString:(NSArray *)spaceType {
+    NSMutableString *typeDesc = [[NSMutableString alloc] init];
+    for (NSString *listingType in spaceType){
+        if (typeDesc.length != 0)
+            [typeDesc appendString:@"\n"];
+        [typeDesc appendString:listingType];
+    }
+    return typeDesc;
 }
 
 + (void) cancelListingForHost:(NSString *) object_id {
