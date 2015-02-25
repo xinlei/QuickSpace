@@ -8,5 +8,5 @@
 
 #import <UIKit/UIKit.h>
 
-@interface SetLocationViewController : UIViewController
+@interface SetLocationViewController : UIViewController<UIAlertViewDelegate>
 @end

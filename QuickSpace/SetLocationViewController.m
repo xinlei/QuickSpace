@@ -39,9 +39,18 @@
             
             [self.myMapView setRegion:region animated:YES];
             [self.myMapView addAnnotation:placemark];
+        } else {
+            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Invalid Location" message:[NSString stringWithFormat:@"%@ is not a valid address", address] delegate:self cancelButtonTitle:@"Try Again" otherButtonTitles: nil];
+            [alert show];
         }
     }];
     // Do any additional setup after loading the view.
+}
+
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+    if (buttonIndex == 0)
+        [self.navigationController popViewControllerAnimated:YES];
 }
 
 - (void)didReceiveMemoryWarning {
