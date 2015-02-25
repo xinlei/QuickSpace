@@ -34,6 +34,7 @@
         lister.description = object[@"description"];
         lister.address = object[@"address"];
         lister.object_id = object.objectId;
+        lister.owner = object[@"lister"];
 
         
         // Booking information. These fields are nil if no value has been set
@@ -52,6 +53,9 @@
         }
         [amenitiesString appendString:@"-"];
         lister.amenities = amenitiesString;
+        
+        
+        lister.rating = [object[@"ratingValue"] intValue];
         
         [listings addObject:lister];
     }

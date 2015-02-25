@@ -12,10 +12,11 @@
 #import "AppDelegate.h"
 
 @interface LoginViewController ()
-@property bool canSegue;
 @end
 
-@implementation LoginViewController
+@implementation LoginViewController{
+    bool canSegue;
+}
 
 @synthesize emailTextField;
 @synthesize passwordTextField;
@@ -24,7 +25,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.canSegue = NO;
+    canSegue = NO;
     // Do any additional setup after loading the view.
 }
 
@@ -42,12 +43,11 @@
 //        });
 //    });
     if(user){
-        self.canSegue = YES;
-        NSLog(@"Can Segue");
+        canSegue = YES;
         AppDelegate *appDelegateTemp = [[UIApplication sharedApplication]delegate];
         appDelegateTemp.window.rootViewController = [[UIStoryboard storyboardWithName:@"Main" bundle:[NSBundle mainBundle]] instantiateInitialViewController];
     } else{
-        self.canSegue = NO;
+        canSegue = NO;
         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Incorrect Login" message:@"Try Again" delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles: nil];
         [alert show];
     }
@@ -67,7 +67,7 @@
     if (![identifier isEqualToString:@"loginSegue"]){
         return YES;
     }
-    return self.canSegue;
+    return canSegue;
 }
     
 /*

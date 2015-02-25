@@ -13,13 +13,14 @@
 
 @end
 
-@implementation SignUpViewController
+@implementation SignUpViewController{
+    bool shouldSegue;
+}
 
 @synthesize emailTextField;
 @synthesize passwordTextField;
 @synthesize confirmPasswordTextField;
 
-bool shouldSegue = YES;
 
 - (void)viewDidLoad {
     [super viewDidLoad];

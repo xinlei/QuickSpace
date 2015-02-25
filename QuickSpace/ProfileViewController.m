@@ -96,7 +96,7 @@ NSArray *bookings;
 
 - (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex {
     Listing *currListing = [userListings objectAtIndex:actionSheet.tag];
-    NSLog(@"Button Index: %ld", (long)buttonIndex);
+
     // Remove listing
     if (listingSegments.selectedSegmentIndex == 1){
         if (buttonIndex == actionSheet.destructiveButtonIndex) {

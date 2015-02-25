@@ -20,6 +20,8 @@
 @property (nonatomic) NSString *object_id;
 @property (nonatomic) NSString *address;
 @property (nonatomic) NSString *amenities;
+@property (nonatomic) int rating;
+@property (nonatomic) NSString *owner;
 
 // Booking information
 @property (nonatomic, strong) NSDate *startTime;
