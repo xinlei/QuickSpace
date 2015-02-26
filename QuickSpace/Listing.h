@@ -28,6 +28,13 @@
 @property (nonatomic, strong) NSDate *endTime;
 @property (nonatomic, strong) NSString *guest_id;
 
++ (NSArray *) getAllAvailableListingsWithAmenities:(NSDictionary *) amenities
+                                         withTypes:(NSArray *)spaceType
+                                     withStartTime:(NSDate *) startTime
+                                       withEndTime:(NSDate *) endTime
+                                          forPrice:(NSNumber *)price
+                                      forLongitude:(NSNumber *)longitude
+                                       forLatitude:(NSNumber *)latitude; 
 + (NSMutableArray *)objectToListingsWith:(NSArray *)PFObjects;
 + (NSString *) amenitiesToString:(NSArray *) amenities;
 + (NSString *) typesToString:(NSArray *) spaceType;

@@ -16,6 +16,82 @@
 @synthesize endTime;
 @synthesize guest_id;
 
++ (NSArray *) getAllAvailableListingsWithAmenities:(NSDictionary *) amenities
+                                         withTypes:(NSArray *)spaceType
+                                     withStartTime:(NSDate *) startTime
+                                       withEndTime:(NSDate *) endTime
+                                          forPrice:(NSNumber *)price
+                                      forLongitude:(NSNumber *)longitude
+                                       forLatitude:(NSNumber *)latitude {
+    PFGeoPoint *discoverLocation = [PFGeoPoint geoPointWithLatitude:[latitude doubleValue] longitude:[longitude doubleValue]];
+    
+    //    PFGeoPoint *currLocationGeoPoint = [PFGeoPoint geoPointWithLocation:_currentLocation];
+    //    [self.locationManager stopUpdatingLocation];
+    
+    // Exclude booked locations
+    NSDate *now = [NSDate date];
+    __block NSMutableArray *excludedListings = [[NSMutableArray alloc] init];
+    PFQuery *innerQuery = [PFQuery queryWithClassName:@"Booking"];
+    [innerQuery whereKey:@"endTime" greaterThan:endTime];
+    [innerQuery whereKey:@"startTime" lessThan:startTime];
+    [innerQuery includeKey:@"listing"];
+    NSArray *existingBookings = [innerQuery findObjects];
+    for (PFObject *booking in existingBookings) {
+        PFObject *listing = [booking objectForKey:@"listing"];
+        [excludedListings addObject:[listing valueForKeyPath:@"objectId"]];
+    }
+    PFQuery *query = [PFQuery queryWithClassName:@"Listing"];
+    [query whereKey:@"objectId" notContainedIn:excludedListings];
+    [query whereKey:@"location" nearGeoPoint:discoverLocation withinMiles:20];
+    
+    bool wifi = [[amenities objectForKey:@"wifi"] boolValue];
+    bool refrigerator = [[amenities objectForKey:@"refrigerator"] boolValue];
+    bool study = [[amenities objectForKey:@"studyDesk"] boolValue];
+    bool monitor = [[amenities objectForKey:@"monitor"] boolValue];
+    bool services = [[amenities objectForKey:@"services"] boolValue];
+    
+    
+    NSMutableArray *amenitiesQueryArray = [[NSMutableArray alloc] init];
+    
+    if(wifi){
+        [amenitiesQueryArray addObject:@"wifi"];
+    }
+    if(refrigerator){
+        [amenitiesQueryArray addObject:@"refrigerator"];
+    }
+    if(study){
+        [amenitiesQueryArray addObject:@"studyDesk"];
+    }
+    if(monitor){
+        [amenitiesQueryArray addObject:@"monitor"];
+    }
+    if(services){
+        [amenitiesQueryArray addObject:@"services"];
+    }
+    
+    NSMutableArray *typeQueryArray = [[NSMutableArray alloc] init];
+    if ([[spaceType objectAtIndex:0] boolValue] == YES){
+        [typeQueryArray addObject:@"Rest"];
+    }
+    if ([[spaceType objectAtIndex:1] boolValue] == YES){
+        [typeQueryArray addObject:@"Closet"];
+    }
+    if ([[spaceType objectAtIndex:2] boolValue] == YES){
+        [typeQueryArray addObject:@"Office"];
+    }
+    if ([[spaceType objectAtIndex:3] boolValue] == YES){
+        [typeQueryArray addObject:@"Quiet"];;
+    }
+    if([amenitiesQueryArray count] > 0)
+        [query whereKey:@"amenities" containsAllObjectsInArray:amenitiesQueryArray];
+    if(price > 0)
+        [query whereKey:@"price" lessThanOrEqualTo: price];
+    if([typeQueryArray count] > 0)
+        [query whereKey:@"type" containsAllObjectsInArray:typeQueryArray];
+    
+    return [self objectToListingsWith:[query findObjects]];
+}
+
 + (NSMutableArray *)objectToListingsWith:(NSArray *)PFObjects {
     NSMutableArray *listings = [[NSMutableArray alloc] init];
 
@@ -38,9 +114,10 @@
 
         
         // Booking information. These fields are nil if no value has been set
-        lister.startTime = object[@"startTime"];
-        lister.endTime = object[@"endTime"];
-        lister.guest_id = object[@"guest_id"];
+        // depreciated
+        //lister.startTime = object[@"startTime"];
+        //lister.endTime = object[@"endTime"];
+        //lister.guest_id = object[@"guest_id"];
         
         
         NSMutableString *amenitiesString = [[NSMutableString alloc] init];

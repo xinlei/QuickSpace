@@ -24,8 +24,6 @@
 
 @implementation ViewController
 
-@synthesize tableView;
-
 NSArray *listings;
 
 - (void)viewDidLoad {
@@ -38,7 +36,6 @@ NSArray *listings;
 //        self.currentLocation = location;
 //    }
     self.tableView.rowHeight = 226;
-    //self.tableView.rowHeight = UITableViewAutomaticDimension;
     [self populateListings];
 }
 
@@ -74,86 +71,29 @@ NSArray *listings;
         NSNumber *price = [defaults objectForKey:@"maxPrice"];
         NSNumber *latitude = [defaults objectForKey:@"latitude"];
         NSNumber *longitude = [defaults objectForKey:@"longitude"];
-        PFGeoPoint *discoverLocation = [PFGeoPoint geoPointWithLatitude:[latitude doubleValue] longitude:[longitude doubleValue]];
         
-        //    PFGeoPoint *currLocationGeoPoint = [PFGeoPoint geoPointWithLocation:_currentLocation];
-        //    [self.locationManager stopUpdatingLocation];
+        // Get all available listings currently not booked
+        listings = [Listing getAllAvailableListingsWithAmenities:amenities withTypes:self.spaceType withStartTime:self.startDate withEndTime:self.endDate forPrice:price forLongitude:longitude forLatitude:latitude];
         
-        // Exclude booked locations
-        NSDate *now = [NSDate date];
-        __block NSMutableArray *excludedListings = [[NSMutableArray alloc] init];
-        PFQuery *innerQuery = [PFQuery queryWithClassName:@"Booking"];
-        [innerQuery whereKey:@"endTime" greaterThan:now];
-        [innerQuery whereKey:@"startTime" lessThan:now];
-        [innerQuery includeKey:@"listing"];
-        NSArray *existingBookings = [innerQuery findObjects];
-        for (PFObject *booking in existingBookings) {
-            PFObject *listing = [booking objectForKey:@"listing"];
-            [excludedListings addObject:[listing valueForKeyPath:@"objectId"]];
-        }
-        PFQuery *query = [PFQuery queryWithClassName:@"Listing"];
-        [query whereKey:@"objectId" notContainedIn:excludedListings];
-        
-        [query whereKey:@"location" nearGeoPoint:discoverLocation withinMiles:20];
-        bool wifi = [[amenities objectForKey:@"wifi"] boolValue];
-        bool refrigerator = [[amenities objectForKey:@"refrigerator"] boolValue];
-        bool study = [[amenities objectForKey:@"studyDesk"] boolValue];
-        bool monitor = [[amenities objectForKey:@"monitor"] boolValue];
-        bool services = [[amenities objectForKey:@"services"] boolValue];
-        
-        
-        NSMutableArray *amenitiesQueryArray = [[NSMutableArray alloc] init];
-        
-        if(wifi){
-            [amenitiesQueryArray addObject:@"wifi"];
-        }
-        if(refrigerator){
-            [amenitiesQueryArray addObject:@"refrigerator"];
-        }
-        if(study){
-            [amenitiesQueryArray addObject:@"studyDesk"];
-        }
-        if(monitor){
-            [amenitiesQueryArray addObject:@"monitor"];
-        }
-        if(services){
-            [amenitiesQueryArray addObject:@"services"];
-        }
-        
-        NSMutableArray *typeQueryArray = [[NSMutableArray alloc] init];
-        if ([[self.spaceType objectAtIndex:0] boolValue] == YES){
-            [typeQueryArray addObject:@"Rest"];
-        }
-        if ([[self.spaceType objectAtIndex:1] boolValue] == YES){
-            [typeQueryArray addObject:@"Closet"];
-        }
-        if ([[self.spaceType objectAtIndex:2] boolValue] == YES){
-            [typeQueryArray addObject:@"Office"];
-        }
-        if ([[self.spaceType objectAtIndex:3] boolValue] == YES){
-            [typeQueryArray addObject:@"Quiet"];;
-        }
-        if([amenitiesQueryArray count] > 0)
-            [query whereKey:@"amenities" containsAllObjectsInArray:amenitiesQueryArray];
-        if(price > 0)
-            [query whereKey:@"price" lessThanOrEqualTo: price];
-        if([typeQueryArray count] > 0)
-            [query whereKey:@"type" containsAllObjectsInArray:typeQueryArray];
-        
+        // Reset filters
         [defaults removeObjectForKey:@"additionalFilters"];
         [defaults removeObjectForKey:@"maxPrice"];
-        listings = [Listing objectToListingsWith:[query findObjects]];
+        
+        // Completion block
         dispatch_async(dispatch_get_main_queue(), ^{
             [self.tableView reloadData];
             [SVProgressHUD dismiss];
+            
+            // Error message if no listing is available
             if ([listings count] == 0){
                 UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"No Listings Available" message:@"Be the first to post a listing in this area!" delegate:self cancelButtonTitle:@"Ok" otherButtonTitles: nil];
                 [alert show];
-                
             }
         });
     });
 }
+
+// Go back to the previous screen when no listing is avilable
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
 {
     if (buttonIndex == 0){
@@ -172,17 +112,13 @@ NSArray *listings;
     
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:simpleTableIdentifier];
     
-    if (cell == nil) {
+    if (cell == nil)
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:simpleTableIdentifier];
-    }
-    
     Listing *thisListing = [listings objectAtIndex:indexPath.row];
     UIImageView *image = (UIImageView *)[cell viewWithTag:1];
     image.image = [UIImage imageWithData: thisListing.imageData];
-    
     UILabel *title = (UILabel *)[cell viewWithTag:2];
     title.text = thisListing.title;
-    
     
     NSMutableString *typeDesc = [[NSMutableString alloc] init];
     NSArray *spaceType = thisListing.types;
@@ -213,6 +149,7 @@ NSArray *listings;
     if ([segue.identifier isEqualToString:@"ShowListingDetail"]){
         NSIndexPath *indexPath = [self.tableView indexPathForSelectedRow];
         ListingDetailViewController *destViewController = segue.destinationViewController;
-        destViewController.listing = [listings objectAtIndex:indexPath.row];    }
+        destViewController.listing = [listings objectAtIndex:indexPath.row];
+    }
 }
 @end

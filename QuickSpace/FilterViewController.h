@@ -18,18 +18,12 @@
 @property (weak, nonatomic) IBOutlet UIButton *closetButton;
 @property (weak, nonatomic) IBOutlet UIButton *officeButton;
 @property (weak, nonatomic) IBOutlet UIButton *quietButton;
+@property (weak, nonatomic) IBOutlet UIDatePicker *startPicker;
+@property (weak, nonatomic) IBOutlet UIDatePicker *endPicker;
+@property (weak, nonatomic) IBOutlet UIView *timePickerContainer;
+
 - (IBAction)restSelected:(id)sender;
 - (IBAction)closetSelected:(id)sender;
 - (IBAction)officeSelected:(id)sender;
 - (IBAction)quietSelected:(id)sender;
-
-//start/end;
-- (IBAction)selectStart:(id)sender;
-- (IBAction)selectEnd:(id)sender;
-
-@property (weak, nonatomic) IBOutlet UIDatePicker *startPicker;
-@property (weak, nonatomic) IBOutlet UIDatePicker *endPicker;
-@property (weak, nonatomic) IBOutlet UIView *asdf;
-
-
 @end

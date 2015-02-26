@@ -51,8 +51,8 @@
     [endPicker setFrame:frame];
     
     
-    CGFloat viewX = self.asdf.frame.size.width;
-    CGFloat viewY = self.asdf.frame.size.height;
+    CGFloat viewX = self.timePickerContainer.frame.size.width;
+    CGFloat viewY = self.timePickerContainer.frame.size.height;
     NSLog(@"%f %f", viewX, viewY);
     
     //    UIDatePicker *datePicker = [[UIDatePicker alloc] init];
@@ -85,56 +85,22 @@
     return NO;
 }
 
-// On tap send filters to model and update the listings
-// Currently no effect on the listings
-- (IBAction)sendFilterValues:(UIButton *)sender {
-    if (restButton.selected)
-        [spaceType replaceObjectAtIndex:0 withObject:[NSNumber numberWithBool:YES]];
-    if (closetButton.selected)
-        [spaceType replaceObjectAtIndex:1 withObject:[NSNumber numberWithBool:YES]];
-    if (officeButton.selected)
-        [spaceType replaceObjectAtIndex:2 withObject:[NSNumber numberWithBool:YES]];
-    if (quietButton.selected)
-        [spaceType replaceObjectAtIndex:3 withObject:[NSNumber numberWithBool:YES]];
-}
-
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    if ([segue.identifier isEqualToString:@"RefineDetails"]) {
-        AdvancedFilterViewController *destViewController = segue.destinationViewController;
+    if ([segue.identifier isEqualToString:@"ShowAvailableListings"]) {
+        ViewController *destViewController = segue.destinationViewController;
+        [spaceType replaceObjectAtIndex:0 withObject:[NSNumber numberWithBool:restButton.selected]];
+        [spaceType replaceObjectAtIndex:1 withObject:[NSNumber numberWithBool:closetButton.selected]];
+        [spaceType replaceObjectAtIndex:2 withObject:[NSNumber numberWithBool:officeButton.selected]];
+        [spaceType replaceObjectAtIndex:3 withObject:[NSNumber numberWithBool:quietButton.selected]];
         
-        if (restButton.selected){
-            [spaceType replaceObjectAtIndex:0 withObject:[NSNumber numberWithBool:YES]];
-            NSLog(@"rest");
-        }
-        if (closetButton.selected)
-            [spaceType replaceObjectAtIndex:1 withObject:[NSNumber numberWithBool:YES]];
-        if (officeButton.selected)
-            [spaceType replaceObjectAtIndex:2 withObject:[NSNumber numberWithBool:YES]];
-        if (quietButton.selected)
-            [spaceType replaceObjectAtIndex:3 withObject:[NSNumber numberWithBool:YES]];
-        NSLog(@"%@", startPicker.date.description);
+        //NSLog(@"%@", startPicker.date.description);
         destViewController.spaceType = spaceType;
         destViewController.startDate = startPicker.date;
         destViewController.endDate = endPicker.date;
     }
-    
-    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-    [defaults setObject:startPicker.date forKey:@"startDate"];
-    [defaults setObject:endPicker.date forKey:@"endDate"];
 }
 
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
-{
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
-
-//spacetype buttons
+// spacetype buttons
 - (IBAction)restSelected:(id)sender {
     UIButton *button = (UIButton *)sender;
     button.selected = !button.selected;
@@ -153,12 +119,5 @@
 - (IBAction)quietSelected:(id)sender {
     UIButton *button = (UIButton *)sender;
     button.selected = !button.selected;
-}
-
-//date selection
-- (IBAction)selectStart:(id)sender {
-}
-
-- (IBAction)selectEnd:(id)sender {
 }
 @end
