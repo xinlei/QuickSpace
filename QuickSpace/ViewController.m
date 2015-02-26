@@ -24,6 +24,7 @@
 
 @implementation ViewController
 
+@synthesize tableView;
 
 NSArray *listings;
 
@@ -36,7 +37,8 @@ NSArray *listings;
 //    if (location) {
 //        self.currentLocation = location;
 //    }
-
+    self.tableView.rowHeight = 226;
+    //self.tableView.rowHeight = UITableViewAutomaticDimension;
     [self populateListings];
 }
 
