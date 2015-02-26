@@ -1128,12 +1128,15 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="1" id="wiF-ax-IvE">
+                            <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" id="wiF-ax-IvE">
                                 <rect key="frame" x="54" y="77" width="212" height="29"/>
                                 <segments>
                                     <segment title="List View"/>
                                     <segment title="Map View"/>
                                 </segments>
+                                <connections>
+                                    <action selector="viewSwitcherValueChanged:" destination="AeC-d2-JzX" eventType="valueChanged" id="7xd-84-z4N"/>
+                                </connections>
                             </segmentedControl>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="226" sectionHeaderHeight="22" sectionFooterHeight="22" id="XG0-5J-GCi">
                                 <rect key="frame" x="0.0" y="113" width="320" height="467"/>
@@ -1198,6 +1201,7 @@
                     </navigationItem>
                     <connections>
                         <outlet property="tableView" destination="XG0-5J-GCi" id="020-mo-fsY"/>
+                        <outlet property="viewSwitcher" destination="wiF-ax-IvE" id="21e-mD-Z8Z"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="SFx-cT-6Kr" userLabel="First Responder" sceneMemberID="firstResponder"/>

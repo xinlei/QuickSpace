@@ -23,6 +23,7 @@
 @end
 
 @implementation ViewController
+@synthesize viewSwitcher;
 
 NSArray *listings;
 
@@ -60,6 +61,11 @@ NSArray *listings;
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+- (IBAction)viewSwitcherValueChanged:(UISegmentedControl *)sender {
+    if (viewSwitcher.selectedSegmentIndex == 1){
+        
+    }
 }
 
 -(void) populateListings{
