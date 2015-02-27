@@ -117,7 +117,7 @@
         lister.address = object[@"address"];
         lister.object_id = object.objectId;
         lister.owner = object[@"lister"];
-
+        lister.amenities = object[@"amenities"];
         
         // Booking information. These fields are nil if no value has been set
         // depreciated

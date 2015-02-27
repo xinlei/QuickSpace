@@ -21,6 +21,11 @@
 @synthesize closetSwitch;
 @synthesize restSwitch;
 @synthesize quietSwitch;
+@synthesize wifiSwitch;
+@synthesize monitorSwitch;
+@synthesize servicesSwitch;
+@synthesize deskSwitch;
+@synthesize fridgeSwitch;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -34,6 +39,11 @@
     restSwitch.on = NO;
     officeSwitch.on = NO;
     closetSwitch.on = NO;
+    fridgeSwitch.on = NO;
+    deskSwitch.on = NO;
+    servicesSwitch.on = NO;
+    monitorSwitch.on = NO;
+    wifiSwitch.on = NO;
         
         //update the amenities in the listing view
 //        _amenitiesLabel.text = _listing.amenities;
@@ -57,6 +67,19 @@
                 officeSwitch.on = YES;
         }
     
+    NSArray *amenities = _listing.amenitiesArray;
+    for(NSString *amenity in amenities){
+        if([amenity isEqualToString:@"wifi"])
+            wifiSwitch.on = YES;
+        else if([amenity isEqualToString:@"refrigerator"])
+            fridgeSwitch.on = YES;
+        else if([amenity isEqualToString:@"monitor"])
+            monitorSwitch.on = YES;
+        else if([amenity isEqualToString:@"services"])
+            servicesSwitch.on = YES;
+        else if([amenity isEqualToString:@"studyDesk"])
+            deskSwitch.on = YES;
+    }
     
     
 }
@@ -84,25 +107,33 @@
 }
 
 - (void) prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Make sure that its only for the "submit changes" segue
-    
-    PFQuery *query = [PFQuery queryWithClassName:@"Listing"];
-    [query getObjectInBackgroundWithId:_listing.object_id block:^(PFObject *object, NSError *error){
-        object[@"title"] = _titleText.text;
-        object[@"address"] = addressTextField.text;
-        object[@"description"] = descriptionTextField.text;
+
+    if([segue.identifier isEqualToString:@"submitChangesSegue"]){
+        PFQuery *query = [PFQuery queryWithClassName:@"Listing"];
+        [query getObjectInBackgroundWithId:_listing.object_id block:^(PFObject *object, NSError *error){
+            object[@"title"] = _titleText.text;
+            object[@"address"] = addressTextField.text;
+            object[@"description"] = descriptionTextField.text;
         
-        NSMutableArray *typeArray = [[NSMutableArray alloc] init];
-        if(restSwitch.on) [typeArray addObject: @"Rest"];
-        if(closetSwitch.on) [typeArray addObject: @"Closet"];
-        if(quietSwitch.on) [typeArray addObject: @"Quiet"];
-        if(officeSwitch.on) [typeArray addObject: @"Office"];
-        object[@"type"] = typeArray;
+            NSMutableArray *typeArray = [[NSMutableArray alloc] init];
+            if(restSwitch.on) [typeArray addObject: @"Rest"];
+            if(closetSwitch.on) [typeArray addObject: @"Closet"];
+            if(quietSwitch.on) [typeArray addObject: @"Quiet"];
+            if(officeSwitch.on) [typeArray addObject: @"Office"];
+            object[@"type"] = typeArray;
+            
+            NSMutableArray *amenitiesArray = [[NSMutableArray alloc] init];
+            if(wifiSwitch.on) [amenitiesArray addObject: @"wifi"];
+            if(fridgeSwitch.on) [amenitiesArray addObject: @"refrigerator"];
+            if(deskSwitch.on) [amenitiesArray addObject: @"studyDesk"];
+            if(monitorSwitch.on) [amenitiesArray addObject: @"monitor"];
+            if(servicesSwitch.on) [amenitiesArray addObject: @"services"];
+            object[@"amenities"] = amenitiesArray;
 
         
-        [object saveInBackground];
-    }];
-    
+            [object saveInBackground];
+        }];
+    }
 }
 
 @end

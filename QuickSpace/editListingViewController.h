@@ -23,5 +23,10 @@
 @property (strong, nonatomic) IBOutlet UISwitch *closetSwitch;
 @property (strong, nonatomic) IBOutlet UISwitch *quietSwitch;
 @property (strong, nonatomic) IBOutlet UISwitch *officeSwitch;
+@property (strong, nonatomic) IBOutlet UISwitch *wifiSwitch;
+@property (strong, nonatomic) IBOutlet UISwitch *fridgeSwitch;
+@property (strong, nonatomic) IBOutlet UISwitch *deskSwitch;
+@property (strong, nonatomic) IBOutlet UISwitch *servicesSwitch;
+@property (strong, nonatomic) IBOutlet UISwitch *monitorSwitch;
 
 @end
