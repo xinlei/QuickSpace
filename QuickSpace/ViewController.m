@@ -122,7 +122,7 @@ NSArray *listings;
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:simpleTableIdentifier];
     Listing *thisListing = [listings objectAtIndex:indexPath.row];
     UIImageView *image = (UIImageView *)[cell viewWithTag:1];
-    image.image = [UIImage imageWithData: thisListing.imageData];
+    image.image = [UIImage imageWithData: [thisListing.allImageData firstObject]];
     UILabel *title = (UILabel *)[cell viewWithTag:2];
     title.text = thisListing.title;
     

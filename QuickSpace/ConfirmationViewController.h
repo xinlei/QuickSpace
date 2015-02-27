@@ -15,4 +15,5 @@
 @property (weak, nonatomic) IBOutlet UILabel *amenitiesLabel;
 @property (weak, nonatomic) IBOutlet UILabel *descriptionLabel;
 @property (nonatomic, retain) UIImage *theImage;
+@property (nonatomic, retain) NSArray *allPhotos;
 @end

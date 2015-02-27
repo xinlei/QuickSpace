@@ -10,6 +10,7 @@
 #import "Listing.h"
 @interface ConfirmationViewController ()
 @property NSArray *amenities;
+
 @end
 @implementation ConfirmationViewController
 
@@ -20,6 +21,7 @@
 @synthesize locationLabel;
 @synthesize amenitiesLabel;
 @synthesize descriptionLabel;
+@synthesize allPhotos;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -79,11 +81,14 @@
     
     
     NSNumber *num = [NSNumber numberWithInteger:[defaults integerForKey:@"newListingPrice"]];
-    UIImage *myImage = listingImg.image;
-    NSData *image = UIImagePNGRepresentation(myImage);
-    PFFile *imageFile = [PFFile fileWithName:@"listingImage.png" data:image];
+//    UIImage *myImage = listingImg.image;
     
-    NSArray *allImages = [[NSArray alloc] initWithObjects:imageFile, nil];
+    NSMutableArray *allImages = [[NSMutableArray alloc] init];
+    for(UIImage *image in allPhotos){
+        NSData *currImage = UIImagePNGRepresentation(image);
+        PFFile *imageFile = [PFFile fileWithName:@"listingImage.png" data:currImage];
+        [allImages addObject:imageFile];
+    }
     PFUser *currentUser = [PFUser currentUser];
     
     NSNumber *latitude = [defaults objectForKey:@"Latitude"];

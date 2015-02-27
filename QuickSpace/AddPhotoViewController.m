@@ -10,7 +10,7 @@
 #import "ConfirmationViewController.h"
 
 @interface AddPhotoViewController ()
-
+@property NSMutableArray *allPhotos;
 @end
 
 @implementation AddPhotoViewController
@@ -30,6 +30,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    self.allPhotos = [[NSMutableArray alloc] init];
     self.imageView.image = [UIImage imageNamed:@"no-image"];
     if (![UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera]) {
         
@@ -73,6 +74,7 @@
     
     UIImage *chosenImage = info[UIImagePickerControllerEditedImage];
     self.imageView.image = chosenImage;
+    [self.allPhotos addObject:chosenImage];
     
     [picker dismissViewControllerAnimated:YES completion:NULL];
     
@@ -89,6 +91,11 @@
     if ([segue.identifier isEqualToString:@"ShowAddBookingConfirmation"]){
         ConfirmationViewController *destViewController = segue.destinationViewController;
         destViewController.theImage = self.imageView.image;
+        
+        if([self.allPhotos count] == 0)
+            [self.allPhotos addObject:[UIImage imageNamed:@"no-image"]];
+        
+        destViewController.allPhotos = self.allPhotos;
     }
 }
 

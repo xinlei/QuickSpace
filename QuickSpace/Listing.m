@@ -99,10 +99,16 @@
         Listing *lister = [[Listing alloc] init];
         [object fetchIfNeeded];
         
+        NSMutableArray *imageData = [[NSMutableArray alloc]init];
+        NSArray *allImageFiles = object[@"images"];
+        for(PFFile *file in allImageFiles){
+            [imageData addObject:[file getData]];
+        }
+        lister.allImageData = imageData;
         
-        PFFile *imageFile = [object[@"images"] firstObject];
-        NSData *myData = [imageFile getData];
-        lister.imageData = myData;
+//        PFFile *imageFile = [object[@"images"] firstObject];
+//        NSData *myData = [imageFile getData];
+//        lister.imageData = myData;
         
         lister.title = object[@"title"];
         lister.types = object[@"type"];

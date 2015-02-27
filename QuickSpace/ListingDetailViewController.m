@@ -37,7 +37,7 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     titleLabel.text = listing.title;
-    image.image = [UIImage imageWithData: listing.imageData];
+    image.image = [UIImage imageWithData: [listing.allImageData firstObject]];
 
     
     int rating = listing.rating;
@@ -74,6 +74,7 @@
     [ListingDetailViewController addSeparatorOnto:scrollView at:ratingLabel.frame.origin.y + ratingLabel.frame.size.height + 8];
     
     //set location
+    locationLabel.text = listing.address;
     [ListingDetailViewController setItemLocation:location withPrev:ratingLabel inView:viewFrame apartBy:15];
     [ListingDetailViewController setItemLocation:locationLabel withPrev:ratingLabel inView:viewFrame apartBy:15];
     [ListingDetailViewController addSeparatorOnto:scrollView at:3];

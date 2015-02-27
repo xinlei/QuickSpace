@@ -26,7 +26,7 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     
-    _image.image = [UIImage imageWithData: _listing.imageData];
+    _image.image = [UIImage imageWithData: [_listing.allImageData firstObject]];
     addressTextField.text = _listing.address;
     
     _titleText.text = _listing.title;
@@ -84,6 +84,8 @@
 }
 
 - (void) prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+    // Make sure that its only for the "submit changes" segue
+    
     PFQuery *query = [PFQuery queryWithClassName:@"Listing"];
     [query getObjectInBackgroundWithId:_listing.object_id block:^(PFObject *object, NSError *error){
         object[@"title"] = _titleText.text;

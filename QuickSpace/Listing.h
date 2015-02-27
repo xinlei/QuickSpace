@@ -22,6 +22,7 @@
 @property (nonatomic) NSString *amenities;
 @property (nonatomic) int rating;
 @property (nonatomic) NSString *owner;
+@property (nonatomic) NSArray *allImageData;
 
 // Booking information
 @property (nonatomic, strong) NSDate *startTime;
