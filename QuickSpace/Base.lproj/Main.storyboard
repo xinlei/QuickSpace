@@ -1635,9 +1635,19 @@
         <simulatedScreenMetrics key="destination" type="retina4"/>
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
+<<<<<<< HEAD
         <segue reference="Wlr-8B-naY"/>
+=======
+<<<<<<< Updated upstream
+        <segue reference="gen-5L-AfH"/>
+>>>>>>> origin/master
         <segue reference="JLq-d7-1U3"/>
         <segue reference="PSf-8c-2F7"/>
+=======
+        <segue reference="PSf-8c-2F7"/>
+        <segue reference="KOp-dB-tul"/>
+        <segue reference="oHm-PT-uY9"/>
+>>>>>>> Stashed changes
         <segue reference="7PK-zv-boD"/>
     </inferredMetricsTieBreakers>
 </document>

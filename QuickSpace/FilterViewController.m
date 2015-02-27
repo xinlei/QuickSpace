@@ -98,6 +98,10 @@
         destViewController.startDate = startPicker.date;
         destViewController.endDate = endPicker.date;
     }
+    
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    [defaults setObject:startPicker.date forKey:@"startTime"];
+    [defaults setObject:endPicker.date forKey:@"endTime"];
 }
 
 // spacetype buttons
