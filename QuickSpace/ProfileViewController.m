@@ -11,7 +11,6 @@
 #import "SVProgressHUD.h"
 #import "Listing.h"
 #import <UIKit/UIKit.h>
-#import "editListingViewController.h"
 #import "AppDelegate.h"
 
 @interface ProfileViewController ()
@@ -75,7 +74,7 @@ NSArray *bookings;
                  delegate:self
                  cancelButtonTitle:@"Cancel"
                  destructiveButtonTitle:@"Remove Listing"
-                 otherButtonTitles:@"Edit Listing", nil];
+                 otherButtonTitles:@"Edit Listing", @"View Current Bookings", nil];
         popup.actionSheetStyle = UIActionSheetStyleBlackOpaque;
         [popup showInView:self.view];
         popup.tag = indexPath.row;
@@ -109,6 +108,10 @@ NSArray *bookings;
         // Edit Listing
         else if (buttonIndex == actionSheet.firstOtherButtonIndex){
             [self performSegueWithIdentifier:@"editSegue" sender:self];
+        }
+        //View Bookings
+        else if (buttonIndex == actionSheet.firstOtherButtonIndex + 1){
+            [self performSegueWithIdentifier:@"bookingSegue" sender:self];
         }
     }
     
@@ -241,6 +244,11 @@ NSArray *bookings;
     if([[segue identifier] isEqualToString:@"editSegue"]){
         Listing *selectedListing = [userListings objectAtIndex:indexPath.row];
         editListingViewController *destViewController = segue.destinationViewController;
+        destViewController.listing = selectedListing;
+    }
+    else if ([[segue identifier] isEqualToString:@"bookingSegue"]){
+        Listing *selectedListing = [userListings objectAtIndex:indexPath.row];
+        viewBookingsController *destViewController = segue.destinationViewController;
         destViewController.listing = selectedListing;
     }
 }

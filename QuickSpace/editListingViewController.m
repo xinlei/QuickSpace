@@ -108,8 +108,12 @@
     [ListingDetailViewController setItemLocation:titleLabel withPrev:image apartBy:10];
     [ListingDetailViewController setItemLocation:titleText withPrev:image apartBy:10];
     
+    //set address
+    [ListingDetailViewController setItemLocation:addressLabel withPrev:titleText apartBy:15];
+    [ListingDetailViewController setItemLocation:addressTextField withPrev:titleText apartBy:15];
+    
     //set spacetype
-    [ListingDetailViewController setItemLocation:typeLabel withPrev:titleText apartBy:10];
+    [ListingDetailViewController setItemLocation:typeLabel withPrev:addressTextField apartBy:15];
     //set rest
     [ListingDetailViewController setItemLocation:restLabel withPrev:typeLabel apartBy:5];
     [editListingViewController centerLeft:restLabel inFrame:viewFrame];
@@ -130,13 +134,10 @@
     [editListingViewController centerLeft:officeLabel inFrame:viewFrame];
     [ListingDetailViewController setItemLocation:officeSwitch withPrev:quietSwitch apartBy:5];
     [editListingViewController centerRight:officeSwitch inFrame:viewFrame];
-    
-    //set address
-    [ListingDetailViewController setItemLocation:addressLabel withPrev:officeSwitch apartBy:10];
-    [ListingDetailViewController setItemLocation:addressTextField withPrev:officeSwitch apartBy:10];
+//    [ListingDetailViewController addSeparatorOnto:scrollView at:officeSwitch.frame.origin.y + officeSwitch.frame.size.height + 8];
     
     //set amenities
-    [ListingDetailViewController setItemLocation:amenitiesLabel withPrev:addressTextField apartBy:10];
+    [ListingDetailViewController setItemLocation:amenitiesLabel withPrev:officeSwitch apartBy:15];
     //wifi
     [ListingDetailViewController setItemLocation:wifiLabel withPrev:amenitiesLabel apartBy:5];
     [editListingViewController centerLeft:wifiLabel inFrame:viewFrame];

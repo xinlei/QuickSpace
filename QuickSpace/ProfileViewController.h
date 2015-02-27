@@ -7,6 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "editListingViewController.h"
+#import "viewBookingsController.h"
 
 @interface ProfileViewController : UIViewController <UITableViewDataSource, UITableViewDelegate, UIActionSheetDelegate>
 

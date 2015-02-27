@@ -114,12 +114,53 @@
                         <outlet property="listingSegments" destination="YWd-Rd-4kD" id="Pn8-iF-GGF"/>
                         <outlet property="listingTable" destination="7oN-Wc-k5G" id="azp-MU-wbB"/>
                         <outlet property="logoutButton" destination="9wW-aD-u20" id="ad0-AJ-apo"/>
-                        <segue destination="2c9-BB-Kbj" kind="push" identifier="editSegue" id="heT-ha-zGI"/>
+                        <segue destination="5l8-sE-REp" kind="push" identifier="bookingSegue" id="gK5-8T-45m"/>
+                        <segue destination="2c9-BB-Kbj" kind="push" identifier="editSegue" id="G5F-K3-k8X"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="yRc-qn-SD9" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-714" y="-1172"/>
+        </scene>
+        <!--View Bookings Controller-->
+        <scene sceneID="aPa-xG-Frm">
+            <objects>
+                <viewController id="5l8-sE-REp" customClass="viewBookingsController" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="PRT-3a-rLe">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Listing Title" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="6x5-Bo-mAq">
+                                <rect key="frame" x="0.0" y="67" width="320" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="nsA-r5-VxO">
+                                <rect key="frame" x="0.0" y="96" width="320" height="421"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <prototypes>
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" id="yv6-J6-Rdz">
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="yv6-J6-Rdz" id="5T5-Wu-MdE">
+                                            <autoresizingMask key="autoresizingMask"/>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                </prototypes>
+                            </tableView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="RJ1-bn-B0C"/>
+                    <connections>
+                        <outlet property="listingTitle" destination="6x5-Bo-mAq" id="cZT-ZF-Q6N"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="NEj-56-NMk" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-291" y="-1806"/>
         </scene>
         <!--Edit Listing View Controller-->
         <scene sceneID="1oL-5E-12j">
@@ -1635,9 +1676,9 @@
         <simulatedScreenMetrics key="destination" type="retina4"/>
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
-        <segue reference="Wlr-8B-naY"/>
-        <segue reference="JLq-d7-1U3"/>
-        <segue reference="PSf-8c-2F7"/>
         <segue reference="7PK-zv-boD"/>
+        <segue reference="JLq-d7-1U3"/>
+        <segue reference="Wlr-8B-naY"/>
+        <segue reference="PSf-8c-2F7"/>
     </inferredMetricsTieBreakers>
 </document>

@@ -33,6 +33,7 @@
 		178097B71A7D946900BDBB1A /* CancelViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 178097B61A7D946900BDBB1A /* CancelViewController.m */; };
 		17E63AB91A86EBCF00F763C1 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 17E63AB81A86EBCF00F763C1 /* MapKit.framework */; };
 		17EEBBE51A9468240055447F /* editListingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 17EEBBE41A9468240055447F /* editListingViewController.m */; };
+		2115DBEB1AA0969F00DA56EA /* viewBookingsController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2115DBEA1AA0969F00DA56EA /* viewBookingsController.m */; };
 		211E0AA81A7275C0003E4D99 /* room1.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 211E0AA51A7275C0003E4D99 /* room1.jpg */; };
 		211E0AA91A7275C0003E4D99 /* room2.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 211E0AA61A7275C0003E4D99 /* room2.jpg */; };
 		211E0AAA1A7275C0003E4D99 /* room3.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 211E0AA71A7275C0003E4D99 /* room3.jpg */; };
@@ -108,6 +109,8 @@
 		17E63AB81A86EBCF00F763C1 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 		17EEBBE31A9468240055447F /* editListingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = editListingViewController.h; sourceTree = "<group>"; };
 		17EEBBE41A9468240055447F /* editListingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = editListingViewController.m; sourceTree = "<group>"; };
+		2115DBE91AA0969F00DA56EA /* viewBookingsController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = viewBookingsController.h; sourceTree = "<group>"; };
+		2115DBEA1AA0969F00DA56EA /* viewBookingsController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = viewBookingsController.m; sourceTree = "<group>"; };
 		211E0AA51A7275C0003E4D99 /* room1.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = room1.jpg; sourceTree = "<group>"; };
 		211E0AA61A7275C0003E4D99 /* room2.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = room2.jpg; sourceTree = "<group>"; };
 		211E0AA71A7275C0003E4D99 /* room3.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = room3.jpg; sourceTree = "<group>"; };
@@ -226,6 +229,8 @@
 				F0144CE71A78917A00113F95 /* AdvancedFilterViewController.m */,
 				F0241E3B1A783ED4009FF170 /* assets */,
 				170EFA111A71C799004EA68B /* Main.storyboard */,
+				2115DBE91AA0969F00DA56EA /* viewBookingsController.h */,
+				2115DBEA1AA0969F00DA56EA /* viewBookingsController.m */,
 				17EEBBE31A9468240055447F /* editListingViewController.h */,
 				17EEBBE41A9468240055447F /* editListingViewController.m */,
 				F0241E521A784DD7009FF170 /* FilterViewController.h */,
@@ -474,6 +479,7 @@
 				F0D6251C1A7AF98E0063CE0B /* AddDetailViewController.m in Sources */,
 				F0A4D8361A75C39A002D8B2F /* DiscoverViewController.m in Sources */,
 				211E0AB01A75B19B003E4D99 /* Listing.m in Sources */,
+				2115DBEB1AA0969F00DA56EA /* viewBookingsController.m in Sources */,
 				170EFA101A71C799004EA68B /* ViewController.m in Sources */,
 				F0241E541A784DD7009FF170 /* FilterViewController.m in Sources */,
 				F0D625191A7AE54D0063CE0B /* HostViewController.m in Sources */,
