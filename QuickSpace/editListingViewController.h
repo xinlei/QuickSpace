@@ -8,25 +8,52 @@
 
 #import <UIKit/UIKit.h>
 #import "Listing.h"
+#import "ListingDetailViewController.h"
 
 @interface editListingViewController : UIViewController
+@property (strong, nonatomic) IBOutlet UIImageView *image;
+//title
+@property (weak, nonatomic) IBOutlet UILabel *titleLabel;
 @property (strong, nonatomic) IBOutlet UITextField *titleText;
 
-@property (strong, nonatomic) IBOutlet UILabel *locationLabel;
+//space types
+@property (weak, nonatomic) IBOutlet UILabel *typeLabel;
 
-@property (strong, nonatomic) IBOutlet UITextField *descriptionTextField;
-@property (strong, nonatomic) IBOutlet UITextField *addressTextField;
-
-@property (nonatomic) Listing *listing;
-@property (strong, nonatomic) IBOutlet UIImageView *image;
+@property (weak, nonatomic) IBOutlet UILabel *restLabel;
 @property (strong, nonatomic) IBOutlet UISwitch *restSwitch;
+@property (weak, nonatomic) IBOutlet UILabel *closetLabel;
 @property (strong, nonatomic) IBOutlet UISwitch *closetSwitch;
+@property (weak, nonatomic) IBOutlet UILabel *quietLabel;
 @property (strong, nonatomic) IBOutlet UISwitch *quietSwitch;
+@property (weak, nonatomic) IBOutlet UILabel *officeLabel;
 @property (strong, nonatomic) IBOutlet UISwitch *officeSwitch;
+
+//address
+@property (weak, nonatomic) IBOutlet UILabel *addressLabel;
+@property (weak, nonatomic) IBOutlet UITextField *addressTextField;
+
+//amenities
+@property (weak, nonatomic) IBOutlet UILabel *amenitiesLabel;
+@property (weak, nonatomic) IBOutlet UILabel *wifiLabel;
 @property (strong, nonatomic) IBOutlet UISwitch *wifiSwitch;
+@property (weak, nonatomic) IBOutlet UILabel *fridgeLabel;
 @property (strong, nonatomic) IBOutlet UISwitch *fridgeSwitch;
+@property (weak, nonatomic) IBOutlet UILabel *deskLabel;
 @property (strong, nonatomic) IBOutlet UISwitch *deskSwitch;
+@property (weak, nonatomic) IBOutlet UILabel *servicesLabel;
 @property (strong, nonatomic) IBOutlet UISwitch *servicesSwitch;
+@property (weak, nonatomic) IBOutlet UILabel *monitorLabel;
 @property (strong, nonatomic) IBOutlet UISwitch *monitorSwitch;
+
+//decriptions
+@property (weak, nonatomic) IBOutlet UILabel *descriptionLabel;
+@property (strong, nonatomic) IBOutlet UITextField *descriptionTextField;
+
+@property (weak, nonatomic) IBOutlet UIButton *saveButton;
+@property (weak, nonatomic) IBOutlet UIScrollView *scrollView;
+@property (nonatomic) Listing *listing;
+
++ (void) centerLeft:(UIView *)item inFrame:(CGRect)viewFrame;
++ (void) centerRight:(UIView *)item inFrame:(CGRect)viewFrame;
 
 @end

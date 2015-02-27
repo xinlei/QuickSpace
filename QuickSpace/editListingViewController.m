@@ -15,26 +15,44 @@
 
 @implementation editListingViewController
 
-@synthesize descriptionTextField;
-@synthesize addressTextField;
+@synthesize image;
+@synthesize titleLabel;
+@synthesize titleText;
+@synthesize typeLabel;
+@synthesize restLabel;
+@synthesize closetLabel;
+@synthesize quietLabel;
+@synthesize officeLabel;
 @synthesize officeSwitch;
 @synthesize closetSwitch;
 @synthesize restSwitch;
 @synthesize quietSwitch;
+@synthesize addressLabel;
+@synthesize addressTextField;
+@synthesize amenitiesLabel;
+@synthesize wifiLabel;
+@synthesize fridgeLabel;
+@synthesize deskLabel;
+@synthesize servicesLabel;
+@synthesize monitorLabel;
 @synthesize wifiSwitch;
 @synthesize monitorSwitch;
 @synthesize servicesSwitch;
 @synthesize deskSwitch;
 @synthesize fridgeSwitch;
+@synthesize descriptionLabel;
+@synthesize descriptionTextField;
+@synthesize saveButton;
+@synthesize scrollView;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     
-    _image.image = [UIImage imageWithData: [_listing.allImageData firstObject]];
+    image.image = [UIImage imageWithData: [_listing.allImageData firstObject]];
     addressTextField.text = _listing.address;
     
-    _titleText.text = _listing.title;
+    titleText.text = _listing.title;
     quietSwitch.on = NO;
     restSwitch.on = NO;
     officeSwitch.on = NO;
@@ -81,7 +99,103 @@
             deskSwitch.on = YES;
     }
     
+    //initiate scroll view
+    scrollView.frame = self.view.frame;
+    scrollView.contentSize = CGSizeMake(self.view.frame.size.width, 1000);
+    CGRect viewFrame = scrollView.frame;
     
+    //set title
+    [ListingDetailViewController setItemLocation:titleLabel withPrev:image apartBy:10];
+    [ListingDetailViewController setItemLocation:titleText withPrev:image apartBy:10];
+    
+    //set spacetype
+    [ListingDetailViewController setItemLocation:typeLabel withPrev:titleText apartBy:10];
+    //set rest
+    [ListingDetailViewController setItemLocation:restLabel withPrev:typeLabel apartBy:5];
+    [editListingViewController centerLeft:restLabel inFrame:viewFrame];
+    [ListingDetailViewController setItemLocation:restSwitch withPrev:typeLabel apartBy:5];
+    [editListingViewController centerRight:restSwitch inFrame:viewFrame];
+    //set closet
+    [ListingDetailViewController setItemLocation:closetLabel withPrev:restSwitch apartBy:5];
+    [editListingViewController centerLeft:closetLabel inFrame:viewFrame];
+    [ListingDetailViewController setItemLocation:closetSwitch withPrev:restSwitch apartBy:5];
+    [editListingViewController centerRight:closetSwitch inFrame:viewFrame];
+    //set quiet
+    [ListingDetailViewController setItemLocation:quietLabel withPrev:closetSwitch apartBy:5];
+    [editListingViewController centerLeft:quietLabel inFrame:viewFrame];
+    [ListingDetailViewController setItemLocation:quietSwitch withPrev:closetSwitch apartBy:5];
+    [editListingViewController centerRight:quietSwitch inFrame:viewFrame];
+    //set office
+    [ListingDetailViewController setItemLocation:officeLabel withPrev:quietSwitch apartBy:5];
+    [editListingViewController centerLeft:officeLabel inFrame:viewFrame];
+    [ListingDetailViewController setItemLocation:officeSwitch withPrev:quietSwitch apartBy:5];
+    [editListingViewController centerRight:officeSwitch inFrame:viewFrame];
+    
+    //set address
+    [ListingDetailViewController setItemLocation:addressLabel withPrev:officeSwitch apartBy:10];
+    [ListingDetailViewController setItemLocation:addressTextField withPrev:officeSwitch apartBy:10];
+    
+    //set amenities
+    [ListingDetailViewController setItemLocation:amenitiesLabel withPrev:addressTextField apartBy:10];
+    //wifi
+    [ListingDetailViewController setItemLocation:wifiLabel withPrev:amenitiesLabel apartBy:5];
+    [editListingViewController centerLeft:wifiLabel inFrame:viewFrame];
+    [ListingDetailViewController setItemLocation:wifiSwitch withPrev:amenitiesLabel apartBy:5];
+    [editListingViewController centerRight:wifiSwitch inFrame:viewFrame];
+    //fridge
+    [ListingDetailViewController setItemLocation:fridgeLabel withPrev:wifiSwitch apartBy:5];
+    [editListingViewController centerLeft:fridgeLabel inFrame:viewFrame];
+    [ListingDetailViewController setItemLocation:fridgeSwitch withPrev:wifiSwitch apartBy:5];
+    [editListingViewController centerRight:fridgeSwitch inFrame:viewFrame];
+    //desk
+    [ListingDetailViewController setItemLocation:deskLabel withPrev:fridgeSwitch apartBy:5];
+    [editListingViewController centerLeft:deskLabel inFrame:viewFrame];
+    [ListingDetailViewController setItemLocation:deskSwitch withPrev:fridgeSwitch apartBy:5];
+    [editListingViewController centerRight:deskSwitch inFrame:viewFrame];
+    //janitorial
+    [ListingDetailViewController setItemLocation:servicesLabel withPrev:deskSwitch apartBy:5];
+    [editListingViewController centerLeft:servicesLabel inFrame:viewFrame];
+    [ListingDetailViewController setItemLocation:servicesSwitch withPrev:deskSwitch apartBy:5];
+    [editListingViewController centerRight:servicesSwitch inFrame:viewFrame];
+    //monitor
+    [ListingDetailViewController setItemLocation:monitorLabel withPrev:servicesSwitch apartBy:5];
+    [editListingViewController centerLeft:monitorLabel inFrame:viewFrame];
+    [ListingDetailViewController setItemLocation:monitorSwitch withPrev:servicesSwitch apartBy:5];
+    [editListingViewController centerRight:monitorSwitch inFrame:viewFrame];
+    
+    //other descriptions
+    [ListingDetailViewController setItemLocation:descriptionLabel withPrev:monitorSwitch apartBy:10];
+    [ListingDetailViewController setItemLocation:descriptionTextField withPrev:descriptionLabel apartBy:5];
+    
+    //if the page is longer than one page, move the book button down
+    CGFloat endOfPage = descriptionTextField.frame.origin.y + descriptionTextField.frame.size.height + 10 + saveButton.frame.size.height;
+    CGFloat bottomOfView = self.view.frame.size.height - self.navigationController.navigationBar.frame.size.height - self.tabBarController.tabBar.frame.size.height - [UIApplication sharedApplication].statusBarFrame.size.height;
+    CGRect frame = saveButton.frame;
+    if (endOfPage > bottomOfView){
+        frame.origin.y = descriptionTextField.frame.origin.y + descriptionTextField.frame.size.height + 10;
+        saveButton.frame = frame;
+    } else {
+        frame.origin.y = bottomOfView - saveButton.frame.size.height;
+        saveButton.frame = frame;
+    }
+    
+    //resize scrollview frame
+    scrollView.contentSize = CGSizeMake(self.view.frame.size.width, saveButton.frame.size.height + saveButton.frame.origin.y);
+    
+}
+
++ (void) centerLeft:(UIView *)item inFrame:(CGRect)viewFrame
+{
+    CGRect frame = item.frame;
+    frame.origin.x = viewFrame.size.width/2 - item.frame.size.width - 1;
+    item.frame = frame;
+}
+
++ (void) centerRight:(UIView *)item inFrame:(CGRect)viewFrame
+{
+    CGRect frame = item.frame;
+    frame.origin.x = viewFrame.size.width/2 + 1;
+    item.frame = frame;
 }
 
 - (void)didReceiveMemoryWarning {
@@ -97,7 +211,7 @@
 
 -(BOOL) textFieldShouldReturn:(UITextField *)textField
 {
-    if(textField == _titleText) {
+    if(textField == titleText) {
       [textField resignFirstResponder];
     } else if (textField == addressTextField){
         [textField resignFirstResponder];
@@ -111,7 +225,7 @@
     if([segue.identifier isEqualToString:@"submitChangesSegue"]){
         PFQuery *query = [PFQuery queryWithClassName:@"Listing"];
         [query getObjectInBackgroundWithId:_listing.object_id block:^(PFObject *object, NSError *error){
-            object[@"title"] = _titleText.text;
+            object[@"title"] = titleText.text;
             object[@"address"] = addressTextField.text;
             object[@"description"] = descriptionTextField.text;
         
