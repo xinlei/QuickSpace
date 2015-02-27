@@ -8,6 +8,7 @@
 
 #import "ListingDetailViewController.h"
 #import "BookingConfirmationViewController.h"
+#import "Booking.h"
 #import <Parse/Parse.h>
 
 @interface ListingDetailViewController () {
@@ -137,27 +138,15 @@
     // Dispose of any resources that can be recreated.
 }
 
-// Set guest_id, startTime, and endTime and save to server
+// Create a new booking for this listing
 - (IBAction)bookButton:(UIButton *)sender {
-    PFObject *booking = [PFObject objectWithClassName:@"Booking"];
-
-    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     
-        PFUser *currentUser = [PFUser currentUser];
-        
-        // Update start and end time
-        NSDate *startTime = [defaults objectForKey:@"startDate"];
-        NSDate *endTime = [defaults objectForKey:@"endDate"];
-        
-        booking[@"startTime"] = startTime;
-        booking[@"endTime"] = endTime;
-        booking[@"guest"] = currentUser;
-        booking[@"owner"] = listing.owner;
-        booking[@"rating"] = @0;
-        booking[@"listing"] = listing;
-        [booking saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
-            if (succeeded) booking_id = [booking objectId];
-        }];
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    PFUser *currentUser = [PFUser currentUser];
+    NSDate *startTime = [defaults objectForKey:@"startTime"];
+    NSDate *endTime = [defaults objectForKey:@"endTime"];
+    Booking *booking = [[Booking alloc] initWithStartTime:startTime endTime:endTime guest:currentUser owner:listing.owner listing:listing];
+    booking_id = [booking confirmBooking];
 }
 
 
