@@ -39,11 +39,6 @@
         UINavigationController* navigation = [[UINavigationController alloc] initWithRootViewController:rootController];
         self.window.rootViewController = navigation;
     }
-    
-    NSLog(@"babfsf");
-    PFACL *defaultACL = [PFACL ACLWithUser:currentUser];
-    [PFACL setDefaultACL:defaultACL withAccessForCurrentUser:YES];
-    
     return YES;
 }
 

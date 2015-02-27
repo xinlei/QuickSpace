@@ -58,7 +58,6 @@
 		F0D625151A7AD92C0063CE0B /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = F0D625141A7AD92C0063CE0B /* Default-568h@2x.png */; };
 		F0D625191A7AE54D0063CE0B /* HostViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F0D625181A7AE54D0063CE0B /* HostViewController.m */; };
 		F0D6251C1A7AF98E0063CE0B /* AddDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F0D6251B1A7AF98E0063CE0B /* AddDetailViewController.m */; };
-		F0EB21161AA0030600A6DF15 /* Booking.m in Sources */ = {isa = PBXBuildFile; fileRef = F0EB21151AA0030600A6DF15 /* Booking.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -149,8 +148,6 @@
 		F0D625181A7AE54D0063CE0B /* HostViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HostViewController.m; sourceTree = "<group>"; };
 		F0D6251A1A7AF98E0063CE0B /* AddDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddDetailViewController.h; sourceTree = "<group>"; };
 		F0D6251B1A7AF98E0063CE0B /* AddDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddDetailViewController.m; sourceTree = "<group>"; };
-		F0EB21141AA0030600A6DF15 /* Booking.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Booking.h; sourceTree = "<group>"; };
-		F0EB21151AA0030600A6DF15 /* Booking.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Booking.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -247,8 +244,6 @@
 				172695221A7872C300DA446E /* LoginViewController.m */,
 				F0A4D8341A75C39A002D8B2F /* DiscoverViewController.h */,
 				F0A4D8351A75C39A002D8B2F /* DiscoverViewController.m */,
-				F0EB21141AA0030600A6DF15 /* Booking.h */,
-				F0EB21151AA0030600A6DF15 /* Booking.m */,
 				211E0AAE1A75B19B003E4D99 /* Listing.h */,
 				211E0AAF1A75B19B003E4D99 /* Listing.m */,
 				211E0AAB1A72E4E7003E4D99 /* ListingDetailViewController.h */,
@@ -471,7 +466,6 @@
 				F08C486D1A8197510025EA2D /* AddPhotoViewController.m in Sources */,
 				17443CF51A881E0100A0694F /* SetLocationViewController.m in Sources */,
 				172695231A7872C300DA446E /* LoginViewController.m in Sources */,
-				F0EB21161AA0030600A6DF15 /* Booking.m in Sources */,
 				211E0AAD1A72E4E7003E4D99 /* ListingDetailViewController.m in Sources */,
 				F0144CE81A78917A00113F95 /* AdvancedFilterViewController.m in Sources */,
 				F085B8F31A7DA7BD00AA5003 /* ProfileViewController.m in Sources */,

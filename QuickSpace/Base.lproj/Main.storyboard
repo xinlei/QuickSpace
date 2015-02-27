@@ -1279,7 +1279,7 @@
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" tag="4" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Location" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="zR0-2L-6Qx">
-                                                    <rect key="frame" x="8" y="205" width="172" height="21"/>
+                                                    <rect key="frame" x="8" y="206" width="172" height="21"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="13"/>
                                                     <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                                     <nil key="highlightedColor"/>
@@ -1635,19 +1635,9 @@
         <simulatedScreenMetrics key="destination" type="retina4"/>
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
-<<<<<<< HEAD
         <segue reference="Wlr-8B-naY"/>
-=======
-<<<<<<< Updated upstream
-        <segue reference="gen-5L-AfH"/>
->>>>>>> origin/master
         <segue reference="JLq-d7-1U3"/>
         <segue reference="PSf-8c-2F7"/>
-=======
-        <segue reference="PSf-8c-2F7"/>
-        <segue reference="KOp-dB-tul"/>
-        <segue reference="oHm-PT-uY9"/>
->>>>>>> Stashed changes
         <segue reference="7PK-zv-boD"/>
     </inferredMetricsTieBreakers>
 </document>
