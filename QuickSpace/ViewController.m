@@ -64,10 +64,11 @@ NSArray *listings;
 }
 - (IBAction)viewSwitcherValueChanged:(UISegmentedControl *)sender {
     if (viewSwitcher.selectedSegmentIndex == 1){
-        
+        //Implement MapView
     }
 }
 
+// Fill an array of available listings given a set of user filters
 -(void) populateListings{
     listings = [[NSArray alloc] init];
     [SVProgressHUD show];
@@ -77,9 +78,11 @@ NSArray *listings;
         NSNumber *price = [defaults objectForKey:@"maxPrice"];
         NSNumber *latitude = [defaults objectForKey:@"latitude"];
         NSNumber *longitude = [defaults objectForKey:@"longitude"];
+        NSDate *startTime = [defaults objectForKey:@"startTime"];
+        NSDate *endTime = [defaults objectForKey:@"endTime"];
         
         // Get all available listings currently not booked
-        listings = [Listing getAllAvailableListingsWithAmenities:amenities withTypes:self.spaceType withStartTime:self.startDate withEndTime:self.endDate forPrice:price forLongitude:longitude forLatitude:latitude];
+        listings = [Listing getAllAvailableListingsWithAmenities:amenities withTypes:self.spaceType withStartTime:startTime withEndTime:endTime forPrice:price forLongitude:longitude forLatitude:latitude];
         
         // Reset filters
         [defaults removeObjectForKey:@"additionalFilters"];
@@ -142,12 +145,6 @@ NSArray *listings;
     location.text = thisListing.address;
     
     return cell;
-}
-
-- (void) tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
-{
-//    UITableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
-//    cell.accessoryType = UITableViewCellAccessoryCheckmark;
 }
 
 - (void) prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender

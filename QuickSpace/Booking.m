@@ -7,49 +7,22 @@
 //
 
 #import "Booking.h"
+#import <Parse/PFObject+Subclass.h>
 
 @implementation Booking
-@synthesize startTime;
-@synthesize endTime;
-@synthesize guest;
-@synthesize owner;
-@synthesize listing;
-@synthesize objectId; 
-//@synthesize rating = _rating;
+@dynamic startTime;
+@dynamic endTime;
+@dynamic guest;
+@dynamic owner;
+@dynamic listing;
+@dynamic rating;
 
-- (instancetype)initWithStartTime:(NSDate *)aStartTime endTime:(NSDate *)aEndTime guest:(NSObject *)aGuest owner:(NSObject *)aOwner listing:(Listing *)aListing{
-    if (self == [super init]) {
-        startTime = aStartTime;
-        endTime = aEndTime;
-        guest = aGuest;
-        owner = aOwner;
-        listing = aListing;
-        _rating = 0;
-    }
-    return self;
++ (void)load {
+    [self registerSubclass];
 }
 
-- (NSString *) confirm {
-    PFObject *booking = [PFObject objectWithClassName:@"Booking"];
-    PFObject *parseListing = [PFObject objectWithoutDataWithClassName:@"Listing" objectId:listing.object_id];
-    booking[@"startTime"] = startTime;
-    booking[@"endTime"] = endTime;
-    booking[@"guest"] = guest;
-    booking[@"owner"] = owner;
-    booking[@"rating"] = [NSNumber numberWithInt:_rating];
-    //[booking setObject:listing forKey:@"listing"];
-    booking[@"listing"] = parseListing;
-    if([booking save]){
-        objectId = [booking objectId];
-        return [booking objectId];
-    } else {
-        return nil;
-    }
++ (NSString *)parseClassName {
+    return @"Booking";
 }
 
-- (BOOL) cancel {
-    PFQuery *query = [PFQuery queryWithClassName:@"Booking"];
-    PFObject *booking = [query getObjectWithId:objectId];
-    return ([booking delete]);
-}
 @end

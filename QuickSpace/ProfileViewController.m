@@ -59,6 +59,7 @@ NSArray *bookings;
     [defaults removeObjectForKey:@"Longitude"];
     [PFUser logOut];
     
+    // Send back to the login page
     AppDelegate *appDelegateTemp = [[UIApplication sharedApplication]delegate];
     UIViewController* rootController = [[UIStoryboard storyboardWithName:@"Main" bundle:[NSBundle mainBundle]] instantiateViewControllerWithIdentifier:@"LoginViewController"];
     UINavigationController* navigation = [[UINavigationController alloc] initWithRootViewController:rootController];
@@ -67,7 +68,7 @@ NSArray *bookings;
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     
-    // Show popup menu
+    // Show popup menu for additional options
     if (listingSegments.selectedSegmentIndex == 1){
         popup = [[UIActionSheet alloc]
                  initWithTitle:@"Listing Options"

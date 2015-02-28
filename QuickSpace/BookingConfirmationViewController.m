@@ -41,7 +41,7 @@
 }
 
 - (IBAction)cancelBooking:(UIButton *)sender {
-    [booking cancel];
+    //[booking cancel];
 }
 
 @end

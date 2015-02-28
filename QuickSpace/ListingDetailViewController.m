@@ -144,9 +144,15 @@
     PFUser *currentUser = [PFUser currentUser];
     NSDate *startTime = [defaults objectForKey:@"startTime"];
     NSDate *endTime = [defaults objectForKey:@"endTime"];
-    Booking *aBooking = [[Booking alloc] initWithStartTime:startTime endTime:endTime guest:currentUser owner:listing.owner listing:listing];
-    [booking confirm];
-    booking = aBooking;
+    
+    Booking *aBooking = [Booking object];
+    aBooking.startTime = startTime;
+    aBooking.endTime = endTime;
+    aBooking.guest = currentUser;
+    aBooking.owner = listing.owner;
+    aBooking.rating = 0;
+    //aBooking.listing = listing;
+    [aBooking save];
 }
 
 

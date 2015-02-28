@@ -88,16 +88,15 @@
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     if ([segue.identifier isEqualToString:@"ShowAvailableListings"]) {
         ViewController *destViewController = segue.destinationViewController;
+        
+        // Set space types
         [spaceType replaceObjectAtIndex:0 withObject:[NSNumber numberWithBool:restButton.selected]];
         [spaceType replaceObjectAtIndex:1 withObject:[NSNumber numberWithBool:closetButton.selected]];
         [spaceType replaceObjectAtIndex:2 withObject:[NSNumber numberWithBool:officeButton.selected]];
         [spaceType replaceObjectAtIndex:3 withObject:[NSNumber numberWithBool:quietButton.selected]];
-        
-        //NSLog(@"%@", startPicker.date.description);
         destViewController.spaceType = spaceType;
-        destViewController.startDate = startPicker.date;
-        destViewController.endDate = endPicker.date;
         
+        // Set start and end time
         NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
         [defaults setObject:startPicker.date forKey:@"startTime"];
         [defaults setObject:endPicker.date forKey:@"endTime"];

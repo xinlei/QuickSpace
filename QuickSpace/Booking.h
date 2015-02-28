@@ -11,31 +11,15 @@
 #import <Parse/Parse.h>
 
 
-@interface Booking : NSObject {
-    NSString *objectId; 
-    NSDate *startTime;
-    NSDate *endTime;
-    NSObject *guest;
-    NSObject *owner;
-    Listing *listing;
-    int rating;
-}
+@interface Booking : PFObject<PFSubclassing>
 
-@property (nonatomic, strong) NSString *objectId;
-@property (nonatomic, strong) NSDate *startTime;
-@property (nonatomic, strong) NSDate *endTime;
-@property (nonatomic, strong) NSObject *guest;
-@property (nonatomic, strong) NSObject *owner;
-@property (nonatomic, strong) Listing *listing;
-@property (nonatomic) int rating;
+@property (retain) NSDate *startTime;
+@property (retain) NSDate *endTime;
+@property (retain) NSObject *guest;
+@property (retain) NSObject *owner;
+@property (retain) Listing *listing;
+@property int rating;
 
-- (instancetype) initWithStartTime:(NSDate *)aStartTime
-                           endTime:(NSDate *)aEndTime
-                             guest:(NSObject *)aGuest
-                             owner:(NSObject *)aOwner
-                           listing:(Listing *)aListing;
-
-- (NSString *) confirm;
-- (BOOL) cancel;
++ (NSString *) parseClassName;
 
 @end
