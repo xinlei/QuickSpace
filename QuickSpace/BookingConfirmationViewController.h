@@ -8,11 +8,11 @@
 
 #import <UIKit/UIKit.h>
 #import "Listing.h"
+#import "Booking.h"
 
 @interface BookingConfirmationViewController : UIViewController
 
-@property (nonatomic, strong) Listing *listing;
-@property (nonatomic, strong) NSString *booking_id; 
+@property (nonatomic, strong) Booking *booking;
 @property (weak, nonatomic) IBOutlet UIButton *cancelButton;
 
 @end

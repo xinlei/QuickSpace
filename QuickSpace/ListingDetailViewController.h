@@ -8,11 +8,12 @@
 
 #import <UIKit/UIKit.h>
 #import "Listing.h"
+#import "Booking.h"
 
 @interface ListingDetailViewController : UIViewController
 
 @property (nonatomic, strong) Listing *listing;
-@property (nonatomic, strong) NSString *booking_id;
+@property (nonatomic, strong) Booking *booking;
 
 @property (nonatomic, strong) IBOutlet UIImageView *image;
 @property (nonatomic, strong) IBOutlet UILabel *titleLabel;

@@ -12,7 +12,7 @@
 #import "Booking.h"
 
 @interface ListingDetailViewController () {
-    NSString *booking_id;
+    Booking *booking;
 }
 
 @end
@@ -30,7 +30,7 @@
 @synthesize ratingLabel;
 @synthesize amenitiesLabel;
 @synthesize descriptionsLabel;
-@synthesize booking_id;
+@synthesize booking;
 @synthesize scrollView;
 @synthesize descriptions;
 
@@ -144,16 +144,16 @@
     PFUser *currentUser = [PFUser currentUser];
     NSDate *startTime = [defaults objectForKey:@"startTime"];
     NSDate *endTime = [defaults objectForKey:@"endTime"];
-    Booking *booking = [[Booking alloc] initWithStartTime:startTime endTime:endTime guest:currentUser owner:listing.owner listing:listing];
-    booking_id = [booking confirmBooking];
+    Booking *aBooking = [[Booking alloc] initWithStartTime:startTime endTime:endTime guest:currentUser owner:listing.owner listing:listing];
+    [booking confirm];
+    booking = aBooking;
 }
 
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     if ([segue.identifier isEqualToString:@"ShowBookingConfirmation"]){
         BookingConfirmationViewController *destViewController = segue.destinationViewController;
-        destViewController.listing = listing;
-        destViewController.booking_id = booking_id;
+        destViewController.booking = booking;
     }
 }
 

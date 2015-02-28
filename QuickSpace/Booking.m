@@ -14,6 +14,7 @@
 @synthesize guest;
 @synthesize owner;
 @synthesize listing;
+@synthesize objectId; 
 //@synthesize rating = _rating;
 
 - (instancetype)initWithStartTime:(NSDate *)aStartTime endTime:(NSDate *)aEndTime guest:(NSObject *)aGuest owner:(NSObject *)aOwner listing:(Listing *)aListing{
@@ -28,7 +29,7 @@
     return self;
 }
 
-- (NSString *) confirmBooking {
+- (NSString *) confirm {
     PFObject *booking = [PFObject objectWithClassName:@"Booking"];
     PFObject *parseListing = [PFObject objectWithoutDataWithClassName:@"Listing" objectId:listing.object_id];
     booking[@"startTime"] = startTime;
@@ -39,10 +40,16 @@
     //[booking setObject:listing forKey:@"listing"];
     booking[@"listing"] = parseListing;
     if([booking save]){
+        objectId = [booking objectId];
         return [booking objectId];
     } else {
         return nil;
     }
 }
 
+- (BOOL) cancel {
+    PFQuery *query = [PFQuery queryWithClassName:@"Booking"];
+    PFObject *booking = [query getObjectWithId:objectId];
+    return ([booking delete]);
+}
 @end

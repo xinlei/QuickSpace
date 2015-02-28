@@ -10,15 +10,14 @@
 #import <Parse/Parse.h>
 
 @interface BookingConfirmationViewController () {
-    NSString *booking_id;
+    Booking *booking;
 }
 @end
 
 @implementation BookingConfirmationViewController
 
 @synthesize cancelButton;
-@synthesize listing;
-@synthesize booking_id;
+@synthesize booking;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -40,22 +39,9 @@
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
+
 - (IBAction)cancelBooking:(UIButton *)sender {
-    PFQuery *query = [PFQuery queryWithClassName:@"Booking"];
-    [query getObjectInBackgroundWithId:booking_id block:^(PFObject *parseBooking, NSError *error) {
-        [parseBooking delete];
-    }];
+    [booking cancel];
 }
-
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
-{
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
 
 @end

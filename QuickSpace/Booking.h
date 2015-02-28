@@ -12,6 +12,7 @@
 
 
 @interface Booking : NSObject {
+    NSString *objectId; 
     NSDate *startTime;
     NSDate *endTime;
     NSObject *guest;
@@ -20,6 +21,7 @@
     int rating;
 }
 
+@property (nonatomic, strong) NSString *objectId;
 @property (nonatomic, strong) NSDate *startTime;
 @property (nonatomic, strong) NSDate *endTime;
 @property (nonatomic, strong) NSObject *guest;
@@ -33,6 +35,7 @@
                              owner:(NSObject *)aOwner
                            listing:(Listing *)aListing;
 
-- (NSString *) confirmBooking;
+- (NSString *) confirm;
+- (BOOL) cancel;
 
 @end
