@@ -29,7 +29,6 @@
     //    [self.locationManager stopUpdatingLocation];
     
     // Exclude booked locations
-    NSDate *now = [NSDate date];
     __block NSMutableArray *excludedListings = [[NSMutableArray alloc] init];
     PFQuery *innerQuery = [PFQuery queryWithClassName:@"Booking"];
     [innerQuery whereKey:@"endTime" greaterThan:endTime];
