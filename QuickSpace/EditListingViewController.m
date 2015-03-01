@@ -8,6 +8,7 @@
 
 #import "editListingViewController.h"
 #import <Parse/Parse.h>
+#import "SVProgressHUD.h"
 
 @interface editListingViewController ()
 
@@ -185,6 +186,48 @@
     
 }
 
+- (IBAction)saveButtonClick:(id)sender {
+    [SVProgressHUD show];
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+
+        PFQuery *query = [PFQuery queryWithClassName:@"Listing"];
+        PFObject *object = [query getObjectWithId:_listing.object_id];
+//        [query getObjectInBackgroundWithId:_listing.object_id block:^(PFObject *object, NSError *error){
+            object[@"title"] = titleText.text;
+            object[@"address"] = addressTextField.text;
+            object[@"description"] = descriptionTextField.text;
+        
+            NSMutableArray *typeArray = [[NSMutableArray alloc] init];
+            if(restSwitch.on) [typeArray addObject: @"Rest"];
+            if(closetSwitch.on) [typeArray addObject: @"Closet"];
+            if(quietSwitch.on) [typeArray addObject: @"Quiet"];
+            if(officeSwitch.on) [typeArray addObject: @"Office"];
+            object[@"type"] = typeArray;
+        
+            NSMutableArray *amenitiesArray = [[NSMutableArray alloc] init];
+            if(wifiSwitch.on) [amenitiesArray addObject: @"wifi"];
+            if(fridgeSwitch.on) [amenitiesArray addObject: @"refrigerator"];
+            if(deskSwitch.on) [amenitiesArray addObject: @"studyDesk"];
+            if(monitorSwitch.on) [amenitiesArray addObject: @"monitor"];
+            if(servicesSwitch.on) [amenitiesArray addObject: @"services"];
+            object[@"amenities"] = amenitiesArray;
+        
+        NSLog(@"say wha?!?");
+            [object save];
+//        }];
+        
+
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [SVProgressHUD dismiss];
+            NSLog(@"Hey");
+            [self.navigationController popToRootViewControllerAnimated:YES];
+        });
+
+    });
+    NSLog(@"Ho");
+    
+}
+
 + (void) centerLeft:(UIView *)item inFrame:(CGRect)viewFrame
 {
     CGRect frame = item.frame;
@@ -223,32 +266,9 @@
 
 - (void) prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
 
-    if([segue.identifier isEqualToString:@"submitChangesSegue"]){
-        PFQuery *query = [PFQuery queryWithClassName:@"Listing"];
-        [query getObjectInBackgroundWithId:_listing.object_id block:^(PFObject *object, NSError *error){
-            object[@"title"] = titleText.text;
-            object[@"address"] = addressTextField.text;
-            object[@"description"] = descriptionTextField.text;
-        
-            NSMutableArray *typeArray = [[NSMutableArray alloc] init];
-            if(restSwitch.on) [typeArray addObject: @"Rest"];
-            if(closetSwitch.on) [typeArray addObject: @"Closet"];
-            if(quietSwitch.on) [typeArray addObject: @"Quiet"];
-            if(officeSwitch.on) [typeArray addObject: @"Office"];
-            object[@"type"] = typeArray;
-            
-            NSMutableArray *amenitiesArray = [[NSMutableArray alloc] init];
-            if(wifiSwitch.on) [amenitiesArray addObject: @"wifi"];
-            if(fridgeSwitch.on) [amenitiesArray addObject: @"refrigerator"];
-            if(deskSwitch.on) [amenitiesArray addObject: @"studyDesk"];
-            if(monitorSwitch.on) [amenitiesArray addObject: @"monitor"];
-            if(servicesSwitch.on) [amenitiesArray addObject: @"services"];
-            object[@"amenities"] = amenitiesArray;
-
-        
-            [object saveInBackground];
-        }];
-    }
+//    if([segue.identifier isEqualToString:@"submitChangesSegue"]){
+//
+//    }
 }
 
 @end

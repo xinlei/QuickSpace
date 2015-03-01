@@ -52,6 +52,7 @@
 @property (weak, nonatomic) IBOutlet UIButton *saveButton;
 @property (weak, nonatomic) IBOutlet UIScrollView *scrollView;
 @property (nonatomic) Listing *listing;
+- (IBAction)saveButtonClick:(id)sender;
 
 + (void) centerLeft:(UIView *)item inFrame:(CGRect)viewFrame;
 + (void) centerRight:(UIView *)item inFrame:(CGRect)viewFrame;

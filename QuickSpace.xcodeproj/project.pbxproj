@@ -31,6 +31,8 @@
 		172695261A7872D300DA446E /* SignUpViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 172695251A7872D300DA446E /* SignUpViewController.m */; };
 		17443CF51A881E0100A0694F /* SetLocationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 17443CF41A881E0100A0694F /* SetLocationViewController.m */; };
 		178097B71A7D946900BDBB1A /* CancelViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 178097B61A7D946900BDBB1A /* CancelViewController.m */; };
+		17B7186F1AA3B85900B9160D /* modalPictureCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 17B7186E1AA3B85900B9160D /* modalPictureCell.m */; };
+		17B718721AA3BCDB00B9160D /* modalPictureViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 17B718711AA3BCDB00B9160D /* modalPictureViewController.m */; };
 		17E63AB91A86EBCF00F763C1 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 17E63AB81A86EBCF00F763C1 /* MapKit.framework */; };
 		17EEBBE51A9468240055447F /* EditListingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 17EEBBE41A9468240055447F /* EditListingViewController.m */; };
 		2115DBEB1AA0969F00DA56EA /* ViewBookingsController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2115DBEA1AA0969F00DA56EA /* ViewBookingsController.m */; };
@@ -107,6 +109,10 @@
 		17443CF41A881E0100A0694F /* SetLocationViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SetLocationViewController.m; sourceTree = "<group>"; };
 		178097B51A7D946900BDBB1A /* CancelViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CancelViewController.h; sourceTree = "<group>"; };
 		178097B61A7D946900BDBB1A /* CancelViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CancelViewController.m; sourceTree = "<group>"; };
+		17B7186D1AA3B85900B9160D /* modalPictureCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = modalPictureCell.h; sourceTree = "<group>"; };
+		17B7186E1AA3B85900B9160D /* modalPictureCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = modalPictureCell.m; sourceTree = "<group>"; };
+		17B718701AA3BCDB00B9160D /* modalPictureViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = modalPictureViewController.h; sourceTree = "<group>"; };
+		17B718711AA3BCDB00B9160D /* modalPictureViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = modalPictureViewController.m; sourceTree = "<group>"; };
 		17E63AB81A86EBCF00F763C1 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 		17EEBBE31A9468240055447F /* EditListingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EditListingViewController.h; sourceTree = "<group>"; };
 		17EEBBE41A9468240055447F /* EditListingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EditListingViewController.m; sourceTree = "<group>"; };
@@ -232,6 +238,8 @@
 				F0144CE61A78917A00113F95 /* AdvancedFilterViewController.h */,
 				F0144CE71A78917A00113F95 /* AdvancedFilterViewController.m */,
 				170EFA111A71C799004EA68B /* Main.storyboard */,
+				17B718701AA3BCDB00B9160D /* modalPictureViewController.h */,
+				17B718711AA3BCDB00B9160D /* modalPictureViewController.m */,
 				2115DBE91AA0969F00DA56EA /* ViewBookingsController.h */,
 				2115DBEA1AA0969F00DA56EA /* ViewBookingsController.m */,
 				17EEBBE31A9468240055447F /* EditListingViewController.h */,
@@ -239,6 +247,8 @@
 				F0241E521A784DD7009FF170 /* FilterViewController.h */,
 				F0241E531A784DD7009FF170 /* FilterViewController.m */,
 				170EFA0B1A71C799004EA68B /* AppDelegate.h */,
+				17B7186D1AA3B85900B9160D /* modalPictureCell.h */,
+				17B7186E1AA3B85900B9160D /* modalPictureCell.m */,
 				170EFA0C1A71C799004EA68B /* AppDelegate.m */,
 				170EFA0E1A71C799004EA68B /* ViewController.h */,
 				170EFA0F1A71C799004EA68B /* ViewController.m */,
@@ -475,10 +485,12 @@
 			files = (
 				F085B8EA1A7D79D200AA5003 /* ConfirmationViewController.m in Sources */,
 				F08C486D1A8197510025EA2D /* AddPhotoViewController.m in Sources */,
+				17B7186F1AA3B85900B9160D /* modalPictureCell.m in Sources */,
 				17443CF51A881E0100A0694F /* SetLocationViewController.m in Sources */,
 				172695231A7872C300DA446E /* LoginViewController.m in Sources */,
 				211E0AAD1A72E4E7003E4D99 /* ListingDetailViewController.m in Sources */,
 				F0144CE81A78917A00113F95 /* AdvancedFilterViewController.m in Sources */,
+				17B718721AA3BCDB00B9160D /* modalPictureViewController.m in Sources */,
 				F085B8F31A7DA7BD00AA5003 /* ProfileViewController.m in Sources */,
 				17EEBBE51A9468240055447F /* EditListingViewController.m in Sources */,
 				178097B71A7D946900BDBB1A /* CancelViewController.m in Sources */,

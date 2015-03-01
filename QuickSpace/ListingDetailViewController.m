@@ -10,9 +10,11 @@
 #import "BookingConfirmationViewController.h"
 #import <Parse/Parse.h>
 #import "Booking.h"
+#import "modalPictureViewController.h"
 
 @interface ListingDetailViewController () {
     Booking *booking;
+    NSMutableArray *images;
 }
 
 @end
@@ -39,6 +41,10 @@
     // Do any additional setup after loading the view.
     titleLabel.text = listing.title;
     image.image = [UIImage imageWithData: [listing.allImageData firstObject]];
+    
+    for (NSData *imageData in listing.allImageData) {
+        [images addObject:[UIImage imageWithData:imageData]];
+    }
 
     
     int rating = listing.rating;
@@ -155,11 +161,21 @@
     [aBooking save];
 }
 
+-(void) touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event{
+    UITouch *touch = [touches anyObject];
+    if([touch view] == image){
+        [self performSegueWithIdentifier:@"modalPics" sender:self];
+    }
+}
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     if ([segue.identifier isEqualToString:@"ShowBookingConfirmation"]){
         BookingConfirmationViewController *destViewController = segue.destinationViewController;
         destViewController.booking = booking;
+    }
+    else if ([segue.identifier isEqualToString:@"modalPics"]){
+        modalPictureViewController *destViewController = segue.destinationViewController;
+        destViewController.images = images;
     }
 }
 
