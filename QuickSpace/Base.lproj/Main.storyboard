@@ -1297,12 +1297,12 @@
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
-                                    <segue destination="AeC-d2-JzX" kind="push" id="yCc-f2-Skr"/>
+                                    <action selector="dismissView:" destination="8WW-W2-NYb" eventType="touchUpInside" id="e05-jZ-Js2"/>
                                 </connections>
                             </button>
                             <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" id="hgB-rH-Ls9">
-                                <rect key="frame" x="0.0" y="105" width="320" height="412"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <rect key="frame" x="0.0" y="105" width="320" height="463"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                             </mapView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -1310,6 +1310,7 @@
                     <navigationItem key="navigationItem" id="qRQ-la-EKv"/>
                     <connections>
                         <outlet property="myMapView" destination="hgB-rH-Ls9" id="etz-9M-Wa6"/>
+                        <outlet property="showListViewButton" destination="urB-3o-4Vq" id="MEC-iH-lC1"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="wLd-TM-aHF" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -1386,7 +1387,7 @@
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
-                                    <segue destination="8WW-W2-NYb" kind="push" identifier="ShowMapView" id="sKL-uf-5C0"/>
+                                    <segue destination="8WW-W2-NYb" kind="modal" identifier="ShowMapView" id="sKL-uf-5C0"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -1769,6 +1770,6 @@
     <inferredMetricsTieBreakers>
         <segue reference="JLq-d7-1U3"/>
         <segue reference="PSf-8c-2F7"/>
-        <segue reference="yCc-f2-Skr"/>
+        <segue reference="8fF-dy-T2g"/>
     </inferredMetricsTieBreakers>
 </document>

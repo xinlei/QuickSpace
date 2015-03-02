@@ -16,6 +16,7 @@
 
 @synthesize myMapView;
 @synthesize listings;
+@synthesize showListViewButton;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -23,8 +24,11 @@
     for (Listing *listing in listings){
         PFGeoPoint *gp = listing.location;
         CLLocationCoordinate2D coordinate = CLLocationCoordinate2DMake(gp.latitude, gp.longitude);
-        MKPlacemark *placemark = [[MKPlacemark alloc] initWithCoordinate:coordinate addressDictionary:nil];
-        [myMapView addAnnotation:placemark];
+        MKPointAnnotation *point = [[MKPointAnnotation alloc] init];
+        [point setCoordinate:coordinate];
+        [point setTitle:listing.title];
+        [point setSubtitle:[NSString stringWithFormat:@"%d",[listing.price intValue]]];
+        [myMapView addAnnotation:point];
     }
     [myMapView showAnnotations:myMapView.annotations animated:YES];
 }
@@ -32,6 +36,9 @@
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+- (IBAction)dismissView:(UIButton *)sender {
+    [self dismissViewControllerAnimated:YES completion:nil];
 }
 
 /*

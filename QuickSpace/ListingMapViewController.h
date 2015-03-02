@@ -8,10 +8,12 @@
 
 #import <UIKit/UIKit.h>
 #import <MapKit/MapKit.h>
+#import <MapKit/MKPointAnnotation.h>
 #import "Listing.h"
 
 @interface ListingMapViewController : UIViewController
 @property (weak, nonatomic) IBOutlet MKMapView *myMapView;
+@property (weak, nonatomic) IBOutlet UIButton *showListViewButton;
 
 @property (nonatomic, strong) NSArray *listings;
 
