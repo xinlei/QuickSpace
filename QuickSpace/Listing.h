@@ -1,16 +1,13 @@
 //
-//  Listing.h
-//  QuickSpace
+// Listing.h
+// QuickSpace
 //
-//  Created by Gene Oetomo on 1/25/15.
-//  Copyright (c) 2015 Jordan. All rights reserved.
+// Created by Gene Oetomo on 1/25/15.
+// Copyright (c) 2015 Jordan. All rights reserved.
 //
-
 #import <Foundation/Foundation.h>
 #import <Parse/Parse.h>
-
 @interface Listing : NSObject
-
 @property (nonatomic, strong) NSString *title;
 @property (nonatomic, strong) PFGeoPoint *location;
 @property (nonatomic, strong) NSArray *types;
@@ -24,19 +21,17 @@
 @property (nonatomic) NSString *owner;
 @property (nonatomic) NSArray *allImageData;
 @property (nonatomic) NSArray *amenitiesArray;
-
 // Booking information
 @property (nonatomic, strong) NSDate *startTime;
 @property (nonatomic, strong) NSDate *endTime;
 @property (nonatomic, strong) NSString *guest_id;
-
 + (NSArray *) getAllAvailableListingsWithAmenities:(NSDictionary *) amenities
                                          withTypes:(NSArray *)spaceType
                                      withStartTime:(NSDate *) startTime
                                        withEndTime:(NSDate *) endTime
                                           forPrice:(NSNumber *)price
                                       forLongitude:(NSNumber *)longitude
-                                       forLatitude:(NSNumber *)latitude; 
+                                       forLatitude:(NSNumber *)latitude;
 + (NSMutableArray *)objectToListingsWith:(NSArray *)PFObjects;
 + (NSString *) amenitiesToString:(NSArray *) amenities;
 + (NSString *) typesToString:(NSArray *) spaceType;
