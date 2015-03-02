@@ -8,6 +8,7 @@
 
 #import "SignUpViewController.h"
 #import <Parse/Parse.h>
+#import <SystemConfiguration/SCNetworkConfiguration.h>
 
 @interface SignUpViewController ()
 
@@ -33,39 +34,52 @@
 }
 - (IBAction)onSubmit:(UIButton *)sender {
     
-    NSString* email = self.emailTextField.text;
-    NSString* password1 = self.passwordTextField.text;
-    NSString* password2 = self.confirmPasswordTextField.text;
+    // Check network connection
+    SCNetworkReachabilityFlags flags;
+    SCNetworkReachabilityRef address = SCNetworkReachabilityCreateWithName(NULL, "www.apple.com" );
+    Boolean success = SCNetworkReachabilityGetFlags(address, &flags);
+    CFRelease(address);
+    bool canReachOnExistingConnection = success && !(flags & kSCNetworkReachabilityFlagsConnectionRequired) && (flags & kSCNetworkReachabilityFlagsReachable);
     
-    if(password1.length < 4){
-        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Password too short" message:@"Please enter at least 4 characters" delegate:nil cancelButtonTitle:@"Try Again" otherButtonTitles: nil];
+    // If connection is not available
+    if(!canReachOnExistingConnection){
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"No Internet Connection" message:@"Try Again" delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles: nil];
         [alert show];
-        shouldSegue = NO;
-    }
-    
-    else if(![password1 isEqualToString:password2]){
-        shouldSegue = NO;
-        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Sign Up Error" message:@"Your Passwords don't match!" delegate:nil cancelButtonTitle:@"Try Again" otherButtonTitles: nil];
-        [alert show];
-    }
-    //    else if(email is not valid){
-    //
-    //    }
-    else {
+    } else {
+        NSString* email = self.emailTextField.text;
+        NSString* password1 = self.passwordTextField.text;
+        NSString* password2 = self.confirmPasswordTextField.text;
         
-        PFUser *user = [PFUser user];
-        user.username = email;
-        user.email = email;
-        user.password = password1;
+        if(password1.length < 4){
+            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Password too short" message:@"Please enter at least 4 characters" delegate:nil cancelButtonTitle:@"Try Again" otherButtonTitles: nil];
+            [alert show];
+            shouldSegue = NO;
+        }
         
-        //Need to make sure that particular email address doesn't already exist in our user database.
-        // if it does, give the person the option to reset the password (?)
-        shouldSegue = [user signUp];
-        if(shouldSegue == NO){
-            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error" message:@"Email address is already taken" delegate:nil cancelButtonTitle:@"Try Again" otherButtonTitles: @"Forgot Password?", nil];
+        else if(![password1 isEqualToString:password2]){
+            shouldSegue = NO;
+            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Sign Up Error" message:@"Your Passwords don't match!" delegate:nil cancelButtonTitle:@"Try Again" otherButtonTitles: nil];
             [alert show];
         }
+        //    else if(email is not valid){
+        //
+        //    }
+        else {
+            
+            PFUser *user = [PFUser user];
+            user.username = email;
+            user.email = email;
+            user.password = password1;
+            
+            //Need to make sure that particular email address doesn't already exist in our user database.
+            // if it does, give the person the option to reset the password (?)
+            shouldSegue = [user signUp];
+            if(shouldSegue == NO){
+                UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error" message:@"Email address is already taken" delegate:nil cancelButtonTitle:@"Try Again" otherButtonTitles: @"Forgot Password?", nil];
+                [alert show];
+            }
 
+        }
     }
 
 }

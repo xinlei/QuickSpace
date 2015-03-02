@@ -10,6 +10,7 @@
 #import "SVProgressHUD.h"
 #import <Parse/Parse.h>
 #import "AppDelegate.h"
+#import <SystemConfiguration/SCNetworkConfiguration.h>
 
 @interface LoginViewController ()
 @end
@@ -42,14 +43,28 @@
 //            [SVProgressHUD dismiss];
 //        });
 //    });
-    if(user){
-        canSegue = YES;
-        AppDelegate *appDelegateTemp = [[UIApplication sharedApplication]delegate];
-        appDelegateTemp.window.rootViewController = [[UIStoryboard storyboardWithName:@"Main" bundle:[NSBundle mainBundle]] instantiateInitialViewController];
-    } else{
-        canSegue = NO;
-        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Incorrect Login" message:@"Try Again" delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles: nil];
+    
+    // Check network connection
+    SCNetworkReachabilityFlags flags;
+    SCNetworkReachabilityRef address = SCNetworkReachabilityCreateWithName(NULL, "www.apple.com" );
+    Boolean success = SCNetworkReachabilityGetFlags(address, &flags);
+    CFRelease(address);
+    bool canReachOnExistingConnection = success && !(flags & kSCNetworkReachabilityFlagsConnectionRequired) && (flags & kSCNetworkReachabilityFlagsReachable);
+    
+    if(!canReachOnExistingConnection){
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"No Internet Connection" message:@"Try Again" delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles: nil];
         [alert show];
+        canSegue = NO;
+    } else {
+        if(user){
+            canSegue = YES;
+            AppDelegate *appDelegateTemp = [[UIApplication sharedApplication]delegate];
+            appDelegateTemp.window.rootViewController = [[UIStoryboard storyboardWithName:@"Main" bundle:[NSBundle mainBundle]] instantiateInitialViewController];
+        } else{
+            canSegue = NO;
+            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Incorrect Login" message:@"Try Again" delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles: nil];
+            [alert show];
+        }
     }
 }
 
