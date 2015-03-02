@@ -8,6 +8,7 @@
 
 #import "Booking.h"
 #import <Parse/PFObject+Subclass.h>
+#import "Listing.h"
 
 @implementation Booking
 @dynamic startTime;
@@ -24,5 +25,6 @@
 + (NSString *)parseClassName {
     return @"Booking";
 }
+
 
 @end

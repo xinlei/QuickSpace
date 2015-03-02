@@ -155,7 +155,7 @@ NSArray *bookings;
 
 - (void) refreshTableData {
     [SVProgressHUD show];
-    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+  //  dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
         PFUser *currentUser = [PFUser currentUser];
         NSDate *now = [NSDate date];
         if (listingSegments.selectedSegmentIndex == 0){
@@ -188,11 +188,12 @@ NSArray *bookings;
             NSArray* AllListings = [query findObjects];
             userListings = [Listing objectToListingsWith:AllListings];
         }
-        dispatch_async(dispatch_get_main_queue(), ^{
+//        dispatch_async(dispatch_get_main_queue(), ^{
             [self.listingTable reloadData];
             [SVProgressHUD dismiss];
-        });
-    });
+//        });
+//    });
+    NSLog(@"boobs");
     
 }
 

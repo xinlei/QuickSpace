@@ -84,7 +84,6 @@
     locationLabel.text = listing.address;
     [ListingDetailViewController setItemLocation:location withPrev:ratingLabel apartBy:15];
     [ListingDetailViewController setItemLocation:locationLabel withPrev:ratingLabel apartBy:15];
-    [ListingDetailViewController addSeparatorOnto:scrollView at:3];
 //    [ListingDetailViewController addSeparatorOnto:scrollView at:locationLabel.frame.size.height + locationLabel.frame.origin.y];
     
     //set amenities
