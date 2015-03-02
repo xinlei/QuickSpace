@@ -52,18 +52,28 @@
     bool canReachOnExistingConnection = success && !(flags & kSCNetworkReachabilityFlagsConnectionRequired) && (flags & kSCNetworkReachabilityFlagsReachable);
     
     if(!canReachOnExistingConnection){
-        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"No Internet Connection" message:@"Try Again" delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles: nil];
-        [alert show];
+        [self showErrorMessage:@"No Internet Connection"];
         canSegue = NO;
     } else {
         if(user){
-            canSegue = YES;
-            AppDelegate *appDelegateTemp = [[UIApplication sharedApplication]delegate];
-            appDelegateTemp.window.rootViewController = [[UIStoryboard storyboardWithName:@"Main" bundle:[NSBundle mainBundle]] instantiateInitialViewController];
-        } else{
+            
+            /* Turned off for testing
+            if (![[user objectForKey:@"emailVerified"] boolValue]) {
+                // Refresh to make sure the user did not recently verify
+                [user fetch];
+                if (![[user objectForKey:@"emailVerified"] boolValue]) {
+                    [self showErrorMessage:@"Email Unverified"];
+                }
+                canSegue = NO;
+            } else {
+             */
+                canSegue = YES;
+                AppDelegate *appDelegateTemp = [[UIApplication sharedApplication]delegate];
+                appDelegateTemp.window.rootViewController = [[UIStoryboard storyboardWithName:@"Main" bundle:[NSBundle mainBundle]] instantiateInitialViewController];
+            //}
+        } else {
             canSegue = NO;
-            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Incorrect Login" message:@"Try Again" delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles: nil];
-            [alert show];
+            [self showErrorMessage:@"Incorrect Login"];
         }
     }
 }
@@ -84,7 +94,12 @@
     }
     return canSegue;
 }
-    
+
+- (void)showErrorMessage: (NSString *) message {
+    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:message message:@"Try Again" delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles: nil];
+    [alert show];
+}
+
 /*
 #pragma mark - Navigation
 
