@@ -62,6 +62,7 @@
 		F0D625151A7AD92C0063CE0B /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = F0D625141A7AD92C0063CE0B /* Default-568h@2x.png */; };
 		F0D625191A7AE54D0063CE0B /* HostViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F0D625181A7AE54D0063CE0B /* HostViewController.m */; };
 		F0D6251C1A7AF98E0063CE0B /* AddDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F0D6251B1A7AF98E0063CE0B /* AddDetailViewController.m */; };
+		F0F064F31AA4338200AF4CBD /* ListingMapViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F0F064F21AA4338200AF4CBD /* ListingMapViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -160,6 +161,8 @@
 		F0D625181A7AE54D0063CE0B /* HostViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HostViewController.m; sourceTree = "<group>"; };
 		F0D6251A1A7AF98E0063CE0B /* AddDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddDetailViewController.h; sourceTree = "<group>"; };
 		F0D6251B1A7AF98E0063CE0B /* AddDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddDetailViewController.m; sourceTree = "<group>"; };
+		F0F064F11AA4338200AF4CBD /* ListingMapViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ListingMapViewController.h; sourceTree = "<group>"; };
+		F0F064F21AA4338200AF4CBD /* ListingMapViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ListingMapViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -238,6 +241,8 @@
 				F0144CE61A78917A00113F95 /* AdvancedFilterViewController.h */,
 				F0144CE71A78917A00113F95 /* AdvancedFilterViewController.m */,
 				170EFA111A71C799004EA68B /* Main.storyboard */,
+				F0F064F11AA4338200AF4CBD /* ListingMapViewController.h */,
+				F0F064F21AA4338200AF4CBD /* ListingMapViewController.m */,
 				17B718701AA3BCDB00B9160D /* modalPictureViewController.h */,
 				17B718711AA3BCDB00B9160D /* modalPictureViewController.m */,
 				2115DBE91AA0969F00DA56EA /* ViewBookingsController.h */,
@@ -498,6 +503,7 @@
 				F0A4D8361A75C39A002D8B2F /* DiscoverViewController.m in Sources */,
 				211E0AB01A75B19B003E4D99 /* Listing.m in Sources */,
 				2115DBEB1AA0969F00DA56EA /* ViewBookingsController.m in Sources */,
+				F0F064F31AA4338200AF4CBD /* ListingMapViewController.m in Sources */,
 				170EFA101A71C799004EA68B /* ViewController.m in Sources */,
 				F0241E541A784DD7009FF170 /* FilterViewController.m in Sources */,
 				F0D625191A7AE54D0063CE0B /* HostViewController.m in Sources */,

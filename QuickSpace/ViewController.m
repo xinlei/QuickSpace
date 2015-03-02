@@ -11,6 +11,7 @@
 #import <QuartzCore/QuartzCore.h>
 #import "SVProgressHUD.h"
 #import "ListingDetailViewController.h"
+#import "ListingMapViewController.h"
 #import "Listing.h"
 
 @interface ViewController ()
@@ -64,7 +65,8 @@ NSArray *listings;
 }
 - (IBAction)viewSwitcherValueChanged:(UISegmentedControl *)sender {
     if (viewSwitcher.selectedSegmentIndex == 1){
-        //Implement MapView
+        [self dismissViewControllerAnimated:NO completion:^{
+        }];
     }
 }
 
@@ -153,6 +155,10 @@ NSArray *listings;
         NSIndexPath *indexPath = [self.tableView indexPathForSelectedRow];
         ListingDetailViewController *destViewController = segue.destinationViewController;
         destViewController.listing = [listings objectAtIndex:indexPath.row];
+    }
+    if ([segue.identifier isEqualToString:@"ShowMapView"]){
+        ListingMapViewController *desViewController = segue.destinationViewController;
+        desViewController.listings = listings; 
     }
 }
 @end
