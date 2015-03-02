@@ -44,4 +44,7 @@
     //[booking cancel];
 }
 
+- (IBAction)homeButton:(id)sender {
+    [self.navigationController popToRootViewControllerAnimated:YES];
+}
 @end

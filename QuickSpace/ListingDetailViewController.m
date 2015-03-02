@@ -164,6 +164,7 @@
 -(void) touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event{
     UITouch *touch = [touches anyObject];
     if([touch view] == image){
+        NSLog(@"I clicked the picture!");
         [self performSegueWithIdentifier:@"modalPics" sender:self];
     }
 }

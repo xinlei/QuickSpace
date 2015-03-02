@@ -14,5 +14,6 @@
 
 @property (nonatomic, strong) Booking *booking;
 @property (weak, nonatomic) IBOutlet UIButton *cancelButton;
+- (IBAction)homeButton:(id)sender;
 
 @end

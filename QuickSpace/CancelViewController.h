@@ -10,5 +10,6 @@
 
 @interface CancelViewController : UIViewController
 @property (weak, nonatomic) IBOutlet UIButton *cancelButton;
+- (IBAction)homeButton:(id)sender;
 
 @end

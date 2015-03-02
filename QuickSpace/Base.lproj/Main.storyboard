@@ -882,7 +882,7 @@
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
-                                    <segue destination="80B-2m-jAM" kind="push" id="sbc-fe-3wW"/>
+                                    <action selector="homeButton:" destination="eYX-ss-bK0" eventType="touchUpInside" id="7i3-CY-q5j"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="pxH-SE-iOf">
@@ -1410,7 +1410,7 @@
                 </collectionViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="gOp-fw-tDJ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1137" y="239"/>
+            <point key="canvasLocation" x="-1465" y="239"/>
         </scene>
         <!--Explore-->
         <scene sceneID="UOT-KM-rHn">
@@ -1552,7 +1552,7 @@
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
-                                    <segue destination="80B-2m-jAM" kind="push" id="KOp-dB-tul"/>
+                                    <action selector="homeButton:" destination="VcC-Ma-qT0" eventType="touchUpInside" id="zi7-qF-DXd"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="J0h-SS-eL7">
@@ -1721,9 +1721,8 @@
         <simulatedScreenMetrics key="destination" type="retina4"/>
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
-        <segue reference="KOp-dB-tul"/>
         <segue reference="7PK-zv-boD"/>
         <segue reference="oHm-PT-uY9"/>
-        <segue reference="PSf-8c-2F7"/>
+        <segue reference="OHa-B8-TXq"/>
     </inferredMetricsTieBreakers>
 </document>
