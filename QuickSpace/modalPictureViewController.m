@@ -22,9 +22,9 @@
     
     NSArray *imageNames = [[NSArray alloc] initWithObjects:@"room1.jpg", @"room3.jpg", @"room2.jpg", nil];
     
-    
-//    scrollView.frame = self.view.frame;
-//    scrollView.contentSize = CGSizeMake(self.view.frame.size.width + 20, self.view.frame.size.height / 2);
+    UITapGestureRecognizer *close = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(closeModal:)];
+    [close setDelegate:self];
+    [scrollView addGestureRecognizer:close];
     
     self.view.backgroundColor = [UIColor blackColor];
     scrollView.frame = self.view.frame;
@@ -50,13 +50,16 @@
 
 }
 
--(void) touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event{
-    UITouch *touch = [touches anyObject];
-//    if([touch view] != image){
-//        NSLog(@"I clicked the black!");
-//        [self performSegueWithIdentifier:@"modalPics" sender:self];
-//    }
+-(BOOL) gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldRecognizeSimultaneouslyWithGestureRecognizer:(UIGestureRecognizer *)otherGestureRecognizer{
+    return YES;
 }
+
+-(void)closeModal:(UITapGestureRecognizer *)sender{
+    if([sender locationInView:self.view].y < self.view.frame.size.height / 3 || [sender locationInView:self.view].y > 2* self.view.frame.size.height / 3){
+            [self dismissViewControllerAnimated: YES completion:nil];
+    }
+}
+
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

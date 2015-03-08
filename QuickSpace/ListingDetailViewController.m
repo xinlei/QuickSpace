@@ -54,6 +54,10 @@
         ratingLabel.text = [NSString stringWithFormat:@"Rating: %d/3", rating];
     }
     
+    UITapGestureRecognizer *picClick = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(expandPics:)];
+    [picClick setDelegate:self];
+    [image addGestureRecognizer:picClick];
+    
     //set scrollView
     scrollView.frame = self.view.frame;
     scrollView.contentSize = CGSizeMake(self.view.frame.size.width, 1000);
@@ -180,13 +184,14 @@
     [aBooking save];
 }
 
--(void) touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event{
-    UITouch *touch = [touches anyObject];
-    if([touch view] == image){
-        NSLog(@"I clicked the picture!");
-        [self performSegueWithIdentifier:@"modalPics" sender:self];
-    }
+-(BOOL) gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldRecognizeSimultaneouslyWithGestureRecognizer:(UIGestureRecognizer *)otherGestureRecognizer{
+    return YES;
 }
+
+-(void) expandPics:(UITapGestureRecognizer *)sender{
+    [self performSegueWithIdentifier:@"modalPics" sender:self];
+}
+
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     if ([segue.identifier isEqualToString:@"ShowBookingConfirmation"]){

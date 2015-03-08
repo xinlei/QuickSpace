@@ -10,7 +10,7 @@
 #import "Listing.h"
 #import "Booking.h"
 
-@interface ListingDetailViewController : UIViewController
+@interface ListingDetailViewController : UIViewController <UIGestureRecognizerDelegate>
 
 @property (nonatomic, strong) Listing *listing;
 @property (nonatomic, strong) Booking *booking;

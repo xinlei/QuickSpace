@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-@interface modalPictureViewController : UIViewController <UIScrollViewDelegate>
+@interface modalPictureViewController : UIViewController <UIScrollViewDelegate, UIGestureRecognizerDelegate>
 @property (strong, nonatomic) IBOutlet UIScrollView *scrollView;
 
 @end
