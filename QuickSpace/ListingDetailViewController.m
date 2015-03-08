@@ -25,13 +25,13 @@
 @synthesize image;
 @synthesize listing;
 @synthesize typeLabel;
-@synthesize locationLabel;
+@synthesize locationText;
 @synthesize location;
 @synthesize amenities;
 @synthesize bookButton;
 @synthesize ratingLabel;
 @synthesize amenitiesLabel;
-@synthesize descriptionsLabel;
+@synthesize descriptionsText;
 @synthesize booking;
 @synthesize scrollView;
 @synthesize descriptions;
@@ -78,12 +78,23 @@
     labelSize = [ratingLabel.text sizeWithAttributes:@{NSFontAttributeName:ratingLabel.font}];
     ratingLabel.frame = CGRectMake(ratingLabel.frame.origin.x, ratingLabel.frame.origin.y, ratingLabel.frame.size.width, labelSize.height);
     [ListingDetailViewController setItemLocation:ratingLabel withPrev:typeLabel apartBy:0];
-    [ListingDetailViewController addSeparatorOnto:scrollView at:ratingLabel.frame.origin.y + ratingLabel.frame.size.height + 8];
+    [ListingDetailViewController addSeparatorOnto:scrollView at:ratingLabel.frame.origin.y + ratingLabel.frame.size.height + 10];
     
     //set location
-    locationLabel.text = listing.address;
+    locationText.text = listing.address;
+    locationText.selectable = NO;
+    locationText.editable = NO;
+    locationText.scrollEnabled = NO;
+    locationText.textContainer.lineFragmentPadding = 0;
+    locationText.textContainerInset = UIEdgeInsetsZero;
+    CGFloat fixedWidth = locationText.frame.size.width;
+    CGSize newSize = [locationText sizeThatFits:CGSizeMake(fixedWidth, MAXFLOAT)];
+    frame = locationText.frame;
+    frame.size = CGSizeMake(fmaxf(newSize.width, fixedWidth), newSize.height);
+    locationText.frame = frame;
+    locationText.backgroundColor = [UIColor clearColor];
     [ListingDetailViewController setItemLocation:location withPrev:ratingLabel apartBy:15];
-    [ListingDetailViewController setItemLocation:locationLabel withPrev:ratingLabel apartBy:15];
+    [ListingDetailViewController setItemLocation:locationText withPrev:ratingLabel apartBy:15];
 //    [ListingDetailViewController addSeparatorOnto:scrollView at:locationLabel.frame.size.height + locationLabel.frame.origin.y];
     
     //set amenities
@@ -91,29 +102,38 @@
     amenitiesLabel.numberOfLines = 0;
     labelSize = [amenitiesLabel.text sizeWithAttributes:@{NSFontAttributeName:amenitiesLabel.font}];
     amenitiesLabel.frame = CGRectMake(amenitiesLabel.frame.origin.x, amenitiesLabel.frame.origin.y, amenitiesLabel.frame.size.width, labelSize.height);
-    [ListingDetailViewController setItemLocation:amenities withPrev:location apartBy:5];
-    [ListingDetailViewController setItemLocation:amenitiesLabel withPrev:location apartBy:5];
+    [ListingDetailViewController setItemLocation:amenities withPrev:locationText apartBy:10];
+    [ListingDetailViewController setItemLocation:amenitiesLabel withPrev:locationText apartBy:10];
 //    [ListingDetailViewController addSeparatorOnto:scrollView at:amenitiesLabel.frame.origin.y + amenitiesLabel.frame.size.height + 3];
     
     //set other descriptions
     //update the description
     NSString *descripString = listing.description;
     if (descripString.length == 0){
-        descriptionsLabel.text = @"No Additional Description";
+        descriptionsText.text = @"No Additional Description";
     } else {
-        descriptionsLabel.text = descripString;
+        descriptionsText.text = descripString;
     }
-    labelSize = [descriptionsLabel.text sizeWithAttributes:@{NSFontAttributeName:descriptionsLabel.font}];
-    descriptionsLabel.frame = CGRectMake(descriptionsLabel.frame.origin.x, descriptionsLabel.frame.origin.y, descriptionsLabel.frame.size.width, labelSize.height);
-    [ListingDetailViewController setItemLocation:descriptions withPrev:amenitiesLabel apartBy:5];
-    [ListingDetailViewController setItemLocation:descriptionsLabel withPrev:descriptions apartBy:5];
+    descriptionsText.textContainer.lineFragmentPadding = 0;
+    descriptionsText.textContainerInset = UIEdgeInsetsZero;
+    descriptionsText.selectable = NO;
+    descriptionsText.editable = NO;
+    descriptionsText.scrollEnabled = NO;
+    fixedWidth = descriptionsText.frame.size.width;
+    newSize = [descriptionsText sizeThatFits:CGSizeMake(fixedWidth, MAXFLOAT)];
+    frame = descriptionsText.frame;
+    frame.size = CGSizeMake(fmaxf(newSize.width, fixedWidth), newSize.height);
+    descriptionsText.frame = frame;
+    descriptionsText.backgroundColor = [UIColor clearColor];
+    [ListingDetailViewController setItemLocation:descriptions withPrev:amenitiesLabel apartBy:10];
+    [ListingDetailViewController setItemLocation:descriptionsText withPrev:descriptions apartBy:5];
     
     //if the page is longer than one page, move the book button down
-    CGFloat endOfPage = descriptionsLabel.frame.origin.y + descriptionsLabel.frame.size.height + 10 + bookButton.frame.size.height;
+    CGFloat endOfPage = descriptionsText.frame.origin.y + descriptionsText.frame.size.height + 10 + bookButton.frame.size.height;
     CGFloat bottomOfView = self.view.frame.size.height - self.navigationController.navigationBar.frame.size.height - self.tabBarController.tabBar.frame.size.height - [UIApplication sharedApplication].statusBarFrame.size.height;
     frame = bookButton.frame;
     if (endOfPage > bottomOfView){
-        frame.origin.y = descriptionsLabel.frame.origin.y + descriptionsLabel.frame.size.height + 10;
+        frame.origin.y = descriptionsText.frame.origin.y + descriptionsText.frame.size.height + 10;
         bookButton.frame = frame;
     } else {
         frame.origin.y = bottomOfView - bookButton.frame.size.height;

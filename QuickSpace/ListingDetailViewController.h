@@ -20,14 +20,14 @@
 @property (weak, nonatomic) IBOutlet UILabel *typeLabel;
 @property (weak, nonatomic) IBOutlet UILabel *ratingLabel;
 
-@property (weak, nonatomic) IBOutlet UILabel *locationLabel;
+@property (weak, nonatomic) IBOutlet UITextView *locationText;
 @property (weak, nonatomic) IBOutlet UILabel *location;
 
 @property (weak, nonatomic) IBOutlet UILabel *amenitiesLabel;
 @property (weak, nonatomic) IBOutlet UILabel *amenities;
 
 @property (weak, nonatomic) IBOutlet UILabel *descriptions;
-@property (weak, nonatomic) IBOutlet UILabel *descriptionsLabel;
+@property (weak, nonatomic) IBOutlet UITextView *descriptionsText;
 
 @property (weak, nonatomic) IBOutlet UIScrollView *scrollView;
 @property (weak, nonatomic) IBOutlet UIButton *bookButton;
