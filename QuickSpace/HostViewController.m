@@ -9,6 +9,7 @@
 #import "HostViewController.h"
 #import <Bolts/BFTask.h>
 #import "SetLocationViewController.h"
+#import "Type.h"
 
 @interface HostViewController ()
 
@@ -39,22 +40,17 @@
 {
     [super viewDidLoad];
     
-    NSNumber *space = [NSNumber numberWithBool:NO];
-    NSNumber *closet = [NSNumber numberWithBool:NO];
-    NSNumber *office = [NSNumber numberWithBool:NO];
-    NSNumber *quiet = [NSNumber numberWithBool:NO];
-    spaceType = [NSMutableArray arrayWithObjects:space, closet, office, quiet, nil];
-    
     // Retrieve temporary created listing
     listing = [NewListing retrieveNewListing];
     
     //[PFObject unpinAllObjects];
     // Update view with values from the previous listing
     if(listing != nil){
-        restButton.selected = [listing.types[0] boolValue];
-        closetButton.selected = [listing.types[1] boolValue];
-        officeButton.selected = [listing.types[2] boolValue];
-        quietButton.selected = [listing.types[3] boolValue];
+        
+        if([listing.types containsObject: [NSNumber numberWithInt:rest]]) restButton.selected = YES;
+        if([listing.types containsObject: [NSNumber numberWithInt:closet]]) closetButton.selected = YES;
+        if([listing.types containsObject: [NSNumber numberWithInt:office]]) officeButton.selected = YES;
+        if([listing.types containsObject: [NSNumber numberWithInt:quiet]]) quietButton.selected = YES;
         titleTextField.text = listing.title;
         descriptionTextField.text = listing.information;
         locationTextField.text = listing.address;
@@ -136,22 +132,25 @@
         destViewController.address = locationTextField.text;
     }
     
+    listing.types = [[NSMutableArray alloc] init];
     if (restButton.selected)
-        [spaceType replaceObjectAtIndex:0 withObject:[NSNumber numberWithBool:YES]];
+        [listing.types addObject:[NSNumber numberWithInt:rest]];
+        //[spaceType replaceObjectAtIndex:0 withObject:[NSNumber numberWithBool:YES]];
     if (closetButton.selected)
-        [spaceType replaceObjectAtIndex:1 withObject:[NSNumber numberWithBool:YES]];
+        [listing.types addObject:[NSNumber numberWithInt:closet]];
+        //[spaceType replaceObjectAtIndex:1 withObject:[NSNumber numberWithBool:YES]];
     if (officeButton.selected)
-        [spaceType replaceObjectAtIndex:2 withObject:[NSNumber numberWithBool:YES]];
+        [listing.types addObject:[NSNumber numberWithInt:office]];
+        //[spaceType replaceObjectAtIndex:2 withObject:[NSNumber numberWithBool:YES]];
     if (quietButton.selected)
-        [spaceType replaceObjectAtIndex:3 withObject:[NSNumber numberWithBool:YES]];
-
+        [listing.types addObject:[NSNumber numberWithInt:quiet]];
+        //[spaceType replaceObjectAtIndex:3 withObject:[NSNumber numberWithBool:YES]];
 
     // Save input to a temporarily created listing
     listing.price = 10;
     listing.title = titleTextField.text;
     listing.information = descriptionTextField.text;
     listing.address = locationTextField.text;
-    listing.types = spaceType;
     listing.ratingValue = 0;
     listing.totalRaters = 0;
     listing.totalRating= 0;

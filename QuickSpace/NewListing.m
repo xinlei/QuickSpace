@@ -117,14 +117,39 @@
         [query whereKey:@"amenities" containsAllObjectsInArray:amenitiesQueryArray];
     if(price > 0)
         [query whereKey:@"price" lessThanOrEqualTo: price];
-    if([typeQueryArray count] > 0)
-        [query whereKey:@"type" containsAllObjectsInArray:typeQueryArray];
-    
+    if([typeQueryArray count] > 0){
+        //[query whereKey:@"type" :typeQueryArray];
+    }
     return [query findObjects];
 }
 
 - (NSString *) amenitiesToString {
     NSMutableString *amenitiesString = [[NSMutableString alloc] init];
+    
+    for (NSNumber *value in self.amenities){
+        if([value isEqual:[NSNumber numberWithInt:wifi]]) {
+            if (amenitiesString.length != 0) [amenitiesString appendString:@"\n"];
+            [amenitiesString appendString:@"WiFi Internet"];
+        }
+        if([value isEqual:[NSNumber numberWithInt:refrigerator]]) {
+            if (amenitiesString.length != 0) [amenitiesString appendString:@"\n"];
+            [amenitiesString appendString:@"Refrigerator"];
+        }
+        if([value isEqual:[NSNumber numberWithInt:studyDesk]]){
+            if (amenitiesString.length != 0) [amenitiesString appendString:@"\n"];
+            [amenitiesString appendString:@"Study Desk"];
+        }
+        if([value isEqual:[NSNumber numberWithInt:monitor]]){
+            if (amenitiesString.length != 0) [amenitiesString appendString:@"\n"];
+            [amenitiesString appendString:@"Monitor"];
+        }
+        if([value isEqual:[NSNumber numberWithInt:services]]){
+            if (amenitiesString.length != 0) [amenitiesString appendString:@"\n"];
+            [amenitiesString appendString:@"Janitoral Services"];
+        }
+    }
+    
+    /*
     for (int i = 0; i < [self.amenities count]; i++) {
         if (i == 0 && [self.amenities[i] boolValue] == YES){
             if (amenitiesString.length != 0) [amenitiesString appendString:@"\n"];
@@ -147,26 +172,27 @@
             [amenitiesString appendString:@"Janitoral Services"];
         }
     }
+     */
     [amenitiesString appendString:@"-"];
     return amenitiesString;
 }
              
 - (NSString *) typesToString {
     NSMutableString *typesString = [[NSMutableString alloc] init];
-    for (int  i = 0; i < [self.types count]; i++){
-        if (i == 0 && [self.types[i] boolValue] == YES){
+    for (NSNumber *value in self.types){
+        if ([value isEqual:[NSNumber numberWithInt:rest]]){
             if (typesString.length != 0) [typesString appendString:@"\n"];
             [typesString appendString:@"Rest"];
         }
-        if (i == 1 && [self.types[i] boolValue] == YES){
+        if ([value isEqual:[NSNumber numberWithInt:closet]]){
             if (typesString.length != 0) [typesString appendString:@"\n"];
             [typesString appendString:@"Closet"];
         }
-        if (i == 2 && [self.types[i] boolValue] == YES){
+        if ([value isEqual:[NSNumber numberWithInt:office]]){
             if (typesString.length != 0) [typesString appendString:@"\n"];
             [typesString appendString:@"Office"];
         }
-        if (i == 3 && [self.types[i] boolValue] == YES){
+        if ([value isEqual:[NSNumber numberWithInt:quiet]]){
             if (typesString.length != 0) [typesString appendString:@"\n"];
             [typesString appendString:@"Quiet"];
         }

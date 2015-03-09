@@ -92,7 +92,7 @@
     
     //set amenities
     amenitiesText.text = [listing amenitiesToString];
-    amenitiesLabel.numberOfLines = 0;
+    //amenitiesLabel.numberOfLines = 0;
     CGSize labelSize = [amenitiesLabel.text sizeWithAttributes:@{NSFontAttributeName:amenitiesLabel.font}];
     amenitiesLabel.frame = CGRectMake(mid, amenitiesLabel.frame.origin.y, amenitiesLabel.frame.size.width, labelSize.height);
     [ListingDetailViewController setItemLocation:amenitiesText withPrev:locationText apartBy:10 atX:mid];

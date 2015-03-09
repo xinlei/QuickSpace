@@ -9,6 +9,8 @@
 #import <Foundation/Foundation.h>
 #import <Parse/Parse.h>
 #import <MapKit/MapKit.h>
+#import "Type.h"
+#import "Amenity.h"
 
 @interface NewListing : PFObject<PFSubclassing>
 
@@ -40,8 +42,6 @@
                                           forPrice:(NSNumber *)price
                                       forLongitude:(NSNumber *)longitude
                                        forLatitude:(NSNumber *)latitude;
-
-//+ (NSMutableArray *)objectToListingsWith:(NSArray *)PFObjects;
 
 - (NSString *) amenitiesToString;
 
