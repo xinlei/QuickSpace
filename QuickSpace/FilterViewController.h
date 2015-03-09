@@ -12,6 +12,9 @@
 @interface FilterViewController : UIViewController 
 
 @property (nonatomic, strong) NSMutableArray *spaceType;
+@property (weak, nonatomic) IBOutlet UIView *line1;
+@property (weak, nonatomic) IBOutlet UIView *line2;
+@property (weak, nonatomic) IBOutlet UIView *line3;
 
 //spacetype buttons
 @property (weak, nonatomic) IBOutlet UIButton *restButton;

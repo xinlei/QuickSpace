@@ -66,7 +66,8 @@
     
     //set image location
     CGRect frame = image.frame;
-    frame.origin.x = mid - frame.size.width/2;
+//    frame.origin.x = mid - frame.size.width/2;
+    frame.origin.y = 0;
     image.frame = frame;
     
     //set title

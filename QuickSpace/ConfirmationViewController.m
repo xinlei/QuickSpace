@@ -56,6 +56,8 @@
     listingImg.image = theImage;
     CGRect frame = listingImg.frame;
     frame.origin.x = mid - frame.size.width/2;
+    frame.origin.y = 0;
+    listingImg.frame = frame;
     
     //set title
     titleText.text = listing.title;

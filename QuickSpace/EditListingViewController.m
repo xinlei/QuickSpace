@@ -85,16 +85,23 @@
     
     //set image
     CGRect frame = image.frame;
-    frame.origin.x = mid - frame.size.width;
+    frame.origin.y = 0;
+//    frame.origin.x = mid - frame.size.width/2;
     image.frame = frame;
     
     //set title
     [ListingDetailViewController setItemLocation:titleLabel withPrev:image apartBy:10 atX:titleLabel.frame.origin.x];
-    [ListingDetailViewController setItemLocation:titleText withPrev:image apartBy:10 atX:mid*2 - frame.size.width - 8];
+    frame = titleText.frame;
+    frame.size.width = viewFrame.size.width - frame.origin.x - 8;
+    titleText.frame = frame;
+    [ListingDetailViewController setItemLocation:titleText withPrev:image apartBy:10 atX:titleText.frame.origin.x];
     
     //set address
     [ListingDetailViewController setItemLocation:addressLabel withPrev:titleText apartBy:15 atX:addressLabel.frame.origin.x];
-    [ListingDetailViewController setItemLocation:addressTextField withPrev:titleText apartBy:15 atX:mid*2 - frame.size.width - 8];
+    frame = addressTextField.frame;
+    frame.size.width = viewFrame.size.width - frame.origin.x - 8;
+    addressTextField.frame = frame;
+    [ListingDetailViewController setItemLocation:addressTextField withPrev:titleText apartBy:15 atX:addressTextField.frame.origin.x];
     
     //set spacetype
     [ListingDetailViewController setItemLocation:typeLabel withPrev:addressTextField apartBy:15 atX:typeLabel.frame.origin.x];
@@ -110,6 +117,7 @@
     [ListingDetailViewController setItemLocation:quietLabel withPrev:closetSwitch apartBy:5 atX:quietLabel.frame.origin.x];
     [editListingViewController centerLeft:quietLabel inFrame:viewFrame];
     [ListingDetailViewController setItemLocation:quietSwitch withPrev:closetSwitch apartBy:5 atX:mid+1];
+    CGFloat asdf = mid+1;
     //set office
     [ListingDetailViewController setItemLocation:officeLabel withPrev:quietSwitch apartBy:5 atX:officeLabel.frame.origin.x];
     [editListingViewController centerLeft:officeLabel inFrame:viewFrame];
@@ -142,6 +150,11 @@
     //other descriptions
     [ListingDetailViewController setItemLocation:descriptionLabel withPrev:monitorSwitch apartBy:10 atX:descriptionLabel.frame.origin.x];
     [ListingDetailViewController setItemLocation:descriptionTextField withPrev:descriptionLabel apartBy:5 atX:mid - descriptionTextField.frame.size.width/2];
+    
+    //adjust button width
+    frame = saveButton.frame;
+    frame.size.width = viewFrame.size.width;
+    saveButton.frame = frame;
     
     //if the page is longer than one page, move the book button down
     CGFloat endOfPage = descriptionTextField.frame.origin.y + descriptionTextField.frame.size.height + 10 + saveButton.frame.size.height;

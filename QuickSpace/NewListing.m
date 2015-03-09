@@ -173,7 +173,6 @@
         }
     }
      */
-    [amenitiesString appendString:@"-"];
     return amenitiesString;
 }
              
