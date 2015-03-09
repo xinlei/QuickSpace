@@ -7,6 +7,7 @@
 //
 
 #import "modalPictureViewController.h"
+#import <Parse/Parse.h>
 
 @interface modalPictureViewController ()
 
@@ -15,7 +16,7 @@
 
 @implementation modalPictureViewController
 @synthesize scrollView;
-@synthesize imageData;
+@synthesize imageFiles;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -29,12 +30,12 @@
     scrollView.frame = self.view.frame;
     scrollView.pagingEnabled = YES;
     
-    for (int i = 0; i < imageData.count; i++) {
+    for (int i = 0; i < imageFiles.count; i++) {
         CGFloat myOrigin = i*self.view.frame.size.width;
         
         UIImageView *myImageView = [[UIImageView alloc] initWithFrame:CGRectMake(myOrigin, self.view.frame.size.height / 3, self.view.frame.size.width, self.view.frame.size.height / 3)];
         
-        myImageView.image = [UIImage imageWithData:[imageData objectAtIndex:i]];
+        myImageView.image = [UIImage imageWithData:[[imageFiles objectAtIndex:i] getData]];
 
         scrollView.delegate = self;
         [scrollView addSubview:myImageView];
@@ -42,7 +43,7 @@
         
     }
     
-    scrollView.contentSize = CGSizeMake(self.view.frame.size.width * imageData.count, self.view.frame.size.height);
+    scrollView.contentSize = CGSizeMake(self.view.frame.size.width * imageFiles.count, self.view.frame.size.height);
 }
 
 -(void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView{

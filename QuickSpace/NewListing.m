@@ -76,7 +76,7 @@
     }
     PFQuery *query = [NewListing query];
     [query whereKey:@"objectId" notContainedIn:excludedListings];
-    [query whereKey:@"location" nearGeoPoint:discoverLocation withinMiles:20];
+    [query whereKey:@"location" nearGeoPoint:discoverLocation withinMiles:50];
     
     bool wifi = [[amenities objectForKey:@"wifi"] boolValue];
     bool refrigerator = [[amenities objectForKey:@"refrigerator"] boolValue];

@@ -23,6 +23,7 @@
     [super viewDidLoad];
     listing = [NewListing retrieveNewListing];
     [listing fetchFromLocalDatastore];
+    
     CLGeocoder *location = [[CLGeocoder alloc] init];
     [location geocodeAddressString:listing.address completionHandler:^(NSArray* placemarks, NSError* error){
         if (placemarks && placemarks.count > 0) {

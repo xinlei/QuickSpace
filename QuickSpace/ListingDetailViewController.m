@@ -213,7 +213,7 @@
         destViewController.booking = booking;
     } else if ([segue.identifier isEqualToString:@"modalPics"]){
         modalPictureViewController *destViewController = segue.destinationViewController;
-        destViewController.imageData = listing.images;
+        destViewController.imageFiles = listing.images;
     }
 }
 
