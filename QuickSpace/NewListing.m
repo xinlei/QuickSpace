@@ -34,28 +34,27 @@
 }
 
 + (NewListing *) retrieveNewListing {
-    PFQuery *query = [[NewListing query] fromPinWithName:@"newListing"];
+    PFQuery *query = [[NewListing query] fromPin];
     NSArray *objects = [query findObjects];
     if([objects count] >= 1) return [objects objectAtIndex:0];
     return nil;
 }
 
 - (BOOL) addNewListing {
-    //return [pinWithName:@"newListing"];
+    [self pin];
     return YES; 
 }
 
 - (void) setLocationWith:(MKPlacemark *)placemark{
-    [self pinWithName:@""];
     self.location = [[PFGeoPoint alloc] init];
     self.location.latitude = placemark.coordinate.latitude;
     self.location.longitude = placemark.coordinate.longitude;
 }
-/*
+
 + (NSArray *) getAllAvailableListingsWithAmenities:(NSDictionary *) amenities
                                          withTypes:(NSArray *)spaceType
-                                     withStartTime:(NSDate *) startTime
-                                       withEndTime:(NSDate *) endTime
+                                     withStartTime:(NSDate *)startTime
+                                       withEndTime:(NSDate *)endTime
                                           forPrice:(NSNumber *)price
                                       forLongitude:(NSNumber *)longitude
                                        forLatitude:(NSNumber *)latitude {
@@ -75,7 +74,7 @@
         PFObject *listing = [booking objectForKey:@"listing"];
         [excludedListings addObject:[listing valueForKeyPath:@"objectId"]];
     }
-    PFQuery *query = [PFQuery queryWithClassName:@"Listing"];
+    PFQuery *query = [NewListing query];
     [query whereKey:@"objectId" notContainedIn:excludedListings];
     [query whereKey:@"location" nearGeoPoint:discoverLocation withinMiles:20];
     
@@ -124,9 +123,8 @@
     if([typeQueryArray count] > 0)
         [query whereKey:@"type" containsAllObjectsInArray:typeQueryArray];
     
-    return [self objectToListingsWith:[query findObjects]];
+    return [query findObjects];
 }
- */
 /*
 + (NSMutableArray *)objectToListingsWith:(NSArray *)PFObjects {
     NSMutableArray *listings = [[NSMutableArray alloc] init];
@@ -223,14 +221,29 @@
     return amenitiesString;
 }
              
-+ (NSString *) typesToString:(NSArray *)spaceType {
-    NSMutableString *typeDesc = [[NSMutableString alloc] init];
-    for (NSString *listingType in spaceType){
-        if (typeDesc.length != 0)
-            [typeDesc appendString:@"\n"];
-        [typeDesc appendString:listingType];
+- (NSString *) typesToString {
+    NSMutableString *typesString = [[NSMutableString alloc] init];
+    for (int  i = 0; i < [self.types count]; i++){
+        if (i == 0 && [self.types[i] boolValue] == YES){
+            if (typesString.length != 0) [typesString appendString:@"\n"];
+            [typesString appendString:@"Rest"];
+        }
+        if (i == 1 && [self.types[i] boolValue] == YES){
+            if (typesString.length != 0) [typesString appendString:@"\n"];
+            [typesString appendString:@"Closet"];
+        }
+        if (i == 2 && [self.types[i] boolValue] == YES){
+            if (typesString.length != 0) [typesString appendString:@"\n"];
+            [typesString appendString:@"Office"];
+        }
+        if (i == 3 && [self.types[i] boolValue] == YES){
+            if (typesString.length != 0) [typesString appendString:@"\n"];
+            [typesString appendString:@"Quiet"];
+        }
     }
-    return typeDesc;
+    [typesString appendString:@"-"];
+    return typesString;
+
 }
 
 + (void) cancelListingForHost:(NSString *) object_id {

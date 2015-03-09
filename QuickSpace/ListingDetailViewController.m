@@ -42,9 +42,9 @@
     
     titleLabel.text = listing.title;
 
-    image.image = [UIImage imageWithData: [listing.allImageData firstObject]];
+    image.image = [UIImage imageWithData: [[listing.images firstObject] getData]];
 
-    int rating = listing.rating;
+    int rating = listing.ratingValue;
     if (rating == 0) {
         ratingLabel.text = @"No Ratings Yet";
     } else {
@@ -75,9 +75,8 @@
     titleLabel.frame = frame;
     
     //set type
-    NSString *typeDesc = [Listing typesToString:listing.types];
     typeLabel.numberOfLines = 0;
-    typeLabel.text = typeDesc;
+    typeLabel.text = [listing typesToString];
     CGSize labelSize = [typeLabel.text sizeWithAttributes:@{NSFontAttributeName:typeLabel.font}];
     typeLabel.frame = CGRectMake(mid - typeLabel.frame.size.width/2, typeLabel.frame.origin.y, labelSize.width, labelSize.height);
     [ListingDetailViewController setItemLocation:typeLabel withPrev:titleLabel apartBy:5];
@@ -108,7 +107,7 @@
 //    [ListingDetailViewController addSeparatorOnto:scrollView at:locationLabel.frame.size.height + locationLabel.frame.origin.y];
     
     //set amenities
-    amenitiesLabel.text = listing.amenities;
+    amenitiesLabel.text = [listing amenitiesToString];
     amenitiesLabel.numberOfLines = 0;
     labelSize = [amenitiesLabel.text sizeWithAttributes:@{NSFontAttributeName:amenitiesLabel.font}];
     amenitiesLabel.frame = CGRectMake(mid - amenitiesLabel.frame.size.width/2, amenitiesLabel.frame.origin.y, amenitiesLabel.frame.size.width, labelSize.height);
@@ -118,7 +117,7 @@
     
     //set other descriptions
     //update the description
-    NSString *descripString = listing.description;
+    NSString *descripString = listing.information;
     if (descripString.length == 0){
         descriptionsText.text = @"No Additional Description";
     } else {
@@ -186,9 +185,9 @@
     aBooking.startTime = startTime;
     aBooking.endTime = endTime;
     aBooking.guest = currentUser;
-    aBooking.owner = listing.owner;
+    aBooking.owner = listing.lister;
     aBooking.rating = 0;
-    aBooking.listing_id = listing.object_id;
+    aBooking.listing_id = [listing objectId];
     aBooking.listing_title = listing.title;
     [aBooking save];
 }
@@ -208,7 +207,7 @@
         destViewController.booking = booking;
     } else if ([segue.identifier isEqualToString:@"modalPics"]){
         modalPictureViewController *destViewController = segue.destinationViewController;
-        destViewController.imageData = listing.allImageData;
+        destViewController.imageData = listing.images;
     }
 }
 
