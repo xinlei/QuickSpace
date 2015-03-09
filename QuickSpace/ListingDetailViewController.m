@@ -39,6 +39,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    
     titleLabel.text = listing.title;
 
     for (NSData *imageData in listing.allImageData) {
@@ -59,13 +60,21 @@
     [image addGestureRecognizer:picClick];
     
     //set scrollView
-    scrollView.frame = self.view.frame;
-    scrollView.contentSize = CGSizeMake(self.view.frame.size.width, 1000);
+    CGRect screenRect = [[UIScreen mainScreen] bounds];
+//    scrollView.frame = self.view.frame;
+    scrollView.frame = screenRect;
+    scrollView.contentSize = CGSizeMake(screenRect.size.width, 1000);
+//    scrollView.contentSize = CGSizeMake(self.view.frame.size.width, 1000);
     CGRect viewFrame = scrollView.frame;
+    CGFloat mid = viewFrame.size.width/2;
+    
+    //set immage location
+    CGRect frame = image.frame;
+    frame.origin.x = viewFrame.size.width/2 - frame.size.width/2;
     
     //set title
-    CGRect frame = titleLabel.frame;
-    frame.origin.x = viewFrame.size.width/2 - frame.size.width/2;
+    frame = titleLabel.frame;
+    frame.origin.x = mid - frame.size.width/2;
     frame.origin.y = image.frame.origin.y + image.frame.size.height + 10;
     titleLabel.frame = frame;
     
@@ -74,13 +83,13 @@
     typeLabel.numberOfLines = 0;
     typeLabel.text = typeDesc;
     CGSize labelSize = [typeLabel.text sizeWithAttributes:@{NSFontAttributeName:typeLabel.font}];
-    typeLabel.frame = CGRectMake(typeLabel.frame.origin.x, typeLabel.frame.origin.y, typeLabel.frame.size.width, labelSize.height);
+    typeLabel.frame = CGRectMake(mid - typeLabel.frame.size.width/2, typeLabel.frame.origin.y, labelSize.width, labelSize.height);
     [ListingDetailViewController setItemLocation:typeLabel withPrev:titleLabel apartBy:5];
     
     //set rating
     ratingLabel.numberOfLines = 0;
     labelSize = [ratingLabel.text sizeWithAttributes:@{NSFontAttributeName:ratingLabel.font}];
-    ratingLabel.frame = CGRectMake(ratingLabel.frame.origin.x, ratingLabel.frame.origin.y, ratingLabel.frame.size.width, labelSize.height);
+    ratingLabel.frame = CGRectMake(mid - ratingLabel.frame.size.width/2, ratingLabel.frame.origin.y, ratingLabel.frame.size.width, labelSize.height);
     [ListingDetailViewController setItemLocation:ratingLabel withPrev:typeLabel apartBy:0];
     [ListingDetailViewController addSeparatorOnto:scrollView at:ratingLabel.frame.origin.y + ratingLabel.frame.size.height + 10];
     
@@ -95,6 +104,7 @@
     CGSize newSize = [locationText sizeThatFits:CGSizeMake(fixedWidth, MAXFLOAT)];
     frame = locationText.frame;
     frame.size = CGSizeMake(fmaxf(newSize.width, fixedWidth), newSize.height);
+    frame.origin.x = mid;
     locationText.frame = frame;
     locationText.backgroundColor = [UIColor clearColor];
     [ListingDetailViewController setItemLocation:location withPrev:ratingLabel apartBy:15];
@@ -105,7 +115,7 @@
     amenitiesLabel.text = listing.amenities;
     amenitiesLabel.numberOfLines = 0;
     labelSize = [amenitiesLabel.text sizeWithAttributes:@{NSFontAttributeName:amenitiesLabel.font}];
-    amenitiesLabel.frame = CGRectMake(amenitiesLabel.frame.origin.x, amenitiesLabel.frame.origin.y, amenitiesLabel.frame.size.width, labelSize.height);
+    amenitiesLabel.frame = CGRectMake(mid - amenitiesLabel.frame.size.width/2, amenitiesLabel.frame.origin.y, amenitiesLabel.frame.size.width, labelSize.height);
     [ListingDetailViewController setItemLocation:amenities withPrev:locationText apartBy:10];
     [ListingDetailViewController setItemLocation:amenitiesLabel withPrev:locationText apartBy:10];
 //    [ListingDetailViewController addSeparatorOnto:scrollView at:amenitiesLabel.frame.origin.y + amenitiesLabel.frame.size.height + 3];
@@ -128,6 +138,7 @@
     frame = descriptionsText.frame;
     frame.size = CGSizeMake(fmaxf(newSize.width, fixedWidth), newSize.height);
     descriptionsText.frame = frame;
+    frame.origin.x = mid - frame.size.width/2;
     descriptionsText.backgroundColor = [UIColor clearColor];
     [ListingDetailViewController setItemLocation:descriptions withPrev:amenitiesLabel apartBy:10];
     [ListingDetailViewController setItemLocation:descriptionsText withPrev:descriptions apartBy:5];
@@ -136,6 +147,7 @@
     CGFloat endOfPage = descriptionsText.frame.origin.y + descriptionsText.frame.size.height + 10 + bookButton.frame.size.height;
     CGFloat bottomOfView = self.view.frame.size.height - self.navigationController.navigationBar.frame.size.height - self.tabBarController.tabBar.frame.size.height - [UIApplication sharedApplication].statusBarFrame.size.height;
     frame = bookButton.frame;
+    frame.origin.x = mid - frame.size.width/2;
     if (endOfPage > bottomOfView){
         frame.origin.y = descriptionsText.frame.origin.y + descriptionsText.frame.size.height + 10;
         bookButton.frame = frame;
