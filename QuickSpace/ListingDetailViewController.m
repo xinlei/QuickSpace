@@ -40,13 +40,9 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     titleLabel.text = listing.title;
-    image.image = [UIImage imageWithData: [listing.allImageData firstObject]];
-    
-    for (NSData *imageData in listing.allImageData) {
-        [images addObject:[UIImage imageWithData:imageData]];
-    }
 
-    
+    image.image = [UIImage imageWithData: [listing.allImageData firstObject]];
+
     int rating = listing.rating;
     if (rating == 0) {
         ratingLabel.text = @"No Ratings Yet";
@@ -180,7 +176,8 @@
     aBooking.guest = currentUser;
     aBooking.owner = listing.owner;
     aBooking.rating = 0;
-    //aBooking.listing = listing;
+    aBooking.listing_id = listing.object_id;
+    aBooking.listing_title = listing.title;
     [aBooking save];
 }
 
@@ -197,6 +194,9 @@
     if ([segue.identifier isEqualToString:@"ShowBookingConfirmation"]){
         BookingConfirmationViewController *destViewController = segue.destinationViewController;
         destViewController.booking = booking;
+    } else if ([segue.identifier isEqualToString:@"modalPics"]){
+        modalPictureViewController *destViewController = segue.destinationViewController;
+        destViewController.imageData = listing.allImageData;
     }
 }
 

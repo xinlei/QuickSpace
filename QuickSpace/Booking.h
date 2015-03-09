@@ -17,7 +17,9 @@
 @property (retain) NSDate *endTime;
 @property (retain) NSObject *guest;
 @property (retain) NSObject *owner;
-@property (retain) Listing *listing;
+//@property (retain) Listing *listing;
+@property (retain) NSString *listing_id;
+@property (retain) NSString *listing_title;
 @property int rating;
 
 + (NSString *) parseClassName;

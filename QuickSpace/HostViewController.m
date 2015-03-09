@@ -8,6 +8,7 @@
 
 #import "HostViewController.h"
 #import <Bolts/BFTask.h>
+#import "SetLocationViewController.h"
 
 @interface HostViewController ()
 
@@ -133,10 +134,21 @@
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
-    [spaceType replaceObjectAtIndex:0 withObject:[NSNumber numberWithBool:restButton.selected]];
-    [spaceType replaceObjectAtIndex:1 withObject:[NSNumber numberWithBool:closetButton.selected]];
-    [spaceType replaceObjectAtIndex:2 withObject:[NSNumber numberWithBool:officeButton.selected]];
-    [spaceType replaceObjectAtIndex:3 withObject:[NSNumber numberWithBool:quietButton.selected]];
+    
+    if ([segue.identifier isEqualToString:@"ShowNewListingDetails"]){
+        SetLocationViewController *destViewController = segue.destinationViewController;
+        destViewController.address = locationTextField.text;
+    }
+    
+    if (restButton.selected)
+        [spaceType replaceObjectAtIndex:0 withObject:[NSNumber numberWithBool:YES]];
+    if (closetButton.selected)
+        [spaceType replaceObjectAtIndex:1 withObject:[NSNumber numberWithBool:YES]];
+    if (officeButton.selected)
+        [spaceType replaceObjectAtIndex:2 withObject:[NSNumber numberWithBool:YES]];
+    if (quietButton.selected)
+        [spaceType replaceObjectAtIndex:3 withObject:[NSNumber numberWithBool:YES]];
+
 
     // Save input to a temporarily created listing
     listing.price = 10;

@@ -45,10 +45,12 @@
 @synthesize descriptionTextField;
 @synthesize saveButton;
 @synthesize scrollView;
+@synthesize listing_id;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    
     
     image.image = [UIImage imageWithData: [_listing.allImageData firstObject]];
     addressTextField.text = _listing.address;
@@ -187,12 +189,12 @@
 }
 
 - (IBAction)saveButtonClick:(id)sender {
-    [SVProgressHUD show];
-    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+//    [SVProgressHUD show];
+//    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
 
         PFQuery *query = [PFQuery queryWithClassName:@"Listing"];
         PFObject *object = [query getObjectWithId:_listing.object_id];
-//        [query getObjectInBackgroundWithId:_listing.object_id block:^(PFObject *object, NSError *error){
+        [query getObjectInBackgroundWithId:_listing.object_id block:^(PFObject *object, NSError *error){
             object[@"title"] = titleText.text;
             object[@"address"] = addressTextField.text;
             object[@"description"] = descriptionTextField.text;
@@ -214,16 +216,16 @@
         
         NSLog(@"say wha?!?");
             [object save];
-//        }];
+        }];
         
 
-        dispatch_async(dispatch_get_main_queue(), ^{
-            [SVProgressHUD dismiss];
-            NSLog(@"Hey");
+//        dispatch_async(dispatch_get_main_queue(), ^{
+//            [SVProgressHUD dismiss];
+//            NSLog(@"Hey");
             [self.navigationController popToRootViewControllerAnimated:YES];
-        });
+//        });
 
-    });
+//    });
     NSLog(@"Ho");
     
 }
@@ -246,20 +248,15 @@
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
-//
-//- (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string
-//{
-//    _locationLabel.text = _locationTextField.text;
-//    return YES;
-//}
+
 
 -(BOOL) textFieldShouldReturn:(UITextField *)textField
 {
     if(textField == titleText) {
-      [textField resignFirstResponder];
+        [addressTextField becomeFirstResponder];
     } else if (textField == addressTextField){
-        [textField resignFirstResponder];
-    } else if (textField == descriptionTextField)
+        [descriptionTextField becomeFirstResponder];
+    } else
         [textField resignFirstResponder];
     return NO;
 }

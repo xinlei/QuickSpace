@@ -25,6 +25,7 @@
 @synthesize popup;
 @synthesize logoutButton;
 NSMutableArray *userListings;
+NSMutableArray *allTitles;
 NSArray *bookings;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
@@ -95,13 +96,14 @@ NSArray *bookings;
 }
 
 - (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex {
-    Listing *currListing = [userListings objectAtIndex:actionSheet.tag];
-
+//    Listing *currListing = [userListings objectAtIndex:actionSheet.tag];
+    NSString *currListing_id = [userListings objectAtIndex:actionSheet.tag];
+    
     // Remove listing
     if (listingSegments.selectedSegmentIndex == 1){
         if (buttonIndex == actionSheet.destructiveButtonIndex) {
             PFQuery *query = [PFQuery queryWithClassName:@"Listing"];
-            [query getObjectInBackgroundWithId:currListing.object_id block:^(PFObject *parseListing, NSError *error) {
+            [query getObjectInBackgroundWithId:currListing_id block:^(PFObject *parseListing, NSError *error) {
                 [parseListing delete];
             }];
             [self.listingTable reloadData];
@@ -122,18 +124,20 @@ NSArray *bookings;
         switch (buttonIndex) {
             case 0:
                 booking[@"rating"] = @3;
+                NSLog(@"fhsdjhfsk");
                 break;
             case 1:
                 booking[@"rating"] = @2;
                 break;
             case 2:
                 booking[@"rating"] = @1;
+                break;
             default:
                 booking[@"rating"] = @0;
         }
         [booking saveInBackground];
         PFQuery *query = [PFQuery queryWithClassName:@"Listing"];
-        [query getObjectInBackgroundWithId:currListing.object_id block:^(PFObject *parseListing, NSError *error) {
+        [query getObjectInBackgroundWithId:currListing_id block:^(PFObject *parseListing, NSError *error) {
             
             int currTotalRating = [parseListing[@"totalRating"] intValue];
             int currTotalRaters = [parseListing[@"totalRaters"] intValue];
@@ -172,10 +176,15 @@ NSArray *bookings;
             bookings = [query findObjects];
             
             NSMutableArray* allRentals = [[NSMutableArray alloc] init];
+            NSMutableArray* titles = [[NSMutableArray alloc] init];
             for (PFObject *object in bookings) {
-                [allRentals addObject:object[@"listing"]];
+                if(object[@"listing_id"] != nil && object[@"listing_title"] != nil){
+                [allRentals addObject:object[@"listing_id"]];
+                [titles addObject:object[@"listing_title"]];
+                }
             }
-            userListings = [Listing objectToListingsWith:allRentals];
+            userListings = allRentals;
+            allTitles = titles;
             
         } else {
             PFQuery *notExpired = [PFQuery queryWithClassName:@"Booking"];
@@ -186,14 +195,22 @@ NSArray *bookings;
             PFQuery *query = [PFQuery queryWithClassName:@"Listing"];
             [query whereKey:@"lister" equalTo:currentUser.username];
             NSArray* AllListings = [query findObjects];
-            userListings = [Listing objectToListingsWith:AllListings];
+            
+            NSMutableArray* allIDs = [[NSMutableArray alloc] init];
+            NSMutableArray* titles = [[NSMutableArray alloc] init];
+            for (PFObject *object in AllListings) {
+ 
+                [allIDs addObject:object.objectId];
+                [titles addObject:object[@"title"]];
+            }
+            userListings = allIDs;
+            allTitles = titles;
         }
 //        dispatch_async(dispatch_get_main_queue(), ^{
             [self.listingTable reloadData];
             [SVProgressHUD dismiss];
 //        });
 //    });
-    NSLog(@"boobs");
     
 }
 
@@ -214,10 +231,12 @@ NSArray *bookings;
     if (cell == nil) {
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:simpleTableIdentifier];
     }
-    Listing *thisListing = [userListings objectAtIndex:indexPath.row];
+    //HREWHRKJEWHRJKHKRJWHKJRKHHKWEJRHRKEWJH
+    
+//    Listing *thisListing = [userListings objectAtIndex:indexPath.row];
     UILabel *timeRemaining = (UILabel *)[cell viewWithTag:2];
     UILabel *title = (UILabel *)[cell viewWithTag:1];
-    title.text = thisListing.title;
+    title.text = [allTitles objectAtIndex:indexPath.row];
     
     if (listingSegments.selectedSegmentIndex == 0){
         PFObject *thisBooking = [bookings objectAtIndex:indexPath.row];
@@ -244,14 +263,18 @@ NSArray *bookings;
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender{
     NSIndexPath *indexPath = [self.listingTable indexPathForSelectedRow];
     if([[segue identifier] isEqualToString:@"editSegue"]){
-        Listing *selectedListing = [userListings objectAtIndex:indexPath.row];
+        PFQuery *query = [PFQuery queryWithClassName:@"Listing"];
+        PFObject *listingObj = [query getObjectWithId:[userListings objectAtIndex:indexPath.row]];
+        NSArray *stupid = [[NSArray alloc]initWithObjects:listingObj, nil];
+        
         editListingViewController *destViewController = segue.destinationViewController;
-        destViewController.listing = selectedListing;
+        destViewController.listing = [[Listing objectToListingsWith:stupid] firstObject];
     }
     else if ([[segue identifier] isEqualToString:@"bookingSegue"]){
-        Listing *selectedListing = [userListings objectAtIndex:indexPath.row];
+        NSString *selectedListing = [userListings objectAtIndex:indexPath.row];
         viewBookingsController *destViewController = segue.destinationViewController;
-        destViewController.listing = selectedListing;
+        destViewController.listing_id = selectedListing;
+        destViewController.listing_title = [allTitles objectAtIndex:indexPath.row];
     }
 }
 
