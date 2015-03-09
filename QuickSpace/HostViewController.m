@@ -23,6 +23,7 @@
 @synthesize closetButton;
 @synthesize officeButton;
 @synthesize quietButton;
+@synthesize listing;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -41,27 +42,24 @@
     NSNumber *closet = [NSNumber numberWithBool:NO];
     NSNumber *office = [NSNumber numberWithBool:NO];
     NSNumber *quiet = [NSNumber numberWithBool:NO];
-    
     spaceType = [NSMutableArray arrayWithObjects:space, closet, office, quiet, nil];
-     
-    // Load previous user inputs
-    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-    NSDictionary *newListingBasicInfo = [defaults objectForKey:@"newListingBasicInfo"];
     
+    // Retrieve temporary created listing
+    PFQuery *query = [[NewListing query] fromPinWithName:@"newListing"];
+    NSArray *objects = [query findObjects];
+    if([objects count] >= 1) listing = [objects objectAtIndex:0];
     
-    // Load previous space types
-    NSArray *newListingSpaceType = [defaults objectForKey:@"newListingSpaceType"];
-    if (newListingSpaceType != nil){
-        restButton.selected = [newListingSpaceType[0] boolValue];
-        closetButton.selected = [newListingSpaceType[1] boolValue];
-        officeButton.selected = [newListingSpaceType[2] boolValue];
-        quietButton.selected = [newListingSpaceType[3] boolValue];
-    }
-    // Load previous basic space information
-    if (newListingBasicInfo != nil){
-        titleTextField.text = newListingBasicInfo[@"title"];
-        descriptionTextField.text = newListingBasicInfo[@"description"];
-        locationTextField.text = newListingBasicInfo[@"location"];
+    // Update view with values from the previous listing
+    if(listing != nil){
+        restButton.selected = [listing.types[0] boolValue];
+        closetButton.selected = [listing.types[1] boolValue];
+        officeButton.selected = [listing.types[2] boolValue];
+        quietButton.selected = [listing.types[3] boolValue];
+        titleTextField.text = listing.title;
+        descriptionTextField.text = listing.information;
+        locationTextField.text = listing.address;
+    } else {
+        [listing pinWithName:@"newListing"];
     }
 }
 
@@ -108,7 +106,7 @@
     return YES;
 }
 
-//spacetype buttons
+// spacetype buttons
 - (IBAction)restSelected:(id)sender {
     UIButton *button = (UIButton *)sender;
     button.selected = !button.selected;
@@ -131,29 +129,17 @@
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
-    if (restButton.selected)
-        [spaceType replaceObjectAtIndex:0 withObject:[NSNumber numberWithBool:YES]];
-    if (closetButton.selected)
-        [spaceType replaceObjectAtIndex:1 withObject:[NSNumber numberWithBool:YES]];
-    if (officeButton.selected)
-        [spaceType replaceObjectAtIndex:2 withObject:[NSNumber numberWithBool:YES]];
-    if (quietButton.selected)
-        [spaceType replaceObjectAtIndex:3 withObject:[NSNumber numberWithBool:YES]];
+    [spaceType replaceObjectAtIndex:0 withObject:[NSNumber numberWithBool:restButton.selected]];
+    [spaceType replaceObjectAtIndex:1 withObject:[NSNumber numberWithBool:closetButton.selected]];
+    [spaceType replaceObjectAtIndex:2 withObject:[NSNumber numberWithBool:officeButton.selected]];
+    [spaceType replaceObjectAtIndex:3 withObject:[NSNumber numberWithBool:quietButton.selected]];
 
-    
-    NSArray *keys = [NSArray arrayWithObjects:
-                     @"title",
-                     @"description",
-                     @"location",
-                     nil];
-   
-    NSArray *objects = [NSArray arrayWithObjects:titleTextField.text, descriptionTextField.text, locationTextField.text, nil];
-    NSMutableDictionary *newListingBasicInfo = [NSMutableDictionary dictionaryWithObjects:objects forKeys:keys];
-    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-    
-    [defaults setObject:spaceType forKey:@"newListingSpaceType"];
-    [defaults setObject:newListingBasicInfo forKey:@"newListingBasicInfo"];
-    [defaults setInteger:-1 forKey:@"price"];
+    // Save input to a temporarily created listing
+    listing.price = -1;
+    listing.title = titleTextField.text;
+    listing.information = descriptionTextField.text;
+    listing.address = locationTextField.text;
+    listing.types = spaceType;
 }
 
 

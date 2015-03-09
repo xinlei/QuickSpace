@@ -7,13 +7,14 @@
 //
 
 #import "NewListing.h"
+#import <Parse/PFObject+Subclass.h>
 #import <Parse/Parse.h>
 
 @implementation NewListing
 
 @dynamic address;
 @dynamic amenities;
-@dynamic description;
+@dynamic information;
 @dynamic image;
 @dynamic lister;
 @dynamic location;
@@ -24,7 +25,7 @@
 @dynamic types;
 
 + (void) load {
-    [self registerSubclass];
+    //[self registerSubclass];
 }
 
 + (NSString *)parseClassName {

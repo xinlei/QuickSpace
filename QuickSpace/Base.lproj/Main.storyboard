@@ -836,6 +836,23 @@
             </objects>
             <point key="canvasLocation" x="-277" y="1119"/>
         </scene>
+<<<<<<< Updated upstream
+=======
+        <!--View Controller-->
+        <scene sceneID="NkJ-55-CYU">
+            <objects>
+                <viewController id="U6N-Vo-k0a" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="ebp-ut-Vbn">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="AJX-hw-wrL" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-1126" y="1877"/>
+        </scene>
+>>>>>>> Stashed changes
         <!--Listing Details-->
         <scene sceneID="Hj8-DT-1YS">
             <objects>
@@ -1634,7 +1651,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="fu6-C5-3Is" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-659" y="239"/>
+            <point key="canvasLocation" x="-714" y="255"/>
         </scene>
         <!--Booking Confirmation View Controller-->
         <scene sceneID="Uqc-ZD-udU">
@@ -1687,7 +1704,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="rnB-vO-xDo" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-240" y="239"/>
+            <point key="canvasLocation" x="-312" y="249"/>
         </scene>
         <!--Modal Picture View Controller-->
         <scene sceneID="Tda-vK-Hxd">
@@ -1854,8 +1871,9 @@
         <simulatedScreenMetrics key="destination" type="retina4"/>
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
-        <segue reference="PSf-8c-2F7"/>
         <segue reference="8fF-dy-T2g"/>
         <segue reference="oHm-PT-uY9"/>
+        <segue reference="zFC-FJ-dpL"/>
+        <segue reference="PSf-8c-2F7"/>
     </inferredMetricsTieBreakers>
 </document>

@@ -8,14 +8,15 @@
 
 #import <UIKit/UIKit.h>
 #import "Listing.h"
+#import "NewListing.h"
 
 @interface HostViewController : UIViewController
 
 @property (weak, nonatomic) IBOutlet UITextField *descriptionTextField;
 @property (weak, nonatomic) IBOutlet UITextField *locationTextField;
 @property (weak, nonatomic) IBOutlet UITextField *titleTextField;
-
 @property (nonatomic, strong) NSMutableArray *spaceType;
+@property (nonatomic, strong) NewListing *listing;
 
 //spacetype buttons
 @property (weak, nonatomic) IBOutlet UIButton *restButton;
