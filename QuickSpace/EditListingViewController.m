@@ -106,75 +106,73 @@
     scrollView.frame = self.view.frame;
     scrollView.contentSize = CGSizeMake(self.view.frame.size.width, 1000);
     CGRect viewFrame = scrollView.frame;
+    CGFloat mid = viewFrame.size.width/2;
+    
+    //set image
+    CGRect frame = image.frame;
+    frame.origin.x = mid - frame.size.width;
+    image.frame = frame;
     
     //set title
-    [ListingDetailViewController setItemLocation:titleLabel withPrev:image apartBy:10];
-    [ListingDetailViewController setItemLocation:titleText withPrev:image apartBy:10];
+
+    [ListingDetailViewController setItemLocation:titleLabel withPrev:image apartBy:10 atX:titleLabel.frame.origin.x];
+    [ListingDetailViewController setItemLocation:titleText withPrev:image apartBy:10 atX:mid*2 - frame.size.width - 8];
     
     //set address
-    [ListingDetailViewController setItemLocation:addressLabel withPrev:titleText apartBy:15];
-    [ListingDetailViewController setItemLocation:addressTextField withPrev:titleText apartBy:15];
+    [ListingDetailViewController setItemLocation:addressLabel withPrev:titleText apartBy:15 atX:addressLabel.frame.origin.x];
+    [ListingDetailViewController setItemLocation:addressTextField withPrev:titleText apartBy:15 atX:mid*2 - frame.size.width - 8];
     
     //set spacetype
-    [ListingDetailViewController setItemLocation:typeLabel withPrev:addressTextField apartBy:15];
+    [ListingDetailViewController setItemLocation:typeLabel withPrev:addressTextField apartBy:15 atX:typeLabel.frame.origin.x];
     //set rest
-    [ListingDetailViewController setItemLocation:restLabel withPrev:typeLabel apartBy:5];
+    [ListingDetailViewController setItemLocation:restLabel withPrev:typeLabel apartBy:5 atX:restLabel.frame.origin.x];
     [editListingViewController centerLeft:restLabel inFrame:viewFrame];
-    [ListingDetailViewController setItemLocation:restSwitch withPrev:typeLabel apartBy:5];
-    [editListingViewController centerRight:restSwitch inFrame:viewFrame];
+    [ListingDetailViewController setItemLocation:restSwitch withPrev:typeLabel apartBy:5 atX:mid+1];
     //set closet
-    [ListingDetailViewController setItemLocation:closetLabel withPrev:restSwitch apartBy:5];
+    [ListingDetailViewController setItemLocation:closetLabel withPrev:restSwitch apartBy:5 atX:closetLabel.frame.origin.x];
     [editListingViewController centerLeft:closetLabel inFrame:viewFrame];
-    [ListingDetailViewController setItemLocation:closetSwitch withPrev:restSwitch apartBy:5];
-    [editListingViewController centerRight:closetSwitch inFrame:viewFrame];
+    [ListingDetailViewController setItemLocation:closetSwitch withPrev:restSwitch apartBy:5 atX:mid+1];
     //set quiet
-    [ListingDetailViewController setItemLocation:quietLabel withPrev:closetSwitch apartBy:5];
+    [ListingDetailViewController setItemLocation:quietLabel withPrev:closetSwitch apartBy:5 atX:quietLabel.frame.origin.x];
     [editListingViewController centerLeft:quietLabel inFrame:viewFrame];
-    [ListingDetailViewController setItemLocation:quietSwitch withPrev:closetSwitch apartBy:5];
-    [editListingViewController centerRight:quietSwitch inFrame:viewFrame];
+    [ListingDetailViewController setItemLocation:quietSwitch withPrev:closetSwitch apartBy:5 atX:mid+1];
     //set office
-    [ListingDetailViewController setItemLocation:officeLabel withPrev:quietSwitch apartBy:5];
+    [ListingDetailViewController setItemLocation:officeLabel withPrev:quietSwitch apartBy:5 atX:officeLabel.frame.origin.x];
     [editListingViewController centerLeft:officeLabel inFrame:viewFrame];
-    [ListingDetailViewController setItemLocation:officeSwitch withPrev:quietSwitch apartBy:5];
-    [editListingViewController centerRight:officeSwitch inFrame:viewFrame];
+    [ListingDetailViewController setItemLocation:officeSwitch withPrev:quietSwitch apartBy:5 atX:mid+1];
 //    [ListingDetailViewController addSeparatorOnto:scrollView at:officeSwitch.frame.origin.y + officeSwitch.frame.size.height + 8];
     
     //set amenities
-    [ListingDetailViewController setItemLocation:amenitiesLabel withPrev:officeSwitch apartBy:15];
+    [ListingDetailViewController setItemLocation:amenitiesLabel withPrev:officeSwitch apartBy:15 atX:amenitiesLabel.frame.origin.x];
     //wifi
-    [ListingDetailViewController setItemLocation:wifiLabel withPrev:amenitiesLabel apartBy:5];
+    [ListingDetailViewController setItemLocation:wifiLabel withPrev:amenitiesLabel apartBy:5 atX:wifiLabel.frame.origin.x];
     [editListingViewController centerLeft:wifiLabel inFrame:viewFrame];
-    [ListingDetailViewController setItemLocation:wifiSwitch withPrev:amenitiesLabel apartBy:5];
-    [editListingViewController centerRight:wifiSwitch inFrame:viewFrame];
+    [ListingDetailViewController setItemLocation:wifiSwitch withPrev:amenitiesLabel apartBy:5 atX:mid+1];
     //fridge
-    [ListingDetailViewController setItemLocation:fridgeLabel withPrev:wifiSwitch apartBy:5];
+    [ListingDetailViewController setItemLocation:fridgeLabel withPrev:wifiSwitch apartBy:5 atX:fridgeLabel.frame.origin.x];
     [editListingViewController centerLeft:fridgeLabel inFrame:viewFrame];
-    [ListingDetailViewController setItemLocation:fridgeSwitch withPrev:wifiSwitch apartBy:5];
-    [editListingViewController centerRight:fridgeSwitch inFrame:viewFrame];
+    [ListingDetailViewController setItemLocation:fridgeSwitch withPrev:wifiSwitch apartBy:5 atX:mid+1];
     //desk
-    [ListingDetailViewController setItemLocation:deskLabel withPrev:fridgeSwitch apartBy:5];
+    [ListingDetailViewController setItemLocation:deskLabel withPrev:fridgeSwitch apartBy:5 atX:deskLabel.frame.origin.x];
     [editListingViewController centerLeft:deskLabel inFrame:viewFrame];
-    [ListingDetailViewController setItemLocation:deskSwitch withPrev:fridgeSwitch apartBy:5];
-    [editListingViewController centerRight:deskSwitch inFrame:viewFrame];
+    [ListingDetailViewController setItemLocation:deskSwitch withPrev:fridgeSwitch apartBy:5 atX:mid+1];
     //janitorial
-    [ListingDetailViewController setItemLocation:servicesLabel withPrev:deskSwitch apartBy:5];
+    [ListingDetailViewController setItemLocation:servicesLabel withPrev:deskSwitch apartBy:5 atX:servicesLabel.frame.origin.x];
     [editListingViewController centerLeft:servicesLabel inFrame:viewFrame];
-    [ListingDetailViewController setItemLocation:servicesSwitch withPrev:deskSwitch apartBy:5];
-    [editListingViewController centerRight:servicesSwitch inFrame:viewFrame];
+    [ListingDetailViewController setItemLocation:servicesSwitch withPrev:deskSwitch apartBy:5 atX:mid+1];
     //monitor
-    [ListingDetailViewController setItemLocation:monitorLabel withPrev:servicesSwitch apartBy:5];
+    [ListingDetailViewController setItemLocation:monitorLabel withPrev:servicesSwitch apartBy:5 atX:monitorLabel.frame.origin.x];
     [editListingViewController centerLeft:monitorLabel inFrame:viewFrame];
-    [ListingDetailViewController setItemLocation:monitorSwitch withPrev:servicesSwitch apartBy:5];
-    [editListingViewController centerRight:monitorSwitch inFrame:viewFrame];
+    [ListingDetailViewController setItemLocation:monitorSwitch withPrev:servicesSwitch apartBy:5 atX:mid+1];
     
     //other descriptions
-    [ListingDetailViewController setItemLocation:descriptionLabel withPrev:monitorSwitch apartBy:10];
-    [ListingDetailViewController setItemLocation:descriptionTextField withPrev:descriptionLabel apartBy:5];
+    [ListingDetailViewController setItemLocation:descriptionLabel withPrev:monitorSwitch apartBy:10 atX:descriptionLabel.frame.origin.x];
+    [ListingDetailViewController setItemLocation:descriptionTextField withPrev:descriptionLabel apartBy:5 atX:mid - descriptionTextField.frame.size.width/2];
     
     //if the page is longer than one page, move the book button down
     CGFloat endOfPage = descriptionTextField.frame.origin.y + descriptionTextField.frame.size.height + 10 + saveButton.frame.size.height;
     CGFloat bottomOfView = self.view.frame.size.height - self.navigationController.navigationBar.frame.size.height - self.tabBarController.tabBar.frame.size.height - [UIApplication sharedApplication].statusBarFrame.size.height;
-    CGRect frame = saveButton.frame;
+    frame = saveButton.frame;
     if (endOfPage > bottomOfView){
         frame.origin.y = descriptionTextField.frame.origin.y + descriptionTextField.frame.size.height + 10;
         saveButton.frame = frame;
@@ -237,12 +235,6 @@
     item.frame = frame;
 }
 
-+ (void) centerRight:(UIView *)item inFrame:(CGRect)viewFrame
-{
-    CGRect frame = item.frame;
-    frame.origin.x = viewFrame.size.width/2 + 1;
-    item.frame = frame;
-}
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

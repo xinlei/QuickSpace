@@ -32,7 +32,7 @@
 @property (weak, nonatomic) IBOutlet UIScrollView *scrollView;
 @property (weak, nonatomic) IBOutlet UIButton *bookButton;
 
-+(void) setItemLocation:(UIView *)item withPrev:(UIView *)prev apartBy:(CGFloat)dist;
++(void) setItemLocation:(UIView *)item withPrev:(UIView *)prev apartBy:(CGFloat)dist atX:(CGFloat)x;
 +(void) addSeparatorOnto:(UIView *)view at:(CGFloat)y;
 
 @end

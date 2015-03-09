@@ -56,6 +56,5 @@
 - (IBAction)saveButtonClick:(id)sender;
 
 + (void) centerLeft:(UIView *)item inFrame:(CGRect)viewFrame;
-+ (void) centerRight:(UIView *)item inFrame:(CGRect)viewFrame;
 
 @end

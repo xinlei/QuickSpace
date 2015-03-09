@@ -42,7 +42,6 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    listingImg.image = theImage;
     
     listing = [NewListing retrieveNewListing];
     [listing fetchFromLocalDatastore];
@@ -51,11 +50,17 @@
     scrollView.frame = self.view.frame;
     scrollView.contentSize = CGSizeMake(self.view.frame.size.width, 1000);
     CGRect viewFrame = scrollView.frame;
-
+    CGFloat mid = viewFrame.size.width/2;
+    
+    //set image
+    listingImg.image = theImage;
+    CGRect frame = listingImg.frame;
+    frame.origin.x = mid - frame.size.width/2;
+    
     //set title
     titleText.text = listing.title;
-    CGRect frame = titleText.frame;
-    frame.origin.x = viewFrame.size.width/2;
+    frame = titleText.frame;
+    frame.origin.x = mid;
     frame.origin.y = listingImg.frame.origin.y + listingImg.frame.size.height + 10;
     titleText.frame = frame;
     frame = titleLabel.frame;
@@ -64,8 +69,10 @@
     
     //set price
     priceText.text = [NSString stringWithFormat:@"$%d/hour", listing.price];
-    [ListingDetailViewController setItemLocation:priceLabel withPrev:titleText apartBy:10];
-    [ListingDetailViewController setItemLocation:priceText withPrev:titleText apartBy:10];
+    frame = priceText.frame;
+    priceText.frame = frame;
+    [ListingDetailViewController setItemLocation:priceLabel withPrev:titleText apartBy:10 atX:priceLabel.frame.origin.x];
+    [ListingDetailViewController setItemLocation:priceText withPrev:titleText apartBy:10 atX:mid];
     
     //set location
     locationText.text = listing.address;
@@ -80,16 +87,16 @@
     frame.size = CGSizeMake(fmaxf(newSize.width, fixedWidth), newSize.height);
     locationText.frame = frame;
     locationText.backgroundColor = [UIColor clearColor];
-    [ListingDetailViewController setItemLocation:locationLabel withPrev:priceText apartBy:10];
-    [ListingDetailViewController setItemLocation:locationText withPrev:priceText apartBy:10];
+    [ListingDetailViewController setItemLocation:locationLabel withPrev:priceText apartBy:10 atX:locationLabel.frame.origin.x];
+    [ListingDetailViewController setItemLocation:locationText withPrev:priceText apartBy:10 atX:mid];
     
     //set amenities
     amenitiesText.text = [listing amenitiesToString];
     amenitiesLabel.numberOfLines = 0;
     CGSize labelSize = [amenitiesLabel.text sizeWithAttributes:@{NSFontAttributeName:amenitiesLabel.font}];
-    amenitiesLabel.frame = CGRectMake(amenitiesLabel.frame.origin.x, amenitiesLabel.frame.origin.y, amenitiesLabel.frame.size.width, labelSize.height);
-    [ListingDetailViewController setItemLocation:amenitiesText withPrev:locationText apartBy:10];
-    [ListingDetailViewController setItemLocation:amenitiesLabel withPrev:locationText apartBy:10];
+    amenitiesLabel.frame = CGRectMake(mid, amenitiesLabel.frame.origin.y, amenitiesLabel.frame.size.width, labelSize.height);
+    [ListingDetailViewController setItemLocation:amenitiesText withPrev:locationText apartBy:10 atX:mid];
+    [ListingDetailViewController setItemLocation:amenitiesLabel withPrev:locationText apartBy:10 atX:amenitiesLabel.frame.origin.x];
     
     //set other descriptions
     //update the description
@@ -110,8 +117,13 @@
     frame.size = CGSizeMake(fmaxf(newSize.width, fixedWidth), newSize.height);
     descriptionsText.frame = frame;
     descriptionsText.backgroundColor = [UIColor clearColor];
-    [ListingDetailViewController setItemLocation:descriptionsLabel withPrev:amenitiesLabel apartBy:10];
-    [ListingDetailViewController setItemLocation:descriptionsText withPrev:descriptionsLabel apartBy:5];
+    [ListingDetailViewController setItemLocation:descriptionsLabel withPrev:amenitiesLabel apartBy:10 atX:descriptionsLabel.frame.origin.x];
+    [ListingDetailViewController setItemLocation:descriptionsText withPrev:descriptionsLabel apartBy:5 atX:mid - frame.size.width/2];
+    
+    //set button size
+    frame = confirmButton.frame;
+    frame.size.width = viewFrame.size.width;
+    confirmButton.frame = frame;
     
     //if the page is longer than one page, move the confirm button down
     CGFloat endOfPage = descriptionsText.frame.origin.y + descriptionsText.frame.size.height + 10 + confirmButton.frame.size.height;
