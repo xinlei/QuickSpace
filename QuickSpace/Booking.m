@@ -19,7 +19,7 @@
 @dynamic rating;
 
 + (void)load {
-    [self registerSubclass];
+    //[self registerSubclass];
 }
 
 + (NSString *)parseClassName {

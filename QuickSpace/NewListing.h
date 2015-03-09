@@ -13,7 +13,7 @@
 
 @property (retain) NSString *address;
 @property (retain) NSArray *amenities;
-@property (retain) NSString *description;
+@property (retain) NSString *information;
 @property (retain) PFFile *image;
 @property (retain) PFUser *lister;
 @property (retain) PFGeoPoint *location;

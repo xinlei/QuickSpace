@@ -8,6 +8,8 @@
 
 #import "AppDelegate.h"
 #import <Parse/Parse.h>
+#import "Booking.h"
+#import "NewListing.h"
 
 @interface AppDelegate ()
 
@@ -20,8 +22,9 @@
     // Override point for customization after application launch.
     
 
-//    [Parse enableLocalDatastore];
-    
+    [Booking registerSubclass];
+    [NewListing registerSubclass]; 
+    [Parse enableLocalDatastore];
     // Initialize Parse.
     [Parse setApplicationId:@"ZfJqEiaD9OesMwdnkPEBmTpCLFhFI3t13PenijEm"
                   clientKey:@"LMMh1ekrK9gy5OW8jzt4f73h496L0YPEjgJkGK0R"];
