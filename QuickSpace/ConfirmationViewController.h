@@ -7,6 +7,7 @@
 //
 #import <UIKit/UIKit.h>
 #import "ListingDetailViewController.h"
+#import "NewListing.h"
 @interface ConfirmationViewController : UIViewController
 
 @property (weak, nonatomic) IBOutlet UIImageView *listingImg;
@@ -26,4 +27,5 @@
 @property (weak, nonatomic) IBOutlet UIScrollView *scrollView;
 @property (nonatomic, retain) UIImage *theImage;
 @property (nonatomic, retain) NSArray *allPhotos;
+@property (nonatomic, retain) NewListing *listing;
 @end
