@@ -7,6 +7,7 @@
 //
 
 #import "viewBookingsController.h"
+#import <Parse/Parse.h>
 
 @interface viewBookingsController ()
 
@@ -20,12 +21,14 @@
 @synthesize listing;
 @synthesize listingTitle;
 @synthesize bookingsTable;
+@synthesize listing_id;
+@synthesize listing_title;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     
     self.navigationItem.title = @"Current Bookings";
-    listingTitle.text = listing.title;
+    listingTitle.text = listing_title;
     
     [self populateBookings];
 
@@ -42,11 +45,9 @@
     [SVProgressHUD show];
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
     
-    PFQuery *query = [PFQuery queryWithClassName:@"Listing"];
-    PFObject *listingObj = [query getObjectWithId:listing.object_id];
     
         PFQuery *listingBookings = [PFQuery queryWithClassName:@"Booking"];
-        [listingBookings whereKey:@"listing" equalTo:listingObj];
+        [listingBookings whereKey:@"listing_id" equalTo:listing_id];
     bookings = [listingBookings findObjects];
     
     
@@ -92,7 +93,8 @@
     [formatter setDateFormat:@"HH:mm"];
     endTime.text = [formatter stringFromDate:thisBooking.endTime];
     UILabel *guest = (UILabel *)[cell viewWithTag:4];
-    guest.text = thisBooking.guest.description;
+    PFUser *theGuest = (PFUser *)thisBooking.guest;
+    guest.text = theGuest.username;
     
     return cell;
 }

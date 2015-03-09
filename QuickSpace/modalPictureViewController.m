@@ -15,7 +15,7 @@
 
 @implementation modalPictureViewController
 @synthesize scrollView;
-@synthesize images;
+@synthesize imageData;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -29,12 +29,12 @@
     scrollView.frame = self.view.frame;
     scrollView.pagingEnabled = YES;
     
-    for (int i = 0; i < images.count; i++) {
+    for (int i = 0; i < imageData.count; i++) {
         CGFloat myOrigin = i*self.view.frame.size.width;
         
         UIImageView *myImageView = [[UIImageView alloc] initWithFrame:CGRectMake(myOrigin, self.view.frame.size.height / 3, self.view.frame.size.width, self.view.frame.size.height / 3)];
         
-        myImageView.image = [images objectAtIndex:i];
+        myImageView.image = [UIImage imageWithData:[imageData objectAtIndex:i]];
 
         scrollView.delegate = self;
         [scrollView addSubview:myImageView];
@@ -42,7 +42,7 @@
         
     }
     
-    scrollView.contentSize = CGSizeMake(self.view.frame.size.width * images.count, self.view.frame.size.height);
+    scrollView.contentSize = CGSizeMake(self.view.frame.size.width * imageData.count, self.view.frame.size.height);
 }
 
 -(void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView{

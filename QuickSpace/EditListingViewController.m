@@ -45,10 +45,12 @@
 @synthesize descriptionTextField;
 @synthesize saveButton;
 @synthesize scrollView;
+@synthesize listing_id;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    
     
     image.image = [UIImage imageWithData: [_listing.allImageData firstObject]];
     addressTextField.text = _listing.address;
