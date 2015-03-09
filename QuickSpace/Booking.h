@@ -8,6 +8,7 @@
 
 #import <Foundation/Foundation.h>
 #import "Listing.h"
+#import "NewListing.h"
 #import <Parse/Parse.h>
 
 
@@ -15,9 +16,9 @@
 
 @property (retain) NSDate *startTime;
 @property (retain) NSDate *endTime;
-@property (retain) NSObject *guest;
-@property (retain) NSObject *owner;
-//@property (retain) Listing *listing;
+@property (retain) PFUser *guest;
+@property (retain) PFUser *owner;
+@property (retain) NewListing *listing;
 @property (retain) NSString *listing_id;
 @property (retain) NSString *listing_title;
 @property int rating;
