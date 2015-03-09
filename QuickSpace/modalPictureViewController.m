@@ -15,12 +15,11 @@
 
 @implementation modalPictureViewController
 @synthesize scrollView;
+@synthesize images;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    
-    NSArray *imageNames = [[NSArray alloc] initWithObjects:@"room1.jpg", @"room3.jpg", @"room2.jpg", nil];
     
     UITapGestureRecognizer *close = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(closeModal:)];
     [close setDelegate:self];
@@ -30,12 +29,12 @@
     scrollView.frame = self.view.frame;
     scrollView.pagingEnabled = YES;
     
-    for (int i = 0; i < imageNames.count; i++) {
+    for (int i = 0; i < images.count; i++) {
         CGFloat myOrigin = i*self.view.frame.size.width;
         
         UIImageView *myImageView = [[UIImageView alloc] initWithFrame:CGRectMake(myOrigin, self.view.frame.size.height / 3, self.view.frame.size.width, self.view.frame.size.height / 3)];
         
-        myImageView.image = [UIImage imageNamed:[imageNames objectAtIndex:i]];
+        myImageView.image = [images objectAtIndex:i];
 
         scrollView.delegate = self;
         [scrollView addSubview:myImageView];
@@ -43,7 +42,7 @@
         
     }
     
-    scrollView.contentSize = CGSizeMake(self.view.frame.size.width * imageNames.count, self.view.frame.size.height);
+    scrollView.contentSize = CGSizeMake(self.view.frame.size.width * images.count, self.view.frame.size.height);
 }
 
 -(void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView{

@@ -10,5 +10,5 @@
 
 @interface modalPictureViewController : UIViewController <UIScrollViewDelegate, UIGestureRecognizerDelegate>
 @property (strong, nonatomic) IBOutlet UIScrollView *scrollView;
-
+@property (nonatomic) NSArray *images;
 @end
