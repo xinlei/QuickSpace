@@ -45,10 +45,9 @@
     spaceType = [NSMutableArray arrayWithObjects:space, closet, office, quiet, nil];
     
     // Retrieve temporary created listing
-    PFQuery *query = [[NewListing query] fromPinWithName:@"newListing"];
-    NSArray *objects = [query findObjects];
-    if([objects count] >= 1) listing = [objects objectAtIndex:0];
+    listing = [NewListing retrieveNewListing];
     
+    [PFObject unpinAllObjects]; 
     // Update view with values from the previous listing
     if(listing != nil){
         restButton.selected = [listing.types[0] boolValue];
@@ -59,7 +58,12 @@
         descriptionTextField.text = listing.information;
         locationTextField.text = listing.address;
     } else {
-        [listing pinWithName:@"newListing"];
+        //listing = [[NewListing alloc] init];
+        listing = [NewListing object];
+        bool saved = [listing pinWithName:@"NewListing"];
+        if(saved){
+            NSLog(@"%@", @"SAVED!!");
+        }
     }
 }
 
@@ -135,11 +139,18 @@
     [spaceType replaceObjectAtIndex:3 withObject:[NSNumber numberWithBool:quietButton.selected]];
 
     // Save input to a temporarily created listing
-    listing.price = -1;
+    listing.price = 10;
     listing.title = titleTextField.text;
     listing.information = descriptionTextField.text;
     listing.address = locationTextField.text;
     listing.types = spaceType;
+    listing.ratingValue = 0;
+    listing.totalRaters = 0;
+    listing.totalRating= 0;
+    
+    PFQuery *query = [NewListing query];
+    [query fromPinWithName:@"NewListing"];
+    NSArray *objects = [query findObjects];
 }
 
 

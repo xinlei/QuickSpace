@@ -21,6 +21,15 @@
 @synthesize servicesSwitch;
 @synthesize priceLabel;
 @synthesize priceTextField;
+@synthesize listing;
+
+typedef enum {
+    wifi = 0,
+    refrigerator,
+    studyDesk,
+    monitor,
+    services,
+} Amenities;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -34,28 +43,16 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    listing = [NewListing retrieveNewListing];
+    [listing fetchFromLocalDatastore];
     
-    // Load previous user inputs
-    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-    NSMutableDictionary *amenities = [defaults objectForKey:@"newListingAmenities"];
-    NSInteger price = [defaults integerForKey:@"newListingPrice"];
-    
-    // Set previous configuration
-    if (amenities != nil) {
-        wifiSwitch.on = [amenities[@"wifi"] boolValue];
-        refrigeratorSwitch.on = [amenities[@"refrigerator"] boolValue];
-        studyDeskSwitch.on = [amenities[@"studyDesk"] boolValue];
-        monitorSwitch.on = [amenities[@"monitor"] boolValue];
-        servicesSwitch.on = [amenities[@"services"] boolValue];
-        if(wifiSwitch.on)
-            NSLog(@"Wifi on(?)");
-    }
-    //Set previous price; otherwise default to 10
-    if (price != -1){
-        priceTextField.text = [@(price) stringValue];
-    } else {
-        priceTextField.text = [@(10) stringValue];
-    }
+    // Update view with values from the previous listing
+    wifiSwitch.on = [listing.amenities[wifi] boolValue];
+    refrigeratorSwitch.on = [listing.amenities[refrigerator] boolValue];
+    studyDeskSwitch.on = [listing.amenities[studyDesk] boolValue];
+    monitorSwitch.on = [listing.amenities[monitor] boolValue];
+    servicesSwitch.on = [listing.amenities[services] boolValue];
+    priceTextField.text = [@(listing.price) stringValue];
 }
 
 - (void)didReceiveMemoryWarning
@@ -84,16 +81,13 @@
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
-    NSMutableDictionary *amenities = [[NSMutableDictionary alloc] init];
-    [amenities setObject:[NSNumber numberWithBool:wifiSwitch.on] forKey:@"wifi"];
-    [amenities setObject:[NSNumber numberWithBool:refrigeratorSwitch.on] forKey:@"refrigerator"];
-    [amenities setObject:[NSNumber numberWithBool:studyDeskSwitch.on] forKey:@"studyDesk"];
-    [amenities setObject:[NSNumber numberWithBool:monitorSwitch.on] forKey:@"monitor"];
-    [amenities setObject:[NSNumber numberWithBool:servicesSwitch.on] forKey:@"services"];
-    
-    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-    [defaults setObject:amenities forKey:@"newListingAmenities"];
-    [defaults setInteger:[priceTextField.text intValue] forKey:@"newListingPrice"];
+    listing.price = [priceTextField.text intValue];
+    listing.amenities = [[NSMutableArray alloc]initWithObjects:
+                                 [NSNumber numberWithBool:wifiSwitch.on],
+                                 [NSNumber numberWithBool:refrigeratorSwitch.on],
+                                 [NSNumber numberWithBool:studyDeskSwitch.on],
+                                 [NSNumber numberWithBool:monitorSwitch.on],
+                                 [NSNumber numberWithBool:servicesSwitch.on],nil];
 }
 
 

@@ -15,13 +15,14 @@
 @dynamic address;
 @dynamic amenities;
 @dynamic information;
-@dynamic image;
+@dynamic images;
 @dynamic lister;
 @dynamic location;
 @dynamic price;
 @dynamic ratingValue;
 @dynamic title;
 @dynamic totalRaters;
+@dynamic totalRating;
 @dynamic types;
 
 + (void) load {
@@ -32,6 +33,24 @@
     return @"Listing";
 }
 
++ (NewListing *) retrieveNewListing {
+    PFQuery *query = [[NewListing query] fromPinWithName:@"newListing"];
+    NSArray *objects = [query findObjects];
+    if([objects count] >= 1) return [objects objectAtIndex:0];
+    return nil;
+}
+
+- (BOOL) addNewListing {
+    //return [pinWithName:@"newListing"];
+    return YES; 
+}
+
+- (void) setLocationWith:(MKPlacemark *)placemark{
+    [self pinWithName:@""];
+    self.location = [[PFGeoPoint alloc] init];
+    self.location.latitude = placemark.coordinate.latitude;
+    self.location.longitude = placemark.coordinate.longitude;
+}
 /*
 + (NSArray *) getAllAvailableListingsWithAmenities:(NSDictionary *) amenities
                                          withTypes:(NSArray *)spaceType
@@ -176,26 +195,26 @@
     return listings;
 }
 */
-+ (NSString *)amenitiesToString:(NSArray *)amenities {
+- (NSString *) amenitiesToString {
     NSMutableString *amenitiesString = [[NSMutableString alloc] init];
-    for (NSString *key in amenities) {
-        if ([key isEqualToString:@"wifi"]){
+    for (int i = 0; i < [self.amenities count]; i++) {
+        if (i == 0 && [self.amenities[i] boolValue] == YES){
             if (amenitiesString.length != 0) [amenitiesString appendString:@"\n"];
             [amenitiesString appendString:@"WiFi Internet"];
         }
-        if ([key isEqualToString:@"refrigerator"]){
+        if (i == 1 && [self.amenities[i] boolValue] == YES){
             if (amenitiesString.length != 0) [amenitiesString appendString:@"\n"];
             [amenitiesString appendString:@"Refrigerator"];
         }
-        if ([key isEqualToString:@"studyDesk"]){
+        if (i == 2 && [self.amenities[i] boolValue] == YES){
             if (amenitiesString.length != 0) [amenitiesString appendString:@"\n"];
             [amenitiesString appendString:@"Study Desk"];
         }
-        if ([key isEqualToString:@"monitor"]){
+        if (i == 3 && [self.amenities[i] boolValue] == YES){
             if (amenitiesString.length != 0) [amenitiesString appendString:@"\n"];
             [amenitiesString appendString:@"Monitor"];
         }
-        if ([key isEqualToString:@"services"]){
+        if (i == 4 && [self.amenities[i] boolValue] == YES){
             if (amenitiesString.length != 0) [amenitiesString appendString:@"\n"];
             [amenitiesString appendString:@"Janitoral Services"];
         }
@@ -203,7 +222,7 @@
     [amenitiesString appendString:@"-"];
     return amenitiesString;
 }
-
+             
 + (NSString *) typesToString:(NSArray *)spaceType {
     NSMutableString *typeDesc = [[NSMutableString alloc] init];
     for (NSString *listingType in spaceType){

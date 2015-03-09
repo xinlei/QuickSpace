@@ -29,6 +29,7 @@
 @synthesize confirmButton;
 @synthesize scrollView;
 @synthesize allPhotos;
+@synthesize listing;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -42,27 +43,17 @@
 {
     [super viewDidLoad];
     listingImg.image = theImage;
+    
+    listing = [NewListing retrieveNewListing];
+    [listing fetchFromLocalDatastore];
 
-    
-    // Get values from UserDefaults
-    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-    NSDictionary *newListingBasicInfo = [defaults objectForKey:@"newListingBasicInfo"];
-    NSDictionary *listingAmenities = [defaults objectForKey:@"newListingAmenities"];
-    NSInteger price = [defaults integerForKey:@"newListingPrice"];
-    
-    NSSet *keys = [listingAmenities keysOfEntriesPassingTest:^(id key, id obj, BOOL *stop){
-        return [obj boolValue];
-    }];
-    self.amenities = [keys allObjects];
-    
-    
     //set scrollView
     scrollView.frame = self.view.frame;
     scrollView.contentSize = CGSizeMake(self.view.frame.size.width, 1000);
     CGRect viewFrame = scrollView.frame;
 
     //set title
-    titleText.text = newListingBasicInfo[@"title"];
+    titleText.text = listing.title;
     CGRect frame = titleText.frame;
     frame.origin.x = viewFrame.size.width/2;
     frame.origin.y = listingImg.frame.origin.y + listingImg.frame.size.height + 10;
@@ -72,12 +63,12 @@
     titleLabel.frame = frame;
     
     //set price
-    priceText.text = [NSString stringWithFormat:@"$%ld/hour", (long)price];
+    priceText.text = [NSString stringWithFormat:@"$%d/hour", listing.price];
     [ListingDetailViewController setItemLocation:priceLabel withPrev:titleText apartBy:10];
     [ListingDetailViewController setItemLocation:priceText withPrev:titleText apartBy:10];
     
     //set location
-    locationText.text = newListingBasicInfo[@"location"];
+    locationText.text = listing.address;
     locationText.selectable = NO;
     locationText.editable = NO;
     locationText.scrollEnabled = NO;
@@ -93,7 +84,7 @@
     [ListingDetailViewController setItemLocation:locationText withPrev:priceText apartBy:10];
     
     //set amenities
-    amenitiesText.text = [Listing amenitiesToString:self.amenities];
+    amenitiesText.text = [listing amenitiesToString];
     amenitiesLabel.numberOfLines = 0;
     CGSize labelSize = [amenitiesLabel.text sizeWithAttributes:@{NSFontAttributeName:amenitiesLabel.font}];
     amenitiesLabel.frame = CGRectMake(amenitiesLabel.frame.origin.x, amenitiesLabel.frame.origin.y, amenitiesLabel.frame.size.width, labelSize.height);
@@ -102,7 +93,7 @@
     
     //set other descriptions
     //update the description
-    NSString *descripString = newListingBasicInfo[@"description"];
+    NSString *descripString = listing.description;
     if (descripString.length == 0){
         descriptionsText.text = @"No Additional Description";
     } else {
@@ -145,60 +136,15 @@
 }
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
-    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-    NSArray *spaceType = [defaults objectForKey:@"newListingSpaceType"];
-    NSDictionary *newListingBasicInfo = [defaults objectForKey:@"newListingBasicInfo"];
-    NSString *address = [newListingBasicInfo objectForKey:@"location"];
-    NSMutableArray *listingTypes = [[NSMutableArray alloc]init];
-    if ([[spaceType objectAtIndex:0] boolValue] == YES){
-        [listingTypes addObject:@"Rest"];
-    }
-    if ([[spaceType objectAtIndex:1] boolValue] == YES){
-        [listingTypes addObject:@"Closet"];
-    }
-    if ([[spaceType objectAtIndex:2] boolValue] == YES){
-        [listingTypes addObject:@"Office"];
-    }
-    if ([[spaceType objectAtIndex:3] boolValue] == YES){
-        [listingTypes addObject:@"Quiet"];;
-    }
-    
-    
-    NSNumber *num = [NSNumber numberWithInteger:[defaults integerForKey:@"newListingPrice"]];
-//    UIImage *myImage = listingImg.image;
-    
     NSMutableArray *allImages = [[NSMutableArray alloc] init];
     for(UIImage *image in allPhotos){
         NSData *currImage = UIImagePNGRepresentation(image);
         PFFile *imageFile = [PFFile fileWithName:@"listingImage.png" data:currImage];
         [allImages addObject:imageFile];
     }
-    PFUser *currentUser = [PFUser currentUser];
-    
-    NSNumber *latitude = [defaults objectForKey:@"Latitude"];
-    NSNumber *longitude = [defaults objectForKey:@"Longitude"];
-    
-    PFGeoPoint *currentPoint =
-    [PFGeoPoint geoPointWithLatitude:[latitude doubleValue]
-                           longitude:[longitude doubleValue]];
-    
-    PFObject *listingObject = [PFObject objectWithClassName:@"Listing"];
-    listingObject[@"title"] = titleLabel.text;
-    listingObject[@"price"] = num;
-    listingObject[@"location"] = currentPoint;
-    listingObject[@"amenities"] = self.amenities;
-    listingObject[@"description"] = descriptionsLabel.text;
-    listingObject[@"lister"] = currentUser.username;
-    listingObject[@"images"] = allImages;
-    listingObject[@"type"] = listingTypes;
-    listingObject[@"totalRating"] = @0;
-    listingObject[@"totalRaters"] = @0;
-    listingObject[@"ratingValue"] = @0;
-    listingObject[@"address"] = address;
-    
-    [listingObject save];
-    NSString *object_id = listingObject.objectId;
-    [defaults setObject:object_id forKey:@"object_id"];
+    listing.images = allImages;
+    listing.lister = [PFUser currentUser];
+    [listing save];
 }
 
 @end

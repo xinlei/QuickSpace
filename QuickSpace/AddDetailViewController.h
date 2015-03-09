@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import "Listing.h"
+#import "NewListing.h"
 
 @interface AddDetailViewController : UIViewController
 @property (weak, nonatomic) IBOutlet UISwitch *wifiSwitch;
@@ -17,5 +18,5 @@
 @property (weak, nonatomic) IBOutlet UISwitch *servicesSwitch;
 @property (weak, nonatomic) IBOutlet UITextField *priceTextField;
 @property (weak, nonatomic) IBOutlet UILabel *priceLabel;
-
+@property (nonatomic, strong) NewListing *listing;
 @end

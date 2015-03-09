@@ -7,6 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "NewListing.h"
 
 @interface SetLocationViewController : UIViewController<UIAlertViewDelegate>
+@property (nonatomic, strong) NewListing *listing;
 @end
