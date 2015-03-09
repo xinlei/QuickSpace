@@ -159,7 +159,6 @@
             [amenitiesString appendString:@"Janitoral Services"];
         }
     }
-    [amenitiesString appendString:@"-"];
     return amenitiesString;
 }
 + (NSString *) typesToString:(NSArray *)spaceType {

@@ -79,14 +79,14 @@
     typeLabel.numberOfLines = 0;
     typeLabel.text = [listing typesToString];
     CGSize labelSize = [typeLabel.text sizeWithAttributes:@{NSFontAttributeName:typeLabel.font}];
-    typeLabel.frame = CGRectMake(mid - typeLabel.frame.size.width/2, typeLabel.frame.origin.y, labelSize.width, labelSize.height);
+    typeLabel.frame = CGRectMake(mid - typeLabel.frame.size.width/2, typeLabel.frame.origin.y, typeLabel.frame.size.width, labelSize.height);
     [ListingDetailViewController setItemLocation:typeLabel withPrev:titleLabel apartBy:5 atX:typeLabel.frame.origin.x];
     
     //set rating
     ratingLabel.numberOfLines = 0;
     labelSize = [ratingLabel.text sizeWithAttributes:@{NSFontAttributeName:ratingLabel.font}];
     ratingLabel.frame = CGRectMake(mid - ratingLabel.frame.size.width/2, ratingLabel.frame.origin.y, ratingLabel.frame.size.width, labelSize.height);
-    [ListingDetailViewController setItemLocation:ratingLabel withPrev:typeLabel apartBy:0 atX:ratingLabel.frame.origin.x];
+    [ListingDetailViewController setItemLocation:ratingLabel withPrev:typeLabel apartBy:5 atX:ratingLabel.frame.origin.x];
     [ListingDetailViewController addSeparatorOnto:scrollView at:ratingLabel.frame.origin.y + ratingLabel.frame.size.height + 10];
     
     //set location
