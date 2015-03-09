@@ -60,9 +60,6 @@
                                        forLatitude:(NSNumber *)latitude {
     PFGeoPoint *discoverLocation = [PFGeoPoint geoPointWithLatitude:[latitude doubleValue] longitude:[longitude doubleValue]];
     
-    //    PFGeoPoint *currLocationGeoPoint = [PFGeoPoint geoPointWithLocation:_currentLocation];
-    //    [self.locationManager stopUpdatingLocation];
-    
     // Exclude booked locations
     __block NSMutableArray *excludedListings = [[NSMutableArray alloc] init];
     PFQuery *innerQuery = [PFQuery queryWithClassName:@"Booking"];
@@ -125,74 +122,7 @@
     
     return [query findObjects];
 }
-/*
-+ (NSMutableArray *)objectToListingsWith:(NSArray *)PFObjects {
-    NSMutableArray *listings = [[NSMutableArray alloc] init];
 
-    for (PFObject *object in PFObjects) {
-        Listing *lister = [[Listing alloc] init];
-        [object fetchIfNeeded];
-        
-        NSMutableArray *imageData = [[NSMutableArray alloc]init];
-        NSArray *allImageFiles = object[@"images"];
-        for(PFFile *file in allImageFiles){
-            [imageData addObject:[file getData]];
-        }
-        lister.allImageData = imageData;
-        
-//        PFFile *imageFile = [object[@"images"] firstObject];
-//        NSData *myData = [imageFile getData];
-//        lister.imageData = myData;
-        
-        lister.title = object[@"title"];
-        lister.types = object[@"type"];
-        lister.location = object[@"location"];
-        lister.description = object[@"description"];
-        lister.address = object[@"address"];
-        lister.object_id = object.objectId;
-        lister.owner = object[@"lister"];
-        lister.amenities = object[@"amenities"];
-        
-        // Booking information. These fields are nil if no value has been set
-        // depreciated
-        //lister.startTime = object[@"startTime"];
-        //lister.endTime = object[@"endTime"];
-        //lister.guest_id = object[@"guest_id"];
-        
-        
-        NSMutableString *amenitiesString = [[NSMutableString alloc] init];
-        for (NSString *key in object[@"amenities"]) {
-            if ([key isEqualToString:@"wifi"]){
-                if (amenitiesString.length != 0) [amenitiesString appendString:@"\n"];
-                [amenitiesString appendString:@"WiFi Internet"];
-            }
-            if ([key isEqualToString:@"refrigerator"]){
-                if (amenitiesString.length != 0) [amenitiesString appendString:@"\n"];
-                [amenitiesString appendString:@"Refrigerator"];
-            }
-            if ([key isEqualToString:@"studyDesk"]){
-                if (amenitiesString.length != 0) [amenitiesString appendString:@"\n"];
-                [amenitiesString appendString:@"Study Desk"];
-            }
-            if ([key isEqualToString:@"monitor"]){
-                if (amenitiesString.length != 0) [amenitiesString appendString:@"\n"];
-                [amenitiesString appendString:@"Monitor"];
-            }
-            if ([key isEqualToString:@"services"]){
-                if (amenitiesString.length != 0) [amenitiesString appendString:@"\n"];
-                [amenitiesString appendString:@"Janitoral Services"];
-            }
-        }
-        lister.amenities = amenitiesString;
-        
-        
-        lister.rating = [object[@"ratingValue"] intValue];
-        
-        [listings addObject:lister];
-    }
-    return listings;
-}
-*/
 - (NSString *) amenitiesToString {
     NSMutableString *amenitiesString = [[NSMutableString alloc] init];
     for (int i = 0; i < [self.amenities count]; i++) {
@@ -251,21 +181,5 @@
     PFObject *currentListing = [query getObjectWithId: object_id];
     [currentListing delete];
 }
-
-
-- (BOOL) isEqual:(id)other{
-//    if (self == other)
-//        return YES;
-//    if(!other || ![other isKindOfClass: [self class]])
-//        return NO;
-//    return [[self object_id] isEqualToString:[other object_id]];
-    return YES;
-}
-
-//-(unsigned)hash{
-//    NSUInteger prime = 31;
-//    NSUInteger result = 1;
-////    result = prime*result 
-//}
 
 @end

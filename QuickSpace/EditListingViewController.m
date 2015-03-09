@@ -9,6 +9,8 @@
 #import "editListingViewController.h"
 #import <Parse/Parse.h>
 #import "SVProgressHUD.h"
+#import "Amenity.h"
+#import "Type.h"
 
 @interface editListingViewController ()
 
@@ -46,61 +48,34 @@
 @synthesize saveButton;
 @synthesize scrollView;
 @synthesize listing_id;
+@synthesize listing;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     
     
-    image.image = [UIImage imageWithData: [_listing.allImageData firstObject]];
-    addressTextField.text = _listing.address;
+    image.image = [UIImage imageWithData: [[listing.images firstObject] getData]];
+    addressTextField.text = listing.address;
+    titleText.text = listing.title;
+ 
+    // update the description
+    NSString *descripString = listing.information;
+    if([descripString length] != 0)
+        descriptionTextField.text = descripString;
     
-    titleText.text = _listing.title;
-    quietSwitch.on = NO;
-    restSwitch.on = NO;
-    officeSwitch.on = NO;
-    closetSwitch.on = NO;
-    fridgeSwitch.on = NO;
-    deskSwitch.on = NO;
-    servicesSwitch.on = NO;
-    monitorSwitch.on = NO;
-    wifiSwitch.on = NO;
-        
-        //update the amenities in the listing view
-//        _amenitiesLabel.text = _listing.amenities;
+    // update the space type
+    restSwitch.on = [listing.types[rest] boolValue];
+    closetSwitch.on = [listing.types[closet] boolValue];
+    quietSwitch.on = [listing.types[quiet] boolValue];
+    officeSwitch.on = [listing.types[office] boolValue];
     
-        //update the description
-        NSString *descripString = _listing.description;
-        if([descripString length] != 0)
-            descriptionTextField.text = descripString;
-    
-        //update the space type
-
-        NSArray *spaceType = _listing.types;
-        for (NSString *listingType in spaceType){
-            if([listingType isEqualToString:@"Rest"])
-                restSwitch.on = YES;
-            else if([listingType isEqualToString:@"Closet"])
-                closetSwitch.on = YES;
-            else if([listingType isEqualToString:@"Quiet"])
-                quietSwitch.on = YES;
-            else if([listingType isEqualToString:@"Office"])
-                officeSwitch.on = YES;
-        }
-    
-    NSArray *amenities = _listing.amenitiesArray;
-    for(NSString *amenity in amenities){
-        if([amenity isEqualToString:@"wifi"])
-            wifiSwitch.on = YES;
-        else if([amenity isEqualToString:@"refrigerator"])
-            fridgeSwitch.on = YES;
-        else if([amenity isEqualToString:@"monitor"])
-            monitorSwitch.on = YES;
-        else if([amenity isEqualToString:@"services"])
-            servicesSwitch.on = YES;
-        else if([amenity isEqualToString:@"studyDesk"])
-            deskSwitch.on = YES;
-    }
+    // update the amenities
+    wifiSwitch.on = [listing.amenities[wifi] boolValue];
+    fridgeSwitch.on = [listing.amenities[refrigerator] boolValue];
+    monitorSwitch.on = [listing.amenities[monitor] boolValue];
+    servicesSwitch.on = [listing.amenities[services] boolValue];
+    deskSwitch.on = [listing.amenities[studyDesk] boolValue];
     
     //initiate scroll view
     scrollView.frame = self.view.frame;
@@ -114,7 +89,6 @@
     image.frame = frame;
     
     //set title
-
     [ListingDetailViewController setItemLocation:titleLabel withPrev:image apartBy:10 atX:titleLabel.frame.origin.x];
     [ListingDetailViewController setItemLocation:titleText withPrev:image apartBy:10 atX:mid*2 - frame.size.width - 8];
     
@@ -183,39 +157,48 @@
     
     //resize scrollview frame
     scrollView.contentSize = CGSizeMake(self.view.frame.size.width, saveButton.frame.size.height + saveButton.frame.origin.y);
-    
 }
 
 - (IBAction)saveButtonClick:(id)sender {
-//    [SVProgressHUD show];
-//    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+    
+    listing.title = titleText.text;
+    listing.address = addressTextField.text;
+    listing.information = descriptionTextField.text;
 
-        PFQuery *query = [PFQuery queryWithClassName:@"Listing"];
-        PFObject *object = [query getObjectWithId:_listing.object_id];
-        [query getObjectInBackgroundWithId:_listing.object_id block:^(PFObject *object, NSError *error){
-            object[@"title"] = titleText.text;
-            object[@"address"] = addressTextField.text;
-            object[@"description"] = descriptionTextField.text;
+    
+    listing.amenities = [[NSMutableArray alloc]initWithObjects:
+                         [NSNumber numberWithBool:wifiSwitch.on],
+                         [NSNumber numberWithBool:fridgeSwitch.on],
+                         [NSNumber numberWithBool:deskSwitch.on],
+                         [NSNumber numberWithBool:monitorSwitch.on],
+                         [NSNumber numberWithBool:servicesSwitch.on],nil];
+
+    listing.types = [[NSMutableArray alloc]initWithObjects:
+                     [NSNumber numberWithBool:restSwitch.on],
+                     [NSNumber numberWithBool:closetSwitch.on],
+                     [NSNumber numberWithBool:quietSwitch.on],
+                     [NSNumber numberWithBool:officeSwitch.on], nil];
+    /*
+    NSMutableArray *typeArray = [[NSMutableArray alloc] init];
+    if(restSwitch.on) [typeArray addObject: @"Rest"];
+    if(closetSwitch.on) [typeArray addObject: @"Closet"];
+    if(quietSwitch.on) [typeArray addObject: @"Quiet"];
+    if(officeSwitch.on) [typeArray addObject: @"Office"];
+    object[@"type"] = typeArray;
+    
+    NSMutableArray *amenitiesArray = [[NSMutableArray alloc] init];
+    if(wifiSwitch.on) [amenitiesArray addObject: @"wifi"];
+    if(fridgeSwitch.on) [amenitiesArray addObject: @"refrigerator"];
+    if(deskSwitch.on) [amenitiesArray addObject: @"studyDesk"];
+    if(monitorSwitch.on) [amenitiesArray addObject: @"monitor"];
+    if(servicesSwitch.on) [amenitiesArray addObject: @"services"];
+    object[@"amenities"] = amenitiesArray;
         
-            NSMutableArray *typeArray = [[NSMutableArray alloc] init];
-            if(restSwitch.on) [typeArray addObject: @"Rest"];
-            if(closetSwitch.on) [typeArray addObject: @"Closet"];
-            if(quietSwitch.on) [typeArray addObject: @"Quiet"];
-            if(officeSwitch.on) [typeArray addObject: @"Office"];
-            object[@"type"] = typeArray;
-        
-            NSMutableArray *amenitiesArray = [[NSMutableArray alloc] init];
-            if(wifiSwitch.on) [amenitiesArray addObject: @"wifi"];
-            if(fridgeSwitch.on) [amenitiesArray addObject: @"refrigerator"];
-            if(deskSwitch.on) [amenitiesArray addObject: @"studyDesk"];
-            if(monitorSwitch.on) [amenitiesArray addObject: @"monitor"];
-            if(servicesSwitch.on) [amenitiesArray addObject: @"services"];
-            object[@"amenities"] = amenitiesArray;
-        
-        NSLog(@"say wha?!?");
-            [object save];
-        }];
-        
+    NSLog(@"say wha?!?");
+    [object save];
+    }];
+    */
+    [listing save];
 
 //        dispatch_async(dispatch_get_main_queue(), ^{
 //            [SVProgressHUD dismiss];

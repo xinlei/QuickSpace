@@ -13,7 +13,7 @@
 @interface NewListing : PFObject<PFSubclassing>
 
 @property (retain) NSString *address;
-@property (retain) NSArray *amenities;
+@property (retain) NSMutableArray *amenities;
 @property (retain) NSString *information;
 @property (retain) NSArray *images;
 @property (retain) PFUser *lister;
@@ -23,7 +23,7 @@
 @property (retain) NSString *title;
 @property int totalRaters;
 @property int totalRating;
-@property (retain) NSArray *types;
+@property (retain) NSMutableArray *types;
 
 + (NSString *) parseClassName;
 

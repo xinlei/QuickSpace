@@ -26,6 +26,7 @@
 @synthesize logoutButton;
 NSMutableArray *userListings;
 NSMutableArray *allTitles;
+NSArray *allListings;
 NSArray *bookings;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
@@ -193,12 +194,12 @@ NSArray *bookings;
             
             // Get listings posted by this user
             PFQuery *query = [PFQuery queryWithClassName:@"Listing"];
-            [query whereKey:@"lister" equalTo:currentUser.username];
-            NSArray* AllListings = [query findObjects];
+            [query whereKey:@"lister" equalTo:currentUser];
+            allListings = [query findObjects];
             
             NSMutableArray* allIDs = [[NSMutableArray alloc] init];
             NSMutableArray* titles = [[NSMutableArray alloc] init];
-            for (PFObject *object in AllListings) {
+            for (PFObject *object in allListings) {
  
                 [allIDs addObject:object.objectId];
                 [titles addObject:object[@"title"]];
@@ -263,12 +264,12 @@ NSArray *bookings;
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender{
     NSIndexPath *indexPath = [self.listingTable indexPathForSelectedRow];
     if([[segue identifier] isEqualToString:@"editSegue"]){
-        PFQuery *query = [PFQuery queryWithClassName:@"Listing"];
-        PFObject *listingObj = [query getObjectWithId:[userListings objectAtIndex:indexPath.row]];
-        NSArray *stupid = [[NSArray alloc]initWithObjects:listingObj, nil];
+        //PFQuery *query = [PFQuery queryWithClassName:@"Listing"];
+        //PFObject *listingObj = [query getObjectWithId:[userListings objectAtIndex:indexPath.row]];
+        //NSArray *stupid = [[NSArray alloc]initWithObjects:listingObj, nil];
         
         editListingViewController *destViewController = segue.destinationViewController;
-        destViewController.listing = [[Listing objectToListingsWith:stupid] firstObject];
+        destViewController.listing = [allListings objectAtIndex:indexPath.row];
     }
     else if ([[segue identifier] isEqualToString:@"bookingSegue"]){
         NSString *selectedListing = [userListings objectAtIndex:indexPath.row];
