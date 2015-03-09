@@ -21,13 +21,13 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    for (Listing *listing in listings){
+    for (NewListing *listing in listings){
         PFGeoPoint *gp = listing.location;
         CLLocationCoordinate2D coordinate = CLLocationCoordinate2DMake(gp.latitude, gp.longitude);
         MKPointAnnotation *point = [[MKPointAnnotation alloc] init];
         [point setCoordinate:coordinate];
         [point setTitle:listing.title];
-        [point setSubtitle:[NSString stringWithFormat:@"%d",[listing.price intValue]]];
+        [point setSubtitle:[NSString stringWithFormat:@"%d", listing.price]];
         [myMapView addAnnotation:point];
     }
     [myMapView showAnnotations:myMapView.annotations animated:YES];

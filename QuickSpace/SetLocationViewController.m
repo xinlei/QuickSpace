@@ -21,9 +21,6 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    PFQuery *query = [NewListing query];
-    [query fromLocalDatastore]; 
-    NSArray *objects = [query findObjects];
     listing = [NewListing retrieveNewListing];
     [listing fetchFromLocalDatastore];
     CLGeocoder *location = [[CLGeocoder alloc] init];

@@ -10,6 +10,7 @@
 #import <MapKit/MapKit.h>
 #import <MapKit/MKPointAnnotation.h>
 #import "Listing.h"
+#import "NewListing.h"
 
 @interface ListingMapViewController : UIViewController
 @property (weak, nonatomic) IBOutlet MKMapView *myMapView;

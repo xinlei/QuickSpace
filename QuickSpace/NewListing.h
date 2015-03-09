@@ -45,7 +45,7 @@
 
 - (NSString *) amenitiesToString;
 
-+ (NSString *) typesToString:(NSArray *) spaceType;
+- (NSString *) typesToString;
 
 + (void) cancelListingForHost:(NSString *) object_id;
 

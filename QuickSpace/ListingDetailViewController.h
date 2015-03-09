@@ -8,11 +8,12 @@
 
 #import <UIKit/UIKit.h>
 #import "Listing.h"
+#import "NewListing.h"
 #import "Booking.h"
 
 @interface ListingDetailViewController : UIViewController <UIGestureRecognizerDelegate>
 
-@property (nonatomic, strong) Listing *listing;
+@property (nonatomic, strong) NewListing *listing;
 @property (nonatomic, strong) Booking *booking;
 
 @property (nonatomic, strong) IBOutlet UIImageView *image;

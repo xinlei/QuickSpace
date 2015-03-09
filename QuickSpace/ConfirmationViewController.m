@@ -100,7 +100,7 @@
     
     //set other descriptions
     //update the description
-    NSString *descripString = listing.description;
+    NSString *descripString = listing.information;
     if (descripString.length == 0){
         descriptionsText.text = @"No Additional Description";
     } else {
