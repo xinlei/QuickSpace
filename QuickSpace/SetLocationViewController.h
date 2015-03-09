@@ -9,4 +9,5 @@
 #import <UIKit/UIKit.h>
 
 @interface SetLocationViewController : UIViewController<UIAlertViewDelegate>
+@property (nonatomic) NSString *address;
 @end

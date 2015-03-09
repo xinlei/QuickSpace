@@ -8,6 +8,7 @@
 
 #import "HostViewController.h"
 #import <Bolts/BFTask.h>
+#import "SetLocationViewController.h"
 
 @interface HostViewController ()
 
@@ -131,6 +132,12 @@
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
+    
+    if ([segue.identifier isEqualToString:@"ShowBookingConfirmation"]){
+        SetLocationViewController *destViewController = segue.destinationViewController;
+        destViewController.address = locationTextField.text;
+    }
+    
     if (restButton.selected)
         [spaceType replaceObjectAtIndex:0 withObject:[NSNumber numberWithBool:YES]];
     if (closetButton.selected)

@@ -15,12 +15,12 @@
 @end
 
 @implementation SetLocationViewController
+@synthesize address;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-    NSDictionary *newListingBasicInfo = [defaults objectForKey:@"newListingBasicInfo"];
-    NSString *address = [newListingBasicInfo objectForKey:@"location"];
+//    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+//    NSDictionary *newListingBasicInfo = [defaults objectForKey:@"newListingBasicInfo"];
     
     CLGeocoder *location = [[CLGeocoder alloc] init];
     [location geocodeAddressString:address completionHandler:^(NSArray* placemarks, NSError* error){
