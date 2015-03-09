@@ -932,6 +932,9 @@
                                             <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
+                                        <connections>
+                                            <segue destination="eYX-ss-bK0" kind="push" id="ea0-vf-Ocq"/>
+                                        </connections>
                                     </button>
                                 </subviews>
                             </scrollView>
