@@ -23,6 +23,9 @@
 @synthesize quietButton;
 @synthesize startPicker;
 @synthesize endPicker;
+@synthesize line1;
+@synthesize line2;
+@synthesize line3;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -50,6 +53,16 @@
     [startPicker setFrame:frame];
     [endPicker setFrame:frame];
     
+    //reorganize vertical line separators
+    frame = line1.frame;
+    frame.origin.x = line1.superview.frame.size.width/4;
+    line1.frame = frame;
+    frame = line2.frame;
+    frame.origin.x = line2.superview.frame.size.width/2;
+    line2.frame = frame;
+    frame = line3.frame;
+    frame.origin.x = line3.superview.frame.size.width*3/4;
+    line3.frame = frame;
     
     CGFloat viewX = self.timePickerContainer.frame.size.width;
     CGFloat viewY = self.timePickerContainer.frame.size.height;

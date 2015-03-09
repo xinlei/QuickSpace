@@ -60,9 +60,6 @@
                                        forLatitude:(NSNumber *)latitude {
     PFGeoPoint *discoverLocation = [PFGeoPoint geoPointWithLatitude:[latitude doubleValue] longitude:[longitude doubleValue]];
     
-    //    PFGeoPoint *currLocationGeoPoint = [PFGeoPoint geoPointWithLocation:_currentLocation];
-    //    [self.locationManager stopUpdatingLocation];
-    
     // Exclude booked locations
     __block NSMutableArray *excludedListings = [[NSMutableArray alloc] init];
     PFQuery *innerQuery = [PFQuery queryWithClassName:@"Booking"];
@@ -120,81 +117,39 @@
         [query whereKey:@"amenities" containsAllObjectsInArray:amenitiesQueryArray];
     if(price > 0)
         [query whereKey:@"price" lessThanOrEqualTo: price];
-    if([typeQueryArray count] > 0)
-        [query whereKey:@"type" containsAllObjectsInArray:typeQueryArray];
-    
+    if([typeQueryArray count] > 0){
+        //[query whereKey:@"type" :typeQueryArray];
+    }
     return [query findObjects];
 }
-/*
-+ (NSMutableArray *)objectToListingsWith:(NSArray *)PFObjects {
-    NSMutableArray *listings = [[NSMutableArray alloc] init];
 
-    for (PFObject *object in PFObjects) {
-        Listing *lister = [[Listing alloc] init];
-        [object fetchIfNeeded];
-        
-        NSMutableArray *imageData = [[NSMutableArray alloc]init];
-        NSArray *allImageFiles = object[@"images"];
-        for(PFFile *file in allImageFiles){
-            [imageData addObject:[file getData]];
-        }
-        lister.allImageData = imageData;
-        
-//        PFFile *imageFile = [object[@"images"] firstObject];
-//        NSData *myData = [imageFile getData];
-//        lister.imageData = myData;
-        
-        lister.title = object[@"title"];
-        lister.types = object[@"type"];
-        lister.location = object[@"location"];
-        lister.description = object[@"description"];
-        lister.address = object[@"address"];
-        lister.object_id = object.objectId;
-        lister.owner = object[@"lister"];
-        lister.amenities = object[@"amenities"];
-        
-        // Booking information. These fields are nil if no value has been set
-        // depreciated
-        //lister.startTime = object[@"startTime"];
-        //lister.endTime = object[@"endTime"];
-        //lister.guest_id = object[@"guest_id"];
-        
-        
-        NSMutableString *amenitiesString = [[NSMutableString alloc] init];
-        for (NSString *key in object[@"amenities"]) {
-            if ([key isEqualToString:@"wifi"]){
-                if (amenitiesString.length != 0) [amenitiesString appendString:@"\n"];
-                [amenitiesString appendString:@"WiFi Internet"];
-            }
-            if ([key isEqualToString:@"refrigerator"]){
-                if (amenitiesString.length != 0) [amenitiesString appendString:@"\n"];
-                [amenitiesString appendString:@"Refrigerator"];
-            }
-            if ([key isEqualToString:@"studyDesk"]){
-                if (amenitiesString.length != 0) [amenitiesString appendString:@"\n"];
-                [amenitiesString appendString:@"Study Desk"];
-            }
-            if ([key isEqualToString:@"monitor"]){
-                if (amenitiesString.length != 0) [amenitiesString appendString:@"\n"];
-                [amenitiesString appendString:@"Monitor"];
-            }
-            if ([key isEqualToString:@"services"]){
-                if (amenitiesString.length != 0) [amenitiesString appendString:@"\n"];
-                [amenitiesString appendString:@"Janitoral Services"];
-            }
-        }
-        lister.amenities = amenitiesString;
-        
-        
-        lister.rating = [object[@"ratingValue"] intValue];
-        
-        [listings addObject:lister];
-    }
-    return listings;
-}
-*/
 - (NSString *) amenitiesToString {
     NSMutableString *amenitiesString = [[NSMutableString alloc] init];
+    
+    for (NSNumber *value in self.amenities){
+        if([value isEqual:[NSNumber numberWithInt:wifi]]) {
+            if (amenitiesString.length != 0) [amenitiesString appendString:@"\n"];
+            [amenitiesString appendString:@"WiFi Internet"];
+        }
+        if([value isEqual:[NSNumber numberWithInt:refrigerator]]) {
+            if (amenitiesString.length != 0) [amenitiesString appendString:@"\n"];
+            [amenitiesString appendString:@"Refrigerator"];
+        }
+        if([value isEqual:[NSNumber numberWithInt:studyDesk]]){
+            if (amenitiesString.length != 0) [amenitiesString appendString:@"\n"];
+            [amenitiesString appendString:@"Study Desk"];
+        }
+        if([value isEqual:[NSNumber numberWithInt:monitor]]){
+            if (amenitiesString.length != 0) [amenitiesString appendString:@"\n"];
+            [amenitiesString appendString:@"Monitor"];
+        }
+        if([value isEqual:[NSNumber numberWithInt:services]]){
+            if (amenitiesString.length != 0) [amenitiesString appendString:@"\n"];
+            [amenitiesString appendString:@"Janitoral Services"];
+        }
+    }
+    
+    /*
     for (int i = 0; i < [self.amenities count]; i++) {
         if (i == 0 && [self.amenities[i] boolValue] == YES){
             if (amenitiesString.length != 0) [amenitiesString appendString:@"\n"];
@@ -217,26 +172,26 @@
             [amenitiesString appendString:@"Janitoral Services"];
         }
     }
-    [amenitiesString appendString:@"-"];
+     */
     return amenitiesString;
 }
              
 - (NSString *) typesToString {
     NSMutableString *typesString = [[NSMutableString alloc] init];
-    for (int  i = 0; i < [self.types count]; i++){
-        if (i == 0 && [self.types[i] boolValue] == YES){
+    for (NSNumber *value in self.types){
+        if ([value isEqual:[NSNumber numberWithInt:rest]]){
             if (typesString.length != 0) [typesString appendString:@"\n"];
             [typesString appendString:@"Rest"];
         }
-        if (i == 1 && [self.types[i] boolValue] == YES){
+        if ([value isEqual:[NSNumber numberWithInt:closet]]){
             if (typesString.length != 0) [typesString appendString:@"\n"];
             [typesString appendString:@"Closet"];
         }
-        if (i == 2 && [self.types[i] boolValue] == YES){
+        if ([value isEqual:[NSNumber numberWithInt:office]]){
             if (typesString.length != 0) [typesString appendString:@"\n"];
             [typesString appendString:@"Office"];
         }
-        if (i == 3 && [self.types[i] boolValue] == YES){
+        if ([value isEqual:[NSNumber numberWithInt:quiet]]){
             if (typesString.length != 0) [typesString appendString:@"\n"];
             [typesString appendString:@"Quiet"];
         }
@@ -251,21 +206,5 @@
     PFObject *currentListing = [query getObjectWithId: object_id];
     [currentListing delete];
 }
-
-
-- (BOOL) isEqual:(id)other{
-//    if (self == other)
-//        return YES;
-//    if(!other || ![other isKindOfClass: [self class]])
-//        return NO;
-//    return [[self object_id] isEqualToString:[other object_id]];
-    return YES;
-}
-
-//-(unsigned)hash{
-//    NSUInteger prime = 31;
-//    NSUInteger result = 1;
-////    result = prime*result 
-//}
 
 @end

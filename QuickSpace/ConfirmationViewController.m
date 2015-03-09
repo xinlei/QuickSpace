@@ -56,6 +56,8 @@
     listingImg.image = theImage;
     CGRect frame = listingImg.frame;
     frame.origin.x = mid - frame.size.width/2;
+    frame.origin.y = 0;
+    listingImg.frame = frame;
     
     //set title
     titleText.text = listing.title;
@@ -92,7 +94,7 @@
     
     //set amenities
     amenitiesText.text = [listing amenitiesToString];
-    amenitiesLabel.numberOfLines = 0;
+    //amenitiesLabel.numberOfLines = 0;
     CGSize labelSize = [amenitiesLabel.text sizeWithAttributes:@{NSFontAttributeName:amenitiesLabel.font}];
     amenitiesLabel.frame = CGRectMake(mid, amenitiesLabel.frame.origin.y, amenitiesLabel.frame.size.width, labelSize.height);
     [ListingDetailViewController setItemLocation:amenitiesText withPrev:locationText apartBy:10 atX:mid];

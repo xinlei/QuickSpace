@@ -21,15 +21,15 @@
 @synthesize listing;
 @synthesize listingTitle;
 @synthesize bookingsTable;
-@synthesize listing_id;
-@synthesize listing_title;
+//@synthesize listing_id;
+//@synthesize listing_title;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     
     self.navigationItem.title = @"Current Bookings";
-    listingTitle.text = listing_title;
-    
+    //listingTitle.text = listing_title;
+    listingTitle.text = listing.title;
     [self populateBookings];
 
 }
@@ -44,13 +44,9 @@
     bookings = [[NSArray alloc] init];
     [SVProgressHUD show];
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-    
-    
-        PFQuery *listingBookings = [PFQuery queryWithClassName:@"Booking"];
-        [listingBookings whereKey:@"listing_id" equalTo:listing_id];
-    bookings = [listingBookings findObjects];
-    
-    
+        PFQuery *findListingBookings = [Booking query];
+        [findListingBookings whereKey:@"listing" equalTo:listing];
+        bookings = [findListingBookings findObjects];
         dispatch_async(dispatch_get_main_queue(), ^{
             [self.bookingsTable reloadData];
             [SVProgressHUD dismiss];
@@ -93,7 +89,8 @@
     [formatter setDateFormat:@"HH:mm"];
     endTime.text = [formatter stringFromDate:thisBooking.endTime];
     UILabel *guest = (UILabel *)[cell viewWithTag:4];
-    PFUser *theGuest = (PFUser *)thisBooking.guest;
+    PFUser *theGuest = thisBooking.guest;
+    [theGuest fetch]; 
     guest.text = theGuest.username;
     
     return cell;

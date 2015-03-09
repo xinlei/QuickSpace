@@ -9,11 +9,13 @@
 #import <Foundation/Foundation.h>
 #import <Parse/Parse.h>
 #import <MapKit/MapKit.h>
+#import "Type.h"
+#import "Amenity.h"
 
 @interface NewListing : PFObject<PFSubclassing>
 
 @property (retain) NSString *address;
-@property (retain) NSArray *amenities;
+@property (retain) NSMutableArray *amenities;
 @property (retain) NSString *information;
 @property (retain) NSArray *images;
 @property (retain) PFUser *lister;
@@ -23,7 +25,7 @@
 @property (retain) NSString *title;
 @property int totalRaters;
 @property int totalRating;
-@property (retain) NSArray *types;
+@property (retain) NSMutableArray *types;
 
 + (NSString *) parseClassName;
 
@@ -40,8 +42,6 @@
                                           forPrice:(NSNumber *)price
                                       forLongitude:(NSNumber *)longitude
                                        forLatitude:(NSNumber *)latitude;
-
-//+ (NSMutableArray *)objectToListingsWith:(NSArray *)PFObjects;
 
 - (NSString *) amenitiesToString;
 

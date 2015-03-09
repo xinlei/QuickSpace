@@ -15,7 +15,7 @@
 @dynamic endTime;
 @dynamic guest;
 @dynamic owner;
-//@dynamic listing;
+@dynamic listing;
 @dynamic rating;
 @dynamic listing_id;
 
