@@ -34,9 +34,8 @@
         CGFloat myOrigin = i*self.view.frame.size.width;
         
         UIImageView *myImageView = [[UIImageView alloc] initWithFrame:CGRectMake(myOrigin, self.view.frame.size.height / 3, self.view.frame.size.width, self.view.frame.size.height / 3)];
-        
-        myImageView.image = [UIImage imageWithData:[[imageFiles objectAtIndex:i] getData]];
 
+        myImageView.image = [UIImage imageWithData:[[imageFiles objectAtIndex:i] getData]];
         scrollView.delegate = self;
         [scrollView addSubview:myImageView];
         
