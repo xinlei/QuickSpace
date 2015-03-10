@@ -7,6 +7,7 @@
 //
 
 #import "modalPictureViewController.h"
+#import <Parse/Parse.h>
 
 @interface modalPictureViewController ()
 
@@ -34,7 +35,7 @@
         
         UIImageView *myImageView = [[UIImageView alloc] initWithFrame:CGRectMake(myOrigin, self.view.frame.size.height / 3, self.view.frame.size.width, self.view.frame.size.height / 3)];
         
-        myImageView.image = [UIImage imageWithData:[imageData objectAtIndex:i]];
+        myImageView.image = [UIImage imageWithData:[[imageData objectAtIndex:i] getData]];
 
         scrollView.delegate = self;
         [scrollView addSubview:myImageView];
