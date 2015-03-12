@@ -51,13 +51,13 @@
     self.location.longitude = placemark.coordinate.longitude;
 }
 
-+ (NSArray *) getAllAvailableListingsWithAmenities:(NSDictionary *) amenities
-                                         withTypes:(NSArray *)spaceType
-                                     withStartTime:(NSDate *)startTime
-                                       withEndTime:(NSDate *)endTime
-                                          forPrice:(NSNumber *)price
-                                      forLongitude:(NSNumber *)longitude
-                                       forLatitude:(NSNumber *)latitude {
++ (NSArray *) getAllAvailableListingsWithAmenities:(NSArray *)amenityType
+                                             Types:(NSArray *)spaceType
+                                         StartTime:(NSDate *)startTime
+                                           EndTime:(NSDate *)endTime
+                                             Price:(NSNumber *)price
+                                         Longitude:(NSNumber *)longitude
+                                          Latitude:(NSNumber *)latitude {
     PFGeoPoint *discoverLocation = [PFGeoPoint geoPointWithLatitude:[latitude doubleValue] longitude:[longitude doubleValue]];
     
     // Exclude booked locations
@@ -75,50 +75,12 @@
     [query whereKey:@"objectId" notContainedIn:excludedListings];
     [query whereKey:@"location" nearGeoPoint:discoverLocation withinMiles:50];
     
-    bool wifi = [[amenities objectForKey:@"wifi"] boolValue];
-    bool refrigerator = [[amenities objectForKey:@"refrigerator"] boolValue];
-    bool study = [[amenities objectForKey:@"studyDesk"] boolValue];
-    bool monitor = [[amenities objectForKey:@"monitor"] boolValue];
-    bool services = [[amenities objectForKey:@"services"] boolValue];
-    
-    
-    NSMutableArray *amenitiesQueryArray = [[NSMutableArray alloc] init];
-    
-    if(wifi){
-        [amenitiesQueryArray addObject:@"wifi"];
-    }
-    if(refrigerator){
-        [amenitiesQueryArray addObject:@"refrigerator"];
-    }
-    if(study){
-        [amenitiesQueryArray addObject:@"studyDesk"];
-    }
-    if(monitor){
-        [amenitiesQueryArray addObject:@"monitor"];
-    }
-    if(services){
-        [amenitiesQueryArray addObject:@"services"];
-    }
-    
-    NSMutableArray *typeQueryArray = [[NSMutableArray alloc] init];
-    if ([[spaceType objectAtIndex:0] boolValue] == YES){
-        [typeQueryArray addObject:@"Rest"];
-    }
-    if ([[spaceType objectAtIndex:1] boolValue] == YES){
-        [typeQueryArray addObject:@"Closet"];
-    }
-    if ([[spaceType objectAtIndex:2] boolValue] == YES){
-        [typeQueryArray addObject:@"Office"];
-    }
-    if ([[spaceType objectAtIndex:3] boolValue] == YES){
-        [typeQueryArray addObject:@"Quiet"];;
-    }
-    if([amenitiesQueryArray count] > 0)
-        [query whereKey:@"amenities" containsAllObjectsInArray:amenitiesQueryArray];
+    if([amenityType count] > 0)
+        [query whereKey:@"amenities" containsAllObjectsInArray:amenityType];
     if(price > 0)
         [query whereKey:@"price" lessThanOrEqualTo: price];
-    if([typeQueryArray count] > 0){
-        //[query whereKey:@"type" :typeQueryArray];
+    if([spaceType count] > 0){
+        [query whereKey:@"types" containsAllObjectsInArray:spaceType];
     }
     return [query findObjects];
 }
@@ -196,7 +158,7 @@
             [typesString appendString:@"Quiet"];
         }
     }
-    [typesString appendString:@"-"];
+    //[typesString appendString:@"-"];
     return typesString;
 
 }

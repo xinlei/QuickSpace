@@ -36,12 +36,12 @@
 - (void) setLocationWith: (MKPlacemark *)placemark;
 
 + (NSArray *) getAllAvailableListingsWithAmenities:(NSDictionary *) amenities
-                                         withTypes:(NSArray *)spaceType
-                                     withStartTime:(NSDate *) startTime
-                                       withEndTime:(NSDate *) endTime
-                                          forPrice:(NSNumber *)price
-                                      forLongitude:(NSNumber *)longitude
-                                       forLatitude:(NSNumber *)latitude;
+                                             Types:(NSArray *)spaceType
+                                         StartTime:(NSDate *) startTime
+                                           EndTime:(NSDate *) endTime
+                                             Price:(NSNumber *)price
+                                         Longitude:(NSNumber *)longitude
+                                          Latitude:(NSNumber *)latitude;
 
 - (NSString *) amenitiesToString;
 

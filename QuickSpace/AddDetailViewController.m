@@ -76,6 +76,7 @@
 {
     listing.price = [priceTextField.text intValue];
     listing.amenities = [[NSMutableArray alloc] init];
+
     if(wifiSwitch.on)[listing.amenities addObject:[NSNumber numberWithInt:wifi]];
     if(refrigeratorSwitch.on)[listing.amenities addObject:[NSNumber numberWithInt:refrigerator]];
     if(studyDeskSwitch.on)[listing.amenities addObject:[NSNumber numberWithInt:studyDesk]];

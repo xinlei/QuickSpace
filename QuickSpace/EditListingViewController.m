@@ -185,7 +185,9 @@
     listing.title = titleText.text;
     listing.address = addressTextField.text;
     listing.information = descriptionTextField.text;
-
+    [listing.amenities removeAllObjects];
+    [listing.types removeAllObjects];
+    
     if(wifiSwitch.on)[listing.amenities addObject:[NSNumber numberWithInt:wifi]];
     if(fridgeSwitch.on)[listing.amenities addObject:[NSNumber numberWithInt:refrigerator]];
     if(deskSwitch.on)[listing.amenities addObject:[NSNumber numberWithInt:studyDesk]];

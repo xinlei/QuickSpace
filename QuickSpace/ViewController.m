@@ -76,7 +76,7 @@ NSArray *listings;
     [SVProgressHUD show];
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
         NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-        NSDictionary *amenities = [defaults objectForKey:@"additionalFilters"];
+        NSDictionary *amenityType = [defaults objectForKey:@"amenityType"];
         NSNumber *price = [defaults objectForKey:@"maxPrice"];
         NSNumber *latitude = [defaults objectForKey:@"latitude"];
         NSNumber *longitude = [defaults objectForKey:@"longitude"];
@@ -84,7 +84,7 @@ NSArray *listings;
         NSDate *endTime = [defaults objectForKey:@"endTime"];
         
         // Get all available listings currently not booked
-        listings = [NewListing getAllAvailableListingsWithAmenities:amenities withTypes:self.spaceType withStartTime:startTime withEndTime:endTime forPrice:price forLongitude:longitude forLatitude:latitude];
+        listings = [NewListing getAllAvailableListingsWithAmenities:amenityType Types:self.spaceType StartTime:startTime EndTime:endTime Price:price Longitude:longitude Latitude:latitude];
         
         // Reset filters
         [defaults removeObjectForKey:@"additionalFilters"];
