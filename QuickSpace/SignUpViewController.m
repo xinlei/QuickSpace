@@ -14,10 +14,7 @@
 
 @end
 
-@implementation SignUpViewController{
-    bool shouldSegue;
-}
-
+@implementation SignUpViewController
 @synthesize emailTextField;
 @synthesize passwordTextField;
 @synthesize confirmPasswordTextField;
@@ -53,39 +50,31 @@
         if(password1.length < 4){
             UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Password too short" message:@"Please enter at least 4 characters" delegate:nil cancelButtonTitle:@"Try Again" otherButtonTitles: nil];
             [alert show];
-            shouldSegue = NO;
         }
-        
         else if(![password1 isEqualToString:password2]){
-            shouldSegue = NO;
             UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Sign Up Error" message:@"Your Passwords don't match!" delegate:nil cancelButtonTitle:@"Try Again" otherButtonTitles: nil];
             [alert show];
         }
-        //    else if(email is not valid){
-        //
-        //    }
         else {
             
+            // New user
             PFUser *user = [PFUser user];
             user.username = email;
             user.email = email;
             user.password = password1;
-            
             //Need to make sure that particular email address doesn't already exist in our user database.
             // if it does, give the person the option to reset the password (?)
-            shouldSegue = [user signUp];
-            if(shouldSegue == NO){
-                UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error" message:@"Email address is already taken" delegate:nil cancelButtonTitle:@"Try Again" otherButtonTitles: @"Forgot Password?", nil];
+            if(![user signUp]){
+                UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error" message:@"Email address is invalid" delegate:nil cancelButtonTitle:@"Try Again" otherButtonTitles: @"Forgot Password?", nil];
                 [alert show];
+            } else {
+                AppDelegate *appDelegateTemp = [[UIApplication sharedApplication]delegate];
+                appDelegateTemp.window.rootViewController = [[UIStoryboard storyboardWithName:@"Main" bundle:[NSBundle mainBundle]] instantiateInitialViewController];
             }
 
         }
     }
 
-}
-
--(BOOL)shouldPerformSegueWithIdentifier:(NSString *)identifier sender:(id)sender{
-    return shouldSegue;
 }
 
 -(BOOL) textFieldShouldReturn:(UITextField *)textField
