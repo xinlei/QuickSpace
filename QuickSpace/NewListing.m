@@ -10,6 +10,7 @@
 #import <Parse/PFObject+Subclass.h>
 #import <Parse/Parse.h>
 
+
 @implementation NewListing
 
 @dynamic address;
@@ -71,9 +72,12 @@
         PFObject *listing = [booking objectForKey:@"listing"];
         [excludedListings addObject:[listing valueForKeyPath:@"objectId"]];
     }
+    
     PFQuery *query = [NewListing query];
     [query whereKey:@"objectId" notContainedIn:excludedListings];
-    [query whereKey:@"location" nearGeoPoint:discoverLocation withinMiles:50];
+    
+    // Limit to 30 mile radius
+    [query whereKey:@"location" nearGeoPoint:discoverLocation withinMiles:30];
     
     if([amenityType count] > 0)
         [query whereKey:@"amenities" containsAllObjectsInArray:amenityType];
@@ -110,31 +114,6 @@
             [amenitiesString appendString:@"Janitoral Services"];
         }
     }
-    
-    /*
-    for (int i = 0; i < [self.amenities count]; i++) {
-        if (i == 0 && [self.amenities[i] boolValue] == YES){
-            if (amenitiesString.length != 0) [amenitiesString appendString:@"\n"];
-            [amenitiesString appendString:@"WiFi Internet"];
-        }
-        if (i == 1 && [self.amenities[i] boolValue] == YES){
-            if (amenitiesString.length != 0) [amenitiesString appendString:@"\n"];
-            [amenitiesString appendString:@"Refrigerator"];
-        }
-        if (i == 2 && [self.amenities[i] boolValue] == YES){
-            if (amenitiesString.length != 0) [amenitiesString appendString:@"\n"];
-            [amenitiesString appendString:@"Study Desk"];
-        }
-        if (i == 3 && [self.amenities[i] boolValue] == YES){
-            if (amenitiesString.length != 0) [amenitiesString appendString:@"\n"];
-            [amenitiesString appendString:@"Monitor"];
-        }
-        if (i == 4 && [self.amenities[i] boolValue] == YES){
-            if (amenitiesString.length != 0) [amenitiesString appendString:@"\n"];
-            [amenitiesString appendString:@"Janitoral Services"];
-        }
-    }
-     */
     return amenitiesString;
 }
              
@@ -158,9 +137,7 @@
             [typesString appendString:@"Quiet"];
         }
     }
-    //[typesString appendString:@"-"];
     return typesString;
-
 }
 
 + (void) cancelListingForHost:(NSString *) object_id {
