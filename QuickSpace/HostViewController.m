@@ -40,17 +40,19 @@
 {
     [super viewDidLoad];
     
-    // Retrieve temporary created listing
+    // Retrieve temporarily created listing
     listing = [NewListing retrieveNewListing];
     
-    //[PFObject unpinAllObjects];
     // Update view with values from the previous listing
     if(listing != nil){
-        
-        if([listing.types containsObject: [NSNumber numberWithInt:rest]]) restButton.selected = YES;
-        if([listing.types containsObject: [NSNumber numberWithInt:closet]]) closetButton.selected = YES;
-        if([listing.types containsObject: [NSNumber numberWithInt:office]]) officeButton.selected = YES;
-        if([listing.types containsObject: [NSNumber numberWithInt:quiet]]) quietButton.selected = YES;
+        if([listing.types containsObject: [NSNumber numberWithInt:rest]])
+            restButton.selected = YES;
+        if([listing.types containsObject: [NSNumber numberWithInt:closet]])
+            closetButton.selected = YES;
+        if([listing.types containsObject: [NSNumber numberWithInt:office]])
+            officeButton.selected = YES;
+        if([listing.types containsObject: [NSNumber numberWithInt:quiet]])
+            quietButton.selected = YES;
         titleTextField.text = listing.title;
         descriptionTextField.text = listing.information;
         locationTextField.text = listing.address;
@@ -135,16 +137,12 @@
     listing.types = [[NSMutableArray alloc] init];
     if (restButton.selected)
         [listing.types addObject:[NSNumber numberWithInt:rest]];
-        //[spaceType replaceObjectAtIndex:0 withObject:[NSNumber numberWithBool:YES]];
     if (closetButton.selected)
         [listing.types addObject:[NSNumber numberWithInt:closet]];
-        //[spaceType replaceObjectAtIndex:1 withObject:[NSNumber numberWithBool:YES]];
     if (officeButton.selected)
         [listing.types addObject:[NSNumber numberWithInt:office]];
-        //[spaceType replaceObjectAtIndex:2 withObject:[NSNumber numberWithBool:YES]];
     if (quietButton.selected)
         [listing.types addObject:[NSNumber numberWithInt:quiet]];
-        //[spaceType replaceObjectAtIndex:3 withObject:[NSNumber numberWithBool:YES]];
 
     // Save input to a temporarily created listing
     listing.price = 10;

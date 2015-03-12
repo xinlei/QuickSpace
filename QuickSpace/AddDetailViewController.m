@@ -39,7 +39,8 @@
     [listing fetchFromLocalDatastore];
     
     // Update view with values from the previous listing
-    if([listing.amenities containsObject:[NSNumber numberWithInt:wifi]]) wifiSwitch.on = YES;
+    if([listing.amenities containsObject:[NSNumber numberWithInt:wifi]])
+        wifiSwitch.on = YES;
     if([listing.amenities containsObject:[NSNumber numberWithInt:refrigerator]]) refrigeratorSwitch.on = YES;
     if([listing.amenities containsObject:[NSNumber numberWithInt:studyDesk]]) studyDeskSwitch.on = YES;
     if([listing.amenities containsObject:[NSNumber numberWithInt:monitor]]) monitorSwitch.on = YES;
