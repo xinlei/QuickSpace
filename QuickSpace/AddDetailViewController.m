@@ -61,7 +61,7 @@
     } else {
         UIAlertView *notPermitted = [[UIAlertView alloc]
                                      initWithTitle:@"Error"
-                                     message:@"Price Must a Number"
+                                     message:@"Price Must Be a Whole Number"
                                      delegate:nil
                                      cancelButtonTitle:@"OK"
                                      otherButtonTitles:nil];

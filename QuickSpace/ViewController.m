@@ -76,7 +76,7 @@ NSArray *listings;
     [SVProgressHUD show];
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
         NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-        NSDictionary *amenityType = [defaults objectForKey:@"amenityType"];
+        NSArray *amenityType = [defaults objectForKey:@"amenityType"];
         NSNumber *price = [defaults objectForKey:@"maxPrice"];
         NSNumber *latitude = [defaults objectForKey:@"latitude"];
         NSNumber *longitude = [defaults objectForKey:@"longitude"];
@@ -89,6 +89,7 @@ NSArray *listings;
         // Reset filters
         [defaults removeObjectForKey:@"additionalFilters"];
         [defaults removeObjectForKey:@"maxPrice"];
+        [defaults removeObjectForKey:@"amenityType"];
         
         // Completion block
         dispatch_async(dispatch_get_main_queue(), ^{

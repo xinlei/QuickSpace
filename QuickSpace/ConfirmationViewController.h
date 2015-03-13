@@ -8,7 +8,7 @@
 #import <UIKit/UIKit.h>
 #import "ListingDetailViewController.h"
 #import "NewListing.h"
-@interface ConfirmationViewController : UIViewController
+@interface ConfirmationViewController : UIViewController <UIGestureRecognizerDelegate>
 
 @property (weak, nonatomic) IBOutlet UIImageView *listingImg;
 

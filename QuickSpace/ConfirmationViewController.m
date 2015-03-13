@@ -8,6 +8,8 @@
 #import "ConfirmationViewController.h"
 #import <Parse/Parse.h>
 #import "Listing.h"
+#import "modalPictureViewController.h"
+
 @interface ConfirmationViewController ()
 @property NSArray *amenities;
 
@@ -45,6 +47,10 @@
     
     listing = [NewListing retrieveNewListing];
     [listing fetchFromLocalDatastore];
+    
+    UITapGestureRecognizer *picClick = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(expandPics:)];
+    [picClick setDelegate:self];
+    [listingImg addGestureRecognizer:picClick];
 
     //set scrollView
     scrollView.frame = self.view.frame;
@@ -148,6 +154,15 @@
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
+
+-(BOOL) gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldRecognizeSimultaneouslyWithGestureRecognizer:(UIGestureRecognizer *)otherGestureRecognizer{
+    return YES;
+}
+
+-(void) expandPics:(UITapGestureRecognizer *)sender{
+    [self performSegueWithIdentifier:@"confirmationModalPics" sender:self];
+}
+
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
     NSMutableArray *allImages = [[NSMutableArray alloc] init];
@@ -156,9 +171,17 @@
         PFFile *imageFile = [PFFile fileWithName:@"listingImage.png" data:currImage];
         [allImages addObject:imageFile];
     }
-    listing.images = allImages;
-    listing.lister = [PFUser currentUser];
-    [listing save];
+    
+    if ([segue.identifier isEqualToString:@"confirmationModalPics"]){
+        modalPictureViewController *destViewController = segue.destinationViewController;
+        destViewController.imageFiles = allImages;
+    } else{
+    
+
+        listing.images = allImages;
+        listing.lister = [PFUser currentUser];
+        [listing save];
+    }
 }
 
 @end

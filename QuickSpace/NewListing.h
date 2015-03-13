@@ -35,7 +35,7 @@
 
 - (void) setLocationWith: (MKPlacemark *)placemark;
 
-+ (NSArray *) getAllAvailableListingsWithAmenities:(NSDictionary *) amenities
++ (NSArray *) getAllAvailableListingsWithAmenities:(NSArray *) amenities
                                              Types:(NSArray *)spaceType
                                          StartTime:(NSDate *) startTime
                                            EndTime:(NSDate *) endTime
