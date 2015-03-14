@@ -14,9 +14,7 @@
 @property NSArray *amenities;
 
 @end
-@implementation ConfirmationViewController{
-    NSMutableArray *allImages;
-}
+@implementation ConfirmationViewController
 
 @synthesize theImage;
 @synthesize listingImg;
@@ -32,7 +30,6 @@
 @synthesize descriptionsText;
 @synthesize confirmButton;
 @synthesize scrollView;
-@synthesize allPhotos;
 @synthesize listing;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
@@ -46,20 +43,10 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+
+
     
-//    NSMutableArray *allImages = [[NSMutableArray alloc] init];
-    for(UIImage *image in allPhotos){
-        NSData *currImage = UIImagePNGRepresentation(image);
-        PFFile *imageFile = [PFFile fileWithName:@"listingImage.png" data:currImage];
-        [allImages addObject:imageFile];
-    }
-    
-//    listing = [NewListing retrieveNewListing];
-//    [listing fetchFromLocalDatastore];
-    
-    UITapGestureRecognizer *picClick = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(expandPics:)];
-    [picClick setDelegate:self];
-    [listingImg addGestureRecognizer:picClick];
+
 
     //set scrollView
     scrollView.frame = self.view.frame;
@@ -68,11 +55,16 @@
     CGFloat mid = viewFrame.size.width/2;
     
     //set image
-    listingImg.image = theImage;
+
     CGRect frame = listingImg.frame;
     frame.origin.x = mid - frame.size.width/2;
     frame.origin.y = 0;
     listingImg.frame = frame;
+    listingImg.image = theImage;
+    
+    UITapGestureRecognizer *picClick = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(seeMorePics:)];
+    [picClick setDelegate:self];
+    [listingImg addGestureRecognizer:picClick];
     
     //set title
     titleText.text = listing.title;
@@ -168,7 +160,8 @@
     return YES;
 }
 
--(void) expandPics:(UITapGestureRecognizer *)sender{
+-(void) seeMorePics:(UITapGestureRecognizer *)sender{
+    NSLog(@"IM HERE");
     [self performSegueWithIdentifier:@"confirmationModalPics" sender:self];
 }
 
@@ -176,13 +169,11 @@
 {
     if ([segue.identifier isEqualToString:@"confirmationModalPics"]){
         modalPictureViewController *destViewController = segue.destinationViewController;
-        destViewController.imageFiles = allImages;
+        destViewController.imageFiles = listing.images;
     } else{
-        listing.images = allImages;
         listing.lister = [PFUser currentUser];
         [listing pinInBackgroundWithName:@"Listing"];
         [listing save];
-
     }
 }
 

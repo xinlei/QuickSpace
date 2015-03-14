@@ -65,7 +65,7 @@
             //Need to make sure that particular email address doesn't already exist in our user database.
             // if it does, give the person the option to reset the password (?)
             if(![user signUp]){
-                UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error" message:@"Email address is invalid" delegate:nil cancelButtonTitle:@"Try Again" otherButtonTitles: @"Forgot Password?", nil];
+                UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error" message:@"Email address is invalid" delegate:nil cancelButtonTitle:@"Try Again" otherButtonTitles: nil];
                 [alert show];
             } else {
                 AppDelegate *appDelegateTemp = [[UIApplication sharedApplication]delegate];

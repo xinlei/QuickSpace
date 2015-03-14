@@ -26,6 +26,5 @@
 @property (weak, nonatomic) IBOutlet UIButton *confirmButton;
 @property (weak, nonatomic) IBOutlet UIScrollView *scrollView;
 @property (nonatomic, retain) UIImage *theImage;
-@property (nonatomic, retain) NSArray *allPhotos;
 @property (nonatomic, retain) NewListing *listing;
 @end

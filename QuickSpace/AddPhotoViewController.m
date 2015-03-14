@@ -75,7 +75,11 @@
     
     UIImage *chosenImage = info[UIImagePickerControllerEditedImage];
     self.imageView.image = chosenImage;
-    [self.allPhotos addObject:chosenImage];
+    
+    NSData *currImage = UIImagePNGRepresentation(chosenImage);
+    PFFile *imageFile = [PFFile fileWithName:@"listingImage.png" data:currImage];
+   
+    [self.allPhotos addObject:imageFile];
     
     [picker dismissViewControllerAnimated:YES completion:NULL];
     
@@ -89,14 +93,18 @@
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
+
     if ([segue.identifier isEqualToString:@"ShowAddBookingConfirmation"]){
         ConfirmationViewController *destViewController = segue.destinationViewController;
         destViewController.theImage = self.imageView.image;
         
-        if([self.allPhotos count] == 0)
-            [self.allPhotos addObject:[UIImage imageNamed:@"no-image"]];
+        if([self.allPhotos count] == 0){
+            NSData *currImage = UIImagePNGRepresentation([UIImage imageNamed:@"no-image"]);
+            PFFile *imageFile = [PFFile fileWithName:@"listingImage.png" data:currImage];
+            [self.allPhotos addObject:imageFile];
+        }
         
-        destViewController.allPhotos = self.allPhotos;
+        listing.images = self.allPhotos;
         destViewController.listing = listing;
     }
 }
