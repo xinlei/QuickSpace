@@ -13,7 +13,8 @@
 @interface BookingConfirmationViewController : UIViewController
 
 @property (nonatomic, strong) Booking *booking;
-@property (weak, nonatomic) IBOutlet UIButton *cancelButton;
+
 - (IBAction)homeButton:(id)sender;
+- (IBAction)cancelButton:(id)sender;
 
 @end

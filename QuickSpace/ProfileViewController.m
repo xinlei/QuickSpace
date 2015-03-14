@@ -9,7 +9,7 @@
 #import "ProfileViewController.h"
 #import <Parse/Parse.h>
 #import "SVProgressHUD.h"
-#import "Listing.h"
+#import "NewListing.h"
 #import <UIKit/UIKit.h>
 #import "AppDelegate.h"
 
@@ -19,18 +19,15 @@
 
 @end
 
-@implementation ProfileViewController
+@implementation ProfileViewController{
+    NSArray *userListings;
+    NSArray *bookings;
+}
 
 @synthesize listingSegments;
 @synthesize popup;
 @synthesize logoutButton;
-NSMutableArray *userListings;
-//NSMutableArray *allTitles;
 
-//NSArray *allListings;
-//NSArray *allRentals;
-
-NSArray *bookings;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -44,6 +41,8 @@ NSArray *bookings;
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+//    userListings = [[NSMutableArray alloc] init];
+
     [self refreshTableData];
 }
 
@@ -100,13 +99,14 @@ NSArray *bookings;
 }
 
 - (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex {
-    NewListing *currListing = [userListings objectAtIndex:actionSheet.tag];
-    //NSString *currListing_id = [userListings objectAtIndex:actionSheet.tag];
-    
+
+
     // Remove listing
     if (listingSegments.selectedSegmentIndex == 1){
         if (buttonIndex == actionSheet.destructiveButtonIndex) {
-            [currListing delete];
+            NewListing *currListing = [userListings objectAtIndex:actionSheet.tag];
+            [currListing deleteInBackground];
+            [currListing unpinWithName:@"Listing"];
             [self.listingTable reloadData];
         }
         // Edit Listing
@@ -135,6 +135,8 @@ NSArray *bookings;
             default:
                 booking[@"rating"] = @0;
         }
+        NewListing *currListing = booking.listing;
+        [booking unpinInBackgroundWithName:@"Booking"];
         [booking saveInBackground];
         currListing.totalRating = currListing.totalRating + booking.rating;
         currListing.totalRaters = currListing.totalRaters + 1;
@@ -146,56 +148,20 @@ NSArray *bookings;
 - (void) refreshTableData {
     [SVProgressHUD show];
   //  dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-        PFUser *currentUser = [PFUser currentUser];
-        [userListings removeAllObjects];
-        NSDate *now = [NSDate date];
+
+//        NSDate *now = [NSDate date];
+
+    
         if (listingSegments.selectedSegmentIndex == 0){
-            
-            PFQuery *notExpired = [PFQuery queryWithClassName:@"Booking"];
-            [notExpired whereKey:@"guest" equalTo:currentUser];
-            [notExpired whereKey:@"endTime" greaterThan:now];
-            
-            PFQuery *noRatings = [PFQuery queryWithClassName:@"Booking"];
-            [noRatings whereKey:@"guest" equalTo:currentUser];
-            [noRatings whereKey:@"rating" lessThanOrEqualTo:@0];
-            
-            PFQuery *query = [PFQuery orQueryWithSubqueries:@[noRatings,notExpired]];
+            PFQuery *query = [PFQuery queryWithClassName:@"Booking"];
+            [query fromPinWithName:@"Booking"];
+            [query whereKey:@"rating" lessThanOrEqualTo:@0];
             bookings = [query findObjects];
             
-            
-            //NSMutableArray* allRentals = [[NSMutableArray alloc] init];
-            //NSMutableArray* titles = [[NSMutableArray alloc] init];
-            for (Booking *booking in bookings) {
-                
-                [userListings addObject:booking.listing];
-                //if(object[@"listing_id"] != nil && object[@"listing_title"] != nil){
-                //[allRentals addObject:object[@"listing_id"]];
-                //[titles addObject:object[@"listing_title"]];
-                //}
-            }
-            //userListings = allRentals;
-            //allTitles = titles;
-            //*/
         } else {
-            PFQuery *notExpired = [PFQuery queryWithClassName:@"Booking"];
-            [notExpired whereKey:@"owner" equalTo:currentUser];
-            bookings = [notExpired findObjects];
-            
-            // Get listings posted by this user
             PFQuery *query = [PFQuery queryWithClassName:@"Listing"];
-            [query whereKey:@"lister" equalTo:currentUser];
-            
-            userListings = [[NSMutableArray alloc] initWithArray:[query findObjects]];
-            
-            //NSMutableArray* allIDs = [[NSMutableArray alloc] init];
-            //NSMutableArray* titles = [[NSMutableArray alloc] init];
-            //for (PFObject *object in allListings) {
- 
-                //[allIDs addObject:object.objectId];
-                //[titles addObject:object[@"title"]];
-            //}
-            //userListings = allIDs;
-            //allTitles = titles;
+            [query fromPinWithName:@"Listing"];
+            userListings = [query findObjects];
         }
 //        dispatch_async(dispatch_get_main_queue(), ^{
             [self.listingTable reloadData];
@@ -211,6 +177,8 @@ NSArray *bookings;
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
+    if (listingSegments.selectedSegmentIndex == 0)
+        return [bookings count];
     return [userListings count];
 }
 
@@ -223,14 +191,16 @@ NSArray *bookings;
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:simpleTableIdentifier];
     }
     
-    Listing *thisListing = [userListings objectAtIndex:indexPath.row];
+
     UILabel *timeRemaining = (UILabel *)[cell viewWithTag:2];
     UILabel *title = (UILabel *)[cell viewWithTag:1];
-    //title.text = [allTitles objectAtIndex:indexPath.row];
-    title.text = thisListing.title;
+
     
     if (listingSegments.selectedSegmentIndex == 0){
         Booking *thisBooking = [bookings objectAtIndex:indexPath.row];
+        [thisBooking.listing fetchIfNeeded];
+        title.text = thisBooking.listing.title;
+        
         NSString *timeDiff = [[NSString alloc] init];
         NSTimeInterval interval = [thisBooking.endTime timeIntervalSinceNow];
         int minutes = interval/60;
@@ -246,6 +216,8 @@ NSArray *bookings;
             timeRemaining.text = timeDiff;
         }
     } else {
+        NewListing *thisListing = [userListings objectAtIndex:indexPath.row];
+        title.text = thisListing.title;
         timeRemaining.text = @"";
     }
     return cell;
@@ -254,18 +226,11 @@ NSArray *bookings;
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender{
     NSIndexPath *indexPath = [self.listingTable indexPathForSelectedRow];
     if([[segue identifier] isEqualToString:@"editSegue"]){
-        //PFQuery *query = [PFQuery queryWithClassName:@"Listing"];
-        //PFObject *listingObj = [query getObjectWithId:[userListings objectAtIndex:indexPath.row]];
-        //NSArray *stupid = [[NSArray alloc]initWithObjects:listingObj, nil];
-        
         editListingViewController *destViewController = segue.destinationViewController;
         destViewController.listing = [userListings objectAtIndex:indexPath.row];
     }
     else if ([[segue identifier] isEqualToString:@"bookingSegue"]){
-        //NSString *selectedListing = [userListings objectAtIndex:indexPath.row];
         viewBookingsController *destViewController = segue.destinationViewController;
-        //destViewController.listing_id = selectedListing;
-        //destViewController.listing_title = [allTitles objectAtIndex:indexPath.row];
         destViewController.listing = [userListings objectAtIndex:indexPath.row];
     }
 }

@@ -8,6 +8,7 @@
 
 #import "SetLocationViewController.h"
 #import <MapKit/MapKit.h>
+#import "AddDetailViewController.h";
 
 @interface SetLocationViewController ()
 @property (strong, nonatomic) IBOutlet MKMapView *myMapView;
@@ -21,8 +22,8 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    listing = [NewListing retrieveNewListing];
-    [listing fetchFromLocalDatastore];
+//    listing = [NewListing retrieveNewListing];
+//    [listing fetchFromLocalDatastore];
     
     CLGeocoder *location = [[CLGeocoder alloc] init];
     [location geocodeAddressString:listing.address completionHandler:^(NSArray* placemarks, NSError* error){
@@ -51,6 +52,13 @@
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+{
+    AddDetailViewController *destViewController = segue.destinationViewController;
+    destViewController.listing = listing;
+    
 }
 
 @end

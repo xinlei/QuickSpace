@@ -7,6 +7,7 @@
 //
 
 #import "AddDetailViewController.h"
+#import "AddPhotoViewController.h"
 
 @interface AddDetailViewController ()
 
@@ -35,8 +36,8 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    listing = [NewListing retrieveNewListing];
-    [listing fetchFromLocalDatastore];
+//    listing = [NewListing retrieveNewListing];
+//    [listing fetchFromLocalDatastore];
     
     // Update view with values from the previous listing
     if([listing.amenities containsObject:[NSNumber numberWithInt:wifi]])
@@ -45,7 +46,7 @@
     if([listing.amenities containsObject:[NSNumber numberWithInt:studyDesk]]) studyDeskSwitch.on = YES;
     if([listing.amenities containsObject:[NSNumber numberWithInt:monitor]]) monitorSwitch.on = YES;
     if([listing.amenities containsObject:[NSNumber numberWithInt:services]]) servicesSwitch.on = YES;
-    priceTextField.text = [@(listing.price) stringValue];
+    priceTextField.text = @"10";//[@(listing.price) stringValue];
 }
 
 - (void)didReceiveMemoryWarning
@@ -82,6 +83,9 @@
     if(studyDeskSwitch.on)[listing.amenities addObject:[NSNumber numberWithInt:studyDesk]];
     if(monitorSwitch.on)[listing.amenities addObject:[NSNumber numberWithInt:monitor]];
     if(servicesSwitch.on)[listing.amenities addObject:[NSNumber numberWithInt:services]];
+    
+    AddPhotoViewController *destViewController = segue.destinationViewController;
+    destViewController.listing = listing;
 }
 
 

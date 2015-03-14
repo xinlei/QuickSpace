@@ -47,13 +47,13 @@
 @synthesize descriptionTextField;
 @synthesize saveButton;
 @synthesize scrollView;
-@synthesize listing_id;
 @synthesize listing;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     
+    NSLog(@"COUNT: %d", [listing.images count]);
     
     image.image = [UIImage imageWithData: [[listing.images firstObject] getData]];
     addressTextField.text = listing.address;
@@ -97,6 +97,7 @@
     frame.origin.y = 0;
 //    frame.origin.x = mid - frame.size.width/2;
     image.frame = frame;
+
     
     //set title
     [ListingDetailViewController setItemLocation:titleLabel withPrev:image apartBy:10 atX:titleLabel.frame.origin.x];
@@ -182,25 +183,44 @@
 }
 
 - (IBAction)saveButtonClick:(id)sender {
-    listing.title = titleText.text;
-    listing.address = addressTextField.text;
-    listing.information = descriptionTextField.text;
-    [listing.amenities removeAllObjects];
-    [listing.types removeAllObjects];
     
-    if(wifiSwitch.on)[listing.amenities addObject:[NSNumber numberWithInt:wifi]];
-    if(fridgeSwitch.on)[listing.amenities addObject:[NSNumber numberWithInt:refrigerator]];
-    if(deskSwitch.on)[listing.amenities addObject:[NSNumber numberWithInt:studyDesk]];
-    if(monitorSwitch.on)[listing.amenities addObject:[NSNumber numberWithInt:monitor]];
-    if(servicesSwitch.on)[listing.amenities addObject:[NSNumber numberWithInt:services]];
+    NewListing *newListing = [[NewListing alloc] init];
+    newListing.images = listing.images;
+    newListing.price = listing.price;
+    newListing.ratingValue = listing.ratingValue;
+    newListing.totalRating = listing.totalRating;
+    newListing.totalRaters = listing.totalRaters;
+    newListing.location = listing.location;
     
-    if (restSwitch.on)[listing.types addObject:[NSNumber numberWithInt:rest]];
-    if (closetSwitch.on)[listing.types addObject:[NSNumber numberWithInt:closet]];
-    if (officeSwitch.on)[listing.types addObject:[NSNumber numberWithInt:office]];
-    if (quietSwitch.on)[listing.types addObject:[NSNumber numberWithInt:quiet]];
+    [listing fetchFromLocalDatastore];
+//    [listing unpinInBackgroundWithName:@"Listing"];
+    [listing deleteInBackground];
+    
+    newListing.title = titleText.text;
+    newListing.address = addressTextField.text;
+    newListing.information = descriptionTextField.text;
+    newListing.amenities = [[NSMutableArray alloc] init];
+    newListing.types = [[NSMutableArray alloc] init];
+    newListing.lister = [PFUser currentUser];
 
-    [listing save];
+//    [listing.amenities removeAllObjects];
+//    [listing.types removeAllObjects];
+    
+    if(wifiSwitch.on)[newListing.amenities addObject:[NSNumber numberWithInt:wifi]];
+    if(fridgeSwitch.on)[newListing.amenities addObject:[NSNumber numberWithInt:refrigerator]];
+    if(deskSwitch.on)[newListing.amenities addObject:[NSNumber numberWithInt:studyDesk]];
+    if(monitorSwitch.on)[newListing.amenities addObject:[NSNumber numberWithInt:monitor]];
+    if(servicesSwitch.on)[newListing.amenities addObject:[NSNumber numberWithInt:services]];
+    
+    if (restSwitch.on)[newListing.types addObject:[NSNumber numberWithInt:rest]];
+    if (closetSwitch.on)[newListing.types addObject:[NSNumber numberWithInt:closet]];
+    if (officeSwitch.on)[newListing.types addObject:[NSNumber numberWithInt:office]];
+    if (quietSwitch.on)[newListing.types addObject:[NSNumber numberWithInt:quiet]];
+    
 
+    [newListing saveInBackground];
+    [newListing pinWithName:@"Listing"];
+    
 //        dispatch_async(dispatch_get_main_queue(), ^{
 //            [SVProgressHUD dismiss];
 //            NSLog(@"Hey");
@@ -237,11 +257,5 @@
     return NO;
 }
 
-- (void) prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-
-//    if([segue.identifier isEqualToString:@"submitChangesSegue"]){
-//
-//    }
-}
 
 @end

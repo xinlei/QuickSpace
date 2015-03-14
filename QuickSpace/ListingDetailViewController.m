@@ -199,9 +199,9 @@
         aBooking.owner = listing.lister;
         aBooking.rating = 0;
         aBooking.listing = listing;
-        //aBooking.listing_id = [listing objectId];
-        //aBooking.listing_title = listing.title;
-        [aBooking save];
+        
+        [aBooking saveInBackground];
+        [aBooking pinWithName:@"Booking"];
         [self performSegueWithIdentifier:@"ShowBookingConfirmation" sender:self];
     }
 }

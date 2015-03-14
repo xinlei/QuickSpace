@@ -17,6 +17,7 @@
 
 @synthesize takePhotoButton;
 @synthesize selectPhotoButton;
+@synthesize listing;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -96,6 +97,7 @@
             [self.allPhotos addObject:[UIImage imageNamed:@"no-image"]];
         
         destViewController.allPhotos = self.allPhotos;
+        destViewController.listing = listing;
     }
 }
 

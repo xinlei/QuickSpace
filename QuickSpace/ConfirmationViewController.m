@@ -14,7 +14,9 @@
 @property NSArray *amenities;
 
 @end
-@implementation ConfirmationViewController
+@implementation ConfirmationViewController{
+    NSMutableArray *allImages;
+}
 
 @synthesize theImage;
 @synthesize listingImg;
@@ -45,8 +47,15 @@
 {
     [super viewDidLoad];
     
-    listing = [NewListing retrieveNewListing];
-    [listing fetchFromLocalDatastore];
+//    NSMutableArray *allImages = [[NSMutableArray alloc] init];
+    for(UIImage *image in allPhotos){
+        NSData *currImage = UIImagePNGRepresentation(image);
+        PFFile *imageFile = [PFFile fileWithName:@"listingImage.png" data:currImage];
+        [allImages addObject:imageFile];
+    }
+    
+//    listing = [NewListing retrieveNewListing];
+//    [listing fetchFromLocalDatastore];
     
     UITapGestureRecognizer *picClick = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(expandPics:)];
     [picClick setDelegate:self];
@@ -165,22 +174,15 @@
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
-    NSMutableArray *allImages = [[NSMutableArray alloc] init];
-    for(UIImage *image in allPhotos){
-        NSData *currImage = UIImagePNGRepresentation(image);
-        PFFile *imageFile = [PFFile fileWithName:@"listingImage.png" data:currImage];
-        [allImages addObject:imageFile];
-    }
-    
     if ([segue.identifier isEqualToString:@"confirmationModalPics"]){
         modalPictureViewController *destViewController = segue.destinationViewController;
         destViewController.imageFiles = allImages;
     } else{
-    
-
         listing.images = allImages;
         listing.lister = [PFUser currentUser];
+        [listing pinInBackgroundWithName:@"Listing"];
         [listing save];
+
     }
 }
 
