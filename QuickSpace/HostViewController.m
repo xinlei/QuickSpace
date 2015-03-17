@@ -44,23 +44,27 @@
                                    initWithTarget:self
                                    action:@selector(dismissKeyboard)];
     [self.view addGestureRecognizer:tap];
-
+    
     // Retrieve temporarily created listing
     listing = [NewListing retrieveNewListing];
     
     // Update view with values from the previous listing
-    if(listing != nil){
-        if([listing.types containsObject: [NSNumber numberWithInt:rest]]) restButton.selected = YES;
-        if([listing.types containsObject: [NSNumber numberWithInt:closet]]) closetButton.selected = YES;
-        if([listing.types containsObject: [NSNumber numberWithInt:office]]) officeButton.selected = YES;
-        if([listing.types containsObject: [NSNumber numberWithInt:quiet]]) quietButton.selected = YES;
-        titleTextField.text = listing.title;
-        descriptionTextField.text = listing.information;
-        locationTextField.text = listing.address;
-    } else {
+//    if(listing != nil){
+//        if([listing.types containsObject: [NSNumber numberWithInt:rest]])
+//            restButton.selected = YES;
+//        if([listing.types containsObject: [NSNumber numberWithInt:closet]])
+//            closetButton.selected = YES;
+//        if([listing.types containsObject: [NSNumber numberWithInt:office]])
+//            officeButton.selected = YES;
+//        if([listing.types containsObject: [NSNumber numberWithInt:quiet]])
+//            quietButton.selected = YES;
+//        titleTextField.text = listing.title;
+//        descriptionTextField.text = listing.information;
+//        locationTextField.text = listing.address;
+//    } else {
         listing = [NewListing object];
-        [listing pin];
-    }
+//        [listing pin];
+//    }
 }
 
 - (void)didReceiveMemoryWarning
@@ -75,18 +79,18 @@
     [locationTextField resignFirstResponder];
 }
 
+
 -(BOOL) textFieldShouldReturn:(UITextField *)textField
 {
     [textField resignFirstResponder];
     return YES;
 }
 
-// Perform error checking on user inputs: title, information, and location
 - (BOOL)shouldPerformSegueWithIdentifier:(NSString *)identifier sender:(id)sender {
     if ([identifier isEqualToString:@"ShowNewListingDetails"]) {
         
         bool canSegue = YES;
-        NSString *alertText = [[NSString alloc] init];
+        NSString *alertText = @"";
         
         if (!titleTextField || titleTextField.text.length == 0){
             canSegue = NO;
@@ -98,11 +102,11 @@
         }
         if (canSegue)return YES;
         UIAlertView *notPermitted = [[UIAlertView alloc]
-                                     initWithTitle:@"Alert"
-                                     message:alertText
-                                     delegate:nil
-                                     cancelButtonTitle:@"OK"
-                                     otherButtonTitles:nil];
+                                        initWithTitle:@"Alert"
+                                        message:alertText
+                                        delegate:nil
+                                        cancelButtonTitle:@"OK"
+                                        otherButtonTitles:nil];
         [notPermitted show];
     }
     return NO;
@@ -131,14 +135,12 @@
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
-    
     listing.types = [[NSMutableArray alloc] init];
     if (restButton.selected) [listing.types addObject:[NSNumber numberWithInt:rest]];
     if (closetButton.selected)[listing.types addObject:[NSNumber numberWithInt:closet]];
     if (officeButton.selected)[listing.types addObject:[NSNumber numberWithInt:office]];
     if (quietButton.selected)[listing.types addObject:[NSNumber numberWithInt:quiet]];
 
-    // Save input to a temporarily created listing
     listing.price = 10;
     listing.title = titleTextField.text;
     listing.information = descriptionTextField.text;
@@ -146,6 +148,10 @@
     listing.ratingValue = 0;
     listing.totalRaters = 0;
     listing.totalRating= 0;
+
+    SetLocationViewController *destViewController = segue.destinationViewController;
+    destViewController.listing = listing;
+    
 }
 
 

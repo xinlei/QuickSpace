@@ -61,6 +61,7 @@
     [defaults removeObjectForKey:@"newListingPrice"];
     [defaults removeObjectForKey:@"Latitude"];
     [defaults removeObjectForKey:@"Longitude"];
+    [PFObject unpinAllObjects];
     [PFUser logOut];
     
     // Send back to the login page
@@ -147,28 +148,33 @@
 
 - (void) refreshTableData {
     [SVProgressHUD show];
-  //  dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-
-//        NSDate *now = [NSDate date];
-
-    
-        if (listingSegments.selectedSegmentIndex == 0){
-            PFQuery *query = [PFQuery queryWithClassName:@"Booking"];
-            [query fromPinWithName:@"Booking"];
-            [query whereKey:@"rating" lessThanOrEqualTo:@0];
-            bookings = [query findObjects];
+    PFUser *currentUser = [PFUser currentUser];
+    NSDate *now = [NSDate date];
+    if (listingSegments.selectedSegmentIndex == 0){
+        //PFQuery *query = [PFQuery queryWithClassName:@"Booking"];
+        //[query :@"Booking"];
+        //[query whereKey:@"rating" lessThanOrEqualTo:@0];
+        //bookings = [query findObjects];
             
-        } else {
-            PFQuery *query = [PFQuery queryWithClassName:@"Listing"];
-            [query fromPinWithName:@"Listing"];
-            userListings = [query findObjects];
-        }
-//        dispatch_async(dispatch_get_main_queue(), ^{
-            [self.listingTable reloadData];
-            [SVProgressHUD dismiss];
-//        });
-//    });
-    
+        PFQuery *notExpired = [Booking query];
+        [notExpired whereKey:@"guest" equalTo:currentUser];
+        [notExpired whereKey:@"endTime" greaterThan:now];
+        
+        PFQuery *noRatings = [Booking query];
+        [noRatings whereKey:@"guest" equalTo:currentUser];
+        [noRatings whereKey:@"rating" lessThanOrEqualTo:@0];
+        
+        PFQuery *query = [PFQuery orQueryWithSubqueries:@[noRatings,notExpired]];
+        bookings = [query findObjects];
+        
+    } else {
+        PFQuery *query = [NewListing query];
+        [query whereKey:@"lister" equalTo:currentUser];
+        //[query fromPinWithName:@"Listing"];
+        userListings = [query findObjects];
+    }
+    [self.listingTable reloadData];
+    [SVProgressHUD dismiss];
 }
 
 - (IBAction)listingSegmentValueChanged:(UISegmentedControl *)sender {

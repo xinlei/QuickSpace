@@ -35,8 +35,8 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    listing = [NewListing retrieveNewListing];
-    [listing fetchFromLocalDatastore];
+    //listing = [NewListing retrieveNewListing];
+    //[listing fetchFromLocalDatastore];
     
     // Update view with values from the previous listing
     if([listing.amenities containsObject:[NSNumber numberWithInt:wifi]])wifiSwitch.on = YES;
@@ -88,6 +88,9 @@
     if(studyDeskSwitch.on)[listing.amenities addObject:[NSNumber numberWithInt:studyDesk]];
     if(monitorSwitch.on)[listing.amenities addObject:[NSNumber numberWithInt:monitor]];
     if(servicesSwitch.on)[listing.amenities addObject:[NSNumber numberWithInt:services]];
+    
+    AddPhotoViewController *destViewController = segue.destinationViewController;
+    destViewController.listing = listing;
 }
 
 

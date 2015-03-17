@@ -31,8 +31,8 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    listing = [NewListing retrieveNewListing];
-    [listing fetchFromLocalDatastore];
+    //listing = [NewListing retrieveNewListing];
+    //[listing fetchFromLocalDatastore];
     self.allPhotos = [[NSMutableArray alloc] init];
     self.imageView.image = [UIImage imageNamed:@"no-image.png"];
     if (![UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera]) {
@@ -106,6 +106,7 @@
             [self.allPhotos addObject:imageFile];
         }
         listing.images = self.allPhotos;
+        destViewController.listing = listing;
     }
 }
 
