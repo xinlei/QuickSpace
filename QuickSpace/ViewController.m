@@ -101,13 +101,20 @@ NSArray *listings;
     if (cell == nil)
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:simpleTableIdentifier];
     NewListing *thisListing = [listings objectAtIndex:indexPath.row];
-    UIImageView *image = (UIImageView *)[cell viewWithTag:1];
-    image.image = [UIImage imageWithData: [[thisListing.images firstObject] getData]];
+    
+    cell.backgroundView.contentMode = UIViewContentModeTop;
+    cell.selectedBackgroundView = [[UIImageView alloc] initWithImage:[UIImage imageWithData: [[thisListing.images firstObject] getData]]];
+
+    cell.backgroundView = [[UIImageView alloc] initWithImage:[UIImage imageWithData: [[thisListing.images firstObject] getData]]];
+
+    //UIImageView *image = (UIImageView *)[cell viewWithTag:1];
+    //image.image = [UIImage imageWithData: [[thisListing.images firstObject] getData]];
+    
     UILabel *title = (UILabel *)[cell viewWithTag:2];
     title.text = thisListing.title;
     
-    UILabel *type = (UILabel *)[cell viewWithTag:3];
-    type.text = [thisListing typesToString];
+    //UILabel *type = (UILabel *)[cell viewWithTag:3];
+    //type.text = [thisListing typesToString];
 
     UILabel *location = (UILabel *)[cell viewWithTag:4];
     location.text = thisListing.address;
