@@ -20,7 +20,6 @@
 @synthesize studyDeskSwitch;
 @synthesize monitorSwitch;
 @synthesize servicesSwitch;
-@synthesize priceLabel;
 @synthesize priceTextField;
 @synthesize listing;
 
@@ -36,17 +35,16 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-//    listing = [NewListing retrieveNewListing];
-//    [listing fetchFromLocalDatastore];
+    listing = [NewListing retrieveNewListing];
+    [listing fetchFromLocalDatastore];
     
     // Update view with values from the previous listing
-    if([listing.amenities containsObject:[NSNumber numberWithInt:wifi]])
-        wifiSwitch.on = YES;
+    if([listing.amenities containsObject:[NSNumber numberWithInt:wifi]])wifiSwitch.on = YES;
     if([listing.amenities containsObject:[NSNumber numberWithInt:refrigerator]]) refrigeratorSwitch.on = YES;
     if([listing.amenities containsObject:[NSNumber numberWithInt:studyDesk]]) studyDeskSwitch.on = YES;
     if([listing.amenities containsObject:[NSNumber numberWithInt:monitor]]) monitorSwitch.on = YES;
     if([listing.amenities containsObject:[NSNumber numberWithInt:services]]) servicesSwitch.on = YES;
-    priceTextField.text = @"10";//[@(listing.price) stringValue];
+    priceTextField.text = [@(listing.price) stringValue];
 }
 
 - (void)didReceiveMemoryWarning
@@ -57,19 +55,26 @@
 
 - (BOOL)shouldPerformSegueWithIdentifier:(NSString *)identifier sender:(id)sender{
     NSCharacterSet* notDigits = [[NSCharacterSet decimalDigitCharacterSet] invertedSet];
-    if ([priceTextField.text rangeOfCharacterFromSet:notDigits].location == NSNotFound){
-        return YES;
+    bool isPermitted = YES;
+    NSString *error = [[NSString alloc] init];
+    if ([priceTextField.text rangeOfCharacterFromSet:notDigits].location != NSNotFound || [priceTextField.text length] == 0){
+        error = @"Price must be a whole number";
+        isPermitted = NO;
+    } else if ([priceTextField.text intValue] < 0 || [priceTextField.text intValue] > 500){
+        isPermitted = NO;
+        error = @"Set price between 0-500";
     } else {
-        UIAlertView *notPermitted = [[UIAlertView alloc]
-                                     initWithTitle:@"Error"
-                                     message:@"Price Must Be a Whole Number"
-                                     delegate:nil
-                                     cancelButtonTitle:@"OK"
-                                     otherButtonTitles:nil];
-        
-        [notPermitted show];
-        return NO;
+        isPermitted = YES;
     }
+    UIAlertView *notPermitted = [[UIAlertView alloc]
+                             initWithTitle:@"Error"
+                             message:error
+                             delegate:nil
+                             cancelButtonTitle:@"OK"
+                             otherButtonTitles:nil];
+
+    [notPermitted show];
+    return isPermitted;
 }
 
 
@@ -83,9 +88,6 @@
     if(studyDeskSwitch.on)[listing.amenities addObject:[NSNumber numberWithInt:studyDesk]];
     if(monitorSwitch.on)[listing.amenities addObject:[NSNumber numberWithInt:monitor]];
     if(servicesSwitch.on)[listing.amenities addObject:[NSNumber numberWithInt:services]];
-    
-    AddPhotoViewController *destViewController = segue.destinationViewController;
-    destViewController.listing = listing;
 }
 
 

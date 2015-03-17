@@ -83,6 +83,8 @@
 -(void)dismissKeyboard {
     [emailTextField resignFirstResponder];
     [passwordTextField resignFirstResponder];
+    [confirmPasswordTextField resignFirstResponder];
+}
 
 -(BOOL) textFieldShouldReturn:(UITextField *)textField
 {

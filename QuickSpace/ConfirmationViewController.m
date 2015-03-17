@@ -44,9 +44,8 @@
 {
     [super viewDidLoad];
 
-
-    
-
+    listing = [NewListing retrieveNewListing];
+    [listing fetchFromLocalDatastore];
 
     //set scrollView
     scrollView.frame = self.view.frame;
@@ -172,7 +171,7 @@
         destViewController.imageFiles = listing.images;
     } else{
         listing.lister = [PFUser currentUser];
-        [listing pinInBackgroundWithName:@"Listing"];
+        //[listing pinInBackgroundWithName:@"Listing"];
         [listing save];
     }
 }

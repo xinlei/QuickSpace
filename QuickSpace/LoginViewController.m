@@ -38,14 +38,7 @@
     // Dispose of any resources that can be recreated.
 }
 - (IBAction)onSubmit:(UIButton *)sender {
-//    __block PFUser *user = [[PFUser alloc] init];
-//    [SVProgressHUD show];
-//    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-        PFUser *user = [PFUser logInWithUsername: self.emailTextField.text password: self.passwordTextField.text];
-//        dispatch_async(dispatch_get_main_queue(), ^{
-//            [SVProgressHUD dismiss];
-//        });
-//    });
+    PFUser *user = [PFUser logInWithUsername: self.emailTextField.text password: self.passwordTextField.text];
     
     // Check network connection
     SCNetworkReachabilityFlags flags;
@@ -60,7 +53,7 @@
     } else {
         if(user){
             
-            /* Turned off for testing
+            /* Email verification turned off for testing and demo
             if (![[user objectForKey:@"emailVerified"] boolValue]) {
                 // Refresh to make sure the user did not recently verify
                 [user fetch];
@@ -81,6 +74,7 @@
     }
 }
 
+// Dismiss keyboard when touching outside of textfield
 -(void)dismissKeyboard {
     [emailTextField resignFirstResponder];
     [passwordTextField resignFirstResponder];

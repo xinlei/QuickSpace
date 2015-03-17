@@ -31,8 +31,10 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    listing = [NewListing retrieveNewListing];
+    [listing fetchFromLocalDatastore];
     self.allPhotos = [[NSMutableArray alloc] init];
-    self.imageView.image = [UIImage imageNamed:@"no-image"];
+    self.imageView.image = [UIImage imageNamed:@"no-image2.png"];
     if (![UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera]) {
         
         UIAlertView *noCameraAlert = [[UIAlertView alloc] initWithTitle:@"Error"
@@ -99,13 +101,11 @@
         destViewController.theImage = self.imageView.image;
         
         if([self.allPhotos count] == 0){
-            NSData *currImage = UIImagePNGRepresentation([UIImage imageNamed:@"no-image"]);
+            NSData *currImage = UIImagePNGRepresentation([UIImage imageNamed:@"no-image2.png"]);
             PFFile *imageFile = [PFFile fileWithName:@"listingImage.png" data:currImage];
             [self.allPhotos addObject:imageFile];
         }
-        
         listing.images = self.allPhotos;
-        destViewController.listing = listing;
     }
 }
 
