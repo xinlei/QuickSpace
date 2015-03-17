@@ -19,6 +19,7 @@
 
 @implementation AdvancedFilterViewController
 
+
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
@@ -45,31 +46,16 @@
 
 -(void) prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender{
     
-    /*
-    if ([segue.identifier isEqualToString:@"DisplayResults"]) {
-        AdvancedFilterViewController *destViewController = segue.destinationViewController;
- 
-        destViewController.spaceType = self.spaceType;
-        destViewController.startDate = self.startDate;
-        destViewController.endDate = self.endDate;
-    }
-    */
-    
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     
-    NSArray *keys = [NSArray arrayWithObjects:
-                     @"wifi",
-                     @"refrigerator",
-                     @"studyDesk",
-                     @"monitor",
-                     @"services",
-                     nil];
+    NSMutableArray *amenityType = [[NSMutableArray alloc] init];
+    if(self.wifiSwitch.on)[amenityType addObject:[NSNumber numberWithInt:wifi]];
+    if(self.refrigeratorSwitch.on)[amenityType addObject:[NSNumber numberWithInt:refrigerator]];
+    if(self.studySwitch.on)[amenityType addObject:[NSNumber numberWithInt:studyDesk]];
+    if(self.computerSwitch.on)[amenityType addObject:[NSNumber numberWithInt:monitor]];
+    if(self.janitorSwitch.on)[amenityType addObject:[NSNumber numberWithInt:services]];
     
-    NSArray *objects = [NSArray arrayWithObjects:[NSNumber numberWithBool:self.wifiSwitch.on], [NSNumber numberWithBool:self.refrigeratorSwitch.on], [NSNumber numberWithBool:self.studySwitch.on], [NSNumber numberWithBool:self.computerSwitch.on], [NSNumber numberWithBool:self.janitorSwitch.on], nil];
-    NSMutableDictionary *additionalFilters = [NSMutableDictionary dictionaryWithObjects:objects forKeys:keys];
-    
-    
-    [defaults setObject:additionalFilters forKey:@"additionalFilters"];
+    [defaults setObject:amenityType forKey:@"amenityType"];
     [defaults setInteger:(int)self.priceSlider.value forKey:@"maxPrice"];
 }
 

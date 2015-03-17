@@ -7,9 +7,12 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "NewListing.h"
 
 @interface CancelViewController : UIViewController
 @property (weak, nonatomic) IBOutlet UIButton *cancelButton;
+@property (nonatomic) NewListing *listing;
 - (IBAction)homeButton:(id)sender;
+- (IBAction)cancelButton:(id)sender;
 
 @end

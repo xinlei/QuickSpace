@@ -17,6 +17,7 @@
 
 @synthesize takePhotoButton;
 @synthesize selectPhotoButton;
+@synthesize listing;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -30,8 +31,10 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    //listing = [NewListing retrieveNewListing];
+    //[listing fetchFromLocalDatastore];
     self.allPhotos = [[NSMutableArray alloc] init];
-    self.imageView.image = [UIImage imageNamed:@"no-image"];
+    self.imageView.image = [UIImage imageNamed:@"no-image.png"];
     if (![UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera]) {
         
         UIAlertView *noCameraAlert = [[UIAlertView alloc] initWithTitle:@"Error"
@@ -74,7 +77,11 @@
     
     UIImage *chosenImage = info[UIImagePickerControllerEditedImage];
     self.imageView.image = chosenImage;
-    [self.allPhotos addObject:chosenImage];
+    
+    NSData *currImage = UIImagePNGRepresentation(chosenImage);
+    PFFile *imageFile = [PFFile fileWithName:@"listingImage.png" data:currImage];
+   
+    [self.allPhotos addObject:imageFile];
     
     [picker dismissViewControllerAnimated:YES completion:NULL];
     
@@ -88,14 +95,18 @@
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
+
     if ([segue.identifier isEqualToString:@"ShowAddBookingConfirmation"]){
         ConfirmationViewController *destViewController = segue.destinationViewController;
         destViewController.theImage = self.imageView.image;
         
-        if([self.allPhotos count] == 0)
-            [self.allPhotos addObject:[UIImage imageNamed:@"no-image"]];
-        
-        destViewController.allPhotos = self.allPhotos;
+        if([self.allPhotos count] == 0){
+            NSData *currImage = UIImagePNGRepresentation([UIImage imageNamed:@"no-image.png"]);
+            PFFile *imageFile = [PFFile fileWithName:@"listingImage.png" data:currImage];
+            [self.allPhotos addObject:imageFile];
+        }
+        listing.images = self.allPhotos;
+        destViewController.listing = listing;
     }
 }
 

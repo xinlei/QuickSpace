@@ -16,7 +16,6 @@
 
 @implementation BookingConfirmationViewController
 
-@synthesize cancelButton;
 @synthesize booking;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
@@ -40,11 +39,14 @@
     // Dispose of any resources that can be recreated.
 }
 
-- (IBAction)cancelBooking:(UIButton *)sender {
-    //[booking cancel];
+- (IBAction)homeButton:(id)sender {
+    [self.navigationController popToRootViewControllerAnimated:YES];
 }
 
-- (IBAction)homeButton:(id)sender {
+- (IBAction)cancelButton:(id)sender {
+    [booking fetchFromLocalDatastore];
+    [booking unpinInBackgroundWithName:@"Booking"];
+    [booking deleteInBackground];
     [self.navigationController popToRootViewControllerAnimated:YES];
 }
 @end

@@ -188,16 +188,22 @@
     NSDate *startTime = [defaults objectForKey:@"startTime"];
     NSDate *endTime = [defaults objectForKey:@"endTime"];
     
-    Booking *aBooking = [Booking object];
-    aBooking.startTime = startTime;
-    aBooking.endTime = endTime;
-    aBooking.guest = currentUser;
-    aBooking.owner = listing.lister;
-    aBooking.rating = 0;
-    aBooking.listing = listing;
-    //aBooking.listing_id = [listing objectId];
-    //aBooking.listing_title = listing.title;
-    [aBooking save];
+    if (currentUser == listing.lister){
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"You can't book your own listing!" message:@""delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles: nil];
+        [alert show];
+    } else {
+        Booking *aBooking = [Booking object];
+        aBooking.startTime = startTime;
+        aBooking.endTime = endTime;
+        aBooking.guest = currentUser;
+        aBooking.owner = listing.lister;
+        aBooking.rating = 0;
+        aBooking.listing = listing;
+        
+        [aBooking saveInBackground];
+        [aBooking pinWithName:@"Booking"];
+        [self performSegueWithIdentifier:@"ShowBookingConfirmation" sender:self];
+    }
 }
 
 -(BOOL) gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldRecognizeSimultaneouslyWithGestureRecognizer:(UIGestureRecognizer *)otherGestureRecognizer{

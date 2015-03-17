@@ -8,6 +8,8 @@
 #import "ConfirmationViewController.h"
 #import <Parse/Parse.h>
 #import "Listing.h"
+#import "modalPictureViewController.h"
+
 @interface ConfirmationViewController ()
 @property NSArray *amenities;
 
@@ -28,7 +30,6 @@
 @synthesize descriptionsText;
 @synthesize confirmButton;
 @synthesize scrollView;
-@synthesize allPhotos;
 @synthesize listing;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
@@ -42,9 +43,10 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+
+
     
-    listing = [NewListing retrieveNewListing];
-    [listing fetchFromLocalDatastore];
+
 
     //set scrollView
     scrollView.frame = self.view.frame;
@@ -53,11 +55,16 @@
     CGFloat mid = viewFrame.size.width/2;
     
     //set image
-    listingImg.image = theImage;
+
     CGRect frame = listingImg.frame;
     frame.origin.x = mid - frame.size.width/2;
     frame.origin.y = 0;
     listingImg.frame = frame;
+    listingImg.image = theImage;
+    
+    UITapGestureRecognizer *picClick = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(seeMorePics:)];
+    [picClick setDelegate:self];
+    [listingImg addGestureRecognizer:picClick];
     
     //set title
     titleText.text = listing.title;
@@ -148,17 +155,26 @@
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
+
+-(BOOL) gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldRecognizeSimultaneouslyWithGestureRecognizer:(UIGestureRecognizer *)otherGestureRecognizer{
+    return YES;
+}
+
+-(void) seeMorePics:(UITapGestureRecognizer *)sender{
+    NSLog(@"IM HERE");
+    [self performSegueWithIdentifier:@"confirmationModalPics" sender:self];
+}
+
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
-    NSMutableArray *allImages = [[NSMutableArray alloc] init];
-    for(UIImage *image in allPhotos){
-        NSData *currImage = UIImagePNGRepresentation(image);
-        PFFile *imageFile = [PFFile fileWithName:@"listingImage.png" data:currImage];
-        [allImages addObject:imageFile];
+    if ([segue.identifier isEqualToString:@"confirmationModalPics"]){
+        modalPictureViewController *destViewController = segue.destinationViewController;
+        destViewController.imageFiles = listing.images;
+    } else{
+        listing.lister = [PFUser currentUser];
+        [listing pinInBackgroundWithName:@"Listing"];
+        [listing save];
     }
-    listing.images = allImages;
-    listing.lister = [PFUser currentUser];
-    [listing save];
 }
 
 @end

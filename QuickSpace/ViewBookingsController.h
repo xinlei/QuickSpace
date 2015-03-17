@@ -18,8 +18,6 @@
 
 @property (weak, nonatomic) IBOutlet UITableView *bookingsTable;
 @property (nonatomic) NewListing * listing;
-@property (nonatomic) NSString *listing_id;
-@property (nonatomic) NSString *listing_title;
 
 -(void) populateBookings;
 

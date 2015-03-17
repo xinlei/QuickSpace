@@ -30,34 +30,8 @@ NSArray *listings;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
-//    [self.locationManager startUpdatingLocation];
-//
-//    CLLocation *location = self.locationManager.location;
-//    if (location) {
-//        self.currentLocation = location;
-//    }
-    self.tableView.rowHeight = 226;
     [self populateListings];
 }
-
-//Taken from the AnyWall Parse tutorial
-//- (CLLocationManager *)locationManager {
-//    if (_locationManager == nil) {
-//        _locationManager = [[CLLocationManager alloc] init];
-//        _locationManager.delegate = self;
-//        _locationManager.desiredAccuracy = kCLLocationAccuracyBest;
-//        _locationManager.distanceFilter = kCLLocationAccuracyNearestTenMeters;
-//    }
-//    return _locationManager;
-//}
-
-//Taken from the AnyWall Parse tutorial
-//- (void)locationManager:(CLLocationManager *)manager
-//    didUpdateToLocation:(CLLocation *)newLocation
-//           fromLocation:(CLLocation *)oldLocation {
-//    self.currentLocation = newLocation;
-//}
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
@@ -76,7 +50,7 @@ NSArray *listings;
     [SVProgressHUD show];
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
         NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-        NSDictionary *amenities = [defaults objectForKey:@"additionalFilters"];
+        NSArray *amenityType = [defaults objectForKey:@"amenityType"];
         NSNumber *price = [defaults objectForKey:@"maxPrice"];
         NSNumber *latitude = [defaults objectForKey:@"latitude"];
         NSNumber *longitude = [defaults objectForKey:@"longitude"];
@@ -84,11 +58,12 @@ NSArray *listings;
         NSDate *endTime = [defaults objectForKey:@"endTime"];
         
         // Get all available listings currently not booked
-        listings = [NewListing getAllAvailableListingsWithAmenities:amenities withTypes:self.spaceType withStartTime:startTime withEndTime:endTime forPrice:price forLongitude:longitude forLatitude:latitude];
+        listings = [NewListing getAllAvailableListingsWithAmenities:amenityType Types:self.spaceType StartTime:startTime EndTime:endTime Price:price Longitude:longitude Latitude:latitude];
         
         // Reset filters
         [defaults removeObjectForKey:@"additionalFilters"];
         [defaults removeObjectForKey:@"maxPrice"];
+        [defaults removeObjectForKey:@"amenityType"];
         
         // Completion block
         dispatch_async(dispatch_get_main_queue(), ^{

@@ -101,12 +101,13 @@
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     if ([segue.identifier isEqualToString:@"ShowAvailableListings"]) {
         ViewController *destViewController = segue.destinationViewController;
+        spaceType = [[NSMutableArray alloc]init];
         
-        // Set space types
-        [spaceType replaceObjectAtIndex:0 withObject:[NSNumber numberWithBool:restButton.selected]];
-        [spaceType replaceObjectAtIndex:1 withObject:[NSNumber numberWithBool:closetButton.selected]];
-        [spaceType replaceObjectAtIndex:2 withObject:[NSNumber numberWithBool:officeButton.selected]];
-        [spaceType replaceObjectAtIndex:3 withObject:[NSNumber numberWithBool:quietButton.selected]];
+        // Set the listing type
+        if (restButton.selected)[spaceType addObject:[NSNumber numberWithInt:rest]];
+        if (closetButton.selected)[spaceType addObject:[NSNumber numberWithInt:closet]];
+        if (officeButton.selected)[spaceType addObject:[NSNumber numberWithInt:office]];
+        if (quietButton.selected)[spaceType addObject:[NSNumber numberWithInt:quiet]];
         destViewController.spaceType = spaceType;
         
         // Set start and end time

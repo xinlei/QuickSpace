@@ -21,14 +21,11 @@
 @synthesize listing;
 @synthesize listingTitle;
 @synthesize bookingsTable;
-//@synthesize listing_id;
-//@synthesize listing_title;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     
     self.navigationItem.title = @"Current Bookings";
-    //listingTitle.text = listing_title;
     listingTitle.text = listing.title;
     [self populateBookings];
 
@@ -52,7 +49,6 @@
             [SVProgressHUD dismiss];
         });
     });
-    NSLog(@"boobs");
 }
 
 
@@ -75,35 +71,29 @@
     NSDateFormatter *formatter = [[NSDateFormatter alloc]init];
     [formatter setDateStyle:NSDateFormatterMediumStyle];
     startDate.text = [formatter stringFromDate:thisBooking.startTime];
+    
     //set start time
     UILabel *startTime = (UILabel *)[cell viewWithTag:1];
     [formatter setDateFormat:@"HH:mm"];
     startTime.text = [formatter stringFromDate:thisBooking.startTime];
+    
     //set end date
     UILabel *endDate = (UILabel *)[cell viewWithTag:2];
     formatter = [[NSDateFormatter alloc]init];
     [formatter setDateStyle:NSDateFormatterMediumStyle];
     endDate.text = [formatter stringFromDate:thisBooking.endTime];
+    
     //set start time
     UILabel *endTime = (UILabel *)[cell viewWithTag:3];
     [formatter setDateFormat:@"HH:mm"];
     endTime.text = [formatter stringFromDate:thisBooking.endTime];
+    
     UILabel *guest = (UILabel *)[cell viewWithTag:4];
-    PFUser *theGuest = thisBooking.guest;
-    [theGuest fetch]; 
-    guest.text = theGuest.username;
+//    PFUser *theGuest = thisBooking.guest;
+//    [theGuest fetch];
+    guest.text = thisBooking.guest.username;
     
     return cell;
 }
-
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
 
 @end
