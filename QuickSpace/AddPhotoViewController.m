@@ -10,7 +10,9 @@
 #import "ConfirmationViewController.h"
 
 @interface AddPhotoViewController ()
+
 @property NSMutableArray *allPhotos;
+
 @end
 
 @implementation AddPhotoViewController
@@ -31,19 +33,17 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    //listing = [NewListing retrieveNewListing];
-    //[listing fetchFromLocalDatastore];
     self.allPhotos = [[NSMutableArray alloc] init];
-    self.imageView.image = [UIImage imageNamed:@"no-image.png"];
+    //self.imageView.image = [UIImage imageNamed:@"no-image.png"];
     if (![UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera]) {
-        
         UIAlertView *noCameraAlert = [[UIAlertView alloc] initWithTitle:@"Error"
-            message:@"Device has no camera"
+            message:@"Unsupported feature. Device has no camera"
             delegate:nil
             cancelButtonTitle:@"OK"
             otherButtonTitles: nil];
         [noCameraAlert show];
     }
+    
 }
 
 - (void)didReceiveMemoryWarning
@@ -51,6 +51,8 @@
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
+
+// Allow the user to take a new photo and add it to the collection
 - (IBAction)takePhoto:(UIButton *)sender {
     if ([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera]) {
         
@@ -62,7 +64,7 @@
         [self presentViewController:picker animated:YES completion:NULL];
     }
 }
-
+// Add a image from the photo library
 - (IBAction)selectButton:(UIButton *)sender {
     if ([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera]) {
         UIImagePickerController *picker = [[UIImagePickerController alloc] init];
@@ -101,11 +103,11 @@
         ConfirmationViewController *destViewController = segue.destinationViewController;
         destViewController.theImage = self.imageView.image;
         
-        if([self.allPhotos count] == 0){
-            NSData *currImage = UIImagePNGRepresentation([UIImage imageNamed:@"no-image.png"]);
-            PFFile *imageFile = [PFFile fileWithName:@"listingImage.png" data:currImage];
-            [self.allPhotos addObject:imageFile];
-        }
+        //if([self.allPhotos count] == 0){
+            //NSData *currImage = UIImagePNGRepresentation([UIImage imageNamed:@"no-image.png"]);
+            //PFFile *imageFile = [PFFile fileWithName:@"listingImage.png" data:currImage];
+            //[self.allPhotos addObject:imageFile];
+        //}
         listing.images = self.allPhotos;
         destViewController.listing = listing;
     }

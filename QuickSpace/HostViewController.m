@@ -39,32 +39,11 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    
     UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc]
                                    initWithTarget:self
                                    action:@selector(dismissKeyboard)];
     [self.view addGestureRecognizer:tap];
-    
-    // Retrieve temporarily created listing
-    listing = [NewListing retrieveNewListing];
-    
-    // Update view with values from the previous listing
-//    if(listing != nil){
-//        if([listing.types containsObject: [NSNumber numberWithInt:rest]])
-//            restButton.selected = YES;
-//        if([listing.types containsObject: [NSNumber numberWithInt:closet]])
-//            closetButton.selected = YES;
-//        if([listing.types containsObject: [NSNumber numberWithInt:office]])
-//            officeButton.selected = YES;
-//        if([listing.types containsObject: [NSNumber numberWithInt:quiet]])
-//            quietButton.selected = YES;
-//        titleTextField.text = listing.title;
-//        descriptionTextField.text = listing.information;
-//        locationTextField.text = listing.address;
-//    } else {
-        listing = [NewListing object];
-//        [listing pin];
-//    }
+    listing = [NewListing object];
 }
 
 - (void)didReceiveMemoryWarning
@@ -79,7 +58,6 @@
     [locationTextField resignFirstResponder];
 }
 
-
 -(BOOL) textFieldShouldReturn:(UITextField *)textField
 {
     [textField resignFirstResponder];
@@ -92,13 +70,14 @@
         bool canSegue = YES;
         NSString *alertText = @"";
         
-        if (!titleTextField || titleTextField.text.length == 0){
-            canSegue = NO;
-            alertText = @"Please name your space.";
-        }
         if (!locationTextField || locationTextField.text.length == 0){
             canSegue = NO;
             alertText = @"Please locate your space.";
+        }
+        
+        if (!titleTextField || titleTextField.text.length == 0){
+            canSegue = NO;
+            alertText = @"Please name your space.";
         }
         if (canSegue)return YES;
         UIAlertView *notPermitted = [[UIAlertView alloc]
@@ -112,7 +91,7 @@
     return NO;
 }
 
-// spacetype buttons
+// Space type buttons
 - (IBAction)restSelected:(id)sender {
     UIButton *button = (UIButton *)sender;
     button.selected = !button.selected;
@@ -140,18 +119,17 @@
     if (closetButton.selected)[listing.types addObject:[NSNumber numberWithInt:closet]];
     if (officeButton.selected)[listing.types addObject:[NSNumber numberWithInt:office]];
     if (quietButton.selected)[listing.types addObject:[NSNumber numberWithInt:quiet]];
-
-    listing.price = 10;
+    
     listing.title = titleTextField.text;
     listing.information = descriptionTextField.text;
     listing.address = locationTextField.text;
     listing.ratingValue = 0;
     listing.totalRaters = 0;
     listing.totalRating= 0;
-
+    listing.price = 10;
+    
     SetLocationViewController *destViewController = segue.destinationViewController;
     destViewController.listing = listing;
-    
 }
 
 

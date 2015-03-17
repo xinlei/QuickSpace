@@ -53,7 +53,7 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     
-    NSLog(@"COUNT: %d", [listing.images count]);
+    //NSLog(@"COUNT: %d", [listing.images count]);
     
     image.image = [UIImage imageWithData: [[listing.images firstObject] getData]];
     addressTextField.text = listing.address;
@@ -127,7 +127,7 @@
     [ListingDetailViewController setItemLocation:quietLabel withPrev:closetSwitch apartBy:5 atX:quietLabel.frame.origin.x];
     [editListingViewController centerLeft:quietLabel inFrame:viewFrame];
     [ListingDetailViewController setItemLocation:quietSwitch withPrev:closetSwitch apartBy:5 atX:mid+1];
-    CGFloat asdf = mid+1;
+    //CGFloat asdf = mid+1;
     //set office
     [ListingDetailViewController setItemLocation:officeLabel withPrev:quietSwitch apartBy:5 atX:officeLabel.frame.origin.x];
     [editListingViewController centerLeft:officeLabel inFrame:viewFrame];
