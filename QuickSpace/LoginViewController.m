@@ -27,7 +27,10 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     canSegue = NO;
-    // Do any additional setup after loading the view.
+    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc]
+                                   initWithTarget:self
+                                   action:@selector(dismissKeyboard)];
+    [self.view addGestureRecognizer:tap];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -76,6 +79,11 @@
             [self showErrorMessage:@"Incorrect Login"];
         }
     }
+}
+
+-(void)dismissKeyboard {
+    [emailTextField resignFirstResponder];
+    [passwordTextField resignFirstResponder];
 }
 
 -(BOOL) textFieldShouldReturn:(UITextField *)textField
