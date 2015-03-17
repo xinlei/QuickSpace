@@ -30,34 +30,8 @@ NSArray *listings;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
-//    [self.locationManager startUpdatingLocation];
-//
-//    CLLocation *location = self.locationManager.location;
-//    if (location) {
-//        self.currentLocation = location;
-//    }
-    self.tableView.rowHeight = 226;
     [self populateListings];
 }
-
-//Taken from the AnyWall Parse tutorial
-//- (CLLocationManager *)locationManager {
-//    if (_locationManager == nil) {
-//        _locationManager = [[CLLocationManager alloc] init];
-//        _locationManager.delegate = self;
-//        _locationManager.desiredAccuracy = kCLLocationAccuracyBest;
-//        _locationManager.distanceFilter = kCLLocationAccuracyNearestTenMeters;
-//    }
-//    return _locationManager;
-//}
-
-//Taken from the AnyWall Parse tutorial
-//- (void)locationManager:(CLLocationManager *)manager
-//    didUpdateToLocation:(CLLocation *)newLocation
-//           fromLocation:(CLLocation *)oldLocation {
-//    self.currentLocation = newLocation;
-//}
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
