@@ -9,6 +9,7 @@
 #import <Parse/Parse.h>
 #import "Listing.h"
 #import "modalPictureViewController.h"
+#import "CancelViewController.h"
 
 @interface ConfirmationViewController ()
 @property NSArray *amenities;
@@ -55,7 +56,6 @@
     CGFloat mid = viewFrame.size.width/2;
     
     //set image
-
     CGRect frame = listingImg.frame;
     frame.origin.x = mid - frame.size.width/2;
     frame.origin.y = 0;
@@ -68,6 +68,10 @@
     
     //set title
     titleText.text = listing.title;
+    
+    // new
+    //CGRect frame = titleText.frame;
+    
     frame = titleText.frame;
     frame.origin.x = mid;
     frame.origin.y = listingImg.frame.origin.y + listingImg.frame.size.height + 10;
@@ -170,10 +174,21 @@
     if ([segue.identifier isEqualToString:@"confirmationModalPics"]){
         modalPictureViewController *destViewController = segue.destinationViewController;
         destViewController.imageFiles = listing.images;
-    } else{
+    }
+    if ([segue.identifier isEqualToString:@"ShowFinalConfirmation"]){
+        CancelViewController *destViewController = segue.destinationViewController;
+    
+        //if([self.allPhotos count] == 0){
+        //NSData *currImage = UIImagePNGRepresentation([UIImage imageNamed:@"no-image.png"]);
+        //PFFile *imageFile = [PFFile fileWithName:@"listingImage.png" data:currImage];
+        //[self.allPhotos addObject:imageFile];
+        //}
+        
+        destViewController.listing = listing;
         listing.lister = [PFUser currentUser];
         [listing pinInBackgroundWithName:@"Listing"];
         [listing save];
+
     }
 }
 

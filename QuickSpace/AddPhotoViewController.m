@@ -34,7 +34,7 @@
 {
     [super viewDidLoad];
     self.allPhotos = [[NSMutableArray alloc] init];
-    //self.imageView.image = [UIImage imageNamed:@"no-image.png"];
+    self.imageView.image = [UIImage imageNamed:@"no-image4.jpg"];
     if (![UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera]) {
         UIAlertView *noCameraAlert = [[UIAlertView alloc] initWithTitle:@"Error"
             message:@"Unsupported feature. Device has no camera"
@@ -52,7 +52,7 @@
     // Dispose of any resources that can be recreated.
 }
 
-// Allow the user to take a new photo and add it to the collection
+// Allow the user to take a new photo
 - (IBAction)takePhoto:(UIButton *)sender {
     if ([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera]) {
         
@@ -76,6 +76,7 @@
     }
 }
 
+// Add new photo to the collection
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info {
     
     UIImage *chosenImage = info[UIImagePickerControllerEditedImage];
@@ -98,16 +99,14 @@
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
-
+    if([self.allPhotos count] == 0){
+        NSData *currImage = UIImagePNGRepresentation([UIImage imageNamed:@"no-image4.jpg"]);
+        PFFile *imageFile = [PFFile fileWithName:@"listingImage.png" data:currImage];
+        [self.allPhotos addObject:imageFile];
+    }
     if ([segue.identifier isEqualToString:@"ShowAddBookingConfirmation"]){
         ConfirmationViewController *destViewController = segue.destinationViewController;
         destViewController.theImage = self.imageView.image;
-        
-        //if([self.allPhotos count] == 0){
-            //NSData *currImage = UIImagePNGRepresentation([UIImage imageNamed:@"no-image.png"]);
-            //PFFile *imageFile = [PFFile fileWithName:@"listingImage.png" data:currImage];
-            //[self.allPhotos addObject:imageFile];
-        //}
         listing.images = self.allPhotos;
         destViewController.listing = listing;
     }

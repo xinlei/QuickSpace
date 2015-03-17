@@ -33,10 +33,7 @@
 }
 
 - (IBAction)cancelButton:(id)sender {
-    listing = [NewListing retrieveNewListing];
-    [listing fetchFromLocalDatastore];
-    [NewListing cancelListingForHost:[listing objectId]];
-    
+    [listing delete];
     [self.navigationController popToRootViewControllerAnimated:YES];
 }
 @end
