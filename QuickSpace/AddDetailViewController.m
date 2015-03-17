@@ -35,6 +35,10 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc]
+                                   initWithTarget:self
+                                   action:@selector(dismissKeyboard)];
+    [self.view addGestureRecognizer:tap];
     priceTextField.text = [@(listing.price) stringValue];
 }
 
@@ -85,5 +89,14 @@
     destViewController.listing = listing;
 }
 
+- (void) dismissKeyboard {
+    [priceTextField resignFirstResponder];
+}
+
+-(BOOL) textFieldShouldReturn:(UITextField *)textField
+{
+    [textField resignFirstResponder];
+    return YES;
+}
 
 @end

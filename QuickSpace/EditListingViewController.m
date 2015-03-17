@@ -51,6 +51,10 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc]
+                                   initWithTarget:self
+                                   action:@selector(dismissKeyboard)];
+    [self.view addGestureRecognizer:tap];
     // Do any additional setup after loading the view.
     
     //NSLog(@"COUNT: %d", [listing.images count]);
@@ -180,6 +184,12 @@
     
     //resize scrollview frame
     scrollView.contentSize = CGSizeMake(self.view.frame.size.width, saveButton.frame.size.height + saveButton.frame.origin.y);
+}
+
+- (void) dismissKeyboard {
+    [titleText resignFirstResponder];
+    [descriptionTextField resignFirstResponder];
+    [addressTextField resignFirstResponder];
 }
 
 - (IBAction)saveButtonClick:(id)sender {

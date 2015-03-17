@@ -10,7 +10,8 @@
 #import "Listing.h"
 #import "NewListing.h"
 
-@interface AddDetailViewController : UIViewController
+@interface AddDetailViewController : UIViewController<UITextFieldDelegate>
+
 @property (weak, nonatomic) IBOutlet UISwitch *wifiSwitch;
 @property (weak, nonatomic) IBOutlet UISwitch *refrigeratorSwitch;
 @property (weak, nonatomic) IBOutlet UISwitch *studyDeskSwitch;
