@@ -77,7 +77,7 @@
     [query whereKey:@"objectId" notContainedIn:excludedListings];
     
     // Limit to 30 mile radius
-    [query whereKey:@"location" nearGeoPoint:discoverLocation withinMiles:30];
+    [query whereKey:@"location" nearGeoPoint:discoverLocation withinMiles:25];
     
     // Check amenities
     if([amenityType count] > 0)
