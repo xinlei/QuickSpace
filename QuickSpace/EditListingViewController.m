@@ -220,9 +220,9 @@
 
 }
 
--(void) deletePic:(){
+//-(void) deletePic:(){
     
-}
+//}
 
 -(void) keyboardWillShow:(NSNotification *)n {
     NSDictionary *userInfo = [n userInfo];
