@@ -27,7 +27,8 @@
         MKPointAnnotation *point = [[MKPointAnnotation alloc] init];
         [point setCoordinate:coordinate];
         [point setTitle:listing.title];
-        [point setSubtitle:[NSString stringWithFormat:@"%d", listing.price]];
+        [point setSubtitle:[NSString stringWithFormat:@"Hourly Rate: $%d", listing.price]];
+        //point.
         [myMapView addAnnotation:point];
     }
     [myMapView showAnnotations:myMapView.annotations animated:YES];
@@ -37,6 +38,11 @@
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
+
+- (void)mapView:(MKMapView *)mapView annotationView:(MKAnnotationView *)view calloutAccessoryControlTapped:(UIControl *)control{
+    [self performSegueWithIdentifier:@"ShowListingDetail" sender:view];
+}
+
 - (IBAction)dismissView:(UIButton *)sender {
     [self dismissViewControllerAnimated:YES completion:nil];
 }

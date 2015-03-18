@@ -51,6 +51,8 @@
 @synthesize priceLabel;
 @synthesize priceTextField;
 
+#define tabBarHeight 49
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc]
@@ -202,23 +204,19 @@
 
 -(void) keyboardWillShow:(NSNotification *)n {
     NSDictionary *userInfo = [n userInfo];
-    CGFloat keyboardSize = [[userInfo objectForKey:UIKeyboardFrameBeginUserInfoKey] CGRectValue].size.height;
-    CGRect frame = self.scrollView.frame;
-    frame.size.height -= keyboardSize;
+    CGFloat keyboardHeight = [[userInfo objectForKey:UIKeyboardFrameBeginUserInfoKey] CGRectValue].size.height;
     [UIView beginAnimations:nil context:NULL];
     [UIView setAnimationBeginsFromCurrentState:YES];
-    [self.scrollView setFrame:frame];
+    self.view.frame = CGRectOffset(self.view.frame, 0, -(keyboardHeight - tabBarHeight));
     [UIView commitAnimations];
 }
 
 -(void) keyboardWillHide:(NSNotification *)n {
     NSDictionary *userInfo = [n userInfo];
-    CGFloat keyboardSize = [[userInfo objectForKey:UIKeyboardFrameBeginUserInfoKey] CGRectValue].size.height;
-    CGRect frame = self.scrollView.frame;
-    frame.size.height += keyboardSize;
+    CGFloat keyboardHeight = [[userInfo objectForKey:UIKeyboardFrameBeginUserInfoKey] CGRectValue].size.height;
     [UIView beginAnimations:nil context:NULL];
     [UIView setAnimationBeginsFromCurrentState:YES];
-    [self.scrollView setFrame:frame];
+    self.view.frame = CGRectOffset(self.view.frame, 0, keyboardHeight - tabBarHeight);
     [UIView commitAnimations];
 }
 
@@ -272,37 +270,24 @@
     if (officeSwitch.on)[listing.types addObject:[NSNumber numberWithInt:office]];
     if (quietSwitch.on)[listing.types addObject:[NSNumber numberWithInt:quiet]];
     
-    NSCharacterSet* notDigits = [[NSCharacterSet decimalDigitCharacterSet] invertedSet];
-    NSString *error = [[NSString alloc] init];
-    if ([priceTextField.text rangeOfCharacterFromSet:notDigits].location != NSNotFound || [priceTextField.text length] == 0){
-        error = @"Price must be a whole number";
-    } else if ([priceTextField.text intValue] < 0 || [priceTextField.text intValue] > 500){
-        error = @"Set price between 0-500";
-    } else {
-        [listing save];
-        [self.navigationController popToRootViewControllerAnimated:YES];
-    }
-    UIAlertView *notPermitted = [[UIAlertView alloc]
+    NSString *error = nil;
+    if ([NewListing isValidPrice:priceTextField.text] != nil)
+        error = [NewListing isValidPrice:priceTextField.text];
+    if([NewListing isValidAddress:addressTextField.text] != nil)
+        error = [NewListing isValidAddress:addressTextField.text];
+    if (error){
+        UIAlertView *notPermitted = [[UIAlertView alloc]
                                  initWithTitle:@"Error"
                                  message:error
                                  delegate:nil
                                  cancelButtonTitle:@"OK"
                                  otherButtonTitles:nil];
     
-    [notPermitted show];
-
-
-    //[newListing saveInBackground];
-    //[newListing pinWithName:@"Listing"];
-    
-//        dispatch_async(dispatch_get_main_queue(), ^{
-//            [SVProgressHUD dismiss];
-//            NSLog(@"Hey");
-    
-//        });
-
-//    });
-    //NSLog(@"Ho");
+        [notPermitted show];
+    } else {
+        [listing save];
+        [self.navigationController popToRootViewControllerAnimated:YES];
+    }
     
 }
 
@@ -322,38 +307,8 @@
 
 -(BOOL) textFieldShouldReturn:(UITextField *)textField
 {
-    if(textField == titleText) {
-        [addressTextField becomeFirstResponder];
-    } else if (textField == addressTextField){
-        [descriptionTextField becomeFirstResponder];
-    } else
-        [textField resignFirstResponder];
-    return NO;
-}
-
-- (BOOL)shouldPerformSegueWithIdentifier:(NSString *)identifier sender:(id)sender{
-    NSCharacterSet* notDigits = [[NSCharacterSet decimalDigitCharacterSet] invertedSet];
-    bool isPermitted = YES;
-    NSString *error = [[NSString alloc] init];
-    if ([priceTextField.text rangeOfCharacterFromSet:notDigits].location != NSNotFound || [priceTextField.text length] == 0){
-        error = @"Price must be a whole number";
-        isPermitted = NO;
-    } else if ([priceTextField.text intValue] < 0 || [priceTextField.text intValue] > 500){
-        isPermitted = NO;
-        error = @"Set price between 0-500";
-    } else {
-        isPermitted = YES;
-        return isPermitted;
-    }
-    UIAlertView *notPermitted = [[UIAlertView alloc]
-                                 initWithTitle:@"Error"
-                                 message:error
-                                 delegate:nil
-                                 cancelButtonTitle:@"OK"
-                                 otherButtonTitles:nil];
-    
-    [notPermitted show];
-    return isPermitted;
+    [textField resignFirstResponder];
+    return YES;
 }
 
 @end

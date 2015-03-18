@@ -69,7 +69,7 @@
             //}
         } else {
             canSegue = NO;
-            [self showErrorMessage:@"Incorrect Login"];
+            [self showErrorMessage:@"Invalid Login"];
         }
     }
 }
@@ -82,12 +82,8 @@
 
 -(BOOL) textFieldShouldReturn:(UITextField *)textField
 {
-    if(textField == emailTextField) {
-        [passwordTextField becomeFirstResponder];
-    } else if (textField == passwordTextField) {
-        [textField resignFirstResponder];
-    }
-    return NO;
+    [textField resignFirstResponder];
+    return YES;
 }
 
 -(BOOL)shouldPerformSegueWithIdentifier:(NSString *)identifier sender:(id)sender{
@@ -98,7 +94,7 @@
 }
 
 - (void)showErrorMessage: (NSString *) message {
-    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:message message:@"Try Again" delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles: nil];
+    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:message message:@"" delegate:nil cancelButtonTitle:@"Try Again" otherButtonTitles: nil];
     [alert show];
 }
 

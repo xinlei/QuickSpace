@@ -22,7 +22,8 @@
 @synthesize servicesSwitch;
 @synthesize priceTextField;
 @synthesize listing;
-@synthesize scrollView;
+
+#define tabBarHeight 49 // 50 if its before iOS 8.0
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -42,9 +43,7 @@
     [self.view addGestureRecognizer:tap];
     priceTextField.text = [@(listing.price) stringValue];
     
-    scrollView.frame = self.view.frame;
-    scrollView.contentSize = CGSizeMake(self.view.frame.size.width, self.view.frame.size.height + 300);
-    
+ 
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillShow:) name:UIKeyboardWillShowNotification object:self.view.window];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillHide:) name:UIKeyboardWillHideNotification object:self.view.window];
 }
@@ -57,23 +56,21 @@
 
 -(void) keyboardWillShow:(NSNotification *)n {
     NSDictionary *userInfo = [n userInfo];
-    CGFloat keyboardSize = [[userInfo objectForKey:UIKeyboardFrameBeginUserInfoKey] CGRectValue].size.height;
-    CGRect frame = scrollView.frame;
-    frame.size.height -= keyboardSize;
+    CGFloat keyboardHeight = [[userInfo objectForKey:UIKeyboardFrameBeginUserInfoKey] CGRectValue].size.height;
     [UIView beginAnimations:nil context:NULL];
     [UIView setAnimationBeginsFromCurrentState:YES];
-    [scrollView setFrame:frame];
+    [UIView setAnimationDuration:0.3f];
+    self.view.frame = CGRectOffset(self.view.frame, 0, -(keyboardHeight - tabBarHeight));
     [UIView commitAnimations];
 }
 
 -(void) keyboardWillHide:(NSNotification *)n {
     NSDictionary *userInfo = [n userInfo];
-    CGFloat keyboardSize = [[userInfo objectForKey:UIKeyboardFrameBeginUserInfoKey] CGRectValue].size.height;
-    CGRect frame = scrollView.frame;
-    frame.size.height += keyboardSize;
+    CGFloat keyboardHeight = [[userInfo objectForKey:UIKeyboardFrameBeginUserInfoKey] CGRectValue].size.height;
     [UIView beginAnimations:nil context:NULL];
     [UIView setAnimationBeginsFromCurrentState:YES];
-    [scrollView setFrame:frame];
+    [UIView setAnimationDuration:0.3f];
+    self.view.frame = CGRectOffset(self.view.frame, 0, keyboardHeight - tabBarHeight);
     [UIView commitAnimations];
 }
 

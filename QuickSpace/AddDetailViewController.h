@@ -7,7 +7,6 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "Listing.h"
 #import "NewListing.h"
 
 @interface AddDetailViewController : UIViewController<UITextFieldDelegate>
@@ -20,5 +19,4 @@
 @property (weak, nonatomic) IBOutlet UITextField *priceTextField;
 @property (nonatomic, strong) NewListing *listing;
 
-@property (weak, nonatomic) UIScrollView *scrollView;
 @end

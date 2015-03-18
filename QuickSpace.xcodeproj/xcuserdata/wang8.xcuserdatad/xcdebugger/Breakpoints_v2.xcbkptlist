@@ -818,7 +818,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "QuickSpace/ListingMapViewController.m"
-            timestampString = "446974836.645599"
+            timestampString = "448341079.805699"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "30"
@@ -834,11 +834,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "QuickSpace/ListingMapViewController.m"
-            timestampString = "446974836.645599"
+            timestampString = "448344041.474088"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "41"
-            endingLineNumber = "41"
+            startingLineNumber = "47"
+            endingLineNumber = "47"
             landmarkName = "-dismissView:"
             landmarkType = "5">
          </BreakpointContent>
@@ -903,7 +903,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "78"
             endingLineNumber = "78"
-            landmarkName = "-prepareForSegue:sender:"
+            landmarkName = "-keyboardWillHide:"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -919,7 +919,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "78"
             endingLineNumber = "78"
-            landmarkName = "-prepareForSegue:sender:"
+            landmarkName = "-keyboardWillHide:"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -1090,11 +1090,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "QuickSpace/NewListing.h"
-            timestampString = "448258054.735866"
+            timestampString = "448344041.474088"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "38"
-            endingLineNumber = "38"
+            startingLineNumber = "37"
+            endingLineNumber = "37"
             landmarkName = "+getAllAvailableListingsWithAmenities:Types:StartTime:EndTime:Price:Longitude:Latitude:"
             landmarkType = "4">
          </BreakpointContent>
@@ -1256,6 +1256,54 @@
             startingLineNumber = "219"
             endingLineNumber = "219"
             landmarkName = "-tableView:cellForRowAtIndexPath:"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "QuickSpace/NewListing.m"
+            timestampString = "448345968.187297"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "158"
+            endingLineNumber = "158"
+            landmarkName = "+isValidAddress:"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "QuickSpace/EditListingViewController.m"
+            timestampString = "448345968.187297"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "278"
+            endingLineNumber = "278"
+            landmarkName = "-saveButtonClick:"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "QuickSpace/EditListingViewController.m"
+            timestampString = "448346037.100403"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "280"
+            endingLineNumber = "280"
+            landmarkName = "-saveButtonClick:"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
