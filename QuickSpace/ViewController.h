@@ -13,7 +13,6 @@
 
 @property (weak, nonatomic) IBOutlet UISegmentedControl *viewSwitcher;
 @property (nonatomic, strong) IBOutlet UITableView * tableView;
-@property (strong, nonatomic) NSMutableArray *spaceType;
 
 -(void) populateListings;
 @end

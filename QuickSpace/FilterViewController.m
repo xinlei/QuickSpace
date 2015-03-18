@@ -100,20 +100,21 @@
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     if ([segue.identifier isEqualToString:@"ShowAvailableListings"]) {
-        ViewController *destViewController = segue.destinationViewController;
-        spaceType = [[NSMutableArray alloc]init];
-        
-        // Set the listing type
-        if (restButton.selected)[spaceType addObject:[NSNumber numberWithInt:rest]];
-        if (closetButton.selected)[spaceType addObject:[NSNumber numberWithInt:closet]];
-        if (officeButton.selected)[spaceType addObject:[NSNumber numberWithInt:office]];
-        if (quietButton.selected)[spaceType addObject:[NSNumber numberWithInt:quiet]];
-        destViewController.spaceType = spaceType;
         
         // Set start and end time
         NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
         [defaults setObject:startPicker.date forKey:@"startTime"];
         [defaults setObject:endPicker.date forKey:@"endTime"];
+        
+        // Set the listing type
+        spaceType = [[NSMutableArray alloc]init];
+        
+        if (restButton.selected)[spaceType addObject:[NSNumber numberWithInt:rest]];
+        if (closetButton.selected)[spaceType addObject:[NSNumber numberWithInt:closet]];
+        if (officeButton.selected)[spaceType addObject:[NSNumber numberWithInt:office]];
+        if (quietButton.selected)[spaceType addObject:[NSNumber numberWithInt:quiet]];
+        [defaults setObject:spaceType forKey:@"spaceTypes"];
+
     }
 }
 

@@ -61,6 +61,7 @@
     [defaults removeObjectForKey:@"newListingPrice"];
     [defaults removeObjectForKey:@"Latitude"];
     [defaults removeObjectForKey:@"Longitude"];
+    [defaults removeObjectForKey:@"spaceTypes"];
     [PFObject unpinAllObjects];
     [PFUser logOut];
     

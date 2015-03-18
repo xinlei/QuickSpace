@@ -56,9 +56,10 @@ NSArray *listings;
         NSNumber *longitude = [defaults objectForKey:@"longitude"];
         NSDate *startTime = [defaults objectForKey:@"startTime"];
         NSDate *endTime = [defaults objectForKey:@"endTime"];
+        NSArray *spaceType = [defaults objectForKey:@"spaceTypes"];
         
         // Get all available listings currently not booked
-        listings = [NewListing getAllAvailableListingsWithAmenities:amenityType Types:self.spaceType StartTime:startTime EndTime:endTime Price:price Longitude:longitude Latitude:latitude];
+        listings = [NewListing getAllAvailableListingsWithAmenities:amenityType Types:spaceType StartTime:startTime EndTime:endTime Price:price Longitude:longitude Latitude:latitude];
         
         // Reset filters
         [defaults removeObjectForKey:@"additionalFilters"];
