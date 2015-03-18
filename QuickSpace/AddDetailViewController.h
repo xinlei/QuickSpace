@@ -19,4 +19,6 @@
 @property (weak, nonatomic) IBOutlet UISwitch *servicesSwitch;
 @property (weak, nonatomic) IBOutlet UITextField *priceTextField;
 @property (nonatomic, strong) NewListing *listing;
+
+@property (weak, nonatomic) UIScrollView *scrollView;
 @end

@@ -22,6 +22,7 @@
 @synthesize servicesSwitch;
 @synthesize priceTextField;
 @synthesize listing;
+@synthesize scrollView;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -40,12 +41,40 @@
                                    action:@selector(dismissKeyboard)];
     [self.view addGestureRecognizer:tap];
     priceTextField.text = [@(listing.price) stringValue];
+    
+    scrollView.frame = self.view.frame;
+    scrollView.contentSize = CGSizeMake(self.view.frame.size.width, self.view.frame.size.height + 300);
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillShow:) name:UIKeyboardWillShowNotification object:self.view.window];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillHide:) name:UIKeyboardWillHideNotification object:self.view.window];
 }
 
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+-(void) keyboardWillShow:(NSNotification *)n {
+    NSDictionary *userInfo = [n userInfo];
+    CGFloat keyboardSize = [[userInfo objectForKey:UIKeyboardFrameBeginUserInfoKey] CGRectValue].size.height;
+    CGRect frame = scrollView.frame;
+    frame.size.height -= keyboardSize;
+    [UIView beginAnimations:nil context:NULL];
+    [UIView setAnimationBeginsFromCurrentState:YES];
+    [scrollView setFrame:frame];
+    [UIView commitAnimations];
+}
+
+-(void) keyboardWillHide:(NSNotification *)n {
+    NSDictionary *userInfo = [n userInfo];
+    CGFloat keyboardSize = [[userInfo objectForKey:UIKeyboardFrameBeginUserInfoKey] CGRectValue].size.height;
+    CGRect frame = scrollView.frame;
+    frame.size.height += keyboardSize;
+    [UIView beginAnimations:nil context:NULL];
+    [UIView setAnimationBeginsFromCurrentState:YES];
+    [scrollView setFrame:frame];
+    [UIView commitAnimations];
 }
 
 - (BOOL)shouldPerformSegueWithIdentifier:(NSString *)identifier sender:(id)sender{

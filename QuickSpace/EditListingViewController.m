@@ -194,32 +194,34 @@
     
     //resize scrollview frame
     scrollView.contentSize = CGSizeMake(self.view.frame.size.width, saveButton.frame.size.height + saveButton.frame.origin.y);
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillShow:) name:UIKeyboardWillShowNotification object:self.view.window];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillHide:) name:UIKeyboardWillHideNotification object:self.view.window];
+
 }
 
--(void) textFieldDidBeginEditing:(UITextField *)textField {
-    if([textField isEqual:descriptionTextField])
-        [self move_up:YES];
-}
-
--(void) textFieldDidEndEditing:(UITextField *)textField{
-    if([textField isEqual:descriptionTextField])
-        [self move_up:NO];
-}
-
--(void) move_up:(BOOL) up{
-
-    int dist = 264;
+-(void) keyboardWillShow:(NSNotification *)n {
+    NSDictionary *userInfo = [n userInfo];
+    CGFloat keyboardSize = [[userInfo objectForKey:UIKeyboardFrameBeginUserInfoKey] CGRectValue].size.height;
     CGRect frame = self.scrollView.frame;
-    if (up)
-        frame.size.height += dist;
-    else
-        frame.size.height -= dist;
+    frame.size.height -= keyboardSize;
     [UIView beginAnimations:nil context:NULL];
     [UIView setAnimationBeginsFromCurrentState:YES];
     [self.scrollView setFrame:frame];
     [UIView commitAnimations];
-    
 }
+
+-(void) keyboardWillHide:(NSNotification *)n {
+    NSDictionary *userInfo = [n userInfo];
+    CGFloat keyboardSize = [[userInfo objectForKey:UIKeyboardFrameBeginUserInfoKey] CGRectValue].size.height;
+    CGRect frame = self.scrollView.frame;
+    frame.size.height += keyboardSize;
+    [UIView beginAnimations:nil context:NULL];
+    [UIView setAnimationBeginsFromCurrentState:YES];
+    [self.scrollView setFrame:frame];
+    [UIView commitAnimations];
+}
+
 
 - (void) dismissKeyboard {
     [titleText resignFirstResponder];
