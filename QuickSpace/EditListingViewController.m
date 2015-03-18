@@ -11,7 +11,7 @@
 #import "SVProgressHUD.h"
 #import "Amenity.h"
 #import "Type.h"
-//#import "deletePicsViewController.h"
+#import "addPicsViewController.h"
 
 @interface editListingViewController ()
 
@@ -81,17 +81,17 @@
         [deleteButton setImage:[UIImage imageNamed:@"trash_can.png"] forState:UIControlStateNormal];
         [deleteButton addTarget:self action:@selector(deleteButtonClick:) forControlEvents:UIControlEventTouchUpInside];
         
-        UIButton *addButton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
-        [addButton setFrame:CGRectMake(myOrigin + 12, 12, 36, 36)];
-        [addButton setImage:[UIImage imageNamed:@"add_button.png"] forState:UIControlStateNormal];
-        [addButton addTarget:self action:@selector(addButtonClick:) forControlEvents:UIControlEventTouchUpInside];
+//        UIButton *addButton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
+//        [addButton setFrame:CGRectMake(myOrigin + 12, 12, 36, 36)];
+//        [addButton setImage:[UIImage imageNamed:@"add_button.png"] forState:UIControlStateNormal];
+//        [addButton addTarget:self action:@selector(addButtonClick:) forControlEvents:UIControlEventTouchUpInside];
         
         UIImageView *image = [[UIImageView alloc] initWithFrame:CGRectMake(myOrigin, 0, self.view.frame.size.width, self.view.frame.size.width)];
         image.image = [UIImage imageWithData:[[listing.images objectAtIndex:i] getData]];
         
         picScrollView.delegate = self;
         [picScrollView addSubview:image];
-        [picScrollView addSubview:addButton];
+//        [picScrollView addSubview:addButton];
         [picScrollView addSubview:deleteButton];
     }
     
@@ -358,13 +358,15 @@
 }
 
 -(void) prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender{
-    if([segue.identifier isEqualToString:@"viewPic"]){
-        /*
-        deletePicsViewController *destViewController = segue.destinationViewController;
-        destViewController.pic = [UIImage imageWithData: [[listing.images objectAtIndex:pageNumber] getData]];
+    if([segue.identifier isEqualToString:@"addPics"]){
+        
+        addPicsViewController *destViewController = segue.destinationViewController;
+        
+        // destViewController.pic = [UIImage imageWithData: [[listing.images objectAtIndex:pageNumber] getData]]; */
+        
         destViewController.listing = listing;
-        destViewController.index = pageNumber;
-    */
+        
+        //destViewController.index = pageNumber;
     }
 }
 @end
