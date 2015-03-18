@@ -43,9 +43,7 @@
 - (IBAction)sliderValueChanged:(UISlider *)sender {
     self.priceLabel.text = [NSString stringWithFormat:@"$%d", (int)sender.value];
 }
-
--(void) prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender{
-    
+- (IBAction)onSubmit:(UIButton *)sender {
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     
     NSMutableArray *amenityType = [[NSMutableArray alloc] init];
@@ -57,7 +55,11 @@
     
     [defaults setObject:amenityType forKey:@"amenityType"];
     [defaults setInteger:(int)self.priceSlider.value forKey:@"maxPrice"];
+    [self dismissViewControllerAnimated:YES completion:nil];
 }
 
+- (IBAction)onCancel:(UIButton *)sender {
+    [self dismissViewControllerAnimated:YES completion:nil];
+}
 
 @end

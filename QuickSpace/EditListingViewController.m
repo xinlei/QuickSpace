@@ -270,6 +270,7 @@
     if (officeSwitch.on)[listing.types addObject:[NSNumber numberWithInt:office]];
     if (quietSwitch.on)[listing.types addObject:[NSNumber numberWithInt:quiet]];
     
+    // Check to ensure that the price and address are valid
     NSString *error = nil;
     if ([NewListing isValidPrice:priceTextField.text] != nil)
         error = [NewListing isValidPrice:priceTextField.text];
