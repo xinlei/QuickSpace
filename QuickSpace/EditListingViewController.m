@@ -19,6 +19,7 @@
 
 @implementation editListingViewController{
     int pageNumber;
+    NSMutableArray *set;
 }
 
 @synthesize picScrollView;
@@ -66,6 +67,7 @@
 //                                      action:@selector(showPic:)];
 //    [picScrollView addGestureRecognizer:picTap];
     
+    set = [[NSMutableArray alloc] initWithArray:listing.images];
     [self loadPage];
 }
 
@@ -73,7 +75,7 @@
     // Set up side scroll for pictures
     picScrollView.frame = CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.width);
     picScrollView.pagingEnabled = YES;
-    for(int i = 0; i < listing.images.count; i++){
+    for(int i = 0; i < set.count; i++){
         CGFloat myOrigin = i*self.view.frame.size.width;
         
         UIButton *deleteButton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
@@ -87,7 +89,7 @@
 //        [addButton addTarget:self action:@selector(addButtonClick:) forControlEvents:UIControlEventTouchUpInside];
         
         UIImageView *image = [[UIImageView alloc] initWithFrame:CGRectMake(myOrigin, 0, self.view.frame.size.width, self.view.frame.size.width)];
-        image.image = [UIImage imageWithData:[[listing.images objectAtIndex:i] getData]];
+        image.image = [UIImage imageWithData:[[set objectAtIndex:i] getData]];
         
         picScrollView.delegate = self;
         [picScrollView addSubview:image];
@@ -95,7 +97,7 @@
         [picScrollView addSubview:deleteButton];
     }
     
-    picScrollView.contentSize = CGSizeMake(self.view.frame.size.width * listing.images.count, self.view.frame.size.width);
+    picScrollView.contentSize = CGSizeMake(self.view.frame.size.width * set.count, self.view.frame.size.width);
     
     addressTextField.text = listing.address;
     titleText.text = listing.title;
@@ -282,15 +284,13 @@
 }
 
 -(void) deleteButtonClick:(id) sender{
-    NSMutableArray *set = [[NSMutableArray alloc] initWithArray:listing.images];
+
     [set removeObjectAtIndex:pageNumber];
     if (set.count == 0){
         NSData *currImage = UIImagePNGRepresentation([UIImage imageNamed:@"no-image4.jpg"]);
         PFFile *imageFile = [PFFile fileWithName:@"listingImage.png" data:currImage];
         [set addObject: imageFile];
     }
-    listing.images = set;
-    [listing save];
     [self loadPage];
 }
 
@@ -307,6 +307,7 @@
     listing.information = descriptionTextField.text;
     [listing.amenities removeAllObjects];
     [listing.types removeAllObjects];
+    listing.images = set;
     
     if(wifiSwitch.on)[listing.amenities addObject:[NSNumber numberWithInt:wifi]];
     if(fridgeSwitch.on)[listing.amenities addObject:[NSNumber numberWithInt:refrigerator]];
@@ -359,14 +360,8 @@
 
 -(void) prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender{
     if([segue.identifier isEqualToString:@"addPics"]){
-        
         addPicsViewController *destViewController = segue.destinationViewController;
-        
-        // destViewController.pic = [UIImage imageWithData: [[listing.images objectAtIndex:pageNumber] getData]]; */
-        
         destViewController.listing = listing;
-        
-        //destViewController.index = pageNumber;
     }
 }
 @end
