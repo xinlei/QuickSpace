@@ -157,15 +157,16 @@
 - (void) refreshTableData {
     [SVProgressHUD show];
     PFUser *currentUser = [PFUser currentUser];
-    //NSDate *now = [NSDate date];
+    NSDate *now = [NSDate date];
     if (listingSegments.selectedSegmentIndex == 0){
         
+        /*
         PFQuery *query = [Booking query];
         [query whereKey:@"rating" lessThanOrEqualTo:@0];
         [query whereKey:@"guest" equalTo:currentUser];
         bookings = [query findObjects];
+        */
         
-        /*
         PFQuery *notExpired = [Booking query];
         [notExpired whereKey:@"guest" equalTo:currentUser];
         [notExpired whereKey:@"endTime" greaterThan:now];
@@ -176,11 +177,11 @@
         
         PFQuery *query = [PFQuery orQueryWithSubqueries:@[noRatings,notExpired]];
         bookings = [query findObjects];
-        */
+        
     } else {
         PFQuery *query = [NewListing query];
         [query whereKey:@"lister" equalTo:currentUser];
-        [query fromPinWithName:@"Listing"];
+        //[query fromPinWithName:@"Listing"];
         userListings = [query findObjects];
     }
     [self.listingTable reloadData];

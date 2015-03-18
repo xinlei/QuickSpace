@@ -38,17 +38,18 @@
 
 -(void) populateBookings
 {
-    bookings = [[NSArray alloc] init];
     [SVProgressHUD show];
-//    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
         PFQuery *findListingBookings = [Booking query];
+    
         [findListingBookings whereKey:@"listing" equalTo:listing];
         bookings = [findListingBookings findObjects];
-    //    dispatch_async(dispatch_get_main_queue(), ^{
+
+        dispatch_async(dispatch_get_main_queue(), ^{
             [self.bookingsTable reloadData];
-//            [SVProgressHUD dismiss];
-    //    });
-  //  });
+            [SVProgressHUD dismiss];
+        });
+    });
 }
 
 
@@ -89,8 +90,8 @@
     endTime.text = [formatter stringFromDate:thisBooking.endTime];
     
     UILabel *guest = (UILabel *)[cell viewWithTag:4];
-//    PFUser *theGuest = thisBooking.guest;
-//    [theGuest fetch];
+    PFUser *theGuest = thisBooking.guest;
+    [theGuest fetch];
     guest.text = thisBooking.guest.username;
     
     return cell;
