@@ -41,9 +41,13 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-//    userListings = [[NSMutableArray alloc] init];
-
     [self refreshTableData];
+}
+
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    [self refreshTableData];
+    [self.listingTable reloadData];
 }
 
 - (void)didReceiveMemoryWarning
