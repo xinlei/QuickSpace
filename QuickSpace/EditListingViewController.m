@@ -48,6 +48,8 @@
 @synthesize saveButton;
 @synthesize scrollView;
 @synthesize listing;
+@synthesize priceLabel;
+@synthesize priceTextField;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -62,6 +64,7 @@
     image.image = [UIImage imageWithData: [[listing.images firstObject] getData]];
     addressTextField.text = listing.address;
     titleText.text = listing.title;
+    priceTextField.text = [@(listing.price) stringValue];
  
     // update the description
     NSString *descripString = listing.information;
@@ -110,12 +113,19 @@
     titleText.frame = frame;
     [ListingDetailViewController setItemLocation:titleText withPrev:image apartBy:10 atX:titleText.frame.origin.x];
     
+    [ListingDetailViewController setItemLocation:priceLabel withPrev:titleText apartBy:15 atX:priceLabel.frame.origin.x];
+    frame = priceTextField.frame;
+    frame.size.width = viewFrame.size.width - frame.origin.x - 8;
+    priceTextField.frame = frame;
+    [ListingDetailViewController setItemLocation:priceTextField withPrev:titleText apartBy:15 atX:priceTextField.frame.origin.x];
+
+    
     //set address
-    [ListingDetailViewController setItemLocation:addressLabel withPrev:titleText apartBy:15 atX:addressLabel.frame.origin.x];
+    [ListingDetailViewController setItemLocation:addressLabel withPrev:priceTextField apartBy:15 atX:addressLabel.frame.origin.x];
     frame = addressTextField.frame;
     frame.size.width = viewFrame.size.width - frame.origin.x - 8;
     addressTextField.frame = frame;
-    [ListingDetailViewController setItemLocation:addressTextField withPrev:titleText apartBy:15 atX:addressTextField.frame.origin.x];
+    [ListingDetailViewController setItemLocation:addressTextField withPrev:priceTextField apartBy:15 atX:addressTextField.frame.origin.x];
     
     //set spacetype
     [ListingDetailViewController setItemLocation:typeLabel withPrev:addressTextField apartBy:15 atX:typeLabel.frame.origin.x];
@@ -194,6 +204,7 @@
 
 - (IBAction)saveButtonClick:(id)sender {
     
+    /*
     NewListing *newListing = [[NewListing alloc] init];
     newListing.images = listing.images;
     newListing.price = listing.price;
@@ -201,44 +212,70 @@
     newListing.totalRating = listing.totalRating;
     newListing.totalRaters = listing.totalRaters;
     newListing.location = listing.location;
-    
-    [listing fetchFromLocalDatastore];
+    */
+    //[listing fetchFromLocalDatastore];
 //    [listing unpinInBackgroundWithName:@"Listing"];
-    [listing deleteInBackground];
-    
+    //[listing deleteInBackground];
+    /*
     newListing.title = titleText.text;
     newListing.address = addressTextField.text;
     newListing.information = descriptionTextField.text;
     newListing.amenities = [[NSMutableArray alloc] init];
     newListing.types = [[NSMutableArray alloc] init];
     newListing.lister = [PFUser currentUser];
+*/
+    listing.price = [priceTextField.text intValue];
+    listing.title = titleText.text;
+    listing.address = addressTextField.text;
+    listing.information = descriptionTextField.text;
 
-//    [listing.amenities removeAllObjects];
-//    [listing.types removeAllObjects];
+    //listing.lister = [PFUser currentUser];
     
-    if(wifiSwitch.on)[newListing.amenities addObject:[NSNumber numberWithInt:wifi]];
-    if(fridgeSwitch.on)[newListing.amenities addObject:[NSNumber numberWithInt:refrigerator]];
-    if(deskSwitch.on)[newListing.amenities addObject:[NSNumber numberWithInt:studyDesk]];
-    if(monitorSwitch.on)[newListing.amenities addObject:[NSNumber numberWithInt:monitor]];
-    if(servicesSwitch.on)[newListing.amenities addObject:[NSNumber numberWithInt:services]];
+    [listing.amenities removeAllObjects];
+    [listing.types removeAllObjects];
     
-    if (restSwitch.on)[newListing.types addObject:[NSNumber numberWithInt:rest]];
-    if (closetSwitch.on)[newListing.types addObject:[NSNumber numberWithInt:closet]];
-    if (officeSwitch.on)[newListing.types addObject:[NSNumber numberWithInt:office]];
-    if (quietSwitch.on)[newListing.types addObject:[NSNumber numberWithInt:quiet]];
+    if(wifiSwitch.on)[listing.amenities addObject:[NSNumber numberWithInt:wifi]];
+    if(fridgeSwitch.on)[listing.amenities addObject:[NSNumber numberWithInt:refrigerator]];
+    if(deskSwitch.on)[listing.amenities addObject:[NSNumber numberWithInt:studyDesk]];
+    if(monitorSwitch.on)[listing.amenities addObject:[NSNumber numberWithInt:monitor]];
+    if(servicesSwitch.on)[listing.amenities addObject:[NSNumber numberWithInt:services]];
     
+    if (restSwitch.on)[listing.types addObject:[NSNumber numberWithInt:rest]];
+    if (closetSwitch.on)[listing.types addObject:[NSNumber numberWithInt:closet]];
+    if (officeSwitch.on)[listing.types addObject:[NSNumber numberWithInt:office]];
+    if (quietSwitch.on)[listing.types addObject:[NSNumber numberWithInt:quiet]];
+    
+    NSCharacterSet* notDigits = [[NSCharacterSet decimalDigitCharacterSet] invertedSet];
+    NSString *error = [[NSString alloc] init];
+    if ([priceTextField.text rangeOfCharacterFromSet:notDigits].location != NSNotFound || [priceTextField.text length] == 0){
+        error = @"Price must be a whole number";
+    } else if ([priceTextField.text intValue] < 0 || [priceTextField.text intValue] > 500){
+        error = @"Set price between 0-500";
+    } else {
+        [listing save];
+        [self.navigationController popToRootViewControllerAnimated:YES];
+    }
+    UIAlertView *notPermitted = [[UIAlertView alloc]
+                                 initWithTitle:@"Error"
+                                 message:error
+                                 delegate:nil
+                                 cancelButtonTitle:@"OK"
+                                 otherButtonTitles:nil];
+    
+    [notPermitted show];
 
-    [newListing saveInBackground];
-    [newListing pinWithName:@"Listing"];
+
+    //[newListing saveInBackground];
+    //[newListing pinWithName:@"Listing"];
     
 //        dispatch_async(dispatch_get_main_queue(), ^{
 //            [SVProgressHUD dismiss];
 //            NSLog(@"Hey");
-            [self.navigationController popToRootViewControllerAnimated:YES];
+    
 //        });
 
 //    });
-    NSLog(@"Ho");
+    //NSLog(@"Ho");
     
 }
 
@@ -267,5 +304,29 @@
     return NO;
 }
 
+- (BOOL)shouldPerformSegueWithIdentifier:(NSString *)identifier sender:(id)sender{
+    NSCharacterSet* notDigits = [[NSCharacterSet decimalDigitCharacterSet] invertedSet];
+    bool isPermitted = YES;
+    NSString *error = [[NSString alloc] init];
+    if ([priceTextField.text rangeOfCharacterFromSet:notDigits].location != NSNotFound || [priceTextField.text length] == 0){
+        error = @"Price must be a whole number";
+        isPermitted = NO;
+    } else if ([priceTextField.text intValue] < 0 || [priceTextField.text intValue] > 500){
+        isPermitted = NO;
+        error = @"Set price between 0-500";
+    } else {
+        isPermitted = YES;
+        return isPermitted;
+    }
+    UIAlertView *notPermitted = [[UIAlertView alloc]
+                                 initWithTitle:@"Error"
+                                 message:error
+                                 delegate:nil
+                                 cancelButtonTitle:@"OK"
+                                 otherButtonTitles:nil];
+    
+    [notPermitted show];
+    return isPermitted;
+}
 
 @end

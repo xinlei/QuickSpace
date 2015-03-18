@@ -254,6 +254,13 @@
                                         <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Price" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="VEf-Rl-IOQ">
+                                        <rect key="frame" x="8" y="181" width="42" height="21"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Address" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="oaZ-Qx-Ure">
                                         <rect key="frame" x="8" y="317" width="53" height="21"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -414,9 +421,18 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" id="s4m-Qc-WJI">
-                                        <rect key="frame" x="0.0" y="61" width="320" height="320"/>
+                                        <rect key="frame" x="0.0" y="-136" width="320" height="320"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" heightSizable="YES" flexibleMaxY="YES"/>
                                     </imageView>
+                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" id="0dl-7o-Tqa">
+                                        <rect key="frame" x="91" y="172" width="221" height="30"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <textInputTraits key="textInputTraits"/>
+                                        <connections>
+                                            <outlet property="delegate" destination="2c9-BB-Kbj" id="TCz-Nl-Isu"/>
+                                        </connections>
+                                    </textField>
                                 </subviews>
                             </scrollView>
                         </subviews>
@@ -440,6 +456,8 @@
                         <outlet property="monitorSwitch" destination="JiW-C6-lCP" id="dF7-mA-2jI"/>
                         <outlet property="officeLabel" destination="086-Qo-rDZ" id="3tw-lH-j9q"/>
                         <outlet property="officeSwitch" destination="3wW-hB-PXf" id="0XA-9C-RaM"/>
+                        <outlet property="priceLabel" destination="VEf-Rl-IOQ" id="nnK-Wd-iXv"/>
+                        <outlet property="priceTextField" destination="0dl-7o-Tqa" id="Tcp-Yv-SWt"/>
                         <outlet property="quietLabel" destination="Rms-uC-Eyo" id="Y9z-f5-ksE"/>
                         <outlet property="quietSwitch" destination="PKf-1h-eti" id="0tT-mt-rOr"/>
                         <outlet property="restLabel" destination="Uvg-WX-16F" id="enO-Nf-OG6"/>

@@ -47,6 +47,10 @@
 @property (weak, nonatomic) IBOutlet UILabel *monitorLabel;
 @property (strong, nonatomic) IBOutlet UISwitch *monitorSwitch;
 
+//price
+@property (weak, nonatomic) IBOutlet UILabel *priceLabel;
+@property (strong, nonatomic) IBOutlet UITextField *priceTextField;
+
 //decriptions
 @property (weak, nonatomic) IBOutlet UILabel *descriptionLabel;
 @property (strong, nonatomic) IBOutlet UITextField *descriptionTextField;
