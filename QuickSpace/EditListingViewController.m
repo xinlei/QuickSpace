@@ -60,13 +60,13 @@
                                    initWithTarget:self
                                    action:@selector(dismissKeyboard)];
     [self.view addGestureRecognizer:tap];
-    // Do any additional setup after loading the view.
     
     UITapGestureRecognizer *picTap = [[UITapGestureRecognizer alloc]
                                       initWithTarget:self
                                       action:@selector(showPic:)];
     [picScrollView addGestureRecognizer:picTap];
     
+    // Set up side scroll for pictures
     picScrollView.frame = CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.width);
     picScrollView.pagingEnabled = YES;
     for(int i = 0; i < listing.images.count; i++){
@@ -224,6 +224,7 @@
 //    [listing fetchIfNeeded];
 //}
 
+// Keep track of which image is being displayed so that we know which to delete
 -(void)scrollViewDidScroll:(UIScrollView *)thisscrollView{
     pageNumber = lround(thisscrollView.contentOffset.x / self.view.frame.size.width);
 }
@@ -238,16 +239,20 @@
     }
 }
 
-
+// Move up view so that keyboard doesn't obscure any textfields
 -(void) keyboardWillShow:(NSNotification *)n {
+    
+    // Get keyboard height from NSNotification
     NSDictionary *userInfo = [n userInfo];
     CGFloat keyboardHeight = [[userInfo objectForKey:UIKeyboardFrameBeginUserInfoKey] CGRectValue].size.height;
+    
     [UIView beginAnimations:nil context:NULL];
     [UIView setAnimationBeginsFromCurrentState:YES];
     self.view.frame = CGRectOffset(self.view.frame, 0, -(keyboardHeight - self.tabBarController.tabBar.frame.size.height));
     [UIView commitAnimations];
 }
 
+// Move view back into place
 -(void) keyboardWillHide:(NSNotification *)n {
     NSDictionary *userInfo = [n userInfo];
     CGFloat keyboardHeight = [[userInfo objectForKey:UIKeyboardFrameBeginUserInfoKey] CGRectValue].size.height;
@@ -314,7 +319,6 @@
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
-
 
 -(BOOL) textFieldShouldReturn:(UITextField *)textField
 {

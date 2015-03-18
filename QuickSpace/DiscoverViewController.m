@@ -34,6 +34,7 @@
 {
     [super viewDidLoad];
     
+    // Offer user pre-set cities to choose from
     popularPlaces = [NSArray arrayWithObjects:@"Stanford", @"San Francisco", @"Los Angeles", nil];
     popularPlacesImg = [NSArray arrayWithObjects:@"stanford.png", @"san_francisco.png", @"los_angeles.png", nil];
     didUseSearch = NO;

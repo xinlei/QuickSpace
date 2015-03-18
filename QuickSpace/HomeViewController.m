@@ -16,7 +16,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view.
+ 
     UITapGestureRecognizer *screenTouch = [[UITapGestureRecognizer alloc]
                                       initWithTarget:self
                                            action:@selector(touched:)];
@@ -27,6 +27,7 @@
     return YES;
 }
 
+// If top image is clicked trigger appropriate segue and same for bottom image
 -(void) touched:(UITapGestureRecognizer *) sender{
     if([sender locationInView:self.view].y < self.view.frame.size.height / 2){
         [self performSegueWithIdentifier:@"findSpaceSegue" sender:self];
@@ -39,14 +40,5 @@
     // Dispose of any resources that can be recreated.
 }
 
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
 
 @end

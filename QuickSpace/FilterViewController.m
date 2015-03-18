@@ -39,7 +39,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    // Do any additional setup after loading the view.
+    
     NSNumber *space = [NSNumber numberWithBool:NO];
     NSNumber *closet = [NSNumber numberWithBool:NO];
     NSNumber *office = [NSNumber numberWithBool:NO];
@@ -72,6 +72,8 @@
     endPicker.transform = CGAffineTransformMakeScale(.7, .7);
     endPicker.minimumDate = startPicker.date; 
 }
+
+// End time cannot be less than start time
 - (IBAction)limitEndTime:(UIDatePicker *)sender {
     endPicker.minimumDate = startPicker.date;
 }

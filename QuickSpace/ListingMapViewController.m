@@ -22,9 +22,11 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    // Pretend it's a modal view
     self.navigationItem.hidesBackButton = YES;
     myMapView.delegate = self;
     
+    // Add pins to map that met previous search criteria
     for (NewListing *listing in listings){
         PFGeoPoint *gp = listing.location;
         CLLocationCoordinate2D coordinate = CLLocationCoordinate2DMake(gp.latitude, gp.longitude);
@@ -39,7 +41,7 @@
 -(MKAnnotationView *)mapView:(MKMapView*)mapView viewForAnnotation:(id<MKAnnotation>)annotation{
     if([annotation isKindOfClass:[customAnnotation class]]){
         customAnnotation *myPin = (customAnnotation *)annotation;
-        MKAnnotationView *annotationView = [mapView dequeueReusableAnnotationViewWithIdentifier:@"customAnnotation"];//
+        MKAnnotationView *annotationView = [mapView dequeueReusableAnnotationViewWithIdentifier:@"customAnnotation"];
         
         if (annotationView == nil)
             annotationView = myPin.annotationView;
@@ -53,6 +55,7 @@
     return nil;
 }
 
+// If callout accessory was clicked go to corresponding Listing page
 -(void)mapView:(MKMapView*) mapView annotationView:(MKAnnotationView *)view calloutAccessoryControlTapped:(UIControl *)control{
     [self performSegueWithIdentifier:@"toDetailViewController" sender:view];
 }
@@ -63,10 +66,11 @@
     // Dispose of any resources that can be recreated.
 }
 
-
+// Go back to the list view
 - (IBAction)dismissView:(UIButton *)sender {
     [self.navigationController popViewControllerAnimated:YES];
 }
+
 
 -(void) prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender{
     if ([segue.identifier isEqualToString:@"toDetailViewController"]){

@@ -60,13 +60,14 @@
         }
         else {
             
-            // New user
+            // Create new user
             PFUser *user = [PFUser user];
             user.username = email;
             user.email = email;
             user.password = password1;
-            //Need to make sure that particular email address doesn't already exist in our user database.
-            // if it does, give the person the option to reset the password (?)
+
+            // [user signUp] returns NO if there was an error during the sign up process, including if email address was already taken
+            
             if(![user signUp]){
                 UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error" message:@"Email address is invalid or already in use" delegate:nil cancelButtonTitle:@"Try Again" otherButtonTitles: nil];
                 [alert show];
@@ -92,14 +93,5 @@
     return YES;
 }
 
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
 
 @end

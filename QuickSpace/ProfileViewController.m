@@ -44,6 +44,7 @@
     [self refreshTableData];
 }
 
+// Refresh tables every time we go to page
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     [self refreshTableData];
@@ -146,10 +147,13 @@
         PFObject *currListing = [query getObjectWithId:[booking.listing objectId]];
         
         if(currListing){
+            // Remove booking from "Rentals" after being rated and save rating to server
             [booking unpinInBackgroundWithName:@"Booking"];
             [booking saveInBackground];
             booking.listing.totalRating = booking.listing.totalRating + booking.rating;
             booking.listing.totalRaters = booking.listing.totalRaters + 1;
+            
+            // Make sure that ratingValue rounds up if decimal is >= .5
             booking.listing.ratingValue = ((float)booking.listing.totalRating / (float)booking.listing.totalRaters) + 0.5;
             [booking.listing save];
             [self refreshTableData];
@@ -167,13 +171,6 @@
     NSDate *now = [NSDate date];
     if (listingSegments.selectedSegmentIndex == 0){
         
-        /*
-        PFQuery *query = [Booking query];
-        [query whereKey:@"rating" lessThanOrEqualTo:@0];
-        [query whereKey:@"guest" equalTo:currentUser];
-        bookings = [query findObjects];
-        */
-        
         PFQuery *notExpired = [Booking query];
         [notExpired whereKey:@"guest" equalTo:currentUser];
         [notExpired whereKey:@"endTime" greaterThan:now];
@@ -188,7 +185,6 @@
     } else {
         PFQuery *query = [NewListing query];
         [query whereKey:@"lister" equalTo:currentUser];
-        //[query fromPinWithName:@"Listing"];
         userListings = [query findObjects];
     }
     [self.listingTable reloadData];

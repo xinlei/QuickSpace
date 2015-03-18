@@ -20,14 +20,20 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    // Add image
     UIImageView *image = [[UIImageView alloc] initWithFrame:CGRectMake(0, (self.view.frame.size.height - self.view.frame.size.width) / 3, self.view.frame.size.width, self.view.frame.size.width)];
     image.image = pic;
     
+    // Arbitrarily determined constants that are just large enough to hold the text within the button
     int width = 100;
     int height = 50;
+    
+    // Place button in middle horizontally and just below the image.
     [deleteButton setFrame:CGRectMake((self.view.frame.size.width - width) / 2, (self.view.frame.size.width + (self.view.frame.size.height - self.view.frame.size.width) / 3) + height / 2, width, height)];
     [self.view addSubview:image];
     
+
     UITapGestureRecognizer *close = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(closeModal:)];
     [close setDelegate:self];
     [self.view addGestureRecognizer:close];
@@ -42,6 +48,7 @@
     return YES;
 }
 
+// Go back if user clicks anywhere but photo or delete button
 -(void)closeModal:(UITapGestureRecognizer *)sender{
     if([sender locationInView:self.view].y < (self.view.frame.size.height - self.view.frame.size.width) / 2 || [sender locationInView:self.view].y > (self.view.frame.size.width + (self.view.frame.size.height - self.view.frame.size.width) / 3)){
         [self dismissViewControllerAnimated: YES completion:nil];
@@ -49,7 +56,7 @@
 }
 
 
-
+// Delete photo and go back to edit page
 - (IBAction)deletePic:(id)sender {
     NSMutableArray *set = [[NSMutableArray alloc] initWithArray:listing.images];
     [set removeObjectAtIndex:index];

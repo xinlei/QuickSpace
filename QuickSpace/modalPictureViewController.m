@@ -20,8 +20,8 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view.
     
+    // For exiting the view
     UITapGestureRecognizer *close = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(closeModal:)];
     [close setDelegate:self];
     [scrollView addGestureRecognizer:close];
@@ -30,6 +30,7 @@
     scrollView.frame = self.view.frame;
     scrollView.pagingEnabled = YES;
     
+    // Add all pics to the scroll view
     for (int i = 0; i < imageFiles.count; i++) {
         CGFloat myOrigin = i*self.view.frame.size.width;
         
@@ -38,21 +39,17 @@
         myImageView.image = [UIImage imageWithData:[[imageFiles objectAtIndex:i] getData]];
         scrollView.delegate = self;
         [scrollView addSubview:myImageView];
-        
-        
     }
     
     scrollView.contentSize = CGSizeMake(self.view.frame.size.width * imageFiles.count, self.view.frame.size.height);
 }
 
--(void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView{
-
-}
 
 -(BOOL) gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldRecognizeSimultaneouslyWithGestureRecognizer:(UIGestureRecognizer *)otherGestureRecognizer{
     return YES;
 }
 
+// Close modal if user clicks anywhere but the image
 -(void)closeModal:(UITapGestureRecognizer *)sender{
     if([sender locationInView:self.view].y < (self.view.frame.size.height - self.view.frame.size.width) / 2 || [sender locationInView:self.view].y > (self.view.frame.size.width + (self.view.frame.size.height - self.view.frame.size.width) / 2)){
             [self dismissViewControllerAnimated: YES completion:nil];
@@ -65,14 +62,5 @@
     // Dispose of any resources that can be recreated.
 }
 
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
 
 @end

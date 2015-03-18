@@ -54,9 +54,6 @@
     [image addGestureRecognizer:picClick];
     
     //set scrollView
-//    CGRect screenRect = [[UIScreen mainScreen] bounds];
-//    scrollView.frame = screenRect;
-//    scrollView.contentSize = CGSizeMake(screenRect.size.width, 1000);
     scrollView.frame = self.view.frame;
     scrollView.contentSize = CGSizeMake(self.view.frame.size.width, 1000);
     CGRect viewFrame = scrollView.frame;
@@ -64,7 +61,6 @@
     
     //set image location
     CGRect frame = image.frame;
-//    frame.origin.x = mid - frame.size.width/2;
     frame.origin.y = 0;
     image.frame = frame;
     
