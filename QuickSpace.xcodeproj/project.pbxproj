@@ -251,6 +251,7 @@
 		170EFA061A71C799004EA68B /* QuickSpace */ = {
 			isa = PBXGroup;
 			children = (
+				F0978F3C1AB98D7B00AD7EF7 /* Depreciated */,
 				F0241E3B1A783ED4009FF170 /* Assets */,
 				F084BA831A816F3800C63D41 /* ViewGuest */,
 				F0D625161A7AE4570063CE0B /* ViewHost */,
@@ -330,8 +331,6 @@
 				F09741CC1AAD71B700C82313 /* Amenity.m */,
 				F04E19891AA13B02004518B3 /* Booking.h */,
 				F04E198A1AA13B02004518B3 /* Booking.m */,
-				F0F064F41AA449F700AF4CBD /* Listing.h */,
-				F0F064F51AA449F700AF4CBD /* Listing.m */,
 				211E0AAE1A75B19B003E4D99 /* NewListing.h */,
 				211E0AAF1A75B19B003E4D99 /* NewListing.m */,
 				F09741CE1AAD72C700C82313 /* Type.h */,
@@ -377,6 +376,15 @@
 				F084BA881A816FCA00C63D41 /* BookingConfirmationViewController.m */,
 			);
 			name = ViewGuest;
+			sourceTree = "<group>";
+		};
+		F0978F3C1AB98D7B00AD7EF7 /* Depreciated */ = {
+			isa = PBXGroup;
+			children = (
+				F0F064F41AA449F700AF4CBD /* Listing.h */,
+				F0F064F51AA449F700AF4CBD /* Listing.m */,
+			);
+			name = Depreciated;
 			sourceTree = "<group>";
 		};
 		F0D625161A7AE4570063CE0B /* ViewHost */ = {

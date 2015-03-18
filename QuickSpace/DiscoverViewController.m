@@ -45,6 +45,7 @@
     // Dispose of any resources that can be recreated.
 }
 
+// Update the table of results
 - (void)filterContentForSearchText:(NSString*)searchText scope:(NSString*)scope
 {
     CLGeocoder *location = [[CLGeocoder alloc] init];
@@ -56,8 +57,7 @@
     [self.tableView reloadData];
 }
 
--(BOOL)searchDisplayController:(UISearchDisplayController *)controller shouldReloadTableForSearchString:(NSString *)searchString
-{
+-(BOOL)searchDisplayController:(UISearchDisplayController *)controller shouldReloadTableForSearchString:(NSString *)searchString {
     [self filterContentForSearchText:searchString scope:[[self.searchDisplayController.searchBar scopeButtonTitles] objectAtIndex:[self.searchDisplayController.searchBar selectedScopeButtonIndex]]];
     return YES;
 }
