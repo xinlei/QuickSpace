@@ -137,26 +137,35 @@
             default:
                 booking[@"rating"] = @0;
         }
-        NewListing *currListing = booking.listing;
-        [booking unpinInBackgroundWithName:@"Booking"];
-        [booking saveInBackground];
-        currListing.totalRating = currListing.totalRating + booking.rating;
-        currListing.totalRaters = currListing.totalRaters + 1;
-        currListing.ratingValue = currListing.totalRating / currListing.totalRaters;
-        [currListing save];
+        PFQuery *query = [NewListing query];
+        PFObject *currListing = [query getObjectWithId:[booking.listing objectId]];
+        
+        if(currListing){
+            [booking unpinInBackgroundWithName:@"Booking"];
+            [booking saveInBackground];
+            booking.listing.totalRating = booking.listing.totalRating + booking.rating;
+            booking.listing.totalRaters = booking.listing.totalRaters + 1;
+            booking.listing.ratingValue = booking.listing.totalRating / booking.listing.totalRaters;
+            [booking.listing save];
+        } else {
+            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error" message:@"Feature not available" delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles: nil];
+            [alert show];
+        }
     }
 }
 
 - (void) refreshTableData {
     [SVProgressHUD show];
     PFUser *currentUser = [PFUser currentUser];
-    NSDate *now = [NSDate date];
+    //NSDate *now = [NSDate date];
     if (listingSegments.selectedSegmentIndex == 0){
-        //PFQuery *query = [PFQuery queryWithClassName:@"Booking"];
-        //[query :@"Booking"];
-        //[query whereKey:@"rating" lessThanOrEqualTo:@0];
-        //bookings = [query findObjects];
-            
+        
+        PFQuery *query = [Booking query];
+        [query whereKey:@"rating" lessThanOrEqualTo:@0];
+        [query whereKey:@"guest" equalTo:currentUser];
+        bookings = [query findObjects];
+        
+        /*
         PFQuery *notExpired = [Booking query];
         [notExpired whereKey:@"guest" equalTo:currentUser];
         [notExpired whereKey:@"endTime" greaterThan:now];
@@ -167,11 +176,11 @@
         
         PFQuery *query = [PFQuery orQueryWithSubqueries:@[noRatings,notExpired]];
         bookings = [query findObjects];
-        
+        */
     } else {
         PFQuery *query = [NewListing query];
         [query whereKey:@"lister" equalTo:currentUser];
-        //[query fromPinWithName:@"Listing"];
+        [query fromPinWithName:@"Listing"];
         userListings = [query findObjects];
     }
     [self.listingTable reloadData];
@@ -205,9 +214,14 @@
     
     if (listingSegments.selectedSegmentIndex == 0){
         Booking *thisBooking = [bookings objectAtIndex:indexPath.row];
-        [thisBooking.listing fetchIfNeeded];
-        title.text = thisBooking.listing.title;
         
+        PFQuery *query = [NewListing query];
+        PFObject *currListing = [query getObjectWithId:[thisBooking.listing objectId]];
+        
+        if(currListing)
+            title.text = thisBooking.listing.title;
+        else
+            title.text = @"Listing Removed";
         NSString *timeDiff = [[NSString alloc] init];
         NSTimeInterval interval = [thisBooking.endTime timeIntervalSinceNow];
         int minutes = interval/60;
