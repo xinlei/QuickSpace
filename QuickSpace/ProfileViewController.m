@@ -109,6 +109,7 @@
             NewListing *currListing = [userListings objectAtIndex:actionSheet.tag];
             [currListing deleteInBackground];
             [currListing unpinWithName:@"Listing"];
+            [self refreshTableData];
             [self.listingTable reloadData];
         }
         // Edit Listing
@@ -147,6 +148,8 @@
             booking.listing.totalRaters = booking.listing.totalRaters + 1;
             booking.listing.ratingValue = ((float)booking.listing.totalRating / (float)booking.listing.totalRaters) + 0.5;
             [booking.listing save];
+            [self refreshTableData];
+            [self.listingTable reloadData];
         } else {
             UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error" message:@"Feature not available" delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles: nil];
             [alert show];
