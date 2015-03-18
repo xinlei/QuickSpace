@@ -188,7 +188,7 @@
         destViewController.listing = listing;
         listing.lister = [PFUser currentUser];
         [listing pinInBackgroundWithName:@"Listing"];
-        [listing save];
+        [listing saveInBackground];
 
     }
 }
