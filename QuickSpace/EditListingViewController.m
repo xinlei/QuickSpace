@@ -11,7 +11,7 @@
 #import "SVProgressHUD.h"
 #import "Amenity.h"
 #import "Type.h"
-#import "deletePicsViewController.h"
+//#import "deletePicsViewController.h"
 
 @interface editListingViewController ()
 
@@ -359,11 +359,12 @@
 
 -(void) prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender{
     if([segue.identifier isEqualToString:@"viewPic"]){
+        /*
         deletePicsViewController *destViewController = segue.destinationViewController;
         destViewController.pic = [UIImage imageWithData: [[listing.images objectAtIndex:pageNumber] getData]];
         destViewController.listing = listing;
         destViewController.index = pageNumber;
+    */
     }
 }
-
 @end
