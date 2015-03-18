@@ -196,6 +196,31 @@
     scrollView.contentSize = CGSizeMake(self.view.frame.size.width, saveButton.frame.size.height + saveButton.frame.origin.y);
 }
 
+-(void) textFieldDidBeginEditing:(UITextField *)textField {
+    if([textField isEqual:descriptionTextField])
+        [self move_up:YES];
+}
+
+-(void) textFieldDidEndEditing:(UITextField *)textField{
+    if([textField isEqual:descriptionTextField])
+        [self move_up:YES];
+}
+
+-(void) move_up:(BOOL) up{
+
+    int dist = 264;
+    CGRect frame = self.scrollView.frame;
+    if (up)
+        frame.size.height += dist;
+    else
+        frame.size.height -= dist;
+    [UIView beginAnimations:nil context:NULL];
+    [UIView setAnimationBeginsFromCurrentState:YES];
+    [self.scrollView setFrame:frame];
+    [UIView commitAnimations];
+    
+}
+
 - (void) dismissKeyboard {
     [titleText resignFirstResponder];
     [descriptionTextField resignFirstResponder];
