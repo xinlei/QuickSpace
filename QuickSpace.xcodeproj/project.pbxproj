@@ -12,6 +12,7 @@
 		170317AB1AB9C18B00AC987E /* pin.png in Resources */ = {isa = PBXBuildFile; fileRef = 170317AA1AB9C18B00AC987E /* pin.png */; };
 		170317AF1AB9EDD600AC987E /* add_button.png in Resources */ = {isa = PBXBuildFile; fileRef = 170317AE1AB9EDD500AC987E /* add_button.png */; };
 		170317B11AB9EDEA00AC987E /* trash_can.png in Resources */ = {isa = PBXBuildFile; fileRef = 170317B01AB9EDEA00AC987E /* trash_can.png */; };
+		170317B41AB9F9F300AC987E /* addPicsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 170317B31AB9F9F300AC987E /* addPicsViewController.m */; };
 		170EFA0A1A71C799004EA68B /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 170EFA091A71C799004EA68B /* main.m */; };
 		170EFA0D1A71C799004EA68B /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 170EFA0C1A71C799004EA68B /* AppDelegate.m */; };
 		170EFA101A71C799004EA68B /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 170EFA0F1A71C799004EA68B /* ViewController.m */; };
@@ -67,7 +68,6 @@
 		F0978F401AB995AA00AD7EF7 /* logo.png in Resources */ = {isa = PBXBuildFile; fileRef = F0978F3F1AB995AA00AD7EF7 /* logo.png */; };
 		F0978F421AB9961D00AD7EF7 /* logo-2.png in Resources */ = {isa = PBXBuildFile; fileRef = F0978F411AB9961D00AD7EF7 /* logo-2.png */; };
 		F0978F441AB9967100AD7EF7 /* logo-3.png in Resources */ = {isa = PBXBuildFile; fileRef = F0978F431AB9967100AD7EF7 /* logo-3.png */; };
-		F0978F471AB9B23B00AD7EF7 /* deletePicsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F0978F461AB9B23B00AD7EF7 /* deletePicsViewController.m */; };
 		F0A1BF2A1AB7C64500AA2C57 /* landing2.jpg in Resources */ = {isa = PBXBuildFile; fileRef = F0A1BF291AB7C64500AA2C57 /* landing2.jpg */; };
 		F0A1BF2C1AB7DA1C00AA2C57 /* no-image2.png in Resources */ = {isa = PBXBuildFile; fileRef = F0A1BF2B1AB7DA1C00AA2C57 /* no-image2.png */; };
 		F0A4D8361A75C39A002D8B2F /* DiscoverViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F0A4D8351A75C39A002D8B2F /* DiscoverViewController.m */; };
@@ -98,6 +98,8 @@
 		170317AA1AB9C18B00AC987E /* pin.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = pin.png; path = ../../pin.png; sourceTree = "<group>"; };
 		170317AE1AB9EDD500AC987E /* add_button.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = add_button.png; path = ../add_button.png; sourceTree = "<group>"; };
 		170317B01AB9EDEA00AC987E /* trash_can.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = trash_can.png; path = ../trash_can.png; sourceTree = "<group>"; };
+		170317B21AB9F9F300AC987E /* addPicsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = addPicsViewController.h; path = ../addPicsViewController.h; sourceTree = "<group>"; };
+		170317B31AB9F9F300AC987E /* addPicsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = addPicsViewController.m; path = ../addPicsViewController.m; sourceTree = "<group>"; };
 		170EFA041A71C799004EA68B /* QuickSpace.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = QuickSpace.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		170EFA081A71C799004EA68B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		170EFA091A71C799004EA68B /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -181,8 +183,6 @@
 		F0978F3F1AB995AA00AD7EF7 /* logo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = logo.png; sourceTree = "<group>"; };
 		F0978F411AB9961D00AD7EF7 /* logo-2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "logo-2.png"; sourceTree = "<group>"; };
 		F0978F431AB9967100AD7EF7 /* logo-3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "logo-3.png"; sourceTree = "<group>"; };
-		F0978F451AB9B23B00AD7EF7 /* deletePicsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = deletePicsViewController.h; sourceTree = "<group>"; };
-		F0978F461AB9B23B00AD7EF7 /* deletePicsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = deletePicsViewController.m; sourceTree = "<group>"; };
 		F0A1BF291AB7C64500AA2C57 /* landing2.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = landing2.jpg; path = ../landing2.jpg; sourceTree = "<group>"; };
 		F0A1BF2B1AB7DA1C00AA2C57 /* no-image2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "no-image2.png"; sourceTree = "<group>"; };
 		F0A4D8341A75C39A002D8B2F /* DiscoverViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DiscoverViewController.h; sourceTree = "<group>"; };
@@ -276,11 +276,11 @@
 				F0144CE91A789C8700113F95 /* Models */,
 				F0144CE61A78917A00113F95 /* AdvancedFilterViewController.h */,
 				F0144CE71A78917A00113F95 /* AdvancedFilterViewController.m */,
+				170317B21AB9F9F300AC987E /* addPicsViewController.h */,
+				170317B31AB9F9F300AC987E /* addPicsViewController.m */,
 				170EFA111A71C799004EA68B /* Main.storyboard */,
 				170317A51AB9BEB200AC987E /* HomeViewController.h */,
 				170317A61AB9BEB200AC987E /* HomeViewController.m */,
-				F0978F451AB9B23B00AD7EF7 /* deletePicsViewController.h */,
-				F0978F461AB9B23B00AD7EF7 /* deletePicsViewController.m */,
 				175D67231AA8FE0C00E0DF50 /* modalPictureViewController.h */,
 				175D67241AA8FE0C00E0DF50 /* modalPictureViewController.m */,
 				F0F064F11AA4338200AF4CBD /* ListingMapViewController.h */,
@@ -564,13 +564,13 @@
 				F085B8EA1A7D79D200AA5003 /* ConfirmationViewController.m in Sources */,
 				F08C486D1A8197510025EA2D /* AddPhotoViewController.m in Sources */,
 				17443CF51A881E0100A0694F /* SetLocationViewController.m in Sources */,
-				F0978F471AB9B23B00AD7EF7 /* deletePicsViewController.m in Sources */,
 				172695231A7872C300DA446E /* LoginViewController.m in Sources */,
 				211E0AAD1A72E4E7003E4D99 /* ListingDetailViewController.m in Sources */,
 				F0144CE81A78917A00113F95 /* AdvancedFilterViewController.m in Sources */,
 				F085B8F31A7DA7BD00AA5003 /* ProfileViewController.m in Sources */,
 				17EEBBE51A9468240055447F /* EditListingViewController.m in Sources */,
 				178097B71A7D946900BDBB1A /* CancelViewController.m in Sources */,
+				170317B41AB9F9F300AC987E /* addPicsViewController.m in Sources */,
 				F0D6251C1A7AF98E0063CE0B /* AddDetailViewController.m in Sources */,
 				F0A4D8361A75C39A002D8B2F /* DiscoverViewController.m in Sources */,
 				211E0AB01A75B19B003E4D99 /* NewListing.m in Sources */,

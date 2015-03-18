@@ -61,11 +61,15 @@
                                    action:@selector(dismissKeyboard)];
     [self.view addGestureRecognizer:tap];
     
-    UITapGestureRecognizer *picTap = [[UITapGestureRecognizer alloc]
-                                      initWithTarget:self
-                                      action:@selector(showPic:)];
-    [picScrollView addGestureRecognizer:picTap];
+//    UITapGestureRecognizer *picTap = [[UITapGestureRecognizer alloc]
+//                                      initWithTarget:self
+//                                      action:@selector(showPic:)];
+//    [picScrollView addGestureRecognizer:picTap];
     
+    [self loadPage];
+}
+
+-(void) loadPage{
     // Set up side scroll for pictures
     picScrollView.frame = CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.width);
     picScrollView.pagingEnabled = YES;
@@ -73,18 +77,21 @@
         CGFloat myOrigin = i*self.view.frame.size.width;
         
         UIButton *deleteButton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
-        [deleteButton setFrame:CGRectMake(self.view.frame.size.width - 36, 0, 36, 36)];
+        [deleteButton setFrame:CGRectMake(myOrigin + self.view.frame.size.width - 48, 12, 36, 36)];
         [deleteButton setImage:[UIImage imageNamed:@"trash_can.png"] forState:UIControlStateNormal];
+        [deleteButton addTarget:self action:@selector(deleteButtonClick:) forControlEvents:UIControlEventTouchUpInside];
         
         UIButton *addButton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
-        [addButton setFrame:CGRectMake(0, 0, 36, 36)];
+        [addButton setFrame:CGRectMake(myOrigin + 12, 12, 36, 36)];
         [addButton setImage:[UIImage imageNamed:@"add_button.png"] forState:UIControlStateNormal];
+        [addButton addTarget:self action:@selector(addButtonClick:) forControlEvents:UIControlEventTouchUpInside];
         
         UIImageView *image = [[UIImageView alloc] initWithFrame:CGRectMake(myOrigin, 0, self.view.frame.size.width, self.view.frame.size.width)];
         image.image = [UIImage imageWithData:[[listing.images objectAtIndex:i] getData]];
-
+        
         picScrollView.delegate = self;
         [picScrollView addSubview:image];
+        [picScrollView addSubview:addButton];
         [picScrollView addSubview:deleteButton];
     }
     
@@ -93,7 +100,7 @@
     addressTextField.text = listing.address;
     titleText.text = listing.title;
     priceTextField.text = [@(listing.price) stringValue];
- 
+    
     // update the description
     NSString *descripString = listing.information;
     if([descripString length] != 0)
@@ -120,7 +127,7 @@
         monitorSwitch.on = YES;
     if([listing.amenities containsObject:[NSNumber numberWithInt:services]])
         servicesSwitch.on = YES;
-
+    
     //initiate scroll view
     scrollView.frame = self.view.frame;
     scrollView.contentSize = CGSizeMake(self.view.frame.size.width, 1000);
@@ -129,8 +136,8 @@
     
     //set image
     CGRect frame = picScrollView.frame;
-
-
+    
+    
     
     //set title
     [ListingDetailViewController setItemLocation:titleLabel withPrev:picScrollView apartBy:10 atX:titleLabel.frame.origin.x];
@@ -144,7 +151,7 @@
     frame.size.width = viewFrame.size.width - frame.origin.x - 8;
     priceTextField.frame = frame;
     [ListingDetailViewController setItemLocation:priceTextField withPrev:titleText apartBy:15 atX:priceTextField.frame.origin.x];
-
+    
     
     //set address
     [ListingDetailViewController setItemLocation:addressLabel withPrev:priceTextField apartBy:15 atX:addressLabel.frame.origin.x];
@@ -172,7 +179,7 @@
     [ListingDetailViewController setItemLocation:officeLabel withPrev:quietSwitch apartBy:5 atX:officeLabel.frame.origin.x];
     [editListingViewController centerLeft:officeLabel inFrame:viewFrame];
     [ListingDetailViewController setItemLocation:officeSwitch withPrev:quietSwitch apartBy:5 atX:mid+1];
-//    [ListingDetailViewController addSeparatorOnto:scrollView at:officeSwitch.frame.origin.y + officeSwitch.frame.size.height + 8];
+    //    [ListingDetailViewController addSeparatorOnto:scrollView at:officeSwitch.frame.origin.y + officeSwitch.frame.size.height + 8];
     
     //set amenities
     [ListingDetailViewController setItemLocation:amenitiesLabel withPrev:officeSwitch apartBy:15 atX:amenitiesLabel.frame.origin.x];
@@ -240,11 +247,11 @@
     return YES;
 }
 
--(void) showPic:(UITapGestureRecognizer *) sender{
-    if([sender locationInView:self.view].y < self.view.frame.size.width){
-        [self performSegueWithIdentifier:@"viewPic" sender:self];
-    }
-}
+//-(void) showPic:(UITapGestureRecognizer *) sender{
+//    if([sender locationInView:self.view].y < self.view.frame.size.width){
+//        [self performSegueWithIdentifier:@"viewPic" sender:self];
+//    }
+//}
 
 // Move up view so that keyboard doesn't obscure any textfields
 -(void) keyboardWillShow:(NSNotification *)n {
@@ -269,6 +276,23 @@
     [UIView commitAnimations];
 }
 
+
+-(void) addButtonClick:(id) sender{
+    [self performSegueWithIdentifier:@"addPics" sender:self];
+}
+
+-(void) deleteButtonClick:(id) sender{
+    NSMutableArray *set = [[NSMutableArray alloc] initWithArray:listing.images];
+    [set removeObjectAtIndex:pageNumber];
+    if (set.count == 0){
+        NSData *currImage = UIImagePNGRepresentation([UIImage imageNamed:@"no-image4.jpg"]);
+        PFFile *imageFile = [PFFile fileWithName:@"listingImage.png" data:currImage];
+        [set addObject: imageFile];
+    }
+    listing.images = set;
+    [listing save];
+    [self loadPage];
+}
 
 - (void) dismissKeyboard {
     [titleText resignFirstResponder];
