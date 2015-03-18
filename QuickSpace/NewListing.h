@@ -28,12 +28,20 @@
 @property (retain) NSMutableArray *types;
 
 + (NSString *) parseClassName;
+
+// Retrieve the most recently pinned listing
 + (NewListing *) retrieveNewListing;
+
+// Return nil if the address is valid, error msg otherwise
 + (NSString *) isValidAddress: (NSString *) address;
+
+// Return nil if the price is valid, error msg otherwise
 + (NSString *) isValidPrice: (NSString *) price;
-- (BOOL) addNewListing;
+
+// Set the location coordintes of the listing
 - (void) setLocationWith: (MKPlacemark *)placemark;
 
+// Return all available listing based on search criteria
 + (NSArray *) getAllAvailableListingsWithAmenities:(NSArray *) amenities
                                              Types:(NSArray *)spaceType
                                          StartTime:(NSDate *) startTime
@@ -42,7 +50,9 @@
                                          Longitude:(NSNumber *)longitude
                                           Latitude:(NSNumber *)latitude;
 
+// Return a string version of all the amenities separated by space
 - (NSString *) amenitiesToString;
+
+// Return a string version of all the types separated by space
 - (NSString *) typesToString;
-+ (void) cancelListingForHost:(NSString *) object_id;
 @end

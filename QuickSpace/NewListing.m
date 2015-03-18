@@ -34,6 +34,7 @@
     return @"Listing";
 }
 
+// Retrieve the most recently pinned listing
 + (NewListing *) retrieveNewListing {
     PFQuery *query = [[NewListing query] fromPin];
     NSArray *objects = [query findObjects];
@@ -41,17 +42,14 @@
     return nil;
 }
 
-- (BOOL) addNewListing {
-    [self pin];
-    return YES; 
-}
-
+// Set the location coordintes of the listing
 - (void) setLocationWith:(MKPlacemark *)placemark{
     self.location = [[PFGeoPoint alloc] init];
     self.location.latitude = placemark.coordinate.latitude;
     self.location.longitude = placemark.coordinate.longitude;
 }
 
+// Return all available listing based on search criteria
 + (NSArray *) getAllAvailableListingsWithAmenities:(NSArray *)amenityType
                                              Types:(NSArray *)spaceType
                                          StartTime:(NSDate *)startTime
@@ -68,27 +66,33 @@
     [innerQuery whereKey:@"startTime" lessThan:startTime];
     [innerQuery includeKey:@"listing"];
     NSArray *existingBookings = [innerQuery findObjects];
+    
+    // Get the listings of all the excluded bookings
     for (PFObject *booking in existingBookings) {
         PFObject *listing = [booking objectForKey:@"listing"];
         [excludedListings addObject:[listing valueForKeyPath:@"objectId"]];
     }
-    
+    // Get the listings not in the excluded listing list
     PFQuery *query = [NewListing query];
     [query whereKey:@"objectId" notContainedIn:excludedListings];
     
     // Limit to 30 mile radius
     [query whereKey:@"location" nearGeoPoint:discoverLocation withinMiles:30];
     
+    // Check amenities
     if([amenityType count] > 0)
         [query whereKey:@"amenities" containsAllObjectsInArray:amenityType];
+    // Check prices range
     if(price > 0)
         [query whereKey:@"price" lessThanOrEqualTo: price];
+    // Check space type
     if([spaceType count] > 0){
         [query whereKey:@"types" containsAllObjectsInArray:spaceType];
     }
     return [query findObjects];
 }
 
+// Return a string version of all the amenities separated by space
 - (NSString *) amenitiesToString {
     NSMutableString *amenitiesString = [[NSMutableString alloc] init];
     
@@ -116,7 +120,8 @@
     }
     return amenitiesString;
 }
-             
+
+// Return a string version of all the types separated by space
 - (NSString *) typesToString {
     NSMutableString *typesString = [[NSMutableString alloc] init];
     for (NSNumber *value in self.types){
@@ -140,17 +145,14 @@
     return typesString;
 }
 
-+ (void) cancelListingForHost:(NSString *) object_id {
-    PFQuery *query = [PFQuery queryWithClassName:@"Listing"];
-    PFObject *currentListing = [query getObjectWithId: object_id];
-    [currentListing delete];
-}
-
+// Return nil if the address is valid, error msg otherwise
 + (NSString *) isValidAddress: (NSString *) address{
     dispatch_group_t group = dispatch_group_create();
     dispatch_group_enter(group);
     CLGeocoder *location = [[CLGeocoder alloc] init];
     __block NSString *errorMsg;
+    
+    // Makes an asychronous call to check the address
     [location geocodeAddressString:address completionHandler:^(NSArray* placemarks, NSError* error){
         if (placemarks && placemarks.count > 0) {
             errorMsg = nil;
@@ -159,6 +161,7 @@
         }
         dispatch_group_leave(group);
     }];
+    // Block until the call is complete
     while (dispatch_group_wait(group, DISPATCH_TIME_NOW)) {
         [[NSRunLoop currentRunLoop] runMode:NSDefaultRunLoopMode
                                  beforeDate:[NSDate dateWithTimeIntervalSinceNow:1.f]];
@@ -166,6 +169,7 @@
     return errorMsg;
 }
 
+// Return nil if the price is valid, error msg otherwise
 + (NSString *) isValidPrice: (NSString *) price{
     NSCharacterSet* notDigits = [[NSCharacterSet decimalDigitCharacterSet] invertedSet];
     NSString *error;

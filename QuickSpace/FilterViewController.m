@@ -66,19 +66,10 @@
     
     CGFloat viewX = self.timePickerContainer.frame.size.width;
     CGFloat viewY = self.timePickerContainer.frame.size.height;
-    //NSLog(@"%f %f", viewX, viewY);
-    
-    //    UIDatePicker *datePicker = [[UIDatePicker alloc] init];
-    //    datePicker.frame = CGRectMake(0, 0, viewX, viewY/2);
-    //    datePicker.transform = CGAffineTransformMakeScale(.7, 0.7);
-    //    [self.asdf addSubview:datePicker];
-    
     startPicker.frame = CGRectMake(0, 0, viewX, viewY/2);
     startPicker.transform = CGAffineTransformMakeScale(.7, .7);
-    
     endPicker.frame = CGRectMake(0, viewY/2, viewX, viewY/2);
     endPicker.transform = CGAffineTransformMakeScale(.7, .7);
-    
     endPicker.minimumDate = startPicker.date; 
 }
 - (IBAction)limitEndTime:(UIDatePicker *)sender {
