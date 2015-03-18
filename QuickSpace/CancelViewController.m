@@ -19,6 +19,8 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    // Don't allow user to go back after hitting "confirm" in previous view
     self.navigationItem.hidesBackButton = YES;
 }
 

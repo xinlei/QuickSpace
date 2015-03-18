@@ -8,9 +8,9 @@
 #import <UIKit/UIKit.h>
 #import "ListingDetailViewController.h"
 #import "NewListing.h"
-@interface ConfirmationViewController : UIViewController <UIGestureRecognizerDelegate>
+@interface ConfirmationViewController : UIViewController <UIScrollViewDelegate>
 
-@property (weak, nonatomic) IBOutlet UIImageView *listingImg;
+@property (strong, nonatomic) IBOutlet UIScrollView *picScrollView;
 
 @property (weak, nonatomic) IBOutlet UILabel *titleText;
 @property (weak, nonatomic) IBOutlet UILabel *titleLabel;
@@ -25,6 +25,5 @@
 @property (weak, nonatomic) IBOutlet UILabel *descriptionsLabel;
 @property (weak, nonatomic) IBOutlet UIButton *confirmButton;
 @property (weak, nonatomic) IBOutlet UIScrollView *scrollView;
-@property (nonatomic, retain) UIImage *theImage;
 @property (nonatomic, retain) NewListing *listing;
 @end

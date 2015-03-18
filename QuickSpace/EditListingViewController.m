@@ -120,9 +120,9 @@
     
     //set image
     CGRect frame = picScrollView.frame;
-    frame.origin.y = 0;
-//    frame.origin.x = mid - frame.size.width/2;
-    picScrollView.frame = frame;
+//    frame.origin.y = 0;
+////    frame.origin.x = mid - frame.size.width/2;
+//    picScrollView.frame = frame;
 
     
     //set title

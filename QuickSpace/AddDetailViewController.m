@@ -43,7 +43,8 @@
     [self.view addGestureRecognizer:tap];
     priceTextField.text = [@(listing.price) stringValue];
     
- 
+    
+    //Used to get the keyboard height and trigger moving the view up / down
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillShow:) name:UIKeyboardWillShowNotification object:self.view.window];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillHide:) name:UIKeyboardWillHideNotification object:self.view.window];
 }
@@ -76,6 +77,7 @@
     [UIView commitAnimations];
 }
 
+// Make sure price input is a valid number
 - (BOOL)shouldPerformSegueWithIdentifier:(NSString *)identifier sender:(id)sender{
     NSString *error = [NewListing isValidPrice:priceTextField.text];
     if (error) {

@@ -17,11 +17,14 @@
 
 @implementation SetLocationViewController
 @synthesize address;
-
+@synthesize confirmButton;
 @synthesize listing;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    // Don't let user hit confirm until their input has been verified
+    confirmButton.hidden = YES;
     
     // Get coordinations from address string
     CLGeocoder *location = [[CLGeocoder alloc] init];
@@ -36,7 +39,10 @@
             [listing setLocationWith:placemark];
             [self.myMapView setRegion:region animated:YES];
             [self.myMapView addAnnotation:placemark];
+            
+            confirmButton.hidden = NO;
         } else {
+            //Could not find a physical location for user input so report error
             UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Invalid Location" message:[NSString stringWithFormat:@"%@ is not a valid address", listing.address] delegate:self cancelButtonTitle:@"Try Again" otherButtonTitles: nil];
             [alert show];
         }
@@ -45,6 +51,7 @@
 
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
 {
+    // After closing alert go back to previous view
     if (buttonIndex == 0)
         [self.navigationController popViewControllerAnimated:YES];
 }
@@ -58,7 +65,6 @@
 {
     AddDetailViewController *destViewController = segue.destinationViewController;
     destViewController.listing = listing;
-    
 }
 
 @end

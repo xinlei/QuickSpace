@@ -39,10 +39,14 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    
+    // Dismiss keyboard if any other part of the view is touched
     UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc]
                                    initWithTarget:self
                                    action:@selector(dismissKeyboard)];
     [self.view addGestureRecognizer:tap];
+    
+    // Initialize listing
     listing = [NewListing object];
 }
 
@@ -120,6 +124,7 @@
     if (officeButton.selected)[listing.types addObject:[NSNumber numberWithInt:office]];
     if (quietButton.selected)[listing.types addObject:[NSNumber numberWithInt:quiet]];
     
+    // Set all initial fields for the "Listing" object
     listing.title = titleTextField.text;
     listing.information = descriptionTextField.text;
     listing.address = locationTextField.text;

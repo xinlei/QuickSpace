@@ -638,6 +638,7 @@
                     </view>
                     <navigationItem key="navigationItem" title="Location" id="TNz-PJ-85h"/>
                     <connections>
+                        <outlet property="confirmButton" destination="MgF-Fm-5CM" id="Ttb-Cj-JDh"/>
                         <outlet property="myMapView" destination="tVG-mQ-5sk" id="ntp-ME-3ye"/>
                     </connections>
                 </viewController>
@@ -1034,10 +1035,10 @@
                                         <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" id="Vc6-t8-sOm">
-                                        <rect key="frame" x="0.0" y="0.0" width="320" height="320"/>
-                                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES" flexibleMaxY="YES"/>
-                                    </imageView>
+                                    <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" id="ha8-pB-mJd">
+                                        <rect key="frame" x="0.0" y="77" width="320" height="128"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                    </scrollView>
                                 </subviews>
                             </scrollView>
                         </subviews>
@@ -1050,15 +1051,14 @@
                         <outlet property="confirmButton" destination="u3H-hJ-8cc" id="PWq-JL-ggV"/>
                         <outlet property="descriptionsLabel" destination="QcK-px-2Ol" id="g9O-12-j6U"/>
                         <outlet property="descriptionsText" destination="HYK-gw-RbD" id="U1y-Al-b0g"/>
-                        <outlet property="listingImg" destination="Vc6-t8-sOm" id="ttw-yP-mfu"/>
                         <outlet property="locationLabel" destination="eY7-Wu-Acc" id="cqc-Rs-kCq"/>
                         <outlet property="locationText" destination="35H-yh-ksq" id="yJe-ti-ogA"/>
+                        <outlet property="picScrollView" destination="ha8-pB-mJd" id="9v6-ME-GUg"/>
                         <outlet property="priceLabel" destination="BLN-Qj-6XL" id="bLE-dX-STq"/>
                         <outlet property="priceText" destination="pap-Ht-DP5" id="sPd-99-m36"/>
                         <outlet property="scrollView" destination="KLC-sw-gtt" id="5wP-3J-nLA"/>
                         <outlet property="titleLabel" destination="vka-zm-1sn" id="lDx-Ho-qTX"/>
                         <outlet property="titleText" destination="Ukh-KB-orf" id="EU5-st-wV5"/>
-                        <segue destination="mnP-z9-OiD" kind="modal" identifier="confirmationModalPics" id="gik-ho-ctw"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="0KW-Sl-Reu" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -1648,7 +1648,7 @@
                                             <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                             <subviews>
                                                 <imageView userInteractionEnabled="NO" tag="1" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" id="1Dm-vi-Rek">
-                                                    <rect key="frame" x="-3" y="407" width="320" height="1304"/>
+                                                    <rect key="frame" x="-3" y="407" width="320" height="1398"/>
                                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                 </imageView>
                                                 <label opaque="NO" tag="2" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Title" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="U9h-0n-OEM">
@@ -2077,7 +2077,6 @@
         <simulatedScreenMetrics key="destination" type="retina4"/>
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
-        <segue reference="gik-ho-ctw"/>
         <segue reference="d00-qt-M9n"/>
     </inferredMetricsTieBreakers>
 </document>

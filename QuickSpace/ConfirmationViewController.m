@@ -17,8 +17,7 @@
 @end
 @implementation ConfirmationViewController
 
-@synthesize theImage;
-@synthesize listingImg;
+@synthesize picScrollView;
 @synthesize titleLabel;
 @synthesize titleText;
 @synthesize priceLabel;
@@ -45,35 +44,39 @@
 {
     [super viewDidLoad];
     
+    
+    // Set side scroll for pictures at top of page
+    picScrollView.frame = CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.width);
+    picScrollView.pagingEnabled = YES;
+    for(int i = 0; i < listing.images.count; i++){
+        CGFloat myOrigin = i*self.view.frame.size.width;
+        
+        UIImageView *image = [[UIImageView alloc] initWithFrame:CGRectMake(myOrigin, 0, self.view.frame.size.width, self.view.frame.size.width)];
+        image.image = [UIImage imageWithData:[[listing.images objectAtIndex:i] getData]];
+        
+        picScrollView.delegate = self;
+        [picScrollView addSubview:image];
+    }
+    
+    picScrollView.contentSize = CGSizeMake(self.view.frame.size.width * listing.images.count, self.view.frame.size.width);
+    
+
+    
     //set scrollView
     scrollView.frame = self.view.frame;
     scrollView.contentSize = CGSizeMake(self.view.frame.size.width, 1000);
     CGRect viewFrame = scrollView.frame;
     CGFloat mid = viewFrame.size.width/2;
-    
-    //set image
-    CGRect frame = listingImg.frame;
-    frame.origin.x = mid - frame.size.width/2;
-    frame.origin.y = 0;
-    listingImg.frame = frame;
-    listingImg.image = theImage;
-    
-    UITapGestureRecognizer *picClick = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(seeMorePics:)];
-    [picClick setDelegate:self];
-    [listingImg addGestureRecognizer:picClick];
+
     
     //set title
     titleText.text = listing.title;
-    
-    // new
-    //CGRect frame = titleText.frame;
-    
-    frame = titleText.frame;
+    CGRect frame = titleText.frame;
     frame.origin.x = mid;
-    frame.origin.y = listingImg.frame.origin.y + listingImg.frame.size.height + 10;
+    frame.origin.y = picScrollView.frame.size.height + 10;
     titleText.frame = frame;
     frame = titleLabel.frame;
-    frame.origin.y = listingImg.frame.origin.y + listingImg.frame.size.height + 10;
+    frame.origin.y = picScrollView.frame.size.height + 10;
     titleLabel.frame = frame;
     
     //set price
@@ -102,7 +105,6 @@
     //set amenities
     amenitiesText.text = [listing amenitiesToString];
     amenitiesText.numberOfLines = 0;
-    NSLog(@"%@", amenitiesText.text);
     CGSize labelSize = [amenitiesText.text sizeWithAttributes:@{NSFontAttributeName:amenitiesText.font}];
     amenitiesText.frame = CGRectMake(mid, amenitiesText.frame.origin.y, amenitiesText.frame.size.width, labelSize.height);
     [ListingDetailViewController setItemLocation:amenitiesText withPrev:locationText apartBy:10 atX:mid];
@@ -157,29 +159,15 @@
     // Dispose of any resources that can be recreated.
 }
 
--(BOOL) gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldRecognizeSimultaneouslyWithGestureRecognizer:(UIGestureRecognizer *)otherGestureRecognizer{
-    return YES;
-}
-
--(void) seeMorePics:(UITapGestureRecognizer *)sender {
-    [self performSegueWithIdentifier:@"confirmationModalPics" sender:self];
-}
-
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
-    // Popup to a slideshow of pictures
-    if ([segue.identifier isEqualToString:@"confirmationModalPics"]){
-        modalPictureViewController *destViewController = segue.destinationViewController;
-        destViewController.imageFiles = listing.images;
-    }
-    // Show the final confirmation screen, with option to cancel
+    // Show the final confirmation screen and save to server, with option to cancel
     if ([segue.identifier isEqualToString:@"ShowFinalConfirmation"]){
         CancelViewController *destViewController = segue.destinationViewController;
         listing.lister = [PFUser currentUser];
         destViewController.listing = listing;
         [listing pinInBackgroundWithName:@"Listing"];
         [listing saveInBackground];
-
     }
 }
 

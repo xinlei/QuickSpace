@@ -74,7 +74,7 @@
     }
 }
 
-// Add new photo to the collection
+// Add new photo to the collection. Change button text to reflect that a photo has been added
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info {
     
     UIImage *chosenImage = info[UIImagePickerControllerEditedImage];
@@ -95,7 +95,7 @@
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
-    // Add a "No Image Available" image to the collection
+    // Add a "No Image Available" image to the collection if user didn't add their own
     if([self.allPhotos count] == 0){
         NSData *currImage = UIImagePNGRepresentation([UIImage imageNamed:@"no-image4.jpg"]);
         PFFile *imageFile = [PFFile fileWithName:@"listingImage.png" data:currImage];
@@ -103,7 +103,6 @@
     }
     if ([segue.identifier isEqualToString:@"ShowAddBookingConfirmation"]){
         ConfirmationViewController *destViewController = segue.destinationViewController;
-        destViewController.theImage = self.imageView.image;
         listing.images = self.allPhotos;
         destViewController.listing = listing;
     }
