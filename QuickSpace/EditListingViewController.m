@@ -250,34 +250,10 @@
 }
 
 - (IBAction)saveButtonClick:(id)sender {
-    
-    /*
-    NewListing *newListing = [[NewListing alloc] init];
-    newListing.images = listing.images;
-    newListing.price = listing.price;
-    newListing.ratingValue = listing.ratingValue;
-    newListing.totalRating = listing.totalRating;
-    newListing.totalRaters = listing.totalRaters;
-    newListing.location = listing.location;
-    */
-    //[listing fetchFromLocalDatastore];
-//    [listing unpinInBackgroundWithName:@"Listing"];
-    //[listing deleteInBackground];
-    /*
-    newListing.title = titleText.text;
-    newListing.address = addressTextField.text;
-    newListing.information = descriptionTextField.text;
-    newListing.amenities = [[NSMutableArray alloc] init];
-    newListing.types = [[NSMutableArray alloc] init];
-    newListing.lister = [PFUser currentUser];
-*/
     listing.price = [priceTextField.text intValue];
     listing.title = titleText.text;
     listing.address = addressTextField.text;
     listing.information = descriptionTextField.text;
-
-    //listing.lister = [PFUser currentUser];
-    
     [listing.amenities removeAllObjects];
     [listing.types removeAllObjects];
     
@@ -305,13 +281,11 @@
                                  delegate:nil
                                  cancelButtonTitle:@"OK"
                                  otherButtonTitles:nil];
-    
         [notPermitted show];
     } else {
         [listing save];
         [self.navigationController popToRootViewControllerAnimated:YES];
     }
-    
 }
 
 + (void) centerLeft:(UIView *)item inFrame:(CGRect)viewFrame
@@ -320,7 +294,6 @@
     frame.origin.x = viewFrame.size.width/2 - item.frame.size.width - 1;
     item.frame = frame;
 }
-
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

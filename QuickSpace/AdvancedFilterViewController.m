@@ -43,9 +43,10 @@
 - (IBAction)sliderValueChanged:(UISlider *)sender {
     self.priceLabel.text = [NSString stringWithFormat:@"$%d", (int)sender.value];
 }
+
+// On submit, save amenities type and price information to user defaults
 - (IBAction)onSubmit:(UIButton *)sender {
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-    
     NSMutableArray *amenityType = [[NSMutableArray alloc] init];
     if(self.wifiSwitch.on)[amenityType addObject:[NSNumber numberWithInt:wifi]];
     if(self.refrigeratorSwitch.on)[amenityType addObject:[NSNumber numberWithInt:refrigerator]];
