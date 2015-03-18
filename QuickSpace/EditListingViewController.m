@@ -11,12 +11,15 @@
 #import "SVProgressHUD.h"
 #import "Amenity.h"
 #import "Type.h"
+#import "deletePicsViewController.h"
 
 @interface editListingViewController ()
 
 @end
 
-@implementation editListingViewController
+@implementation editListingViewController{
+    int pageNumber;
+}
 
 @synthesize picScrollView;
 @synthesize titleLabel;
@@ -59,23 +62,19 @@
     [self.view addGestureRecognizer:tap];
     // Do any additional setup after loading the view.
     
+    UITapGestureRecognizer *picTap = [[UITapGestureRecognizer alloc]
+                                      initWithTarget:self
+                                      action:@selector(showPic:)];
+    [picScrollView addGestureRecognizer:picTap];
     
     picScrollView.frame = CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.width);
     picScrollView.pagingEnabled = YES;
     for(int i = 0; i < listing.images.count; i++){
         CGFloat myOrigin = i*self.view.frame.size.width;
-//        UIButton *deleteButton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
-//        [deleteButton setFrame:CGRectMake(myOrigin - 32, 0, 32, 32)];
-//        [deleteButton setTitle:@"Delete" forState:UIControlStateNormal];
-//        [deleteButton addTarget:self action:@selector(deletePic:) forControlEvents:UIControlEventTouchUpInside];
-//        
-//        UIView *myView = [[UIView alloc] initWithFrame:CGRectMake(myOrigin, 0, self.view.frame.size.width, self.view.frame.size.width)];
-//        
+
         UIImageView *image = [[UIImageView alloc] initWithFrame:CGRectMake(myOrigin, 0, self.view.frame.size.width, self.view.frame.size.width)];
         image.image = [UIImage imageWithData:[[listing.images objectAtIndex:i] getData]];
-        
-//        [myView addSubview:image];
-//        [myView addSubview:deleteButton];
+
         picScrollView.delegate = self;
         [picScrollView addSubview:image];
     }
@@ -220,9 +219,25 @@
 
 }
 
-//-(void) deletePic:(){
-    
+//- (void)viewWillAppear:(BOOL)animated {
+//    [super viewWillAppear:animated];
+//    [listing fetchIfNeeded];
 //}
+
+-(void)scrollViewDidScroll:(UIScrollView *)thisscrollView{
+    pageNumber = lround(thisscrollView.contentOffset.x / self.view.frame.size.width);
+}
+
+-(BOOL) gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldRecognizeSimultaneouslyWithGestureRecognizer:(UIGestureRecognizer *)otherGestureRecognizer{
+    return YES;
+}
+
+-(void) showPic:(UITapGestureRecognizer *) sender{
+    if([sender locationInView:self.view].y < self.view.frame.size.width){
+        [self performSegueWithIdentifier:@"viewPic" sender:self];
+    }
+}
+
 
 -(void) keyboardWillShow:(NSNotification *)n {
     NSDictionary *userInfo = [n userInfo];
@@ -305,6 +320,15 @@
 {
     [textField resignFirstResponder];
     return YES;
+}
+
+-(void) prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender{
+    if([segue.identifier isEqualToString:@"viewPic"]){
+        deletePicsViewController *destViewController = segue.destinationViewController;
+        destViewController.pic = [UIImage imageWithData: [[listing.images objectAtIndex:pageNumber] getData]];
+        destViewController.listing = listing;
+        destViewController.index = pageNumber;
+    }
 }
 
 @end

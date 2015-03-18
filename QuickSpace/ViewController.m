@@ -30,6 +30,8 @@ NSArray *listings;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    [self populateListings];
+    [self.tableView reloadData];
 }
 
 - (void)viewWillAppear:(BOOL)animated {

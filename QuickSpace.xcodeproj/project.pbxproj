@@ -64,6 +64,7 @@
 		F0978F401AB995AA00AD7EF7 /* logo.png in Resources */ = {isa = PBXBuildFile; fileRef = F0978F3F1AB995AA00AD7EF7 /* logo.png */; };
 		F0978F421AB9961D00AD7EF7 /* logo-2.png in Resources */ = {isa = PBXBuildFile; fileRef = F0978F411AB9961D00AD7EF7 /* logo-2.png */; };
 		F0978F441AB9967100AD7EF7 /* logo-3.png in Resources */ = {isa = PBXBuildFile; fileRef = F0978F431AB9967100AD7EF7 /* logo-3.png */; };
+		F0978F471AB9B23B00AD7EF7 /* deletePicsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F0978F461AB9B23B00AD7EF7 /* deletePicsViewController.m */; };
 		F0A1BF2A1AB7C64500AA2C57 /* landing2.jpg in Resources */ = {isa = PBXBuildFile; fileRef = F0A1BF291AB7C64500AA2C57 /* landing2.jpg */; };
 		F0A1BF2C1AB7DA1C00AA2C57 /* no-image2.png in Resources */ = {isa = PBXBuildFile; fileRef = F0A1BF2B1AB7DA1C00AA2C57 /* no-image2.png */; };
 		F0A4D8361A75C39A002D8B2F /* DiscoverViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F0A4D8351A75C39A002D8B2F /* DiscoverViewController.m */; };
@@ -173,6 +174,8 @@
 		F0978F3F1AB995AA00AD7EF7 /* logo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = logo.png; sourceTree = "<group>"; };
 		F0978F411AB9961D00AD7EF7 /* logo-2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "logo-2.png"; sourceTree = "<group>"; };
 		F0978F431AB9967100AD7EF7 /* logo-3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "logo-3.png"; sourceTree = "<group>"; };
+		F0978F451AB9B23B00AD7EF7 /* deletePicsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = deletePicsViewController.h; sourceTree = "<group>"; };
+		F0978F461AB9B23B00AD7EF7 /* deletePicsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = deletePicsViewController.m; sourceTree = "<group>"; };
 		F0A1BF291AB7C64500AA2C57 /* landing2.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = landing2.jpg; path = ../landing2.jpg; sourceTree = "<group>"; };
 		F0A1BF2B1AB7DA1C00AA2C57 /* no-image2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "no-image2.png"; sourceTree = "<group>"; };
 		F0A4D8341A75C39A002D8B2F /* DiscoverViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DiscoverViewController.h; sourceTree = "<group>"; };
@@ -267,6 +270,8 @@
 				F0144CE61A78917A00113F95 /* AdvancedFilterViewController.h */,
 				F0144CE71A78917A00113F95 /* AdvancedFilterViewController.m */,
 				170EFA111A71C799004EA68B /* Main.storyboard */,
+				F0978F451AB9B23B00AD7EF7 /* deletePicsViewController.h */,
+				F0978F461AB9B23B00AD7EF7 /* deletePicsViewController.m */,
 				175D67231AA8FE0C00E0DF50 /* modalPictureViewController.h */,
 				175D67241AA8FE0C00E0DF50 /* modalPictureViewController.m */,
 				F0F064F11AA4338200AF4CBD /* ListingMapViewController.h */,
@@ -546,6 +551,7 @@
 				F085B8EA1A7D79D200AA5003 /* ConfirmationViewController.m in Sources */,
 				F08C486D1A8197510025EA2D /* AddPhotoViewController.m in Sources */,
 				17443CF51A881E0100A0694F /* SetLocationViewController.m in Sources */,
+				F0978F471AB9B23B00AD7EF7 /* deletePicsViewController.m in Sources */,
 				172695231A7872C300DA446E /* LoginViewController.m in Sources */,
 				211E0AAD1A72E4E7003E4D99 /* ListingDetailViewController.m in Sources */,
 				F0144CE81A78917A00113F95 /* AdvancedFilterViewController.m in Sources */,
