@@ -71,12 +71,21 @@
     picScrollView.pagingEnabled = YES;
     for(int i = 0; i < listing.images.count; i++){
         CGFloat myOrigin = i*self.view.frame.size.width;
-
+        
+        UIButton *deleteButton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
+        [deleteButton setFrame:CGRectMake(self.view.frame.size.width - 36, 0, 36, 36)];
+        [deleteButton setImage:[UIImage imageNamed:@"trash_can.png"] forState:UIControlStateNormal];
+        
+        UIButton *addButton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
+        [addButton setFrame:CGRectMake(0, 0, 36, 36)];
+        [addButton setImage:[UIImage imageNamed:@"add_button.png"] forState:UIControlStateNormal];
+        
         UIImageView *image = [[UIImageView alloc] initWithFrame:CGRectMake(myOrigin, 0, self.view.frame.size.width, self.view.frame.size.width)];
         image.image = [UIImage imageWithData:[[listing.images objectAtIndex:i] getData]];
 
         picScrollView.delegate = self;
         [picScrollView addSubview:image];
+        [picScrollView addSubview:deleteButton];
     }
     
     picScrollView.contentSize = CGSizeMake(self.view.frame.size.width * listing.images.count, self.view.frame.size.width);
@@ -120,9 +129,7 @@
     
     //set image
     CGRect frame = picScrollView.frame;
-//    frame.origin.y = 0;
-////    frame.origin.x = mid - frame.size.width/2;
-//    picScrollView.frame = frame;
+
 
     
     //set title
