@@ -23,6 +23,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     allPhotos = [[NSMutableArray alloc] initWithArray:listing.images];
+    [UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera];
 }
 
 - (void)didReceiveMemoryWarning {
