@@ -145,7 +145,7 @@
             [booking saveInBackground];
             booking.listing.totalRating = booking.listing.totalRating + booking.rating;
             booking.listing.totalRaters = booking.listing.totalRaters + 1;
-            booking.listing.ratingValue = booking.listing.totalRating / booking.listing.totalRaters;
+            booking.listing.ratingValue = ((float)booking.listing.totalRating / (float)booking.listing.totalRaters + 0.5);
             [booking.listing save];
         } else {
             UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error" message:@"Feature not available" delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles: nil];
