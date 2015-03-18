@@ -1412,11 +1412,11 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </switch>
                             <view contentMode="scaleToFill" id="pIX-sl-70N">
-                                <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="568.00000292134268"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxX="YES" heightSizable="YES" flexibleMaxY="YES"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="mf3-H9-baC">
-                                        <rect key="frame" x="0.0" y="478" width="160" height="39.999997304243607"/>
+                                        <rect key="frame" x="0.0" y="478" width="160" height="40.000000225586298"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES"/>
                                         <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                         <state key="normal" title="Cancel">
@@ -1503,7 +1503,7 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="jtb-YX-9UC">
-                                        <rect key="frame" x="160" y="478" width="160" height="39.999997304243607"/>
+                                        <rect key="frame" x="160" y="478" width="160" height="40.000000225586298"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES"/>
                                         <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                         <state key="normal" title="Search">
@@ -1566,11 +1566,12 @@
                     <connections>
                         <outlet property="myMapView" destination="hgB-rH-Ls9" id="etz-9M-Wa6"/>
                         <outlet property="showListViewButton" destination="urB-3o-4Vq" id="MEC-iH-lC1"/>
+                        <segue destination="Duy-ei-nca" kind="push" identifier="toDetailViewController" id="d00-qt-M9n"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="wLd-TM-aHF" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="90" y="-1172"/>
+            <point key="canvasLocation" x="120" y="-1172"/>
         </scene>
         <!--View Controller-->
         <scene sceneID="Jtn-YC-UDZ">
@@ -1600,7 +1601,7 @@
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
-                                    <segue destination="8WW-W2-NYb" kind="modal" identifier="ShowMapView" id="sKL-uf-5C0"/>
+                                    <segue destination="8WW-W2-NYb" kind="push" identifier="ShowMapView" id="sKL-uf-5C0"/>
                                 </connections>
                             </button>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="320" sectionHeaderHeight="22" sectionFooterHeight="22" id="XG0-5J-GCi">
@@ -2045,5 +2046,6 @@
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
         <segue reference="gik-ho-ctw"/>
+        <segue reference="d00-qt-M9n"/>
     </inferredMetricsTieBreakers>
 </document>

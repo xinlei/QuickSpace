@@ -7,6 +7,7 @@
 //
 
 #import "ListingMapViewController.h"
+#import "ListingDetailViewController.h"
 
 @interface ListingMapViewController ()
 
@@ -24,37 +25,54 @@
     for (NewListing *listing in listings){
         PFGeoPoint *gp = listing.location;
         CLLocationCoordinate2D coordinate = CLLocationCoordinate2DMake(gp.latitude, gp.longitude);
-        MKPointAnnotation *point = [[MKPointAnnotation alloc] init];
-        [point setCoordinate:coordinate];
-        [point setTitle:listing.title];
-        [point setSubtitle:[NSString stringWithFormat:@"Hourly Rate: $%d", listing.price]];
-        //point.
+        customAnnotation *point = [[customAnnotation alloc]initWithTitle:listing.title Location:coordinate];
+        [point setSubTitle:[NSString stringWithFormat:@"Price: %d", listing.price]];
+        [point setListing:listing];
         [myMapView addAnnotation:point];
     }
     [myMapView showAnnotations:myMapView.annotations animated:YES];
 }
+
+-(MKAnnotationView *)mapView:(MKMapView*)mapView viewForAnnotation:(id<MKAnnotation>)annotation{
+    if([annotation isKindOfClass:[customAnnotation class]]){
+        customAnnotation *myPin = (customAnnotation *)annotation;
+        MKAnnotationView *annotationView = [mapView dequeueReusableAnnotationViewWithIdentifier:@"customAnnotation"];//
+        
+        if (annotationView == nil)
+            annotationView = myPin.annotationView;
+        else
+            annotationView.annotation = annotation;
+        
+        annotationView.canShowCallout = YES;
+        annotationView.rightCalloutAccessoryView = [UIButton buttonWithType:UIButtonTypeDetailDisclosure];
+        return annotationView;
+    }
+    return nil;
+}
+
+-(void)mapView:(MKMapView*) mapView annotationView:(MKAnnotationView *)view calloutAccessoryControlTapped:(UIControl *)control{
+    [self performSegueWithIdentifier:@"toDetailViewController" sender:view];
+}
+
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
 
-- (void)mapView:(MKMapView *)mapView annotationView:(MKAnnotationView *)view calloutAccessoryControlTapped:(UIControl *)control{
-    [self performSegueWithIdentifier:@"ShowListingDetail" sender:view];
-}
 
 - (IBAction)dismissView:(UIButton *)sender {
     [self dismissViewControllerAnimated:YES completion:nil];
 }
 
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
+-(void) prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender{
+    if ([segue.identifier isEqualToString:@"toDetailViewController"]){
+        ListingDetailViewController* destViewController = segue.destinationViewController;
+        MKAnnotationView *annotationView = sender;
+        customAnnotation *myAnnotation = annotationView.annotation;
+        
+        destViewController.listing = myAnnotation.listing;
+    }
 }
-*/
 
 @end

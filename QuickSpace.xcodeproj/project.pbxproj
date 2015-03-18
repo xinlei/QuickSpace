@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		170317A21AB98B9700AC987E /* customAnnotation.m in Sources */ = {isa = PBXBuildFile; fileRef = 170317A11AB98B9700AC987E /* customAnnotation.m */; };
 		170EFA0A1A71C799004EA68B /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 170EFA091A71C799004EA68B /* main.m */; };
 		170EFA0D1A71C799004EA68B /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 170EFA0C1A71C799004EA68B /* AppDelegate.m */; };
 		170EFA101A71C799004EA68B /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 170EFA0F1A71C799004EA68B /* ViewController.m */; };
@@ -82,6 +83,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		170317A01AB98B9700AC987E /* customAnnotation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = customAnnotation.h; sourceTree = "<group>"; };
+		170317A11AB98B9700AC987E /* customAnnotation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = customAnnotation.m; sourceTree = "<group>"; };
 		170EFA041A71C799004EA68B /* QuickSpace.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = QuickSpace.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		170EFA081A71C799004EA68B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		170EFA091A71C799004EA68B /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -321,6 +324,8 @@
 		F0144CE91A789C8700113F95 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				170317A01AB98B9700AC987E /* customAnnotation.h */,
+				170317A11AB98B9700AC987E /* customAnnotation.m */,
 				F09741CB1AAD71B700C82313 /* Amenity.h */,
 				F09741CC1AAD71B700C82313 /* Amenity.m */,
 				F04E19891AA13B02004518B3 /* Booking.h */,
@@ -529,6 +534,7 @@
 				2115DBEB1AA0969F00DA56EA /* ViewBookingsController.m in Sources */,
 				F0F064F31AA4338200AF4CBD /* ListingMapViewController.m in Sources */,
 				170EFA101A71C799004EA68B /* ViewController.m in Sources */,
+				170317A21AB98B9700AC987E /* customAnnotation.m in Sources */,
 				F0241E541A784DD7009FF170 /* FilterViewController.m in Sources */,
 				F0D625191A7AE54D0063CE0B /* HostViewController.m in Sources */,
 				170EFA0D1A71C799004EA68B /* AppDelegate.m in Sources */,

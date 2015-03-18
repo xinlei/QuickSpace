@@ -64,8 +64,18 @@
     picScrollView.pagingEnabled = YES;
     for(int i = 0; i < listing.images.count; i++){
         CGFloat myOrigin = i*self.view.frame.size.width;
+//        UIButton *deleteButton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
+//        [deleteButton setFrame:CGRectMake(myOrigin - 32, 0, 32, 32)];
+//        [deleteButton setTitle:@"Delete" forState:UIControlStateNormal];
+//        [deleteButton addTarget:self action:@selector(deletePic:) forControlEvents:UIControlEventTouchUpInside];
+//        
+//        UIView *myView = [[UIView alloc] initWithFrame:CGRectMake(myOrigin, 0, self.view.frame.size.width, self.view.frame.size.width)];
+//        
         UIImageView *image = [[UIImageView alloc] initWithFrame:CGRectMake(myOrigin, 0, self.view.frame.size.width, self.view.frame.size.width)];
         image.image = [UIImage imageWithData:[[listing.images objectAtIndex:i] getData]];
+        
+//        [myView addSubview:image];
+//        [myView addSubview:deleteButton];
         picScrollView.delegate = self;
         [picScrollView addSubview:image];
     }
@@ -208,6 +218,10 @@
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillShow:) name:UIKeyboardWillShowNotification object:self.view.window];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillHide:) name:UIKeyboardWillHideNotification object:self.view.window];
 
+}
+
+-(void) deletePic:(){
+    
 }
 
 -(void) keyboardWillShow:(NSNotification *)n {

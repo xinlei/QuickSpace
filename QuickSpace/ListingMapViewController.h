@@ -11,6 +11,7 @@
 #import <MapKit/MKPointAnnotation.h>
 #import "Listing.h"
 #import "NewListing.h"
+#import "customAnnotation.h"
 
 @interface ListingMapViewController : UIViewController
 @property (weak, nonatomic) IBOutlet MKMapView *myMapView;
