@@ -71,7 +71,13 @@
     
     //set title
     titleText.text = listing.title;
+    titleText.scrollEnabled = NO;
+    titleText.textContainer.lineFragmentPadding = 0;
+    titleText.textContainerInset = UIEdgeInsetsZero;
+    CGFloat fixedWidth = titleText.frame.size.width;
+    CGSize newSize = [titleText sizeThatFits:CGSizeMake(fixedWidth, MAXFLOAT)];
     CGRect frame = titleText.frame;
+    frame.size = CGSizeMake(fmaxf(newSize.width, fixedWidth), newSize.height);
     frame.origin.x = mid;
     frame.origin.y = picScrollView.frame.size.height + 10;
     titleText.frame = frame;
@@ -93,8 +99,8 @@
     locationText.scrollEnabled = NO;
     locationText.textContainer.lineFragmentPadding = 0;
     locationText.textContainerInset = UIEdgeInsetsZero;
-    CGFloat fixedWidth = locationText.frame.size.width;
-    CGSize newSize = [locationText sizeThatFits:CGSizeMake(fixedWidth, MAXFLOAT)];
+    fixedWidth = locationText.frame.size.width;
+    newSize = [locationText sizeThatFits:CGSizeMake(fixedWidth, MAXFLOAT)];
     frame = locationText.frame;
     frame.size = CGSizeMake(fmaxf(newSize.width, fixedWidth), newSize.height);
     locationText.frame = frame;

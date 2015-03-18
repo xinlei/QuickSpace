@@ -12,7 +12,8 @@
 
 @property (strong, nonatomic) IBOutlet UIScrollView *picScrollView;
 
-@property (weak, nonatomic) IBOutlet UILabel *titleText;
+
+@property (weak, nonatomic) IBOutlet UITextView *titleText;
 @property (weak, nonatomic) IBOutlet UILabel *titleLabel;
 @property (weak, nonatomic) IBOutlet UILabel *priceText;
 
