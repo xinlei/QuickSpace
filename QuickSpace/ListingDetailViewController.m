@@ -25,6 +25,8 @@
 @synthesize image;
 @synthesize listing;
 @synthesize typeLabel;
+@synthesize priceLabel;
+@synthesize priceText;
 @synthesize locationText;
 @synthesize location;
 @synthesize amenities;
@@ -84,6 +86,11 @@
     [ListingDetailViewController setItemLocation:ratingLabel withPrev:typeLabel apartBy:5 atX:ratingLabel.frame.origin.x];
     [ListingDetailViewController addSeparatorOnto:scrollView at:ratingLabel.frame.origin.y + ratingLabel.frame.size.height + 10];
     
+    //set price
+    priceText.text = [NSString stringWithFormat:@"$%d", listing.price];
+    [ListingDetailViewController setItemLocation:priceLabel withPrev:ratingLabel apartBy:15 atX:priceLabel.frame.origin.x];
+    [ListingDetailViewController setItemLocation:priceText withPrev:ratingLabel apartBy:15 atX:mid];
+    
     //set location
     locationText.text = listing.address;
     locationText.selectable = NO;
@@ -97,8 +104,8 @@
     frame.size = CGSizeMake(fmaxf(newSize.width, fixedWidth), newSize.height);
     locationText.frame = frame;
     locationText.backgroundColor = [UIColor clearColor];
-    [ListingDetailViewController setItemLocation:location withPrev:ratingLabel apartBy:15 atX:location.frame.origin.x];
-    [ListingDetailViewController setItemLocation:locationText withPrev:ratingLabel apartBy:15 atX:mid];
+    [ListingDetailViewController setItemLocation:location withPrev:priceText apartBy:10 atX:location.frame.origin.x];
+    [ListingDetailViewController setItemLocation:locationText withPrev:priceText apartBy:10 atX:mid];
 //    [ListingDetailViewController addSeparatorOnto:scrollView at:locationLabel.frame.size.height + locationLabel.frame.origin.y];
     
     //set amenities

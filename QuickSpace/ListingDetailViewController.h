@@ -20,7 +20,9 @@
 @property (nonatomic, strong) IBOutlet UILabel *titleLabel;
 @property (weak, nonatomic) IBOutlet UILabel *typeLabel;
 @property (weak, nonatomic) IBOutlet UILabel *ratingLabel;
+@property (weak, nonatomic) IBOutlet UILabel *priceLabel;
 
+@property (weak, nonatomic) IBOutlet UILabel *priceText;
 @property (weak, nonatomic) IBOutlet UITextView *locationText;
 @property (weak, nonatomic) IBOutlet UILabel *location;
 

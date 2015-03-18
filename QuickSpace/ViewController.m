@@ -111,11 +111,13 @@ NSArray *listings;
     cell.selectedBackgroundView = [[UIImageView alloc] initWithImage:[UIImage imageWithData: [[thisListing.images firstObject] getData]]];
     cell.backgroundView = [[UIImageView alloc] initWithImage:[UIImage imageWithData: [[thisListing.images firstObject] getData]]];
     
-    // Title and location
+    // Title, location, and price
     UILabel *title = (UILabel *)[cell viewWithTag:2];
     title.text = thisListing.title;
     UILabel *location = (UILabel *)[cell viewWithTag:4];
     location.text = thisListing.address;
+    UILabel *price = (UILabel *)[cell viewWithTag:5];
+    price.text = [NSString stringWithFormat:@"$%d", thisListing.price];
     return cell;
 }
 
