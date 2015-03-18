@@ -19,8 +19,6 @@
 @property (retain) PFUser *guest;
 @property (retain) PFUser *owner;
 @property (retain) NewListing *listing;
-@property (retain) NSString *listing_id;
-@property (retain) NSString *listing_title;
 @property int rating;
 
 + (NSString *) parseClassName;

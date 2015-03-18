@@ -60,7 +60,6 @@
         picker.delegate = self;
         picker.allowsEditing = YES;
         picker.sourceType = UIImagePickerControllerSourceTypeCamera;
-    
         [self presentViewController:picker animated:YES completion:NULL];
     }
 }
@@ -71,7 +70,6 @@
         picker.delegate = self;
         picker.allowsEditing = YES;
         picker.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
-    
         [self presentViewController:picker animated:YES completion:NULL];
     }
 }
@@ -81,12 +79,9 @@
     
     UIImage *chosenImage = info[UIImagePickerControllerEditedImage];
     self.imageView.image = chosenImage;
-    
     NSData *currImage = UIImagePNGRepresentation(chosenImage);
     PFFile *imageFile = [PFFile fileWithName:@"listingImage.png" data:currImage];
-   
     [self.allPhotos addObject:imageFile];
-    
     [picker dismissViewControllerAnimated:YES completion:NULL];
     
 }
@@ -99,6 +94,7 @@
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
+    // Add a "No Image Available" image to the collection
     if([self.allPhotos count] == 0){
         NSData *currImage = UIImagePNGRepresentation([UIImage imageNamed:@"no-image4.jpg"]);
         PFFile *imageFile = [PFFile fileWithName:@"listingImage.png" data:currImage];

@@ -35,6 +35,8 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    
+    // To detect when tapped outside of the key board
     UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc]
                                    initWithTarget:self
                                    action:@selector(dismissKeyboard)];
@@ -52,6 +54,7 @@
     // Dispose of any resources that can be recreated.
 }
 
+// Moves the view up so the keyboard doesn't cover the textfield
 -(void) keyboardWillShow:(NSNotification *)n {
     NSDictionary *userInfo = [n userInfo];
     CGFloat keyboardHeight = [[userInfo objectForKey:UIKeyboardFrameBeginUserInfoKey] CGRectValue].size.height;
@@ -62,6 +65,7 @@
     [UIView commitAnimations];
 }
 
+// Moves the view down after the keyboard is dismissed
 -(void) keyboardWillHide:(NSNotification *)n {
     NSDictionary *userInfo = [n userInfo];
     CGFloat keyboardHeight = [[userInfo objectForKey:UIKeyboardFrameBeginUserInfoKey] CGRectValue].size.height;
@@ -73,28 +77,18 @@
 }
 
 - (BOOL)shouldPerformSegueWithIdentifier:(NSString *)identifier sender:(id)sender{
-    NSCharacterSet* notDigits = [[NSCharacterSet decimalDigitCharacterSet] invertedSet];
-    bool isPermitted = YES;
-    NSString *error = [[NSString alloc] init];
-    if ([priceTextField.text rangeOfCharacterFromSet:notDigits].location != NSNotFound || [priceTextField.text length] == 0){
-        error = @"Price must be a whole number";
-        isPermitted = NO;
-    } else if ([priceTextField.text intValue] < 0 || [priceTextField.text intValue] > 500){
-        isPermitted = NO;
-        error = @"Set price between 0-500";
-    } else {
-        isPermitted = YES;
-        return isPermitted;
-    }
-    UIAlertView *notPermitted = [[UIAlertView alloc]
-                             initWithTitle:@"Error"
-                             message:error
-                             delegate:nil
-                             cancelButtonTitle:@"OK"
-                             otherButtonTitles:nil];
-
-    [notPermitted show];
-    return isPermitted;
+    NSString *error = [NewListing isValidPrice:priceTextField.text];
+    if (error) {
+        UIAlertView *notPermitted = [[UIAlertView alloc]
+                                     initWithTitle:@"Error"
+                                     message:error
+                                     delegate:nil
+                                     cancelButtonTitle:@"OK"
+                                     otherButtonTitles:nil];
+        
+        [notPermitted show];
+        return NO;
+    } else return YES;
 }
 
 

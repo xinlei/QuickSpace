@@ -41,9 +41,7 @@
     // Do any additional setup after loading the view.
     
     titleLabel.text = listing.title;
-
     image.image = [UIImage imageWithData: [[listing.images firstObject] getData]];
-
     int rating = listing.ratingValue;
     if (rating == 0) {
         ratingLabel.text = @"No Ratings Yet";
@@ -181,7 +179,6 @@
     // Dispose of any resources that can be recreated.
 }
 
-// Set guest_id, startTime, and endTime and save to server
 - (IBAction)bookButton:(UIButton *)sender {
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     PFUser *currentUser = [PFUser currentUser];
@@ -192,17 +189,6 @@
         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"You can't book your own listing!" message:@""delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles: nil];
         [alert show];
     } else {
-        
-        /*
-        Booking *aBooking = [Booking object];
-        aBooking.startTime = startTime;
-        aBooking.endTime = endTime;
-        aBooking.guest = currentUser;
-        aBooking.owner = listing.lister;
-        aBooking.rating = 0;
-        aBooking.listing = listing;
-         */
-        
         booking = [Booking object];
         booking.startTime = startTime;
         booking.endTime = endTime;
@@ -210,14 +196,9 @@
         booking.owner = listing.lister;
         booking.rating = 0;
         booking.listing = listing;
-
         [booking saveInBackground];
         [booking pinWithName:@"Booking"];
         [self performSegueWithIdentifier:@"ShowBookingConfirmation" sender:self];
-        
-        //[aBooking saveInBackground];
-        //[aBooking pinWithName:@"Booking"];
-        //[self performSegueWithIdentifier:@"ShowBookingConfirmation" sender:self];
     }
 }
 
@@ -225,10 +206,10 @@
     return YES;
 }
 
+// Start a slide show of pictures
 -(void) expandPics:(UITapGestureRecognizer *)sender{
     [self performSegueWithIdentifier:@"modalPics" sender:self];
 }
-
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     if ([segue.identifier isEqualToString:@"ShowBookingConfirmation"]){

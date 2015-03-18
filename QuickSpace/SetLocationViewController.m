@@ -22,6 +22,8 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    // Get coordinations from address string
     CLGeocoder *location = [[CLGeocoder alloc] init];
     [location geocodeAddressString:listing.address completionHandler:^(NSArray* placemarks, NSError* error){
         if (placemarks && placemarks.count > 0) {
@@ -30,6 +32,7 @@
             
             MKCoordinateRegion region = MKCoordinateRegionMakeWithDistance(placemark.coordinate, 5000, 5000);
             
+            // Save coordinations to listing
             [listing setLocationWith:placemark];
             [self.myMapView setRegion:region animated:YES];
             [self.myMapView addAnnotation:placemark];

@@ -44,8 +44,6 @@
 }
 
 - (IBAction)cancelButton:(id)sender {
-    //[booking fetchFromLocalDatastore];
-    //[booking unpinInBackgroundWithName:@"Booking"];
     [booking deleteInBackground];
     [self.navigationController popToRootViewControllerAnimated:YES];
 }

@@ -66,7 +66,7 @@
     
     CGFloat viewX = self.timePickerContainer.frame.size.width;
     CGFloat viewY = self.timePickerContainer.frame.size.height;
-    NSLog(@"%f %f", viewX, viewY);
+    //NSLog(@"%f %f", viewX, viewY);
     
     //    UIDatePicker *datePicker = [[UIDatePicker alloc] init];
     //    datePicker.frame = CGRectMake(0, 0, viewX, viewY/2);

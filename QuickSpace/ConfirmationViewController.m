@@ -44,11 +44,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-
-
     
-
-
     //set scrollView
     scrollView.frame = self.view.frame;
     scrollView.contentSize = CGSizeMake(self.view.frame.size.width, 1000);
@@ -165,28 +161,22 @@
     return YES;
 }
 
--(void) seeMorePics:(UITapGestureRecognizer *)sender{
-    NSLog(@"IM HERE");
+-(void) seeMorePics:(UITapGestureRecognizer *)sender {
     [self performSegueWithIdentifier:@"confirmationModalPics" sender:self];
 }
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
+    // Popup to a slideshow of pictures
     if ([segue.identifier isEqualToString:@"confirmationModalPics"]){
         modalPictureViewController *destViewController = segue.destinationViewController;
         destViewController.imageFiles = listing.images;
     }
+    // Show the final confirmation screen, with option to cancel
     if ([segue.identifier isEqualToString:@"ShowFinalConfirmation"]){
         CancelViewController *destViewController = segue.destinationViewController;
-    
-        //if([self.allPhotos count] == 0){
-        //NSData *currImage = UIImagePNGRepresentation([UIImage imageNamed:@"no-image.png"]);
-        //PFFile *imageFile = [PFFile fileWithName:@"listingImage.png" data:currImage];
-        //[self.allPhotos addObject:imageFile];
-        //}
-        
-        destViewController.listing = listing;
         listing.lister = [PFUser currentUser];
+        destViewController.listing = listing;
         [listing pinInBackgroundWithName:@"Listing"];
         [listing saveInBackground];
 

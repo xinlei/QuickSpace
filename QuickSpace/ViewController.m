@@ -88,9 +88,7 @@ NSArray *listings;
 // Go back to the previous screen when no listing is avilable
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
 {
-    if (buttonIndex == 0){
-        [self.navigationController popViewControllerAnimated:YES];
-    }
+    if (buttonIndex == 0)[self.navigationController popViewControllerAnimated:YES];
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
@@ -101,30 +99,21 @@ NSArray *listings;
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     static NSString *simpleTableIdentifier = @"ListingCell";
-    
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:simpleTableIdentifier];
-    
     if (cell == nil)
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:simpleTableIdentifier];
     NewListing *thisListing = [listings objectAtIndex:indexPath.row];
     
+    // Set background image
     cell.backgroundView.contentMode = UIViewContentModeTop;
     cell.selectedBackgroundView = [[UIImageView alloc] initWithImage:[UIImage imageWithData: [[thisListing.images firstObject] getData]]];
-
     cell.backgroundView = [[UIImageView alloc] initWithImage:[UIImage imageWithData: [[thisListing.images firstObject] getData]]];
-
-    //UIImageView *image = (UIImageView *)[cell viewWithTag:1];
-    //image.image = [UIImage imageWithData: [[thisListing.images firstObject] getData]];
     
+    // Title and location
     UILabel *title = (UILabel *)[cell viewWithTag:2];
     title.text = thisListing.title;
-    
-    //UILabel *type = (UILabel *)[cell viewWithTag:3];
-    //type.text = [thisListing typesToString];
-
     UILabel *location = (UILabel *)[cell viewWithTag:4];
     location.text = thisListing.address;
-    
     return cell;
 }
 
