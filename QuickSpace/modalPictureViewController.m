@@ -33,7 +33,7 @@
     for (int i = 0; i < imageFiles.count; i++) {
         CGFloat myOrigin = i*self.view.frame.size.width;
         
-        UIImageView *myImageView = [[UIImageView alloc] initWithFrame:CGRectMake(myOrigin, self.view.frame.size.height / 3, self.view.frame.size.width, self.view.frame.size.height / 3)];
+        UIImageView *myImageView = [[UIImageView alloc] initWithFrame:CGRectMake(myOrigin, (self.view.frame.size.height - self.view.frame.size.width) / 2, self.view.frame.size.width, self.view.frame.size.width)];
 
         myImageView.image = [UIImage imageWithData:[[imageFiles objectAtIndex:i] getData]];
         scrollView.delegate = self;
@@ -54,7 +54,7 @@
 }
 
 -(void)closeModal:(UITapGestureRecognizer *)sender{
-    if([sender locationInView:self.view].y < self.view.frame.size.height / 3 || [sender locationInView:self.view].y > 2* self.view.frame.size.height / 3){
+    if([sender locationInView:self.view].y < (self.view.frame.size.height - self.view.frame.size.width) / 2 || [sender locationInView:self.view].y > (self.view.frame.size.width + (self.view.frame.size.height - self.view.frame.size.width) / 2)){
             [self dismissViewControllerAnimated: YES completion:nil];
     }
 }
