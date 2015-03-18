@@ -192,6 +192,8 @@
         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"You can't book your own listing!" message:@""delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles: nil];
         [alert show];
     } else {
+        
+        /*
         Booking *aBooking = [Booking object];
         aBooking.startTime = startTime;
         aBooking.endTime = endTime;
@@ -199,10 +201,23 @@
         aBooking.owner = listing.lister;
         aBooking.rating = 0;
         aBooking.listing = listing;
+         */
         
-        [aBooking saveInBackground];
-        [aBooking pinWithName:@"Booking"];
+        booking = [Booking object];
+        booking.startTime = startTime;
+        booking.endTime = endTime;
+        booking.guest = currentUser;
+        booking.owner = listing.lister;
+        booking.rating = 0;
+        booking.listing = listing;
+
+        [booking saveInBackground];
+        [booking pinWithName:@"Booking"];
         [self performSegueWithIdentifier:@"ShowBookingConfirmation" sender:self];
+        
+        //[aBooking saveInBackground];
+        //[aBooking pinWithName:@"Booking"];
+        //[self performSegueWithIdentifier:@"ShowBookingConfirmation" sender:self];
     }
 }
 

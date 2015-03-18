@@ -110,7 +110,7 @@
         for (NSString *key in object[@"amenities"]) {
             if ([key isEqualToString:@"wifi"]){
                 if (amenitiesString.length != 0) [amenitiesString appendString:@"\n"];
-                [amenitiesString appendString:@"WiFi Internet"];
+                [amenitiesString appendString:@"Internet"];
             }
             if ([key isEqualToString:@"refrigerator"]){
                 if (amenitiesString.length != 0) [amenitiesString appendString:@"\n"];
