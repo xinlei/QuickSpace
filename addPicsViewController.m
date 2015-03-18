@@ -20,10 +20,20 @@
 @synthesize submitButton;
 @synthesize listing;
 
+- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
+{
+    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
+    if (self) {
+        // Custom initialization
+    }
+    return self;
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     allPhotos = [[NSMutableArray alloc] initWithArray:listing.images];
-    [UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera];
+    NSLog(@"Count: %d", allPhotos.count);
+//    [UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -45,8 +55,23 @@
 }
 - (IBAction)submitClicked:(id)sender {
     listing.images = allPhotos;
-    [listing save];
-    [self.navigationController popViewControllerAnimated:YES];
+    NSLog(@"Final Count: %d", listing.images.count);
+    [listing saveInBackgroundWithBlock:^(BOOL success, NSError *error){
+        if(success)
+            [self.navigationController popViewControllerAnimated:YES];
+        else {
+            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"There was an error saving" message:@"Go Back" delegate:self cancelButtonTitle:@"Back" otherButtonTitles: nil];
+            [alert show];
+        }
+    }];
+
+}
+
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+    // After closing alert go back to previous view
+    if (buttonIndex == 0)
+        [self.navigationController popViewControllerAnimated:YES];
 }
 
 - (IBAction)selectPhotoClicked:(id)sender {

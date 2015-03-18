@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "NewListing.h"
 
-@interface addPicsViewController : UIViewController  <UIImagePickerControllerDelegate, UINavigationControllerDelegate>
+@interface addPicsViewController : UIViewController  <UIImagePickerControllerDelegate, UINavigationControllerDelegate, UIAlertViewDelegate>
 
 @property (strong, nonatomic) IBOutlet UIButton *takePhotoButton;
 @property (strong, nonatomic) IBOutlet UIButton *submitButton;
