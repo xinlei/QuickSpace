@@ -105,9 +105,10 @@
     
     //set amenities
     amenitiesText.text = [listing amenitiesToString];
-    //amenitiesLabel.numberOfLines = 0;
-    CGSize labelSize = [amenitiesLabel.text sizeWithAttributes:@{NSFontAttributeName:amenitiesLabel.font}];
-    amenitiesLabel.frame = CGRectMake(mid, amenitiesLabel.frame.origin.y, amenitiesLabel.frame.size.width, labelSize.height);
+    amenitiesText.numberOfLines = 0;
+    NSLog(@"%@", amenitiesText.text);
+    CGSize labelSize = [amenitiesText.text sizeWithAttributes:@{NSFontAttributeName:amenitiesText.font}];
+    amenitiesText.frame = CGRectMake(mid, amenitiesText.frame.origin.y, amenitiesText.frame.size.width, labelSize.height);
     [ListingDetailViewController setItemLocation:amenitiesText withPrev:locationText apartBy:10 atX:mid];
     [ListingDetailViewController setItemLocation:amenitiesLabel withPrev:locationText apartBy:10 atX:amenitiesLabel.frame.origin.x];
     
@@ -130,7 +131,7 @@
     frame.size = CGSizeMake(fmaxf(newSize.width, fixedWidth), newSize.height);
     descriptionsText.frame = frame;
     descriptionsText.backgroundColor = [UIColor clearColor];
-    [ListingDetailViewController setItemLocation:descriptionsLabel withPrev:amenitiesLabel apartBy:10 atX:descriptionsLabel.frame.origin.x];
+    [ListingDetailViewController setItemLocation:descriptionsLabel withPrev:amenitiesText apartBy:10 atX:descriptionsLabel.frame.origin.x];
     [ListingDetailViewController setItemLocation:descriptionsText withPrev:descriptionsLabel apartBy:5 atX:mid - frame.size.width/2];
     
     //set button size
