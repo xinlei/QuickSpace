@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		170317A21AB98B9700AC987E /* customAnnotation.m in Sources */ = {isa = PBXBuildFile; fileRef = 170317A11AB98B9700AC987E /* customAnnotation.m */; };
+		170317A41AB98EAD00AC987E /* pin.png in Resources */ = {isa = PBXBuildFile; fileRef = 170317A31AB98EAD00AC987E /* pin.png */; };
 		170EFA0A1A71C799004EA68B /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 170EFA091A71C799004EA68B /* main.m */; };
 		170EFA0D1A71C799004EA68B /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 170EFA0C1A71C799004EA68B /* AppDelegate.m */; };
 		170EFA101A71C799004EA68B /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 170EFA0F1A71C799004EA68B /* ViewController.m */; };
@@ -85,6 +86,7 @@
 /* Begin PBXFileReference section */
 		170317A01AB98B9700AC987E /* customAnnotation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = customAnnotation.h; sourceTree = "<group>"; };
 		170317A11AB98B9700AC987E /* customAnnotation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = customAnnotation.m; sourceTree = "<group>"; };
+		170317A31AB98EAD00AC987E /* pin.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = pin.png; path = ../pin.png; sourceTree = "<group>"; };
 		170EFA041A71C799004EA68B /* QuickSpace.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = QuickSpace.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		170EFA081A71C799004EA68B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		170EFA091A71C799004EA68B /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -342,6 +344,7 @@
 		F0241E3B1A783ED4009FF170 /* Assets */ = {
 			isa = PBXGroup;
 			children = (
+				170317A31AB98EAD00AC987E /* pin.png */,
 				F0A6CDCF1AB8E85700332E40 /* no-image4.jpg */,
 				F0A6CDCD1AB8E65100332E40 /* no-image3.jpg */,
 				F0A1BF2B1AB7DA1C00AA2C57 /* no-image2.png */,
@@ -492,6 +495,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				170317A41AB98EAD00AC987E /* pin.png in Resources */,
 				F090E6051A843C8C00BBE953 /* no-image.png in Resources */,
 				F0241E421A783ED4009FF170 /* host_space.jpg in Resources */,
 				F0241E481A783F60009FF170 /* san_francisco.png in Resources */,
