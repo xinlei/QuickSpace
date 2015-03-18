@@ -23,8 +23,6 @@
 @synthesize priceTextField;
 @synthesize listing;
 
-#define tabBarHeight 49 // 50 if its before iOS 8.0
-
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
@@ -60,7 +58,7 @@
     [UIView beginAnimations:nil context:NULL];
     [UIView setAnimationBeginsFromCurrentState:YES];
     [UIView setAnimationDuration:0.3f];
-    self.view.frame = CGRectOffset(self.view.frame, 0, -(keyboardHeight - tabBarHeight));
+    self.view.frame = CGRectOffset(self.view.frame, 0, -(keyboardHeight - self.tabBarController.tabBar.frame.size.height));
     [UIView commitAnimations];
 }
 
@@ -70,7 +68,7 @@
     [UIView beginAnimations:nil context:NULL];
     [UIView setAnimationBeginsFromCurrentState:YES];
     [UIView setAnimationDuration:0.3f];
-    self.view.frame = CGRectOffset(self.view.frame, 0, keyboardHeight - tabBarHeight);
+    self.view.frame = CGRectOffset(self.view.frame, 0, keyboardHeight - self.tabBarController.tabBar.frame.size.height);
     [UIView commitAnimations];
 }
 

@@ -51,8 +51,6 @@
 @synthesize priceLabel;
 @synthesize priceTextField;
 
-#define tabBarHeight 49
-
 - (void)viewDidLoad {
     [super viewDidLoad];
     UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc]
@@ -207,7 +205,7 @@
     CGFloat keyboardHeight = [[userInfo objectForKey:UIKeyboardFrameBeginUserInfoKey] CGRectValue].size.height;
     [UIView beginAnimations:nil context:NULL];
     [UIView setAnimationBeginsFromCurrentState:YES];
-    self.view.frame = CGRectOffset(self.view.frame, 0, -(keyboardHeight - tabBarHeight));
+    self.view.frame = CGRectOffset(self.view.frame, 0, -(keyboardHeight - self.tabBarController.tabBar.frame.size.height));
     [UIView commitAnimations];
 }
 
@@ -216,7 +214,7 @@
     CGFloat keyboardHeight = [[userInfo objectForKey:UIKeyboardFrameBeginUserInfoKey] CGRectValue].size.height;
     [UIView beginAnimations:nil context:NULL];
     [UIView setAnimationBeginsFromCurrentState:YES];
-    self.view.frame = CGRectOffset(self.view.frame, 0, keyboardHeight - tabBarHeight);
+    self.view.frame = CGRectOffset(self.view.frame, 0, keyboardHeight - self.tabBarController.tabBar.frame.size.height);
     [UIView commitAnimations];
 }
 
