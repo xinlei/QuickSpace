@@ -13,7 +13,7 @@
 #import "NewListing.h"
 #import "customAnnotation.h"
 
-@interface ListingMapViewController : UIViewController
+@interface ListingMapViewController : UIViewController <MKMapViewDelegate>
 @property (weak, nonatomic) IBOutlet MKMapView *myMapView;
 @property (weak, nonatomic) IBOutlet UIButton *showListViewButton;
 

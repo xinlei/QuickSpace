@@ -22,11 +22,14 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    self.navigationItem.hidesBackButton = YES;
+    myMapView.delegate = self;
+    
     for (NewListing *listing in listings){
         PFGeoPoint *gp = listing.location;
         CLLocationCoordinate2D coordinate = CLLocationCoordinate2DMake(gp.latitude, gp.longitude);
         customAnnotation *point = [[customAnnotation alloc]initWithTitle:listing.title Location:coordinate];
-        [point setSubTitle:[NSString stringWithFormat:@"Price: %d", listing.price]];
+        [point setSubTitle:[NSString stringWithFormat:@"Price: $%d/hour", listing.price]];
         [point setListing:listing];
         [myMapView addAnnotation:point];
     }
@@ -62,7 +65,7 @@
 
 
 - (IBAction)dismissView:(UIButton *)sender {
-    [self dismissViewControllerAnimated:YES completion:nil];
+    [self.navigationController popViewControllerAnimated:YES];
 }
 
 -(void) prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender{
