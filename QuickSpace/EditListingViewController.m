@@ -203,7 +203,7 @@
 
 -(void) textFieldDidEndEditing:(UITextField *)textField{
     if([textField isEqual:descriptionTextField])
-        [self move_up:YES];
+        [self move_up:NO];
 }
 
 -(void) move_up:(BOOL) up{
