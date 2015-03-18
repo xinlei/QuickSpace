@@ -7,10 +7,17 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "NewListing.h"
 
-@interface addPicsViewController : UIViewController
-@property (strong, nonatomic) IBOutlet UIButton *selectButton;
+@interface addPicsViewController : UIViewController  <UIImagePickerControllerDelegate, UINavigationControllerDelegate>
+
 @property (strong, nonatomic) IBOutlet UIButton *takePhotoButton;
 @property (strong, nonatomic) IBOutlet UIButton *submitButton;
+@property (nonatomic) NewListing *listing;
+- (IBAction)takePhotoClicked:(id)sender;
+
+- (IBAction)submitClicked:(id)sender;
+- (IBAction)selectPhotoClicked:(id)sender;
+@property (strong, nonatomic) IBOutlet UIImageView *imageView;
 
 @end
