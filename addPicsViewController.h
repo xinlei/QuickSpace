@@ -9,5 +9,8 @@
 #import <UIKit/UIKit.h>
 
 @interface addPicsViewController : UIViewController
+@property (strong, nonatomic) IBOutlet UIButton *selectButton;
+@property (strong, nonatomic) IBOutlet UIButton *takePhotoButton;
+@property (strong, nonatomic) IBOutlet UIButton *submitButton;
 
 @end
