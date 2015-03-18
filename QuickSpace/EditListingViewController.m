@@ -320,13 +320,8 @@
 
 -(BOOL) textFieldShouldReturn:(UITextField *)textField
 {
-    if(textField == titleText) {
-        [addressTextField becomeFirstResponder];
-    } else if (textField == addressTextField){
-        [descriptionTextField becomeFirstResponder];
-    } else
-        [textField resignFirstResponder];
-    return NO;
+    [textField resignFirstResponder];
+    return YES;
 }
 
 - (BOOL)shouldPerformSegueWithIdentifier:(NSString *)identifier sender:(id)sender{
