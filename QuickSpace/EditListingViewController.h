@@ -11,9 +11,9 @@
 #import "NewListing.h"
 #import "ListingDetailViewController.h"
 
-@interface editListingViewController : UIViewController<UITextFieldDelegate>
+@interface editListingViewController : UIViewController<UITextFieldDelegate, UIScrollViewDelegate>
+@property (strong, nonatomic) IBOutlet UIScrollView *picScrollView;
 
-@property (strong, nonatomic) IBOutlet UIImageView *image;
 //title
 @property (weak, nonatomic) IBOutlet UILabel *titleLabel;
 @property (strong, nonatomic) IBOutlet UITextField *titleText;

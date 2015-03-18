@@ -18,7 +18,7 @@
 
 @implementation editListingViewController
 
-@synthesize image;
+@synthesize picScrollView;
 @synthesize titleLabel;
 @synthesize titleText;
 @synthesize typeLabel;
@@ -59,9 +59,19 @@
     [self.view addGestureRecognizer:tap];
     // Do any additional setup after loading the view.
     
-    //NSLog(@"COUNT: %d", [listing.images count]);
     
-    image.image = [UIImage imageWithData: [[listing.images firstObject] getData]];
+    picScrollView.frame = CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.width);
+    picScrollView.pagingEnabled = YES;
+    for(int i = 0; i < listing.images.count; i++){
+        CGFloat myOrigin = i*self.view.frame.size.width;
+        UIImageView *image = [[UIImageView alloc] initWithFrame:CGRectMake(myOrigin, 0, self.view.frame.size.width, self.view.frame.size.width)];
+        image.image = [UIImage imageWithData:[[listing.images objectAtIndex:i] getData]];
+        picScrollView.delegate = self;
+        [picScrollView addSubview:image];
+    }
+    
+    picScrollView.contentSize = CGSizeMake(self.view.frame.size.width * listing.images.count, self.view.frame.size.width);
+    
     addressTextField.text = listing.address;
     titleText.text = listing.title;
     priceTextField.text = [@(listing.price) stringValue];
@@ -100,18 +110,18 @@
     CGFloat mid = viewFrame.size.width/2;
     
     //set image
-    CGRect frame = image.frame;
+    CGRect frame = picScrollView.frame;
     frame.origin.y = 0;
 //    frame.origin.x = mid - frame.size.width/2;
-    image.frame = frame;
+    picScrollView.frame = frame;
 
     
     //set title
-    [ListingDetailViewController setItemLocation:titleLabel withPrev:image apartBy:10 atX:titleLabel.frame.origin.x];
+    [ListingDetailViewController setItemLocation:titleLabel withPrev:picScrollView apartBy:10 atX:titleLabel.frame.origin.x];
     frame = titleText.frame;
     frame.size.width = viewFrame.size.width - frame.origin.x - 8;
     titleText.frame = frame;
-    [ListingDetailViewController setItemLocation:titleText withPrev:image apartBy:10 atX:titleText.frame.origin.x];
+    [ListingDetailViewController setItemLocation:titleText withPrev:picScrollView apartBy:10 atX:titleText.frame.origin.x];
     
     [ListingDetailViewController setItemLocation:priceLabel withPrev:titleText apartBy:15 atX:priceLabel.frame.origin.x];
     frame = priceTextField.frame;
