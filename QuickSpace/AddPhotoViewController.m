@@ -82,6 +82,7 @@
     NSData *currImage = UIImagePNGRepresentation(chosenImage);
     PFFile *imageFile = [PFFile fileWithName:@"listingImage.png" data:currImage];
     [self.allPhotos addObject:imageFile];
+    [takePhotoButton setTitle:@"Take Another Photo" forState:UIControlStateNormal];
     [picker dismissViewControllerAnimated:YES completion:NULL];
     
 }

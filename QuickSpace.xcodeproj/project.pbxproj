@@ -8,7 +8,9 @@
 
 /* Begin PBXBuildFile section */
 		170317A21AB98B9700AC987E /* customAnnotation.m in Sources */ = {isa = PBXBuildFile; fileRef = 170317A11AB98B9700AC987E /* customAnnotation.m */; };
-		170317A41AB98EAD00AC987E /* pin.png in Resources */ = {isa = PBXBuildFile; fileRef = 170317A31AB98EAD00AC987E /* pin.png */; };
+		170317A71AB9BEB200AC987E /* HomeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 170317A61AB9BEB200AC987E /* HomeViewController.m */; };
+		170317AB1AB9C18B00AC987E /* pin.png in Resources */ = {isa = PBXBuildFile; fileRef = 170317AA1AB9C18B00AC987E /* pin.png */; };
+		170317AD1AB9C1B000AC987E /* home_icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 170317AC1AB9C1B000AC987E /* home_icon.png */; };
 		170EFA0A1A71C799004EA68B /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 170EFA091A71C799004EA68B /* main.m */; };
 		170EFA0D1A71C799004EA68B /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 170EFA0C1A71C799004EA68B /* AppDelegate.m */; };
 		170EFA101A71C799004EA68B /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 170EFA0F1A71C799004EA68B /* ViewController.m */; };
@@ -90,7 +92,10 @@
 /* Begin PBXFileReference section */
 		170317A01AB98B9700AC987E /* customAnnotation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = customAnnotation.h; sourceTree = "<group>"; };
 		170317A11AB98B9700AC987E /* customAnnotation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = customAnnotation.m; sourceTree = "<group>"; };
-		170317A31AB98EAD00AC987E /* pin.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = pin.png; path = ../pin.png; sourceTree = "<group>"; };
+		170317A51AB9BEB200AC987E /* HomeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HomeViewController.h; sourceTree = "<group>"; };
+		170317A61AB9BEB200AC987E /* HomeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HomeViewController.m; sourceTree = "<group>"; };
+		170317AA1AB9C18B00AC987E /* pin.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = pin.png; path = ../../pin.png; sourceTree = "<group>"; };
+		170317AC1AB9C1B000AC987E /* home_icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = home_icon.png; path = ../../home_icon.png; sourceTree = "<group>"; };
 		170EFA041A71C799004EA68B /* QuickSpace.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = QuickSpace.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		170EFA081A71C799004EA68B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		170EFA091A71C799004EA68B /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -270,6 +275,8 @@
 				F0144CE61A78917A00113F95 /* AdvancedFilterViewController.h */,
 				F0144CE71A78917A00113F95 /* AdvancedFilterViewController.m */,
 				170EFA111A71C799004EA68B /* Main.storyboard */,
+				170317A51AB9BEB200AC987E /* HomeViewController.h */,
+				170317A61AB9BEB200AC987E /* HomeViewController.m */,
 				F0978F451AB9B23B00AD7EF7 /* deletePicsViewController.h */,
 				F0978F461AB9B23B00AD7EF7 /* deletePicsViewController.m */,
 				175D67231AA8FE0C00E0DF50 /* modalPictureViewController.h */,
@@ -351,6 +358,8 @@
 		F0241E3B1A783ED4009FF170 /* Assets */ = {
 			isa = PBXGroup;
 			children = (
+				170317AC1AB9C1B000AC987E /* home_icon.png */,
+				170317AA1AB9C18B00AC987E /* pin.png */,
 				F0A1BF291AB7C64500AA2C57 /* landing2.jpg */,
 				211E0AA51A7275C0003E4D99 /* room1.jpg */,
 				211E0AA61A7275C0003E4D99 /* room2.jpg */,
@@ -358,7 +367,6 @@
 				F0978F431AB9967100AD7EF7 /* logo-3.png */,
 				F0978F411AB9961D00AD7EF7 /* logo-2.png */,
 				F0978F3F1AB995AA00AD7EF7 /* logo.png */,
-				170317A31AB98EAD00AC987E /* pin.png */,
 				F0A6CDCF1AB8E85700332E40 /* no-image4.jpg */,
 				F0A6CDCD1AB8E65100332E40 /* no-image3.jpg */,
 				F0A1BF2B1AB7DA1C00AA2C57 /* no-image2.png */,
@@ -509,14 +517,15 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				170317A41AB98EAD00AC987E /* pin.png in Resources */,
 				F090E6051A843C8C00BBE953 /* no-image.png in Resources */,
 				F0241E421A783ED4009FF170 /* host_space.jpg in Resources */,
 				F0241E481A783F60009FF170 /* san_francisco.png in Resources */,
 				F0A6CDCE1AB8E65100332E40 /* no-image3.jpg in Resources */,
 				F0144CE51A78912C00113F95 /* stanford.png in Resources */,
 				211E0AAA1A7275C0003E4D99 /* room3.jpg in Resources */,
+				170317AD1AB9C1B000AC987E /* home_icon.png in Resources */,
 				170EFA131A71C799004EA68B /* Main.storyboard in Resources */,
+				170317AB1AB9C18B00AC987E /* pin.png in Resources */,
 				F0D625151A7AD92C0063CE0B /* Default-568h@2x.png in Resources */,
 				F0A1BF2A1AB7C64500AA2C57 /* landing2.jpg in Resources */,
 				F050D56B1A8FF3340066EF00 /* SVProgressHUD.bundle in Resources */,
@@ -571,6 +580,7 @@
 				F09741D01AAD72C700C82313 /* Type.m in Sources */,
 				F050D56A1A8FF3340066EF00 /* SVIndefiniteAnimatedView.m in Sources */,
 				F09741CD1AAD71B700C82313 /* Amenity.m in Sources */,
+				170317A71AB9BEB200AC987E /* HomeViewController.m in Sources */,
 				170EFA0A1A71C799004EA68B /* main.m in Sources */,
 				F0F064F61AA449F700AF4CBD /* Listing.m in Sources */,
 				F050D56C1A8FF3340066EF00 /* SVProgressHUD.m in Sources */,
