@@ -146,4 +146,36 @@
     [currentListing delete];
 }
 
++ (NSString *) isValidAddress: (NSString *) address{
+    dispatch_group_t group = dispatch_group_create();
+    dispatch_group_enter(group);
+    CLGeocoder *location = [[CLGeocoder alloc] init];
+    __block NSString *errorMsg;
+    [location geocodeAddressString:address completionHandler:^(NSArray* placemarks, NSError* error){
+        if (placemarks && placemarks.count > 0) {
+            errorMsg = nil;
+        } else {
+            errorMsg = [NSString stringWithFormat:@"%@ is not a valid address", address];
+        }
+        dispatch_group_leave(group);
+    }];
+    while (dispatch_group_wait(group, DISPATCH_TIME_NOW)) {
+        [[NSRunLoop currentRunLoop] runMode:NSDefaultRunLoopMode
+                                 beforeDate:[NSDate dateWithTimeIntervalSinceNow:1.f]];
+    }
+    return errorMsg;
+}
+
++ (NSString *) isValidPrice: (NSString *) price{
+    NSCharacterSet* notDigits = [[NSCharacterSet decimalDigitCharacterSet] invertedSet];
+    NSString *error;
+    if ([price rangeOfCharacterFromSet:notDigits].location != NSNotFound || [price length] == 0){
+        error = @"Price must be a whole number";
+    } else if ([price intValue] < 0 || [price intValue] > 500){
+        error = @"Set price between 0-500";
+    }
+    return error;
+}
+
+
 @end

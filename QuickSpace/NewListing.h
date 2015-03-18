@@ -28,11 +28,10 @@
 @property (retain) NSMutableArray *types;
 
 + (NSString *) parseClassName;
-
 + (NewListing *) retrieveNewListing;
-
++ (NSString *) isValidAddress: (NSString *) address;
++ (NSString *) isValidPrice: (NSString *) price;
 - (BOOL) addNewListing;
-
 - (void) setLocationWith: (MKPlacemark *)placemark;
 
 + (NSArray *) getAllAvailableListingsWithAmenities:(NSArray *) amenities
@@ -44,11 +43,6 @@
                                           Latitude:(NSNumber *)latitude;
 
 - (NSString *) amenitiesToString;
-
 - (NSString *) typesToString;
-
 + (void) cancelListingForHost:(NSString *) object_id;
-
-- (BOOL) isEqual: other;
-//- (unsigned) hash;
 @end

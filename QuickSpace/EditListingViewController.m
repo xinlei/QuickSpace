@@ -270,37 +270,24 @@
     if (officeSwitch.on)[listing.types addObject:[NSNumber numberWithInt:office]];
     if (quietSwitch.on)[listing.types addObject:[NSNumber numberWithInt:quiet]];
     
-    NSCharacterSet* notDigits = [[NSCharacterSet decimalDigitCharacterSet] invertedSet];
-    NSString *error = [[NSString alloc] init];
-    if ([priceTextField.text rangeOfCharacterFromSet:notDigits].location != NSNotFound || [priceTextField.text length] == 0){
-        error = @"Price must be a whole number";
-    } else if ([priceTextField.text intValue] < 0 || [priceTextField.text intValue] > 500){
-        error = @"Set price between 0-500";
-    } else {
-        [listing save];
-        [self.navigationController popToRootViewControllerAnimated:YES];
-    }
-    UIAlertView *notPermitted = [[UIAlertView alloc]
+    NSString *error = nil;
+    if ([NewListing isValidPrice:priceTextField.text] != nil)
+        error = [NewListing isValidPrice:priceTextField.text];
+    if([NewListing isValidAddress:addressTextField.text] != nil)
+        error = [NewListing isValidAddress:addressTextField.text];
+    if (error){
+        UIAlertView *notPermitted = [[UIAlertView alloc]
                                  initWithTitle:@"Error"
                                  message:error
                                  delegate:nil
                                  cancelButtonTitle:@"OK"
                                  otherButtonTitles:nil];
     
-    [notPermitted show];
-
-
-    //[newListing saveInBackground];
-    //[newListing pinWithName:@"Listing"];
-    
-//        dispatch_async(dispatch_get_main_queue(), ^{
-//            [SVProgressHUD dismiss];
-//            NSLog(@"Hey");
-    
-//        });
-
-//    });
-    //NSLog(@"Ho");
+        [notPermitted show];
+    } else {
+        [listing save];
+        [self.navigationController popToRootViewControllerAnimated:YES];
+    }
     
 }
 
@@ -322,31 +309,6 @@
 {
     [textField resignFirstResponder];
     return YES;
-}
-
-- (BOOL)shouldPerformSegueWithIdentifier:(NSString *)identifier sender:(id)sender{
-    NSCharacterSet* notDigits = [[NSCharacterSet decimalDigitCharacterSet] invertedSet];
-    bool isPermitted = YES;
-    NSString *error = [[NSString alloc] init];
-    if ([priceTextField.text rangeOfCharacterFromSet:notDigits].location != NSNotFound || [priceTextField.text length] == 0){
-        error = @"Price must be a whole number";
-        isPermitted = NO;
-    } else if ([priceTextField.text intValue] < 0 || [priceTextField.text intValue] > 500){
-        isPermitted = NO;
-        error = @"Set price between 0-500";
-    } else {
-        isPermitted = YES;
-        return isPermitted;
-    }
-    UIAlertView *notPermitted = [[UIAlertView alloc]
-                                 initWithTitle:@"Error"
-                                 message:error
-                                 delegate:nil
-                                 cancelButtonTitle:@"OK"
-                                 otherButtonTitles:nil];
-    
-    [notPermitted show];
-    return isPermitted;
 }
 
 @end
