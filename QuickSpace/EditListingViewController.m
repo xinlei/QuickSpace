@@ -83,11 +83,6 @@
         [deleteButton setImage:[UIImage imageNamed:@"trash_can.png"] forState:UIControlStateNormal];
         [deleteButton addTarget:self action:@selector(deleteButtonClick:) forControlEvents:UIControlEventTouchUpInside];
         
-//        UIButton *addButton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
-//        [addButton setFrame:CGRectMake(myOrigin + 12, 12, 36, 36)];
-//        [addButton setImage:[UIImage imageNamed:@"add_button.png"] forState:UIControlStateNormal];
-//        [addButton addTarget:self action:@selector(addButtonClick:) forControlEvents:UIControlEventTouchUpInside];
-        
         UIImageView *image = [[UIImageView alloc] initWithFrame:CGRectMake(myOrigin, 0, self.view.frame.size.width, self.view.frame.size.width)];
         image.image = [UIImage imageWithData:[[set objectAtIndex:i] getData]];
         

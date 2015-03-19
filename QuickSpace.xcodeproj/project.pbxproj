@@ -271,11 +271,9 @@
 			children = (
 				F0978F3C1AB98D7B00AD7EF7 /* Depreciated */,
 				F0241E3B1A783ED4009FF170 /* Assets */,
-				F084BA831A816F3800C63D41 /* ViewGuest */,
-				F0D625161A7AE4570063CE0B /* ViewHost */,
 				F0144CE91A789C8700113F95 /* Models */,
-				F0144CE61A78917A00113F95 /* AdvancedFilterViewController.h */,
-				F0144CE71A78917A00113F95 /* AdvancedFilterViewController.m */,
+				F0D625161A7AE4570063CE0B /* ViewHost */,
+				F084BA831A816F3800C63D41 /* ViewGuest */,
 				170317B21AB9F9F300AC987E /* addPicsViewController.h */,
 				170317B31AB9F9F300AC987E /* addPicsViewController.m */,
 				170EFA111A71C799004EA68B /* Main.storyboard */,
@@ -285,10 +283,6 @@
 				175D67241AA8FE0C00E0DF50 /* modalPictureViewController.m */,
 				F0F064F11AA4338200AF4CBD /* ListingMapViewController.h */,
 				F0F064F21AA4338200AF4CBD /* ListingMapViewController.m */,
-				2115DBE91AA0969F00DA56EA /* ViewBookingsController.h */,
-				2115DBEA1AA0969F00DA56EA /* ViewBookingsController.m */,
-				17EEBBE31A9468240055447F /* EditListingViewController.h */,
-				17EEBBE41A9468240055447F /* EditListingViewController.m */,
 				F0241E521A784DD7009FF170 /* FilterViewController.h */,
 				F0241E531A784DD7009FF170 /* FilterViewController.m */,
 				170EFA0B1A71C799004EA68B /* AppDelegate.h */,
@@ -400,6 +394,8 @@
 		F084BA831A816F3800C63D41 /* ViewGuest */ = {
 			isa = PBXGroup;
 			children = (
+				F0144CE71A78917A00113F95 /* AdvancedFilterViewController.m */,
+				F0144CE61A78917A00113F95 /* AdvancedFilterViewController.h */,
 				F084BA871A816FCA00C63D41 /* BookingConfirmationViewController.h */,
 				F084BA881A816FCA00C63D41 /* BookingConfirmationViewController.m */,
 			);
@@ -418,6 +414,10 @@
 		F0D625161A7AE4570063CE0B /* ViewHost */ = {
 			isa = PBXGroup;
 			children = (
+				17EEBBE31A9468240055447F /* EditListingViewController.h */,
+				17EEBBE41A9468240055447F /* EditListingViewController.m */,
+				2115DBE91AA0969F00DA56EA /* ViewBookingsController.h */,
+				2115DBEA1AA0969F00DA56EA /* ViewBookingsController.m */,
 				17443CF31A881E0100A0694F /* SetLocationViewController.h */,
 				17443CF41A881E0100A0694F /* SetLocationViewController.m */,
 				178097B51A7D946900BDBB1A /* CancelViewController.h */,

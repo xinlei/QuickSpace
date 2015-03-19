@@ -35,7 +35,10 @@
 @property (weak, nonatomic) IBOutlet UIScrollView *scrollView;
 @property (weak, nonatomic) IBOutlet UIButton *bookButton;
 
+//sets the given item a specified distance under another specified item. also sets the x location as to what is specified
 +(void) setItemLocation:(UIView *)item withPrev:(UIView *)prev apartBy:(CGFloat)dist atX:(CGFloat)x;
+
+//adds a one-pixel tall dark grey line used to separate different parts of the page
 +(void) addSeparatorOnto:(UIView *)view at:(CGFloat)y;
 
 @end
