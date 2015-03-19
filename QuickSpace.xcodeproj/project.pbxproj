@@ -274,8 +274,6 @@
 				F0144CE91A789C8700113F95 /* Models */,
 				F0D625161A7AE4570063CE0B /* ViewHost */,
 				F084BA831A816F3800C63D41 /* ViewGuest */,
-				170317B21AB9F9F300AC987E /* addPicsViewController.h */,
-				170317B31AB9F9F300AC987E /* addPicsViewController.m */,
 				170EFA111A71C799004EA68B /* Main.storyboard */,
 				170317A51AB9BEB200AC987E /* HomeViewController.h */,
 				170317A61AB9BEB200AC987E /* HomeViewController.m */,
@@ -416,6 +414,8 @@
 			children = (
 				17EEBBE31A9468240055447F /* EditListingViewController.h */,
 				17EEBBE41A9468240055447F /* EditListingViewController.m */,
+				170317B21AB9F9F300AC987E /* addPicsViewController.h */,
+				170317B31AB9F9F300AC987E /* addPicsViewController.m */,
 				2115DBE91AA0969F00DA56EA /* ViewBookingsController.h */,
 				2115DBEA1AA0969F00DA56EA /* ViewBookingsController.m */,
 				17443CF31A881E0100A0694F /* SetLocationViewController.h */,
